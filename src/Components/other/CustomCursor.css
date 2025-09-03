@@ -1,0 +1,50 @@
+body {
+
+  cursor: none; 
+}
+a, button, .hoverable {
+  cursor: none;
+}
+.cursor__ball {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  will-change: transform;
+  isolation: isolate; 
+}
+
+.cursor__ball--big {
+  width: 30px;
+  height: 30px;
+}
+
+.cursor__ball circle {
+  fill: #f0f0f0;
+}
+.cursor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translateY(var(--scroll-y, 0px));
+  mix-blend-mode: difference; /* 👈 ПЕРЕНЕСИТЕ ЭТУ СТРОКУ СЮДА */
+}
+
+/* Старые стили теперь применяются к дочерним элементам */
+.cursor-container .cursor__ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* mix-blend-mode: difference; ❌ УДАЛИТЕ ЭТУ СТРОКУ ОТСЮДА */
+  will-change: transform;
+}
+
+.cursor-container .cursor__ball circle {
+  fill: #f0f0f0;
+}
