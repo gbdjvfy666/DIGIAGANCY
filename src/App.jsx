@@ -9,7 +9,7 @@ import WebDevelopment from './pages/WebDevelopment';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger'; // 👈 1. ИМПОРТИРУЕМ ScrollTrigger
 import CustomCursor from './Components/other/CustomCursor';
-
+import About from './pages/About';
 // 👈 2. РЕГИСТРИРУЕМ ПЛАГИН
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,6 +101,7 @@ function AppContent() {
         <Route path="/Test" element={<Test />} />
         <Route path="/web-development" element={<WebDevelopment />} />
         <Route path="/works" element={<Works />} />
+        <Route path="/About" element={<About />} />
       </Routes>
     </div>
   );

@@ -15,24 +15,43 @@ import NoiseBackground from '../Components/background/NoiseBackground/NoiseBackg
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black dark:text-white">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-black dark:text-white">
       <FractalOrbComponent />
 
-      {/* Контейнер для слайдера */}
-      <div className="relative w-full min-h-screen flex items-center justify-center z-30 bg-transparent">
-        <NoiseBackground />
+      {/* Первый раздел: текст и слайдер (как на фото) */}
+      <div className="relative flex-shrink-0 flex items-center justify-center w-full min-h-[150vh]">
+        <div className="absolute inset-0 z-0">
+          <NoiseBackground height="100%" /> 
+        </div>
         
-        {/* Явная разделительная линия сверху */}
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gray-300 dark:bg-gray-600 z-40" />
-        
-        {/* Контейнер для слайдера */}
-        <div className="relative z-20 w-full">
-          <Slider />
+        {/*
+          Главный контейнер контента
+          - justify-between: раздвигает текст и слайдер по краям
+          - p-4 lg:p-24: отступы по бокам
+        */}
+        <div className="z-20 w-full flex flex-col md:flex-row items-center justify-between h-full p-4 lg:p-24"> 
+          
+          {/* Контейнер для текста */}
+          <div className="w-full md:w-1/3 text-left mb-8 md:mb-0"> 
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
+              Ваш Заголовок
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl">
+              Здесь вы можете добавить любой текст, который вам нужен. 
+              Например, описание проекта, слоган или любую другую информацию, 
+              которая будет дополнять ваш слайдер.
+            </p>
+          </div>
+          
+          {/* Контейнер для слайдера */}
+          <div className="w-full md:w-1/2"> 
+            <Slider />
+          </div>
         </div>
       </div>
       
       {/* Остальные компоненты */}
-      <div className="bg-white dark:bg-zinc-900 px-0">
+      <div className="flex-grow bg-white dark:bg-zinc-900 px-0">
         <Navbar />
         <VideoGrid />
       </div>

@@ -142,7 +142,7 @@ export default function Slider() {
     }),
   };
   return (
-    <div className="mx-4 md:mx-8 xl:mx-16 w-auto rounded-3xl overflow-hidden shadow-2xl border-y-2 border-gray-200 dark:border-gray-700">
+    <div className="rounded-3xl overflow-hidden shadow-2xl border-y-2 border-gray-200 dark:border-gray-700">
       <Swiper
         slidesPerView={1}
         spaceBetween={0}
