@@ -1,3 +1,4 @@
+// NoiseBackground.jsx
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import './NoiseBackground.css';
@@ -23,13 +24,15 @@ const NoiseBackground = ({ width = '100%', height = '100vh', zIndex = 1 }) => {
     renderer.setSize(container.clientWidth, container.clientHeight);
     sceneElement.appendChild(renderer.domElement);
 
-    const mouse = new THREE.Vector2(0, 0);
-    const smoothedMouse = new THREE.Vector2(0, 0);
+    // Удаляем mouse и smoothedMouse, так как они больше не нужны
+    // const mouse = new THREE.Vector2(0, 0);
+    // const smoothedMouse = new THREE.Vector2(0, 0);
+    const fixedLightPosition = new THREE.Vector2(0.0, 0.0); // Координаты для левого нижнего угла
 
     const primaryColor = [255, 255, 255];
     const secondaryColor = [255, 255, 255];
     const accentColor = [0, 0, 0];
-    const lightIntensity = 1.0;
+    const lightIntensity = 0.5;
     const grainStrength = 0.15;
     const grainSize = 3.5;
     const animationSpeed = 0.02;
@@ -40,7 +43,7 @@ const NoiseBackground = ({ width = '100%', height = '100vh', zIndex = 1 }) => {
           value: new THREE.Vector2(container.clientWidth, container.clientHeight),
         },
         iTime: { value: 0.0 },
-        smoothedMouse: { value: new THREE.Vector2(0, 0) },
+        fixedLightPosition: { value: fixedLightPosition }, // Передаем фиксированную позицию
         primaryColor: {
           value: new THREE.Color().fromArray(primaryColor.map((c) => c / 255)),
         },
@@ -69,7 +72,7 @@ const NoiseBackground = ({ width = '100%', height = '100vh', zIndex = 1 }) => {
         uniform vec3 primaryColor;
         uniform vec3 secondaryColor;
         uniform vec3 accentColor;
-        uniform vec2 smoothedMouse;
+        uniform vec2 fixedLightPosition; // Теперь униформ для фиксированной позиции
         uniform float lightIntensity;
         uniform float grainStrength;
         uniform float grainSize;
@@ -87,28 +90,13 @@ const NoiseBackground = ({ width = '100%', height = '100vh', zIndex = 1 }) => {
             return fract(sin(n) * 43758.5453);
         }
         
-        float orbShape(vec2 uv, float time) {
-            uv = (uv * 2.0 - 1.0);
-            uv.x *= iResolution.x / iResolution.y;
-            
-            float d = length(uv);
-            float pulse = 0.5;
-            
-            float shape = smoothstep(pulse, pulse - 0.1, d);
-            float innerGlow = smoothstep(pulse * 0.8, 0.0, d) * 0.5;
-            float angle = atan(uv.y, uv.x);
-            float swirl = 0.16 * sin(angle * 6.0 + time * 3.0 * animationSpeed) * smoothstep(pulse, 0.0, d);
-            
-            return shape + innerGlow + swirl;
-        }
-
         float calculateLight(vec2 uv, float time) {
-            vec2 mousePos = smoothedMouse / iResolution.xy;
-            mousePos = (mousePos * 2.0 - 1.0);
-            mousePos.x *= iResolution.x / iResolution.y;
+            // Используем фиксированную позицию света
+            vec2 lightPos = (fixedLightPosition * 2.0 - 1.0);
+            lightPos.x *= iResolution.x / iResolution.y;
             
-            float mouseDist = length(uv - mousePos);
-            float totalLight = lightIntensity * 2.0 / (1.0 + mouseDist * mouseDist * 4.0);
+            float dist = length(uv - lightPos);
+            float totalLight = lightIntensity * 2.0 / (1.0 + dist * dist * 4.0);
             
             return totalLight;
         }
@@ -148,48 +136,37 @@ const NoiseBackground = ({ width = '100%', height = '100vh', zIndex = 1 }) => {
     
     updateSize();
 
-    const handleMouseMove = (event) => {
-      const rect = container.getBoundingClientRect();
-      const mouseX = (event.clientX - rect.left) / rect.width;
-      const mouseY = 1.0 - (event.clientY - rect.top) / rect.height;
-      mouse.set(mouseX, mouseY);
-    };
-
-    container.addEventListener("mousemove", handleMouseMove);
+    // Удаляем обработчик событий мыши
+    // container.addEventListener("mousemove", handleMouseMove);
     
     function animate() {
       animationIdRef.current = requestAnimationFrame(animate);
       const time = performance.now() * 0.001;
       shaderMaterial.uniforms.iTime.value = time;
-      smoothedMouse.lerp(mouse, 0.1);
-      shaderMaterial.uniforms.smoothedMouse.value.set(
-        smoothedMouse.x * container.clientWidth,
-        smoothedMouse.y * container.clientHeight
-      );
       renderer.render(scene, camera);
     }
 
     // --- Главное изменение: Intersection Observer ---
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Если компонент видим, запускаем анимацию
-          if (!animationIdRef.current) {
-            animate();
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            // Запуск анимации, когда хотя бы 1 пиксель виден
+            if (!animationIdRef.current) {
+              animate();
+            }
+          } else {
+            // Остановка анимации, когда компонент полностью не виден
+            if (animationIdRef.current) {
+              cancelAnimationFrame(animationIdRef.current);
+              animationIdRef.current = null;
+            }
           }
-        } else {
-          // Если компонент не виден, останавливаем анимацию
-          if (animationIdRef.current) {
-            cancelAnimationFrame(animationIdRef.current);
-            animationIdRef.current = null;
-          }
+        },
+        {
+          root: null,
+          threshold: 0, // Установите 0
         }
-      },
-      {
-        root: null, // Следим относительно viewport
-        threshold: 0.1, // Триггер, когда 10% компонента видно
-      }
-    );
+      );
 
     observer.observe(container);
     // --------------------------------------------------
@@ -206,7 +183,8 @@ const NoiseBackground = ({ width = '100%', height = '100vh', zIndex = 1 }) => {
       }
       observer.disconnect();
       resizeObserver.disconnect();
-      container.removeEventListener("mousemove", handleMouseMove);
+      // Удаляем обработчик событий мыши
+      // container.removeEventListener("mousemove", handleMouseMove);
       if (sceneElement.contains(renderer.domElement)) {
         sceneElement.removeChild(renderer.domElement);
       }

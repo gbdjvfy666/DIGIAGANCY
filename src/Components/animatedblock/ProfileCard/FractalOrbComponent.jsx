@@ -247,12 +247,11 @@ const FractalOrbComponent = ({ width = '100%', height = '100vh' }) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Если компонент видим, запускаем анимацию
+
           if (!animationIdRef.current) {
             animate();
           }
         } else {
-          // Если компонент не виден, останавливаем анимацию
           if (animationIdRef.current) {
             cancelAnimationFrame(animationIdRef.current);
             animationIdRef.current = null;
@@ -260,8 +259,8 @@ const FractalOrbComponent = ({ width = '100%', height = '100vh' }) => {
         }
       },
       {
-        root: null, // Следим относительно viewport
-        threshold: 0.1, // Триггер, когда 10% компонента видно
+        root: null,
+        threshold: 0, 
       }
     );
 
@@ -322,16 +321,7 @@ const FractalOrbComponent = ({ width = '100%', height = '100vh' }) => {
           </p>
         </div>
       </div>
-      <div className="profile-card">
-        <div className="profile-info">
-          <p className="profile-name">NoSwatt</p>
-          <p className="profile-twitter">
-            <a href="https://x.com/filipz" target="_blank" rel="noopener noreferrer">
-              @filipz
-            </a>
-          </p>
-        </div>
-      </div>
+
     </div>
   );
 };
