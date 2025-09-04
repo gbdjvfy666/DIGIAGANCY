@@ -10,9 +10,10 @@
 }
 
 /* Анимация шума на фоне */
-body::before {
+/* Анимация шума на фоне, ограниченная контейнером */
+.fractal-orb-container::before {
   content: "";
-  position: fixed;
+  position: absolute; /* Changed from 'fixed' to 'absolute' */
   top: -50%;
   left: -50%;
   width: 200%;
@@ -22,7 +23,7 @@ body::before {
   animation: noise-animation 0.3s steps(5) infinite;
   opacity: 1;
   will-change: transform;
-  z-index: 100;
+  z-index: 10; /* Lowered z-index to be behind content but above the canvas */
   pointer-events: none;
 }
 

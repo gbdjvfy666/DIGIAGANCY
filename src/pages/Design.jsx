@@ -1,5 +1,5 @@
 import Navbar from "../Components/components/Navbar";
-import FilledHoverButton from "../Components/buttons/FilledHoverButton";
+
 import '../index.css'
 export default function Design() {
   return (
@@ -17,7 +17,7 @@ export default function Design() {
           Получить консультацию
         </button>
       </section>
-<FilledHoverButton>Заказать дизайн</FilledHoverButton>
+<button>Заказать дизайн</button>
       {/* Услуги */}
 <section className="w-full px-0 py-24"> 
   <div className="text-center mb-16">

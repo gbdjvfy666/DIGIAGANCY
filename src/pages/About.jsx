@@ -4,7 +4,7 @@ import '../index.css';
 import Footer from '../Components/components/Footer.jsx';
 
 
-export default function Works() {
+export default function About() {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 dark:text-white">
         <Navbar />

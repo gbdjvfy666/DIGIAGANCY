@@ -7,18 +7,31 @@ import TextEffect from '../Components/components/TextEffect.jsx';
 import VideoGrid from '../Components/animatedblock/ServicesGrid.jsx';
 import ParallaxCardSlider from '../Components/animatedblock/ParallaxCardSlider.jsx';
 import FractalOrbComponent from '../Components/animatedblock/ProfileCard/FractalOrbComponent.jsx';
-import Footer from '../Components/components/footer.jsx';
+import Footer from '../Components/components/Footer.jsx';
 import StarBackground from '../Components/background/StarBackground.jsx';
 import SpacePage from '../Components/animatedblock/Spaceswiper/SpacePage.jsx';
+import NoiseBackground from '../Components/background/NoiseBackground/NoiseBackground.jsx';
 
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-black dark:text-white">
-
       <FractalOrbComponent />
-      <Slider />
+
+      {/* Контейнер для слайдера */}
+      <div className="relative w-full min-h-screen flex items-center justify-center z-30 bg-transparent">
+        <NoiseBackground />
+        
+        {/* Явная разделительная линия сверху */}
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gray-300 dark:bg-gray-600 z-40" />
+        
+        {/* Контейнер для слайдера */}
+        <div className="relative z-20 w-full">
+          <Slider />
+        </div>
+      </div>
       
+      {/* Остальные компоненты */}
       <div className="bg-white dark:bg-zinc-900 px-0">
         <Navbar />
         <VideoGrid />

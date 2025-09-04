@@ -68,10 +68,11 @@ export default function Navbar() {
           {/* Кнопка "О нас" справа */}
           <div className="flex items-center">
             <a
-              className="relative text-sm sm:text-base text-white transition-colors duration-300 hover:text-amber-500 hoverable z-10"
+              className="relative text-sm sm:text-base text-white transition-colors duration-300 hoverable z-10 group"
               href="/about"
             >
               О нас
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-current transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </a>
           </div>
         </div>

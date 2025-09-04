@@ -9,7 +9,7 @@ import CelebrationCard from '../Components/components/CelebrationCard.jsx';
 import FractalOrbComponent from '../Components/animatedblock/ProfileCard/FractalOrbComponent.jsx';
 
 import NoiseOverlay from '../Components/other/NoiseOverlay.jsx';
-import Footer from '../Components/components/footer.jsx';
+import Footer from '../Components/components/Footer.jsx';
 
 import GlowingCard from '../Components/background/GlowingCard.jsx';
 export default function Test() {

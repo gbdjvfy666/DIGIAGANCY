@@ -102,7 +102,7 @@ const slides = [
     titleClass: 'text-6xl font-black tracking-tight',
     containerClass: 'absolute bottom-16 left-1/2 transform -translate-x-1/2',
     buttonText: null,
-    centered: true, // ✅ тоже центрировать
+    centered: true,
   },
 ];
 
@@ -142,7 +142,7 @@ export default function Slider() {
     }),
   };
   return (
-    <div className="my-8 mx-4 md:mx-8 xl:mx-16 w-auto rounded-3xl overflow-hidden shadow-2xl">
+    <div className="mx-4 md:mx-8 xl:mx-16 w-auto rounded-3xl overflow-hidden shadow-2xl border-y-2 border-gray-200 dark:border-gray-700">
       <Swiper
         slidesPerView={1}
         spaceBetween={0}
