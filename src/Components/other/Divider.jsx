@@ -2,7 +2,7 @@
 import React from 'react';
 import dividerImage from '../../assets/BACKGROUNDS9.jpg';
 
-const Divider = ({ height = '20px' }) => {
+const Divider = ({ height = '10px' }) => {
   return (
     <div
       style={{
