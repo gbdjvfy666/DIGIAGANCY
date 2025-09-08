@@ -1,13 +1,7 @@
 import designerImage from '../../assets/VeloLand.png';
 import BlurText from '../animatedtext/BlurText';
-import GlareHover from '../animatedblock/GlareHover';
 import ShinyText from '../animatedtext/ShinyText';
 
-import TiltedCard from '../animatedblock/TiltedCard';
-import Carousel from '../animatedblock/Carousel';
-import SpotlightCard from '../animatedblock/SpotlightCard';
-import GlassIcons from '../animatedblock/GlassIcons';
-import CardSwap, { Card } from '../animatedblock/CardSwap';
 import Stepper, { Step } from '../animatedblock/Stepper';
 import ThemeToggleCard from '../components/ThemeToggleCard';
 import '../../index.css';
@@ -285,7 +279,6 @@ export default function DesignerSiteMain() {
   <div className="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-ivory-100/30 blur-xl"></div>
   <div className="absolute -bottom-16 -right-16 w-32 h-32 rounded-full bg-amber-100/20 blur-xl"></div>
   
-  {/* Embossed border effect */}
   <div className="absolute inset-0 rounded-[2rem] pointer-events-none border border-ivory-200/30 mix-blend-overlay"></div>
   
   {/* Luxury icon */}

@@ -1,4 +1,4 @@
-import Navbar from "../Components/components/Navbar";
+import Navbar from "../Components/other/Navbar";
 
 import '../index.css'
 export default function Design() {

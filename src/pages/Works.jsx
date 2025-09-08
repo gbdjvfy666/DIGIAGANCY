@@ -1,7 +1,7 @@
 
-import Navbar from '../Components/components/Navbar.jsx';
+import Navbar from '../Components/other/Navbar.jsx';
 import '../index.css';
-import Footer from '../Components/components/Footer.jsx';
+import Footer from '../Components/other/Footer.jsx';
 
 
 export default function Works() {

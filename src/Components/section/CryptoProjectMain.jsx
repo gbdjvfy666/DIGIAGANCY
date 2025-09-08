@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-import nftParticles from '../../assets/crypto-card.png';
+import nftParticles from '../../assets/Crypto/crypto-card.png';
 import nftCard1 from '../../assets/1.png';
 import nftCard2 from '../../assets/2.svg';
 import nftCard3 from '../../assets/1.png';

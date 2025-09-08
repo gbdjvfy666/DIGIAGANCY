@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import Navbar from '../Components/components/Navbar';
+import Navbar from '../Components/other/Navbar';
 import Cardio from '../Components/components/Cardio';
 import LandingMain from '../Components/section/LandingMain';
 import OnlineShopMain from '../Components/section/OnlineShopMain';

@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from '../Components/components/Navbar.jsx';
+import Navbar from '../Components/other/Navbar.jsx';
 import '../index.css';
 import TextEffect from '../Components/components/TextEffect.jsx';
 import VideoGrid from '../Components/animatedblock/ServicesGrid.jsx';
 import ParallaxCardSlider from '../Components/animatedblock/ParallaxCardSlider.jsx';
 import FractalOrbComponent from '../Components/animatedblock/ProfileCard/FractalOrbComponent.jsx';
-import Footer from '../Components/components/Footer.jsx';
+import Footer from '../Components/other/Footer.jsx';
 import StarBackground from '../Components/background/StarBackground.jsx';
 import SpacePage from '../Components/animatedblock/Spaceswiper/SpacePage.jsx';
 import NoiseBackground from '../Components/background/NoiseBackground/NoiseBackground.jsx';

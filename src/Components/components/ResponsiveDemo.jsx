@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from "react";
-import houseone from '../../assets/houseone.jpg';
-import housetwo from '../../assets/housetwo.jpg';
-import housethree from '../../assets/housethree.jpg';
-import housefour from '../../assets/housefour.jpg';
-import housefive from '../../assets/housefive.jpg';
-import housesix from '../../assets/housesix.jpg';
+import houseone from '../../assets/House/houseone.jpg';
+import housetwo from '../../assets/House/housetwo.jpg';
+import housethree from '../../assets/House/housethree.jpg';
+import housefour from '../../assets/House/housefour.jpg';
+import housefive from '../../assets/House/housefive.jpg';
+import housesix from '../../assets/House/housesix.jpg';
 
 const breakpoints = {
   phone: 480,

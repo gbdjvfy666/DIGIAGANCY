@@ -4,12 +4,9 @@ import FaceAnimation from '../Components/animatedblock/FaceAnimation.jsx';
 import RollingText from '../Components/animatedtext/RollingText.jsx';
 import ShaderCard from '../Components/animatedblock/ShaderCard.jsx';
 import CelebrationCard from '../Components/components/CelebrationCard.jsx';
+import TiltCard from '../Components/components/TiltCard.jsx';
 
 
-import FractalOrbComponent from '../Components/animatedblock/ProfileCard/FractalOrbComponent.jsx';
-
-import NoiseOverlay from '../Components/other/NoiseOverlay.jsx';
-import Footer from '../Components/components/Footer.jsx';
 
 import GlowingCard from '../Components/background/GlowingCard.jsx';
 export default function Test() {
@@ -17,10 +14,12 @@ export default function Test() {
     <div>
       <ParallaxCardSlider />
            <RollingText/>
+
      <ShaderCard/>
      <ThreeCubeAnimation/>
      <FaceAnimation/>
       <CelebrationCard />
+      <TiltCard />
      <GlowingCard/>
     </div>
   );
