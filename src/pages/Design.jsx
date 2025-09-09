@@ -1,10 +1,11 @@
 import Navbar from "../Components/other/Navbar";
-
+import FractalPyramidComponent from "../Components/animatedblock/ProfileCard/FractalPyramidComponent.jsx";
 import '../index.css'
 export default function Design() {
   return (
     <div className="bg-black text-white min-h-screen font-sans overflow-x-hidden">
       <Navbar />
+      <FractalPyramidComponent />
       {/* Hero Section */}
 <section className="max-w-6xl mx-auto px-6 py-24 text-center space-y-6">
         <h1 className="text-5xl md:text-6xl font-extrabold leading-tight font-deutsch">

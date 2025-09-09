@@ -10,6 +10,7 @@ import NewsBlogMain from '../Components/section/NewsBlogMain';
 import DesignerSiteMain from '../Components/section/DesignerSiteMain';
 import CryptoProjectMain from '../Components/section/CryptoProjectMain';
 import ResponsiveDemo from '../Components/components/ResponsiveDemo';
+import FractalOrbComponentSecond from '../Components/animatedblock/ProfileCard/FractalOrbComponentSecond';
 
 export default function WebDevelopment() {
   const componentsRef = useRef({
@@ -50,6 +51,7 @@ export default function WebDevelopment() {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 dark:text-white overflow-x-hidden">
       <Navbar />
+      <FractalOrbComponentSecond />
       <Cardio scrollToComponent={scrollToComponent} />
 
       {/* Секция 1 - ResponsiveDemo */}

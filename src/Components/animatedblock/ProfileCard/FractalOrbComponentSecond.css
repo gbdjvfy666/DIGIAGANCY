@@ -1,0 +1,284 @@
+@import url("https://fonts.googleapis.com/css2?family=Boldonse&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&display=swap");
+
+/* Переменные для легкой настройки */
+:root {
+  --primary-font: "Boldonse", sans-serif;
+  --secondary-font: "Bodoni Moda", serif;
+  --primary-color: #e0e0e0;
+  --secondary-color: rgba(255, 244, 244, 0.5);
+  --accent-red: #e53e3e;
+}
+
+/* Анимация шума на фоне */
+.fractal-orb-container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url("http://assets.iceable.com/img/noise-transparent.png") repeat 0 0;
+  background-size: 300px 300px;
+  animation: noise-animation 0.3s steps(5) infinite;
+  opacity: 0; /* ИЗМЕНЕНО: opacity: 0, чтобы скрыть шум */
+  will-change: transform;
+  z-index: 10;
+  pointer-events: none;
+}
+
+@keyframes noise-animation {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -3%); }
+  20% { transform: translate(-4%, 2%); }
+  30% { transform: translate(2%, -4%); }
+  40% { transform: translate(-2%, 5%); }
+  50% { transform: translate(-4%, 2%); }
+  60% { transform: translate(3%, 0); }
+  70% { transform: translate(0, 3%); }
+  80% { transform: translate(-3%, 0); }
+  90% { transform: translate(2%, 2%); }
+  100% { transform: translate(1%, 0); }
+}
+
+/* Контейнер компонента */
+.fractal-orb-container {
+  position: relative;
+  cursor: none;
+  width: 100%;
+  min-height: 100vh; 
+  overflow: hidden;
+  border-radius: 8px;
+  isolation: isolate;
+  pointer-events: auto;
+  /* Применяем тёмный фон и делаем его приоритетным */
+  background-color: #1a1a2e !important; 
+}
+
+/* Основное содержимое (Mobile-first) */
+.content {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  z-index: 20;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--primary-color);
+  pointer-events: none;
+}
+
+.content > * {
+  pointer-events: auto;
+}
+
+/* Canvas для Three.js */
+.three-container {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Убедись, что холст находится ниже контента */
+    pointer-events: none;
+}
+
+.three-container canvas {
+    display: block;
+    width: 100% !important; 
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.quote-container {
+  max-width: 90%;
+}
+
+/* Стили для мобильных и планшетов */
+.quote {
+  font-family: var(--primary-font);
+  font-size: clamp(6rem, 25vw, 12rem);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  opacity: 1;
+  text-transform: uppercase;
+}
+
+.author {
+  font-family: var(--secondary-font);
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem;
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  color: var(--primary-color);
+  pointer-events: none;
+}
+
+.profile-card a {
+  pointer-events: auto;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.profile-twitter {
+  font-size: 12px;
+  color: #71717a;
+}
+
+.profile-twitter a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.profile-twitter a:hover {
+  text-decoration: underline;
+}
+
+.main-heading,
+.agency-description {
+  position: relative;
+  transform: none;
+  top: auto;
+  left: auto;
+  right: auto;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  z-index: 20;
+}
+
+.main-heading h1 {
+  font-size: clamp(2.5rem, 12vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  color: var(--primary-color);
+}
+
+.main-heading span {
+  display: block;
+}
+
+.main-heading .text-gray-500 {
+  position: static;
+  left: auto;
+}
+
+.agency-description {
+  color: var(--primary-color);
+  font-family: sans-serif;
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
+  line-height: 1.6;
+}
+
+/* Медиа-запрос для ноутбуков и десктопов (>= 1024px) */
+@media (min-width: 1024px) {
+  .content {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  .main-heading {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    width: auto;
+    text-align: left;
+    padding-left: 2rem;
+  }
+    /* Обновляем псевдоэлемент для создания красной линии */
+  .main-heading::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 470px;
+    background-color: var(--accent-red);
+  }
+
+
+  .main-heading h1 {
+    font-size: clamp(4rem, 6vw, 8rem);
+    line-height: 0.95;
+  }
+
+  .main-heading .text-gray-500 {
+    position: relative;
+    left: 0.4vw;
+  }
+
+  .agency-description {
+    position: absolute;
+    top: 50%;
+    right: 5%; 
+    transform: translateY(-50%);
+    width: 30%;
+    max-width: 450px;
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  .quote-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: none;
+  }
+
+  .fractal-orb-container .quote {
+    font-size: 8vw; 
+    line-height: 1.1;
+    margin-bottom: 2rem; 
+  }
+
+  .fractal-orb-container .author {
+    font-size: 1.2vw;
+    color: var(--accent-red);
+    opacity: 1;
+  }
+
+  .profile-card {
+    left: 1.5rem;
+    transform: none;
+  }
+}
+
+.hoverable {
+  pointer-events: auto;
+  cursor: none;
+}
