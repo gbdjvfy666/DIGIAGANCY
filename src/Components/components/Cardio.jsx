@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import texas from '../../assets/texas.svg';
-
+import StaticColumn from '../other/ColumnModel';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -189,7 +189,14 @@ export default function Cardio({ scrollToComponent }) {
           >
             Создаём <span className="text-pink-400">сайты</span> под ключ
           </motion.h1>
-          
+
+        <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
+          <StaticColumn 
+            position={[-8, 0, 0]}   
+            rotationInDegrees={240}
+          />
+        </div>
+
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

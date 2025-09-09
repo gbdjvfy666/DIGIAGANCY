@@ -54,9 +54,7 @@ export default function WebDevelopment() {
       <Navbar />
       <FractalOrbComponentSecond />
       <Cardio scrollToComponent={scrollToComponent} />
-      <div style={{ width: '100%', height: '500px' }}>
-        <StaticColumn />
-      </div>
+
       {/* Секция 1 - ResponsiveDemo */}
       <div ref={componentsRef.current.ResponsiveDemo}>
         <ResponsiveDemo />

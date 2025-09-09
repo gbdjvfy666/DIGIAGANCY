@@ -1,19 +1,19 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-// Возвращаем Center в импорты
-import { useGLTF, Stage, Center } from '@react-three/drei';
+import { useGLTF, Center, Bounds, Environment } from '@react-three/drei';
 
 function Model(props) {
   const { scene } = useGLTF('/models/kolonna.glb');
   return <primitive object={scene} {...props} />;
 }
 
-export default function StaticColumn() {
-  // Укажите здесь желаемый угол в ГРАДУСАХ
-  const angleInDegrees = 240; 
+// Компонент принимает 'position' и 'rotationInDegrees' как props
+export default function StaticColumn({ 
+  position = [0, 0, 0], 
+  rotationInDegrees = 0 
+}) {
   
-  // Конвертируем градусы в радианы
-  const rotationInRadians = (Math.PI / 180) * angleInDegrees;
+  const rotationInRadians = (Math.PI / 180) * rotationInDegrees;
 
   return (
     <Canvas
@@ -21,22 +21,24 @@ export default function StaticColumn() {
       style={{ background: 'transparent' }}
     >
       <Suspense fallback={null}>
-        {/* Stage по-прежнему настраивает свет и камеру */}
-        <Stage environment="city" intensity={0.6} adjustCamera={1}>
-          
-          {/* 1. ГРУППА ДЛЯ ВРАЩЕНИЯ */}
-          {/* Мы применяем вращение к внешней обертке */}
-          <group rotation={[0, rotationInRadians, 0]}>
+        <Environment preset="city" />
+        <directionalLight intensity={0.6} position={[10, 10, 10]} />
 
-            {/* 2. ЦЕНТРИРОВАНИЕ ПЕРЕД ВРАЩЕНИЕМ */}
-            {/* Center исправляет проблему с точкой вращения. Он центрирует модель, */}
-            {/* и теперь внешняя группа будет вращать ее вокруг ее настоящего центра. */}
-            <Center>
-              <Model />
-            </Center>
+        {/* 1. Внешняя группа использует 'position' из props. ОНА ДВИГАЕТ ВСЁ. */}
+        <group position={position}>
+
+          {/* 2. Bounds настраивает камеру ОДИН РАЗ и больше не мешает. */}
+          <Bounds fit clip margin={1}>
+
+            {/* 3. Внутренняя группа вращает модель на месте. */}
+            <group rotation={[0, rotationInRadians, 0]}>
+              <Center>
+                <Model />
+              </Center>
+            </group>
             
-          </group>
-        </Stage>
+          </Bounds>
+        </group>
       </Suspense>
     </Canvas>
   );
