@@ -11,6 +11,7 @@ import DesignerSiteMain from '../Components/section/DesignerSiteMain';
 import CryptoProjectMain from '../Components/section/CryptoProjectMain';
 import ResponsiveDemo from '../Components/components/ResponsiveDemo';
 import FractalOrbComponentSecond from '../Components/animatedblock/ProfileCard/FractalOrbComponentSecond';
+import StaticColumn from '../Components/other/ColumnModel';
 
 export default function WebDevelopment() {
   const componentsRef = useRef({
@@ -53,7 +54,9 @@ export default function WebDevelopment() {
       <Navbar />
       <FractalOrbComponentSecond />
       <Cardio scrollToComponent={scrollToComponent} />
-
+      <div style={{ width: '100%', height: '500px' }}>
+        <StaticColumn />
+      </div>
       {/* Секция 1 - ResponsiveDemo */}
       <div ref={componentsRef.current.ResponsiveDemo}>
         <ResponsiveDemo />
