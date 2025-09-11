@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const ease = [0.4, 0, 0.2, 0.8];
 
-// Анимация текста по словам (как на втором слайде исходного кода)
+// Анимация текста по словам
 const wordAnimation = {
   hidden: { y: '100%', opacity: 0 },
   visible: (i) => ({
@@ -19,7 +19,7 @@ const wordAnimation = {
   }),
 };
 
-// Анимация для подзаголовка и основного текста (fadeUp)
+// Анимация для подзаголовка и основного текста
 const fadeUp = {
   hidden: { y: 30, opacity: 0 },
   visible: (delay = 0) => ({
@@ -29,31 +29,31 @@ const fadeUp = {
   }),
 };
 
-// Удалены все ссылки на изображения, фон будет черным
+// Измененный массив слайдов
 const slides = [
   {
     id: 1,
-    title: 'Побеждай в конкуренции с эффективным сайтом и рекламой.',
-    subtitle: 'Весь мир — в интернете. Почему твой бизнес ещё нет?',
-    text: 'Сайты под ключ · Таргет в ВКонтакте · Дизайн и брендинг',
-    link: '/web-development',
-    centered: false,
+    title: 'Стратегия',
+    subtitle: 'Анализ и планирование',
+    text: 'Глубокое погружение в ваш бизнес для создания выигрышной digital-стратегии.',
+    link: '/strategy',
+    centered: false, // Выравнивание по левому краю, как в оригинале
   },
   {
     id: 2,
-    title: 'САЙТ',
-    subtitle: 'Один сайт — тысячи решений',
-    text: 'Создаем ваш бренд, дизайн и веб-приложения',
-    link: '/web-development',
-    centered: true,
+    title: 'Реализация',
+    subtitle: 'Воплощение идей в жизнь',
+    text: 'Разработка сайтов, настройка рекламы и создание уникального дизайна.',
+    link: '/implementation',
+    centered: true, // Выравнивание по центру
   },
   {
     id: 3,
-    title: 'Fear Nothing',
-    subtitle: 'Nike National Team-Kollektionen 2025',
-    text: 'Wenn es um alles geht.',
-    link: '/target',
-    centered: true,
+    title: 'Развитие',
+    subtitle: 'Поддержка и рост',
+    text: 'Постоянное улучшение и масштабирование вашего проекта для достижения новых высот.',
+    link: '/growth',
+    centered: true, // Выравнивание по центру
   },
 ];
 
@@ -73,11 +73,10 @@ export default function SliderSecond() {
     return activeIndex > prevIndex.current ? 1 : -1;
   })();
 
-  // Варианты для контейнера текста, чтобы он выезжал и исчезал
   const containerVariants = {
     enter: (direction) => ({
       opacity: 0,
-      y: direction > 0 ? 100 : -100, // Анимация по оси Y для контейнера
+      y: direction > 0 ? 100 : -100,
       transition: { duration: 0.8, ease: ease },
     }),
     center: {
@@ -87,7 +86,7 @@ export default function SliderSecond() {
     },
     exit: (direction) => ({
       opacity: 0,
-      y: direction > 0 ? -100 : 100, // Анимация по оси Y для контейнера
+      y: direction > 0 ? -100 : 100,
       transition: { duration: 0.8, ease: ease },
     }),
   };
@@ -113,13 +112,12 @@ export default function SliderSecond() {
         parallax={true}
         speed={900}
         onSlideChange={handleSlideChange}
-        className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] bg-black" // Фон Swiper черный
+        className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] bg-black"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
             <Link to={slide.link} className="relative block w-full h-full cursor-pointer">
-              {/* Удалена логика для фонового изображения, фон будет черным из Swiper */}
-              <div className="absolute inset-0 bg-black/30 z-10"></div> {/* Затемнение, если нужно */}
+              <div className="absolute inset-0 bg-black/30 z-10"></div>
               
               <AnimatePresence initial={false} custom={direction}>
                 {slide.id === slides[activeIndex]?.id && (
@@ -127,7 +125,7 @@ export default function SliderSecond() {
                     key={slide.id}
                     className={`absolute inset-0 flex flex-col justify-center text-white z-20 p-8 ${slide.centered ? 'items-center text-center' : 'items-start px-8 md:px-16 lg:px-24'}`}
                     custom={direction}
-                    variants={containerVariants} // Применяем анимацию выезда/заезда к контейнеру
+                    variants={containerVariants}
                     initial="enter"
                     animate="center"
                     exit="exit"
@@ -144,10 +142,10 @@ export default function SliderSecond() {
                     <motion.h1
                       className={`text-5xl md:text-7xl font-bold tracking-tight mb-4 overflow-hidden`}
                     >
-                      {slide.title.split(' ').map((word, i) => ( // Разбиваем заголовок на слова для анимации
+                      {slide.title.split(' ').map((word, i) => (
                         <motion.span
                           key={i}
-                          className="inline-block mr-2" // Добавьте mr-2 для небольшого отступа между словами
+                          className="inline-block mr-2"
                           variants={wordAnimation}
                           custom={i}
                         >
@@ -171,7 +169,6 @@ export default function SliderSecond() {
           </SwiperSlide>
         ))}
 
-        {/* Custom navigation buttons at the bottom right */}
         <div className="absolute bottom-6 right-6 flex gap-2 z-50">
           <button
             className="custom-prev w-9 h-9 bg-neutral-200/80 rounded-full flex items-center justify-center shadow-sm hover:bg-gray-100"

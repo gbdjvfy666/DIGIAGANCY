@@ -323,7 +323,6 @@ export default function NFTUltimateMain() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="relative z-10 py-12 px-6 md:px-12 lg:px-24 border-t border-purple-900/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="text-xl font-bold mb-4 md:mb-0">

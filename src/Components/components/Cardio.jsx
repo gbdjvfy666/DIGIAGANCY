@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
-import texas from '../../assets/texas.svg';
-import StaticColumn from '../other/ColumnModel';
+import texas from '../../assets/texas.svg'; // Убедитесь, что путь к файлу верный
+
 
 gsap.registerPlugin(ScrollTrigger);
 
+// --- Компонент карточки ---
 const WorkCard = ({ title, image, description, onLearnMore }) => (
   <div className="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-pink-400/50 transition-colors h-full flex flex-col">
     <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
@@ -36,6 +37,7 @@ const WorkCard = ({ title, image, description, onLearnMore }) => (
   </div>
 );
 
+// --- Основной компонент ---
 export default function Cardio({ scrollToComponent }) {
   const container = useRef();
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -47,90 +49,22 @@ export default function Cardio({ scrollToComponent }) {
   }, []);
 
   const cards = [
-    {
-      id: 'landing',
-      title: 'Лендинг под ключ',
-      image: '/images/1.jpg',
-      description: 'Одностраничный сайт с яркой подачей, анимациями и адаптацией под все устройства. Идеален для запуска продукта, услуги или акции с высокой конверсией.',
-    },
-    {
-      id: 'shop',
-      title: 'Интернет-магазин',
-      image: '/images/2.jpg',
-      description: 'Каталог, корзина, онлайн-оплата, личный кабинет и мощная админка — всё, чтобы вы могли продавать 24/7 без ограничений и технических сложностей.',
-    },
-    {
-      id: 'corporate',
-      title: 'Корпоративный сайт',
-      image: '/images/3.jpg',
-      description: 'Стильный и функциональный сайт для компании: описание услуг, команда, кейсы, контакты. Повышает доверие и привлекает новых клиентов.',
-    },
-    {
-      id: 'multi',
-      title: 'Многостраничный сайт',
-      image: '/images/1.jpg',
-      description: 'Сайт с полноценной структурой: разделы «О нас», «Контакты», «Услуги», блог и другие страницы. Отлично подходит для малого и среднего бизнеса.',
-    },
-    {
-      id: 'portfolio',
-      title: 'Сайт-портфолио',
-      image: '/images/2.jpg',
-      description: 'Минималистичный и эстетичный сайт для демонстрации работ, кейсов, отзывов. Идеален для дизайнеров, фотографов и фрилансеров.',
-    },
-    {
-      id: 'event',
-      title: 'Сайт мероприятия',
-      image: '/images/3.jpg',
-      description: 'Продающий сайт для конференции, форума, вечеринки или онлайн-события. Таймер, регистрация, программа, интеграции и визуальный стиль мероприятия.',
-    },
-    {
-      id: 'restaurant',
-      title: 'Сайт для ресторана',
-      image: '/images/3.jpg',
-      description: 'Атмосферный сайт с меню, бронированием, отзывами и интеграциями. Работает как витрина и точка входа для новых гостей и заказов.',
-    },
-    {
-      id: 'blog',
-      title: 'Блог / новостной сайт',
-      image: '/images/1.jpg',
-      description: 'Редакционная платформа с категориями, фильтрами, поиском, комментариями и подписками. Подходит для СМИ, экспертов и авторов.',
-    },
-    {
-      id: 'school',
-      title: 'Сайт школы / сада',
-      image: '/images/2.jpg',
-      description: 'Удобный сайт с программой, педагогами, расписанием, фотоархивом и новостями. Решает все задачи родительского и педагогического взаимодействия.',
-    },
-    {
-      id: 'courses',
-      title: 'Платформа онлайн-курсов',
-      image: '/images/1.jpg',
-      description: 'Сайт для продажи знаний: личные кабинеты, видеоуроки, оплата, тесты и сертификаты. Отличный старт для образовательного проекта.',
-    },
-    {
-      id: 'designer',
-      title: 'Дизайнер одежды / продукта',
-      image: '/images/2.jpg',
-      description: 'Индивидуальный сайт-бутик с каталогом, сторителлингом, онлайн-оплатой и оформлением бренда. Максимум стиля и продаж.',
-    },
-    {
-      id: 'media',
-      title: 'Медиа-бренд',
-      image: '/images/2.jpg',
-      description: 'Центр вашей медиа-активности: статьи, видео, подписки, интеграции, комьюнити. Отлично подойдёт для инфлюенсера или digital-команды.',
-    }
+    { id: 'landing', title: 'Лендинг под ключ', image: '/images/1.jpg', description: 'Одностраничный сайт с яркой подачей, анимациями и адаптацией под все устройства. Идеален для запуска продукта, услуги или акции с высокой конверсией.' },
+    { id: 'shop', title: 'Интернет-магазин', image: '/images/2.jpg', description: 'Каталог, корзина, онлайн-оплата, личный кабинет и мощная админка — всё, чтобы вы могли продавать 24/7 без ограничений и технических сложностей.' },
+    { id: 'corporate', title: 'Корпоративный сайт', image: '/images/3.jpg', description: 'Стильный и функциональный сайт для компании: описание услуг, команда, кейсы, контакты. Повышает доверие и привлекает новых клиентов.' },
+    { id: 'multi', title: 'Многостраничный сайт', image: '/images/1.jpg', description: 'Сайт с полноценной структурой: разделы «О нас», «Контакты», «Услуги», блог и другие страницы. Отлично подходит для малого и среднего бизнеса.' },
+    { id: 'portfolio', title: 'Сайт-портфолио', image: '/images/2.jpg', description: 'Минималистичный и эстетичный сайт для демонстрации работ, кейсов, отзывов. Идеален для дизайнеров, фотографов и фрилансеров.' },
+    { id: 'event', title: 'Сайт мероприятия', image: '/images/3.jpg', description: 'Продающий сайт для конференции, форума, вечеринки или онлайн-события. Таймер, регистрация, программа, интеграции и визуальный стиль мероприятия.' },
+    { id: 'restaurant', title: 'Сайт для ресторана', image: '/images/3.jpg', description: 'Атмосферный сайт с меню, бронированием, отзывами и интеграциями. Работает как витрина и точка входа для новых гостей и заказов.' },
+    { id: 'blog', title: 'Блог / новостной сайт', image: '/images/1.jpg', description: 'Редакционная платформа с категориями, фильтрами, поиском, комментариями и подписками. Подходит для СМИ, экспертов и авторов.' },
+    { id: 'school', title: 'Сайт школы / сада', image: '/images/2.jpg', description: 'Удобный сайт с программой, педагогами, расписанием, фотоархивом и новостями. Решает все задачи родительского и педагогического взаимодействия.' },
+    { id: 'courses', title: 'Платформа онлайн-курсов', image: '/images/1.jpg', description: 'Сайт для продажи знаний: личные кабинеты, видеоуроки, оплата, тесты и сертификаты. Отличный старт для образовательного проекта.' },
+    { id: 'designer', title: 'Дизайнер одежды / продукта', image: '/images/2.jpg', description: 'Индивидуальный сайт-бутик с каталогом, сторителлингом, онлайн-оплатой и оформлением бренда. Максимум стиля и продаж.' },
+    { id: 'media', title: 'Медиа-бренд', image: '/images/2.jpg', description: 'Центр вашей медиа-активности: статьи, видео, подписки, интеграции, комьюнити. Отлично подойдёт для инфлюенсера или digital-команды.' }
   ];
 
   const idToRefKey = {
-    landing: 'LandingMain',
-    shop: 'OnlineShopMain',
-    corporate: 'CorporateMain',
-    multi: 'MultipageSiteMain',
-    restaurant: 'RestaurantSiteMain',
-    blog: 'NewsBlogMain',
-    designer: 'DesignerSiteMain',
-    media: 'ResponsiveDemo',
-    courses: 'CryptoProjectMain',
+    landing: 'LandingMain', shop: 'OnlineShopMain', corporate: 'CorporateMain', multi: 'MultipageSiteMain', restaurant: 'RestaurantSiteMain', blog: 'NewsBlogMain', designer: 'DesignerSiteMain', media: 'ResponsiveDemo', courses: 'CryptoProjectMain',
   };
 
   const handleLearnMore = (cardId) => {
@@ -144,43 +78,37 @@ export default function Cardio({ scrollToComponent }) {
 
   useEffect(() => {
     if (!isMounted) return;
-
     const ctx = gsap.context(() => {
-      gsap.from(container.current, {
-        opacity: 0,
-        y: 100,
-        duration: 1.2,
-        ease: 'power3.out',
-        delay: 0.2
-      });
+      gsap.from(container.current, { opacity: 0, y: 100, duration: 1.2, ease: 'power3.out', delay: 0.2 });
     }, container);
-
     return () => ctx.revert();
   }, [isMounted]);
 
   if (!isMounted) {
     return (
-      <div className="w-full min-h-screen bg-black text-white relative z-10 pt-24">
-        <div className="h-screen flex items-center justify-center">
-          <div className="animate-pulse text-2xl">Загрузка...</div>
-        </div>
+      <div className="w-full min-h-screen bg-black text-white relative z-10 flex items-center justify-center">
+        <div className="animate-pulse text-2xl">Загрузка...</div>
       </div>
     );
   }
 
   return (
-    <div ref={container} className="w-full min-h-screen bg-black text-white relative z-10 ">
-      {/* Hero Section */}
-<div 
-  className="relative h-screen flex items-center justify-center bg-cover bg-center"
-  style={{
-    backgroundImage: `
-      radial-gradient(circle at center, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
-      url(${texas})
-    `
-  }}
->
-        <div className="text-center relative z-10">
+    <div ref={container} className="w-full min-h-screen bg-black text-white relative z-10">
+      
+      {/* --- Hero Section --- */}
+      <div 
+        className="relative h-screen flex items-center justify-center bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at center, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+            url(${texas})
+          `
+        }}
+      >
+
+
+        {/* --- Контент (Текст и Кнопки) --- */}
+        <div className="relative z-10 text-center px-4">
           <motion.h1 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -189,13 +117,6 @@ export default function Cardio({ scrollToComponent }) {
           >
             Создаём <span className="text-pink-400">сайты</span> под ключ
           </motion.h1>
-
-        <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
-          <StaticColumn 
-            position={[-8, 0, 0]}   
-            rotationInDegrees={240}
-          />
-        </div>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -222,7 +143,7 @@ export default function Cardio({ scrollToComponent }) {
         </div>
       </div>
 
-      {/* Modal with Cards */}
+      {/* --- Модальное окно с карточками --- */}
       {detailsOpen && (
         <div 
           className="fixed inset-0 bg-black/95 z-30 pt-20 pb-10 px-4 overflow-y-auto"
@@ -232,7 +153,6 @@ export default function Cardio({ scrollToComponent }) {
             <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
               Наши решения
             </h2>
-            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {cards.map((card) => (
                 <WorkCard 
@@ -244,7 +164,6 @@ export default function Cardio({ scrollToComponent }) {
                 />
               ))}
             </div>
-            
             <div className="mt-16 text-center">
               <button 
                 onClick={() => setDetailsOpen(false)}

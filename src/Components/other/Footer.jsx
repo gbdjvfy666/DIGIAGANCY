@@ -100,7 +100,7 @@ const Footer = ({ actionText = "ПРОЕКТЫ", actionLink = "/works" }) => {
           </span>
         </div>
 
-        {/* Нижняя строка: Копирайт */}
+
         <div className="w-full mt-12 pt-6 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-gray-400 mb-4 md:mb-0 text-sm"></div>
         </div>

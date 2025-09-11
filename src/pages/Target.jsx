@@ -1,9 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Navbar from "../Components/other/Navbar";
+import Footer from "../Components/other/Footer";
 export default function PremiumVkTarget() {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
+      <Navbar />
       {/* Hero Section */}
+
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-black to-blue-900/20 z-0"></div>
         <div className="container mx-auto px-6 py-24 md:py-32 relative z-10">
@@ -476,6 +480,8 @@ export default function PremiumVkTarget() {
           </div>
         </div>
       </section>
+      
+    <Footer/>
     </div>
   );
 }
