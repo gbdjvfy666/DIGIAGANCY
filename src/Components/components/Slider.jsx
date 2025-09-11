@@ -5,24 +5,41 @@ import { motion, AnimatePresence } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Link } from 'react-router-dom';
+
+// Компоненты для других слайдов и фона
 import MacbookWrapper from '../other/MacbookWrapper';
 import GradientBlinds from '../background/GradientBlinds';
-import logPng from '../../assets/LOG.png'; 
+import Prism from '../Prism';
+import logPng from '../../assets/LOG.png';
 
 const ease = [0.4, 0, 0.2, 0.8];
 
 const slides = [
   {
     id: 1,
-    title: 'Дизайн',
+    title: 'ДИЗАЙН',
     subtitle: 'Искусство превращать идею в реальность.',
     text: null,
     link: '/design',
-    titleClass: 'text-5xl md:text-7xl font-bold text-white tracking-tight',
-    containerClass: 'absolute bottom-24 left-8 md:left-16 lg:left-24 max-w-5xl',
-    centered: false,
-    component: null,
-    imageSrc: logPng, 
+    titleClass: 'text-5xl font-dela md:text-7xl font-bold text-white tracking-tight',
+    // ===== ИЗМЕНЕНИЕ №1 ЗДЕСЬ =====
+    // Сгруппировали текст внизу с помощью justify-end и изменили отступы
+    containerClass: 'absolute inset-0 flex flex-col-reverse justify-start items-center pb-16 md:pb-24',
+    centered: true,
+    component: () => (
+      <Prism
+        animationType="rotate"
+        timeScale={0.5}
+        height={3.5}
+        baseWidth={5.5}
+        scale={2.6}
+        hueShift={0}
+        colorFrequency={1}
+        noise={0.5}
+        glow={1}
+      />
+    ),
+    imageSrc: logPng,
   },
   {
     id: 2,
@@ -49,7 +66,7 @@ const slides = [
     centered: true,
     component: () => (
       <GradientBlinds
-        gradientColors={['#FF9FFC', '#5227FF']}
+        gradientColors={['#96C0C0', '#5227FF']}
         angle={0}
         noise={0.3}
         blindCount={12}
@@ -112,7 +129,6 @@ export default function Slider() {
         speed={900}
         onSlideChange={handleSlideChange}
         className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] bg-black"
-        // === ИЗМЕНЕНИЕ ЗДЕСЬ ===
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
@@ -136,7 +152,9 @@ export default function Slider() {
                 {slide.id === slides[activeIndex]?.id && slide.imageSrc && (
                   <motion.div
                     key={`${slide.id}-image`}
-                    className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 max-w-xs md:max-w-md lg:max-w-lg z-20 pointer-events-none"
+                    // ===== ИЗМЕНЕНИЕ №2 ЗДЕСЬ =====
+                    // Подняли картинку, изменив top-[40%] на top-[35%]
+                    className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 max-w-xs md:max-w-md lg:max-w-lg z-20 pointer-events-none"
                     variants={imageVariants}
                     initial="enter"
                     animate="center"

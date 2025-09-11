@@ -10,10 +10,30 @@ import StaticColumn from '../Components/other/ColumnModel.jsx';
 
 import GlowingCard from '../Components/background/GlowingCard.jsx';
 export default function Test() {
+    const [imageData, setImageData] = useState<ImageData | null>(null);
+
+  useEffect(() => {
+    async function loadDefaultImage() {
+      try {
+        const response = await fetch(logo);
+        const blob = await response.blob();
+        const file = new File([blob], "default.png", { type: blob.type });
+
+        const parsedData = await parseLogoImage(file);
+        setImageData(parsedData?.imageData ?? null);
+
+      } catch (err) {
+        console.error("Error loading default image:", err);
+      }
+    }
+
+    loadDefaultImage();
+  }, []);
   return (
     <div>
       <ParallaxCardSlider />
            <RollingText/>
+           
     <div style={{ width: '100%', height: '500px' }}>
       <StaticColumn />
     </div>

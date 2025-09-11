@@ -197,7 +197,7 @@ const ShaderCard = () => {
         ref={shaderRef} 
         className="absolute inset-0 w-full h-full"
       />
-      <style jsx>{`
+      <style>{`
         canvas {
           width: 100% !important;
           height: 100% !important;
