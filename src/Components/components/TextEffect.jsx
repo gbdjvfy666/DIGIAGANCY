@@ -2,27 +2,11 @@ import React, { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Подключаем шрифт через CSS-in-JS
-const fontStyles = `
-  @font-face {
-    font-family: 'MullerNextWide';
-    src: url('/fonts/MullerNextWideTrial-Heavy.otf') format('opentype');
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
-  }
-`;
-
 // Регистрируем плагин GSAP
 gsap.registerPlugin(ScrollTrigger);
 
 const TextEffect = () => {
   useEffect(() => {
-    // Добавляем стили шрифта в head документа
-    const style = document.createElement('style');
-    style.innerHTML = fontStyles;
-    document.head.appendChild(style);
-
     // Инициализация GSAP анимаций
     const textElements = document.querySelectorAll('.text-effect');
     
@@ -39,23 +23,12 @@ const TextEffect = () => {
       });
     });
 
-    // Удаляем стили при размонтировании
-    return () => {
-      document.head.removeChild(style);
-    };
+    // GSAP 3+ автоматически управляет очисткой ScrollTrigger при размонтировании компонента,
+    // поэтому явная функция очистки здесь не обязательна.
   }, []);
 
   return (
     <div className="bg-[#0D0D0D] p-[10%] font-muller">
-      <style>{`
-        :root {
-          --font-muller: 'MullerNextWide', sans-serif;
-        }
-        .font-muller {
-          font-family: var(--font-muller);
-        }
-      `}</style>
-      
       <div className="flex flex-col justify-center items-start min-h-[200vh]">
         {/* Элемент 1 */}
         <h1 className="text-effect relative w-full text-[10vw] leading-none tracking-tight

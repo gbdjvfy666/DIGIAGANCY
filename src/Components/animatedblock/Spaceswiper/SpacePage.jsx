@@ -1,65 +1,323 @@
 import './space.css';
+import '../../../index.css';
 import { useEffect, useRef, useState } from 'react';
-import { initSpaceSwiper } from './space.js';
+
+// Импортируем GSAP прямо сюда
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+// Регистрируем плагины GSAP
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function SpacePage() {
-  const leftMenuRef = useRef(null);
-  const horizontalContainerRef = useRef(null);
-  const menuBtnRef = useRef(null);
+  // --- Refs для всех DOM-элементов, которыми мы управляем ---
   const mainWrapperRef = useRef(null);
+  const horizontalContainerRef = useRef(null);
+  const panelsContainerRef = useRef(null);
+  const panelsRef = useRef([]); // Ref для массива панелей
+  const progressFillRef = useRef(null);
+  const navTextRef = useRef(null);
+  const copyEmailBtnRef = useRef(null);
+  const copyTooltipRef = useRef(null);
+  const sectionNavItemsRef = useRef([]); // Ref для массива элементов навигации
+
+  // State для управления состоянием меню
   const [menuExpanded, setMenuExpanded] = useState(false);
 
+  // --- Основной useEffect, который запускает всю логику анимации ---
   useEffect(() => {
-    let cleanupFunction;
-    const runInit = async () => {
-      cleanupFunction = initSpaceSwiper(horizontalContainerRef.current);
-    };
+    // Вся логика из space.js теперь живет здесь.
+    // Используем .current, чтобы получить доступ к реальным DOM-элементам
+    const pageContainer = horizontalContainerRef.current?.closest(".page-container");
+    const panels = panelsContainerRef.current?.querySelectorAll(".panel");
+    const parallaxElements = horizontalContainerRef.current?.querySelectorAll(".parallax");
+    const sectionNavItems = mainWrapperRef.current?.querySelectorAll(".section-nav-item");
+    
+    if (!pageContainer || !panels || !parallaxElements || !sectionNavItems) {
+      console.error("Один или несколько ключевых элементов не найдены в DOM.");
+      return;
+    }
 
-    runInit();
+    const SMOOTH_FACTOR = 0.065;
+    const WHEEL_SENSITIVITY = 1.0;
+    const PANEL_COUNT = panels.length;
+    let targetX = 0;
+    let currentX = 0;
+    let currentProgress = 0;
+    let targetProgress = 0;
+    let panelWidth = window.innerWidth;
+    let maxScroll = (PANEL_COUNT - 1) * panelWidth;
+    let isAnimating = false;
+    let currentPanel = 0;
+    let lastPanel = -1;
+    let isDragging = false;
+    let startX = 0;
+    let startScrollX = 0;
+    let velocityX = 0;
+    let lastTouchX = 0;
+    let lastTouchTime = 0;
 
-    return () => {
-      if (cleanupFunction) {
-        cleanupFunction();
+    const lerp = (start, end, factor) => start + (end - start) * factor;
+    const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
+    const handleCopyEmail = () => {
+      const emailElement = mainWrapperRef.current?.querySelector(".email");
+      if (emailElement) {
+        navigator.clipboard.writeText(emailElement.textContent).then(() => {
+          copyTooltipRef.current?.classList.add("active");
+          setTimeout(() => {
+            copyTooltipRef.current?.classList.remove("active");
+          }, 2000);
+        });
       }
     };
-  }, []);
 
-  useEffect(() => {
-    const mainWrapper = mainWrapperRef.current;
-    if (mainWrapper) {
-      if (menuExpanded) {
-        mainWrapper.classList.add('menu-expanded');
+    const handleNavItemClick = (e) => {
+      const item = e.currentTarget;
+      const index = Number.parseInt(item.getAttribute("data-index"));
+      targetX = index * panelWidth;
+      sectionNavItems.forEach(navItem => navItem.classList.remove("active"));
+      item.classList.add("active");
+      startAnimation();
+    };
+
+    const handleWheel = (e) => {
+      e.preventDefault();
+      targetX = clamp(targetX + e.deltaY * WHEEL_SENSITIVITY, 0, maxScroll);
+      startAnimation();
+    };
+
+    const handleMouseDown = (e) => {
+        if (e.target.closest(".left-menu") || e.target.closest(".copy-email")) return;
+        isDragging = true;
+        startX = e.clientX;
+        startScrollX = currentX;
+        lastTouchX = e.clientX;
+        lastTouchTime = Date.now();
+        document.body.style.cursor = "grabbing";
+        e.preventDefault();
+    };
+    
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        targetX = clamp(startScrollX - dx, 0, maxScroll);
+        const currentTime = Date.now();
+        const timeDelta = currentTime - lastTouchTime;
+        if (timeDelta > 0) {
+            const touchDelta = lastTouchX - e.clientX;
+            velocityX = (touchDelta / timeDelta) * 15;
+        }
+        lastTouchX = e.clientX;
+        lastTouchTime = currentTime;
+        startAnimation();
+    };
+    
+    const handleMouseUp = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        document.body.style.cursor = "grab";
+        if (Math.abs(velocityX) > 0.5) {
+            targetX = clamp(targetX + velocityX * 8, 0, maxScroll);
+        }
+        const nearestPanel = Math.round(targetX / panelWidth);
+        targetX = nearestPanel * panelWidth;
+        startAnimation();
+    };
+    
+    const handleTouchStart = (e) => {
+        if (e.target.closest(".left-menu") || e.target.closest(".copy-email")) return;
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        startScrollX = currentX;
+        lastTouchX = e.touches[0].clientX;
+        lastTouchTime = Date.now();
+    };
+    
+    const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        const dx = e.touches[0].clientX - startX;
+        targetX = clamp(startScrollX - dx, 0, maxScroll);
+        const currentTime = Date.now();
+        const timeDelta = currentTime - lastTouchTime;
+        if (timeDelta > 0) {
+            const touchDelta = lastTouchX - e.touches[0].clientX;
+            velocityX = (touchDelta / timeDelta) * 12;
+        }
+        lastTouchX = e.touches[0].clientX;
+        lastTouchTime = currentTime;
+        e.preventDefault();
+        startAnimation();
+    };
+
+    const handleTouchEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      if (Math.abs(velocityX) > 0.5) {
+        targetX = clamp(targetX + velocityX * 6, 0, maxScroll);
+      }
+      const nearestPanel = Math.round(targetX / panelWidth);
+      targetX = nearestPanel * panelWidth;
+      startAnimation();
+    };
+    
+    const updateParallax = () => {
+      const PARALLAX_INTENSITY = 0.2;
+      parallaxElements.forEach((element) => {
+        if (!element) return;
+        const speed = Number.parseFloat(element.dataset.speed) || 0.2;
+        const moveX = -currentX * speed * PARALLAX_INTENSITY;
+        element.style.transform = `translateX(${moveX}px)`;
+      });
+    };
+
+    const updateDimensions = (animate = true) => {
+      panelWidth = window.innerWidth;
+      maxScroll = (PANEL_COUNT - 1) * panelWidth;
+      targetX = currentPanel * panelWidth;
+      currentX = targetX;
+      panels.forEach(panel => panel.style.width = `${panelWidth}px`);
+      if (animate) {
+        panelsContainerRef.current.classList.add("transitioning");
+        setTimeout(() => panelsContainerRef.current.classList.remove("transitioning"), 400);
+      }
+      panelsContainerRef.current.style.transform = `translateX(-${currentX}px)`;
+      updateParallax();
+    };
+
+    const updatePageCount = () => {
+      const currentPanelIndex = Math.round(currentX / panelWidth) + 1;
+      const formattedIndex = currentPanelIndex.toString().padStart(2, "0");
+      const totalPanels = PANEL_COUNT.toString().padStart(2, "0");
+      if (navTextRef.current) navTextRef.current.textContent = `${formattedIndex} / ${totalPanels}`;
+      sectionNavItems.forEach((item, index) => {
+        if (index === currentPanelIndex - 1) {
+          item.classList.add("active");
+        } else {
+          item.classList.remove("active");
+        }
+      });
+    };
+    
+    const updateProgress = () => {
+        targetProgress = currentX / maxScroll;
+        currentProgress = lerp(currentProgress, targetProgress, SMOOTH_FACTOR * 1.5);
+        if (progressFillRef.current) progressFillRef.current.style.transform = `scaleX(${currentProgress})`;
+    };
+    
+    const updateActivePanel = () => {
+        currentPanel = Math.round(currentX / panelWidth);
+        if (currentPanel !== lastPanel) {
+            panels.forEach(panel => panel.classList.remove("was-active", "active"));
+            if (panels[currentPanel]) {
+                panels[currentPanel].classList.add("active");
+            }
+            for (let i = 0; i < panels.length; i++) {
+                if (i < currentPanel) {
+                    panels[i].classList.add("visited");
+                } else {
+                    panels[i].classList.remove("visited");
+                }
+            }
+            lastPanel = currentPanel;
+        }
+    };
+    
+    let animationFrameId;
+    const animate = () => {
+      currentX = lerp(currentX, targetX, SMOOTH_FACTOR);
+      panelsContainerRef.current.style.transform = `translateX(-${currentX}px)`;
+      updateProgress();
+      updatePageCount();
+      updateActivePanel();
+      updateParallax();
+      if (Math.abs(targetX - currentX) > 0.1 || isAnimating) {
+        animationFrameId = requestAnimationFrame(animate);
       } else {
-        mainWrapper.classList.remove('menu-expanded');
+        isAnimating = false;
+      }
+    };
+    const startAnimation = () => {
+      if (!isAnimating) {
+        isAnimating = true;
+        animate();
+      }
+    };
+
+    const handleResize = () => updateDimensions();
+
+    copyEmailBtnRef.current?.addEventListener("click", handleCopyEmail);
+    sectionNavItems.forEach(item => item.addEventListener("click", handleNavItemClick));
+    horizontalContainerRef.current?.addEventListener("wheel", handleWheel, { passive: false });
+    horizontalContainerRef.current?.addEventListener("mousedown", handleMouseDown);
+    horizontalContainerRef.current?.addEventListener("touchstart", handleTouchStart, { passive: true });
+    horizontalContainerRef.current?.addEventListener("touchmove", handleTouchMove, { passive: false });
+    horizontalContainerRef.current?.addEventListener("touchend", handleTouchEnd, { passive: true });
+    
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("resize", handleResize);
+
+    updateDimensions();
+    updateActivePanel();
+    updatePageCount();
+    startAnimation();
+
+    // --- Функция очистки, которая будет вызвана при размонтировании компонента ---
+    return () => {
+        cancelAnimationFrame(animationFrameId);
+        
+        copyEmailBtnRef.current?.removeEventListener("click", handleCopyEmail);
+        sectionNavItems.forEach(item => item.removeEventListener("click", handleNavItemClick));
+        horizontalContainerRef.current?.removeEventListener("wheel", handleWheel);
+        horizontalContainerRef.current?.removeEventListener("mousedown", handleMouseDown);
+        horizontalContainerRef.current?.removeEventListener("touchstart", handleTouchStart);
+        horizontalContainerRef.current?.removeEventListener("touchmove", handleTouchMove);
+        horizontalContainerRef.current?.removeEventListener("touchend", handleTouchEnd);
+        
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("mouseup", handleMouseUp);
+        window.removeEventListener("resize", handleResize);
+    };
+
+  }, []); // Пустой массив зависимостей означает, что этот useEffect выполнится только один раз.
+
+  // Этот useEffect остаётся для управления классом на wrapper'е при клике на меню
+  useEffect(() => {
+    if (mainWrapperRef.current) {
+      if (menuExpanded) {
+        mainWrapperRef.current.classList.add('menu-expanded');
+      } else {
+        mainWrapperRef.current.classList.remove('menu-expanded');
       }
     }
   }, [menuExpanded]);
 
   const handleMenuClick = () => {
-    console.log("Кнопка меню была нажата один раз!");
     setMenuExpanded(prev => !prev);
   };
 
   return (
     <>
       <div ref={mainWrapperRef} className="main-wrapper">
-        <div ref={leftMenuRef} className="left-menu">
+        <div className="left-menu"> {/* leftMenuRef больше не нужен, т.к. поиск идет от mainWrapperRef */}
           <div className="left-menu-top">
-            <button ref={menuBtnRef} onClick={handleMenuClick} className="menu-btn" aria-label="Toggle menu">
+            <button onClick={handleMenuClick} className="menu-btn" aria-label="Toggle menu">
               <span></span>
               <span></span>
               <span></span>
             </button>
           </div>
           <div className="left-menu-middle">
-            <div className="logo">SPACE</div>
+            <div className="logo font-dela">ПРОСТРАНСТВО</div>
           </div>
           <div className="section-nav">
             {[
-              "Introduction", "Matthew", "Beyond", "Rick",
-              "Cosmos", "Dialogue", "Infinite", "Vision", "Contact"
+              "Вступление", "Мэтью", "За Гранью", "Рик",
+              "Космос", "Диалог", "Бесконечность", "Видение", "Контакты"
             ].map((label, i) => (
-              <a key={i} className="section-nav-item" data-index={i}>
+              <a key={i} className="section-nav-item font-dela" data-index={i}>
                 <span className="section-nav-item-number">{String(i + 1).padStart(2, "0")}</span>
                 <span>{label}</span>
               </a>
@@ -69,24 +327,23 @@ export default function SpacePage() {
 
         <div className="page-container">
           <div className="horizontal-container" ref={horizontalContainerRef}>
-            
             <div className="navigation">
-              <div className="nav-text">SCROLL</div>
+              <div className="nav-text">СКРОЛЛ</div>
               <div className="nav-progress">
-                <div className="nav-progress-fill"></div>
+                <div ref={progressFillRef} className="nav-progress-fill"></div>
               </div>
-              <div className="nav-text">01 / 09</div>
+              <div ref={navTextRef} className="nav-text">01 / 09</div>
             </div>
             
-            <div className="panels-container">
-              {/* ПАНЕЛИ СЛАЙДОВ */}
+            <div ref={panelsContainerRef} className="panels-container">
+              {/* Все панели остаются без изменений */}
               <section className="panel panel-split editorial-split" data-index="0">
                 <div className="editorial-content">
                   <div className="panel-content">
-                    <div className="chapter">The Conversation</div>
-                    <h1 className="title split-text">When you look up at the stars, you're really looking at the past. Our time here is brief, but our gaze is eternal</h1>
+                    <div className="chapter">Разговор</div>
+                    <h1 className="title split-text font-dela">Когда вы смотрите на звезды, вы на самом деле смотрите в прошлое. Наше время здесь кратко, но наш взгляд вечен.</h1>
                     <div className="text">
-                      <p className="split-text">The vast emptiness of space offers us perspective. It reminds us how small we are in the grand scheme of things. Yet somehow, that doesn't diminish us – it elevates our existence into something miraculous.</p>
+                      <p className="split-text">Бескрайняя пустота космоса дает нам перспективу. Она напоминает, насколько мы малы в великой схеме вещей. И все же, это не умаляет нас — это возвышает наше существование до чего-то чудесного.</p>
                     </div>
                   </div>
                 </div>
@@ -103,10 +360,10 @@ export default function SpacePage() {
                 </div>
                 <div className="panel-full-overlay"></div>
                 <div className="panel-full-content">
-                  <div className="chapter">Matthew</div>
-                  <h2 className="title split-text">The universe doesn't care about our plans. It only rewards our presence</h2>
+                  <div className="chapter">Мэтью</div>
+                  <h2 className="title split-text font-dela">Вселенная не заботится о наших планах. Она вознаграждает лишь наше присутствие.</h2>
                   <div className="text">
-                    <p className="split-text">We think we know what's out there, but man, we've barely scratched the surface. It's like we're children opening our eyes for the first time. Every discovery is just the beginning of ten thousand more questions.</p>
+                    <p className="split-text">Мы думаем, что знаем, что там, снаружи, но, черт возьми, мы едва коснулись поверхности. Мы словно дети, впервые открывающие глаза. Каждое открытие — это лишь начало десяти тысяч новых вопросов.</p>
                   </div>
                 </div>
               </section>
@@ -116,7 +373,7 @@ export default function SpacePage() {
                   <img src="https://cdn.cosmos.so/47895928-9611-45a3-b94d-0d8ef8ac02dc.jpeg" alt="Galaxy view" className="panel-fixed-image parallax" data-speed="0.25"/>
                 </div>
                 <div className="panel-fixed-content">
-                  <div className="space-text">BEYOND</div>
+                  <div className="space-text font-dela">ЗА ГРАНЬЮ</div>
                 </div>
               </section>
 
@@ -128,10 +385,10 @@ export default function SpacePage() {
                 </div>
                 <div className="editorial-content">
                   <div className="panel-content">
-                    <div className="chapter">Rick</div>
-                    <h2 className="title split-text">Silence is the canvas where the universe reveals itself</h2>
+                    <div className="chapter">Рик</div>
+                    <h2 className="title split-text font-dela">Тишина — это холст, на котором вселенная являет себя.</h2>
                     <div className="text">
-                      <p className="split-text">There's something profound about the emptiness. It's not empty at all. It's full of potential. The space between things – that's where the magic happens. We're drawn to explore not because we want to conquer, but because we yearn to understand.</p>
+                      <p className="split-text">В пустоте есть что-то глубокое. Она совсем не пуста. Она полна потенциала. Пространство между вещами — вот где происходит волшебство. Нас тянет исследовать не потому, что мы хотим завоевывать, а потому, что мы жаждем понять.</p>
                     </div>
                   </div>
                 </div>
@@ -143,9 +400,9 @@ export default function SpacePage() {
                 </div>
                 <div className="panel-full-overlay"></div>
                 <div className="panel-full-content">
-                  <div className="beyond-text">COSMOS</div>
+                  <div className="beyond-text font-dela">КОСМОС</div>
                   <div className="text">
-                    <p className="split-text">Sometimes I think about how every atom in our bodies was forged in the heart of a dying star. We're not just in the universe – the universe is in us. That connection, that's what drives us forward.</p>
+                    <p className="split-text">Иногда я думаю о том, что каждый атом в наших телах был выкован в сердце умирающей звезды. Мы не просто во вселенной — вселенная в нас. Эта связь, — вот что движет нами вперед.</p>
                   </div>
                 </div>
               </section>
@@ -153,10 +410,10 @@ export default function SpacePage() {
               <section className="panel panel-split" data-index="5">
                 <div className="panel-left">
                   <div className="panel-content">
-                    <div className="direction-label">Matthew</div>
+                    <div className="direction-label">Мэтью</div>
                     <div className="quote-container">
-                      <div className="quote">"I've always approached the cosmos with a sense of wonder. It's like looking at your reflection in a mirror that stretches into infinity. You see yourself, but you also see beyond yourself."</div>
-                      <div className="author">INTERSTELLAR, 2014</div>
+                      <div className="quote">"Я всегда подходил к космосу с чувством удивления. Это как смотреть на свое отражение в зеркале, которое уходит в бесконечность. Вы видите себя, но вы также видите и за пределы себя."</div>
+                      <div className="author">ИНТЕРСТЕЛЛАР, 2014</div>
                     </div>
                     <div className="image-container">
                       <div className="image-wrapper">
@@ -164,22 +421,22 @@ export default function SpacePage() {
                       </div>
                     </div>
                     <div className="conclusion-text">
-                      <p className="split-text">Looking out there is really looking in here. The questions we ask about the stars are really questions about ourselves.</p>
+                      <p className="split-text">Смотреть туда — значит на самом деле смотреть сюда. Вопросы, которые мы задаем о звездах, — это на самом деле вопросы о нас самих.</p>
                     </div>
                   </div>
                 </div>
                 <div className="panel-right">
                   <div className="panel-content">
-                    <div className="direction-label">Rick</div>
+                    <div className="direction-label">Рик</div>
                     <div className="quote-container">
-                      <div className="quote">"Great art creates space. Great space creates perspective. When we stand at the edge of the known, that's where true creativity begins."</div>
-                      <div className="author">CREATIVE PROCESS, 2022</div>
+                      <div className="quote">"Великое искусство создает пространство. Великое пространство создает перспективу. Когда мы стоим на краю известного, вот где начинается истинное творчество."</div>
+                      <div className="author">ТВОРЧЕСКИЙ ПРОЦЕСС, 2022</div>
                     </div>
                     <div className="full-quote">
-                      "The universe doesn't rush, yet everything gets done. That's the paradox we're trying to understand – infinite patience paired with constant evolution."
+                      "Вселенная не спешит, и все же все свершается. Это парадокс, который мы пытаемся понять, — бесконечное терпение в паре с постоянной эволюцией."
                     </div>
                     <div className="text">
-                      <p className="split-text">What we discover out there transforms everything down here. Each revelation about a distant galaxy reshapes how we see ourselves on this pale blue dot.</p>
+                      <p className="split-text">То, что мы обнаруживаем там, меняет все здесь. Каждое откровение о далекой галактике меняет то, как мы видим себя на этой бледно-голубой точке.</p>
                     </div>
                   </div>
                 </div>
@@ -191,9 +448,9 @@ export default function SpacePage() {
                 </div>
                 <div className="panel-full-overlay"></div>
                 <div className="panel-full-content">
-                  <div className="mega-text">INFINITE</div>
+                  <div className="mega-text font-dela">БЕСКОНЕЧНОСТЬ</div>
                   <div className="text">
-                    <p className="split-text">The universe expands in all directions at once, infinitely complex and infinitely simple. We are but a momentary gathering of stardust, witnessing the cosmic dance.</p>
+                    <p className="split-text">Вселенная расширяется во всех направлениях одновременно, бесконечно сложная и бесконечно простая. Мы лишь мимолетное скопление звездной пыли, наблюдающее за космическим танцем.</p>
                   </div>
                 </div>
               </section>
@@ -204,23 +461,23 @@ export default function SpacePage() {
                 </video>
                 <div className="panel-video-overlay"></div>
                 <div className="panel-video-content">
-                  <div className="mega-text">VISION</div>
+                  <div className="mega-text font-dela">ВИДЕНИЕ</div>
                 </div>
               </section>
 
               <section className="panel panel-contact" data-index="8">
                 <div className="contact-container">
                   <div className="contact-content">
-                    <div className="space-text contact-name">GET IN TOUCH</div>
+                    <div className="space-text contact-name font-dela">СВЯЖИТЕСЬ С НАМИ</div>
                     <div className="email-wrapper">
                       <a href="mailto:hi@filip.fyi" className="email">hi@filip.fyi</a>
-                      <button className="copy-email" title="Copy email" aria-label="Copy email to clipboard">
+                      <button ref={copyEmailBtnRef} className="copy-email" title="Copy email" aria-label="Copy email to clipboard">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>
                       </button>
-                      <span className="copy-tooltip">Copied!</span>
+                      <span ref={copyTooltipRef} className="copy-tooltip">Скопировано!</span>
                     </div>
                   </div>
                 </div>

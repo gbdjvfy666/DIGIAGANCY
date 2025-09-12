@@ -13,7 +13,10 @@
 
   /* Typography */
   --font-primary: "Inter", sans-serif;
-  --font-display: "Boldonse", serif;
+  
+  /* --- CHANGE IS HERE: I have replaced "Boldonse" with the font variable you are already using in your main project --- */
+  --font-display: var(--font-dela), sans-serif;
+  
   --font-serif: "EB Garamond", serif;
   --text-xs: 0.7rem;
   --text-sm: 0.875rem;

@@ -22,8 +22,6 @@ const slides = [
     text: null,
     link: '/design',
     titleClass: 'text-5xl font-dela md:text-7xl font-bold text-white tracking-tight',
-    // ===== ИЗМЕНЕНИЕ №1 ЗДЕСЬ =====
-    // Сгруппировали текст внизу с помощью justify-end и изменили отступы
     containerClass: 'absolute inset-0 flex flex-col-reverse justify-start items-center pb-16 md:pb-24',
     centered: true,
     component: () => (
@@ -32,7 +30,7 @@ const slides = [
         timeScale={0.5}
         height={3.5}
         baseWidth={5.5}
-        scale={2.6}
+        scale={2.1}
         hueShift={0}
         colorFrequency={1}
         noise={0.5}
@@ -51,7 +49,9 @@ const slides = [
     containerClass: 'absolute bottom-32 left-1/2 transform -translate-x-1/2',
     centered: true,
     component: ({ isActive, isExiting, direction }) => (
-      <MacbookWrapper isActive={isActive} isExiting={isExiting} direction={direction} />
+      <div className="w-full h-full bg-black">
+        <MacbookWrapper isActive={isActive} isExiting={isExiting} direction={direction} />
+      </div>
     ),
     imageSrc: null,
   },
@@ -130,7 +130,7 @@ export default function Slider() {
         onSlideChange={handleSlideChange}
         className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] bg-black"
         autoplay={{
-          delay: 5000,
+          delay: 7000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}
@@ -152,15 +152,14 @@ export default function Slider() {
                 {slide.id === slides[activeIndex]?.id && slide.imageSrc && (
                   <motion.div
                     key={`${slide.id}-image`}
-                    // ===== ИЗМЕНЕНИЕ №2 ЗДЕСЬ =====
-                    // Подняли картинку, изменив top-[40%] на top-[35%]
-                    className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 max-w-xs md:max-w-md lg:max-w-lg z-20 pointer-events-none"
+                    // ===== ИЗМЕНЕНИЕ ЗДЕСЬ =====
+                    className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 max-w-[16rem] md:max-w-xs lg:max-w-sm z-20 pointer-events-none"
                     variants={imageVariants}
                     initial="enter"
                     animate="center"
                     exit="exit"
                   >
-                    <img src={slide.imageSrc} alt="Логотип" className="w-full h-auto brightness-75" />
+                    <img src={slide.imageSrc} alt="Логотип" className="w-full h-auto" />
                   </motion.div>
                 )}
               </AnimatePresence>

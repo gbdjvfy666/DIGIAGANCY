@@ -18,11 +18,84 @@
 ---break---
 */
 @custom-variant dark (&:is(.dark *));
+
 /* --- Локальные шрифты --- */
+@font-face {
+  font-family: 'Aradora Pro';
+  src: url('/fonts/AradoraPro-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aradora Pro';
+  src: url('/fonts/AradoraPro-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Behance';
   src: url('/fonts/behance-67842caacaac4.ttf') format('truetype');
   font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bounded';
+  src: url('/fonts/Bounded-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bounded';
+  src: url('/fonts/Bounded-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bounded';
+  src: url('/fonts/Bounded-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bubbler Graffiti';
+  src: url('/fonts/BubblerGraffiti.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bubbler Graffiti';
+  src: url('/fonts/bubblergraffititalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coves';
+  src: url('/fonts/coves_light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coves';
+  src: url('/fonts/coves_bold.otf') format('opentype');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -40,6 +113,78 @@
   src: url('/fonts/DeutschGothic.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Doloman Pavklenko';
+  src: url('/fonts/DolomanPavklenko.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Frankinity';
+  src: url('/fonts/FRANKINITY.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Garet';
+  src: url('/fonts/Garet-Book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Garet';
+  src: url('/fonts/Garet-Heavy.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gerhaus';
+  src: url('/fonts/Gerhaus.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('/fonts/helveticanowtext-bold-demo.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('/fonts/helveticanowtext-bolditalic-demo.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('/fonts/helveticanowtext-black-demo.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('/fonts/helveticanowtext-blackitalic-demo.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -68,6 +213,14 @@
 }
 
 @font-face {
+  font-family: 'Lena';
+  src: url('/fonts/lena.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Maler';
   src: url('/fonts/Maler.ttf') format('truetype');
   font-weight: normal;
@@ -77,8 +230,75 @@
 
 @font-face {
   font-family: 'MullerNextWide';
+  src: url('/fonts/MullerNextWideTrial-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MullerNextWide';
+  src: url('/fonts/MullerNextWideTrial-ThinItalic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MullerNextWide';
+  src: url('/fonts/MullerNextWideTrial-Regular.otf') format('opentype');
+  font-weight: 400; /* Соответствует Tailwind .font-normal */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MullerNextWide';
+  src: url('/fonts/MullerNextWideTrial-RegularItalic.otf') format('opentype');
+  font-weight: 400; /* Соответствует Tailwind .font-normal */
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MullerNextWide';
   src: url('/fonts/MullerNextWideTrial-Heavy.otf') format('opentype');
-  font-weight: 800;
+  font-weight: 800; /* Соответствует Tailwind .font-extrabold */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MullerNextWide';
+  src: url('/fonts/MullerNextWideTrial-HeavyItalic.otf') format('opentype');
+  font-weight: 800; /* Соответствует Tailwind .font-extrabold */
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MullerNextWide';
+  src: url('/fonts/MullerNextWideTrial-ExtraBold.otf') format('opentype');
+  font-weight: 900; /* Соответствует Tailwind .font-black */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MullerNextWide';
+  src: url('/fonts/MullerNextWideTrial-ExtraBoldItalic.otf') format('opentype');
+  font-weight: 900; /* Соответствует Tailwind .font-black */
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --- КОНЕЦ ИЗМЕНЕНИЙ --- */
+
+
+@font-face {
+  font-family: 'Nauryzredkeds';
+  src: url('/fonts/NAURYZREDKEDS.ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
@@ -108,6 +328,22 @@
 }
 
 @font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'PPNeueMachina';
   src: url('/fonts/PPNeueMachina-Regular.otf') format('opentype');
   font-weight: normal;
@@ -124,6 +360,30 @@
 }
 
 @font-face {
+  font-family: 'Saytag';
+  src: url('/fonts/Saytag-Regular 3.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SK Coisa';
+  src: url('/fonts/SKCoisa-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Soledago';
+  src: url('/fonts/Soledago.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Sorcerer';
   src: url('/fonts/Sorcerer.otf') format('opentype');
   font-weight: normal;
@@ -132,12 +392,21 @@
 }
 
 @font-face {
+  font-family: 'DaMiOne';
+  src: url('/fonts/Шрифт DaMiOne.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Zvezda NHZDN';
-  src: url('/fonts/ZvezdaBoldItalic.ttf') format('truetype');
+  src: url('/fonts/Zvezda NHZDN Bold Italic v.1.1.otf') format('opentype');
   font-style: italic;
   font-weight: bold;
   font-display: swap;
 }
+
 
 /*
 |-------------------------------------------------------------------------------
@@ -177,6 +446,25 @@
   --font-sorcerer: 'Sorcerer', serif;
   --font-kankin: 'Kankin', sans-serif;
   --font-jost: 'Jost', sans-serif;
+
+  /* --- НОВЫЕ ПЕРЕМЕННЫЕ --- */
+  --font-aradora: 'Aradora Pro', sans-serif;
+  --font-bounded: 'Bounded', sans-serif;
+  --font-bubbler: 'Bubbler Graffiti', sans-serif;
+  --font-coves: 'Coves', sans-serif;
+  --font-doloman: 'Doloman Pavklenko', sans-serif;
+  --font-frankinity: 'Frankinity', sans-serif;
+  --font-garet: 'Garet', sans-serif;
+  --font-gerhaus: 'Gerhaus', sans-serif;
+  --font-helvetica-now: 'Helvetica Now Text', sans-serif;
+  --font-lena: 'Lena', sans-serif;
+  --font-nauryz: 'Nauryzredkeds', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-saytag: 'Saytag', sans-serif;
+  --font-sk-coisa: 'SK Coisa', sans-serif;
+  --font-soledago: 'Soledago', sans-serif;
+  --font-damione: 'DaMiOne', sans-serif;
+
 
   /* --- Палитра Ivory --- */
   --color-ivory-50: #fffefc;
@@ -303,6 +591,26 @@ body {
   .font-orpheus { font-family: var(--font-orpheus); }
   .font-sorcerer { font-family: var(--font-sorcerer); }
   .font-kankin { font-family: var(--font-kankin); }
+
+  /* --- НОВЫЕ КЛАССЫ --- */
+  .font-aradora { font-family: var(--font-aradora); }
+  .font-bounded { font-family: var(--font-bounded); }
+  .font-bubbler { font-family: var(--font-bubbler); }
+  .font-coves { font-family: var(--font-coves); }
+  .font-doloman { font-family: var(--font-doloman); }
+  .font-frankinity { font-family: var(--font-frankinity); }
+  .font-garet { font-family: var(--font-garet); }
+  .font-gerhaus { font-family: var(--font-gerhaus); }
+  .font-helvetica-now { font-family: var(--font-helvetica-now); }
+  .font-lena { font-family: var(--font-lena); }
+  .font-nauryz { font-family: var(--font-nauryz); }
+  .font-playfair { font-family: var(--font-playfair); }
+  .font-saytag { font-family: var(--font-saytag); }
+  .font-sk-coisa { font-family: var(--font-sk-coisa); }
+  .font-soledago { font-family: var(--font-soledago); }
+  .font-damione { font-family: var(--font-damione); }
+  .font-muller { font-family: var(--font-muller); } /* <--- Убедитесь, что этот класс здесь */
+
 
   /* --- Анимации --- */
   @keyframes shine {

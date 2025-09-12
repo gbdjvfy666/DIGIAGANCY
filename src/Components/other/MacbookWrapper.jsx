@@ -127,8 +127,9 @@ export default function MacbookWrapper({
   className="w-full h-full"
   gl={{ antialias: true }}
 >
-  <color attach="background" args={['#0a0a0c']} />
-  <fog attach="fog" args={['#0a0a0a', 6, 12]} />
+  {/* ===== ИЗМЕНЕНИЕ ЗДЕСЬ ===== */}
+  <color attach="background" args={['#000000']} />
+  <fog attach="fog" args={['#000000', 6, 12]} />
   <Lights />
   <Environment preset="city" background={false} intensity={0.75} />
   <EffectComposer>

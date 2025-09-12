@@ -49,15 +49,8 @@ export default function Home() {
                 <Navbar />
                 <VideoGrid />
             </div>
-            <div className="relative z-50">
-                <TextEffect />
-            </div>
-            <StarBackground>
-                <div className="text-white p-8">
-                    <h1 className="text-4xl font-bold">Ваш контент</h1>
-                    <p>Этот текст будет поверх звездного фона</p>
-                </div>
-            </StarBackground>
+            <StarBackground/>
+
             <SpacePage />
 
             <ParallaxCardSlider />
