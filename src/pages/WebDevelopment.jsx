@@ -1,6 +1,9 @@
-import { useRef } from 'react';
+import React from 'react';
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import Divider from '@/Components/other/Divider';
+// --- ИСПРАВЛЕНИЕ ЗДЕСЬ: Добавлены все недостающие импорты ---
 import Navbar from '../Components/other/Navbar';
-import Cardio from '../Components/components/Cardio';
 import LandingMain from '../Components/section/LandingMain';
 import OnlineShopMain from '../Components/section/OnlineShopMain';
 import CorporateMain from '../Components/section/CorporateMain';
@@ -9,94 +12,66 @@ import RestaurantSiteMain from '../Components/section/RestaurantSiteMain';
 import NewsBlogMain from '../Components/section/NewsBlogMain';
 import DesignerSiteMain from '../Components/section/DesignerSiteMain';
 import CryptoProjectMain from '../Components/section/CryptoProjectMain';
-import ResponsiveDemo from '../Components/components/ResponsiveDemo';
+import ResponsiveDemo from '../Components/components/ResponsiveDemo'; // <-- Вот он, виновник ошибки
 import FractalOrbComponentSecond from '../Components/animatedblock/ProfileCard/FractalOrbComponentSecond';
-import StaticColumn from '../Components/other/ColumnModel';
+
+// Регистрируем плагин GSAP
+gsap.registerPlugin(ScrollToPlugin);
 
 export default function WebDevelopment() {
-  const componentsRef = useRef({
-    ResponsiveDemo: useRef(null),
-    DesignerSiteMain: useRef(null),
-    LandingMain: useRef(null),
-    OnlineShopMain: useRef(null),
-    CorporateMain: useRef(null),
-    MultipageSiteMain: useRef(null),
-    RestaurantSiteMain: useRef(null),
-    NewsBlogMain: useRef(null),
-    CryptoProjectMain: useRef(null)
-  });
+  
+  const scrollToComponent = (targetId) => {
+    console.log("Попытка GSAP скролла к элементу с ID:", targetId);
 
-  const idToRefKey = {
-    landing: 'LandingMain',
-    shop: 'OnlineShopMain',
-    corporate: 'CorporateMain',
-    multi: 'MultipageSiteMain',
-    restaurant: 'RestaurantSiteMain',
-    blog: 'NewsBlogMain',
-    designer: 'DesignerSiteMain',
-    media: 'ResponsiveDemo',
-    courses: 'CryptoProjectMain',
-  };
-
-  const scrollToComponent = (componentName) => {
-    const refKey = idToRefKey[componentName] || componentName;
-    const ref = componentsRef.current[refKey];
-    if (ref?.current) {
-      ref.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+    gsap.to(window, {
+      duration: 1.5,
+      ease: 'power2.inOut',
+      scrollTo: `#${targetId}`,
+      // Если у вас есть фиксированная шапка (Navbar), раскомментируйте и настройте отступ
+      // offsetY: 100 
+    });
   };
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 dark:text-white overflow-x-hidden">
       <Navbar />
-      <FractalOrbComponentSecond />
-      <Cardio scrollToComponent={scrollToComponent} />
+      <FractalOrbComponentSecond scrollToComponent={scrollToComponent} />
 
-      {/* Секция 1 - ResponsiveDemo */}
-      <div ref={componentsRef.current.ResponsiveDemo}>
+      {/* Используем ID как "якоря" для GSAP. Эта часть верна. */}
+      <Divider/>
+      <div id="ResponsiveDemo">
         <ResponsiveDemo />
       </div>
-
-      {/* Секция 2 - DesignerSiteMain */}
-      <div ref={componentsRef.current.DesignerSiteMain}>
+      <Divider/>
+      <div id="DesignerSiteMain">
         <DesignerSiteMain />
       </div>
-
-      {/* Секция 3 - LandingMain */}
-      <div ref={componentsRef.current.LandingMain}>
+      <Divider/>
+      <div id="LandingMain">
         <LandingMain />
       </div>
-
-      {/* Секция 4 - OnlineShopMain */}
-      <div ref={componentsRef.current.OnlineShopMain}>
+      <Divider/>
+      <div id="OnlineShopMain">
         <OnlineShopMain />
       </div>
-
-      {/* Секция 5 - CorporateMain */}
-      <div ref={componentsRef.current.CorporateMain}>
+      <Divider/>
+      <div id="CorporateMain">
         <CorporateMain />
       </div>
-
-      {/* Секция 6 - MultipageSiteMain */}
-      <div ref={componentsRef.current.MultipageSiteMain}>
+      <Divider/>
+      <div id="MultipageSiteMain">
         <MultipageSiteMain />
       </div>
-
-      {/* Секция 7 - RestaurantSiteMain */}
-      <div ref={componentsRef.current.RestaurantSiteMain}>
+      <Divider/>
+      <div id="RestaurantSiteMain">
         <RestaurantSiteMain />
       </div>
-
-      {/* Секция 8 - NewsBlogMain */}
-      <div ref={componentsRef.current.NewsBlogMain}>
+      <Divider/>
+      <div id="NewsBlogMain">
         <NewsBlogMain />
       </div>
-
-      {/* Секция 9 - CryptoProjectMain */}
-      <div ref={componentsRef.current.CryptoProjectMain}>
+      <Divider/>
+      <div id="CryptoProjectMain">
         <CryptoProjectMain />
       </div>
     </div>

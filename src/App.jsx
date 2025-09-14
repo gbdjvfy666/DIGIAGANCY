@@ -4,7 +4,8 @@ import Home from './pages/Home';
 import Design from './pages/Design';
 import Target from './pages/Target';
 import Works from './pages/Works';
-import Test from './pages/Test';
+import Test from './pages/Test'; 
+import Reviews from './pages/Reviews'; 
 import WebDevelopment from './pages/WebDevelopment';
 import About from './pages/About';
 import CustomCursor from './Components/other/CustomCursor';
@@ -24,6 +25,7 @@ function AppContent() {
         <Route path="/target" element={<Target />} />
         <Route path="/Design" element={<Design />} />
         <Route path="/Test" element={<Test />} />
+        <Route path="/Reviews" element={<Reviews />} />
         <Route path="/web-development" element={<WebDevelopment />} />
         <Route path="/works" element={<Works />} />
         <Route path="/About" element={<About />} />
