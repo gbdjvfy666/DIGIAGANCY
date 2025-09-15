@@ -2,7 +2,7 @@ const ShinyText = ({ text, disabled = false, speed = 5, className = '' }) => {
   const animationDuration = `${speed}s`;
 
   return (
-    <div
+    <span // <--- Заменяем div на span
       className={`text-[#b5b5b5a4] bg-clip-text inline-block ${disabled ? '' : 'animate-shine'} ${className}`}
       style={{
         backgroundImage:
@@ -13,11 +13,8 @@ const ShinyText = ({ text, disabled = false, speed = 5, className = '' }) => {
       }}
     >
       {text}
-    </div>
+    </span>
   );
 };
 
 export default ShinyText;
-
-// как использовать 
-// <ShinyText text="Just some shiny text!" disabled={false} speed={3} className='custom-class' />

@@ -12,7 +12,6 @@ import RestaurantSiteMain from '../Components/section/RestaurantSiteMain';
 import NewsBlogMain from '../Components/section/NewsBlogMain';
 import DesignerSiteMain from '../Components/section/DesignerSiteMain';
 import CryptoProjectMain from '../Components/section/CryptoProjectMain';
-import ResponsiveDemo from '../Components/components/ResponsiveDemo'; // <-- Вот он, виновник ошибки
 import FractalOrbComponentSecond from '../Components/animatedblock/ProfileCard/FractalOrbComponentSecond';
 
 // Регистрируем плагин GSAP
@@ -27,8 +26,6 @@ export default function WebDevelopment() {
       duration: 1.5,
       ease: 'power2.inOut',
       scrollTo: `#${targetId}`,
-      // Если у вас есть фиксированная шапка (Navbar), раскомментируйте и настройте отступ
-      // offsetY: 100 
     });
   };
 
@@ -36,12 +33,6 @@ export default function WebDevelopment() {
     <div className="min-h-screen bg-white dark:bg-zinc-900 dark:text-white overflow-x-hidden">
       <Navbar />
       <FractalOrbComponentSecond scrollToComponent={scrollToComponent} />
-
-      {/* Используем ID как "якоря" для GSAP. Эта часть верна. */}
-      <Divider/>
-      <div id="ResponsiveDemo">
-        <ResponsiveDemo />
-      </div>
       <Divider/>
       <div id="DesignerSiteMain">
         <DesignerSiteMain />

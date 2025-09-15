@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { AnimatePresence, motion } from 'framer-motion';
+import ResponsiveDemo from '@/Components/components/ResponsiveDemo';
 
-// Компонент карточки, стилизованный с помощью Tailwind CSS
+// Компонент карточки (без изменений)
 const WorkCard = ({ title, image, description, onLearnMore }) => (
     <div className="group/card relative flex flex-col text-left bg-white/5 border border-white/10 rounded-xl p-6 transition-all duration-300 hover:border-white/40 hover:bg-white/[0.08] hover:-translate-y-1.5 h-full">
         <div className="aspect-video mb-5 rounded-lg overflow-hidden">
@@ -18,7 +19,7 @@ const WorkCard = ({ title, image, description, onLearnMore }) => (
         <div className="mt-auto">
             <button onClick={onLearnMore} className="w-full inline-flex items-center justify-center py-2.5 px-4 bg-transparent text-white border border-white/40 rounded-lg transition-colors duration-200 hover:bg-white hover:text-black font-medium">
                 Подробнее
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 ml-2 transition-transform duration-200 group-hover/card:translate-x-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 L 20 20" fill="currentColor" className="w-5 h-5 ml-2 transition-transform duration-200 group-hover/card:translate-x-1">
                     <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
                 </svg>
             </button>
@@ -26,7 +27,8 @@ const WorkCard = ({ title, image, description, onLearnMore }) => (
     </div>
 );
 
-const LineBackgroundComponent = ({ width = '100%', height = '100vh', scrollToComponent }) => {
+
+const LineBackgroundComponent = ({ width = '100%', height = '250vh', scrollToComponent }) => {
   const containerRef = useRef(null);
   const sceneRef = useRef(null);
   const rendererRef = useRef(null);
@@ -39,8 +41,6 @@ const LineBackgroundComponent = ({ width = '100%', height = '100vh', scrollToCom
     { id: 'corporate', title: 'Корпоративный сайт', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1920', description: 'Профессиональное онлайн-представительство вашей компании. Повышает доверие, привлекает клиентов и партнеров.' },
     { id: 'multi', title: 'Многостраничный сайт', image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1920', description: 'Сайт с полноценной информационной архитектурой: услуги, блог, о компании. Оптимальное решение для малого и среднего бизнеса.' },
     { id: 'restaurant', title: 'Сайт для ресторана', image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1920', description: 'Элегантный сайт с меню, системой бронирования и фотогалереей. Создает правильную атмосферу и привлекает новых гостей.' },
-    { id: 'blog', title: 'Блог / Медиа-платформа', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1920', description: 'Редакционная система с категориями, поиском и комментариями. Профессиональный инструмент для СМИ, экспертов и авторов.' },
-    { id: 'designer', title: 'Сайт-бутик дизайнера', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1920', description: 'Персональный сайт-витрина с каталогом коллекций, онлайн-оплатой и фокусом на сторителлинг вашего бренда.' },
     { id: 'courses', title: 'Платформа онлайн-курсов', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1920', description: 'Система для продажи образовательных продуктов: личные кабинеты, уроки, тесты и сертификаты. Монетизируйте свою экспертизу.' },
   ];
   
@@ -67,6 +67,23 @@ const LineBackgroundComponent = ({ width = '100%', height = '100vh', scrollToCom
           setTimeout(() => { document.body.style.overflow = 'auto'; }, 500);
       }
   }, [detailsOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            setDetailsOpen(false);
+        }
+    };
+
+    if (detailsOpen) {
+        document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [detailsOpen]);
+
 
   useEffect(() => {
     const container = containerRef.current;
@@ -106,56 +123,51 @@ const LineBackgroundComponent = ({ width = '100%', height = '100vh', scrollToCom
         uniform float iTime;
         uniform float grainStrength;
         uniform float grainSize;
-        #define PI 3.14159265359
-        #define BACKGROUND_COLOR vec3(0.07, 0.07, 0.08)
+        
+        #define BACKGROUND_COLOR      vec3(0.07, 0.07, 0.08)
         #define LINE_CORE_COLOR       vec3(1.0, 1.0, 1.0)
         #define LINE_CORE_WIDTH       0.004
-        #define RAINBOW_SPREAD        0.15
-        #define RAINBOW_INTENSITY     1.5
-        #define RAINBOW_ANIMATION_SPEED 0.5
-        #define RAINBOW_NOISE_STRENGTH 0.4
+        #define GLOW_SPREAD           0.15
+        #define GLOW_INTENSITY        1.5
+        // Анимационные константы больше не нужны, но можно их оставить
+        // #define GLOW_ANIMATION_SPEED  2.0
+        // #define GLOW_NOISE_STRENGTH   0.3
+        
         float hash(vec2 p) {
             p = fract(p * vec2(123.34, 456.21));
             p += dot(p, p + 45.32);
             return fract(p.x * p.y);
         }
+        
         vec2 distToSegment(vec2 p, vec2 a, vec2 b) {
             vec2 pa = p - a; vec2 ba = b - a;
             float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
             return vec2(length(pa - ba * h), h);
         }
-        vec3 getRainbowColor(float t) {
-            t = fract(t);
-            vec3 c;
-            float segment = 1.0 / 6.0;
-            if (t < segment) c = mix(vec3(1,0,0), vec3(1,0.5,0), t/segment);
-            else if (t < 2.0 * segment) c = mix(vec3(1,0.5,0), vec3(1,1,0), (t-segment)/segment);
-            else if (t < 3.0 * segment) c = mix(vec3(1,1,0), vec3(0,1,0), (t-2.0*segment)/segment);
-            else if (t < 4.0 * segment) c = mix(vec3(0,1,0), vec3(0,0.5,1), (t-3.0*segment)/segment);
-            else if (t < 5.0 * segment) c = mix(vec3(0,0.5,1), vec3(0,0,1), (t-4.0*segment)/segment);
-            else c = mix(vec3(0,0,1), vec3(0.5,0,1), (t-5.0*segment)/segment);
-            return c;
+        
+        // 👇 ИЗМЕНЕНИЕ ЗДЕСЬ: Функция теперь возвращает статичный белый цвет 👇
+        vec3 getMonochromeGlow(float time, vec2 uv) {
+            return vec3(1.0);
         }
-        vec3 drawLineAndRainbow(vec2 uv, vec2 start, vec2 end, float time) {
+
+        vec3 drawLineAndGlow(vec2 uv, vec2 start, vec2 end, float time) {
             vec2 distData = distToSegment(uv, start, end);
             float perp_dist = distData.x;
             float along_dist = distData.y;
             float core_glow = smoothstep(LINE_CORE_WIDTH * 1.5, 0.0, perp_dist);
             vec3 core_color = LINE_CORE_COLOR * core_glow;
+            float glow_mask = smoothstep(GLOW_SPREAD, 0.0, perp_dist);
             float end_factor = pow(abs(along_dist - 0.5) * 2.0, 2.0);
-            float rainbow_mask = smoothstep(RAINBOW_SPREAD, 0.0, perp_dist);
-            float noise = hash(uv * 10.0 - time) * RAINBOW_NOISE_STRENGTH;
-            rainbow_mask *= (1.0 - noise);
-            float color_phase = perp_dist * (10.0 / RAINBOW_SPREAD) - time * RAINBOW_ANIMATION_SPEED;
-            vec3 rainbow_color = getRainbowColor(color_phase);
-            rainbow_color *= rainbow_mask * end_factor * RAINBOW_INTENSITY;
-            return max(core_color, rainbow_color);
+            vec3 glow_color = getMonochromeGlow(time, uv);
+            glow_color *= glow_mask * end_factor * GLOW_INTENSITY;
+            return max(core_color, glow_color);
         }
+
         void main() {
             vec2 uv = (2.0 * gl_FragCoord.xy - iResolution.xy) / iResolution.y;
-            vec2 start_point = vec2(-2.0, 0.0);
-            vec2 end_point = vec2(2.0, 0.0);
-            vec3 light_effect = drawLineAndRainbow(uv, start_point, end_point, iTime);
+            vec2 start_point = vec2(-2.0, 0.3);
+            vec2 end_point = vec2(2.0, 0.3);
+            vec3 light_effect = drawLineAndGlow(uv, start_point, end_point, iTime);
             vec3 final_color = BACKGROUND_COLOR;
             final_color += light_effect;
             float bg_noise = hash(vUv * grainSize + iTime * 0.1) * grainStrength;
@@ -177,6 +189,7 @@ const LineBackgroundComponent = ({ width = '100%', height = '100vh', scrollToCom
       };
       updateSize();
   
+      // Анимация все еще нужна для фонового шума
       function animate() {
         animationIdRef.current = requestAnimationFrame(animate);
         const time = performance.now() * 0.001;
@@ -208,39 +221,46 @@ const LineBackgroundComponent = ({ width = '100%', height = '100vh', scrollToCom
     <div
       ref={containerRef}
       style={{ width, height }}
-      className="relative isolate min-h-screen overflow-hidden bg-[#0a0a0b]"
+      className="relative isolate overflow-hidden bg-[#0a0a0b]"
     >
         <div ref={sceneRef} className="absolute inset-0 z-[1] h-full w-full pointer-events-none" />
 
-        <div 
-            className={`relative z-20 flex min-h-screen w-full items-center justify-center p-8 transition-all duration-500 ease-in-out ${detailsOpen ? 'blur-md scale-95 opacity-50' : 'blur-0 scale-100 opacity-100'}`}
-        >
-            <div className="max-w-3xl text-center lg:text-left">
-                <h1 style={{ fontFamily: 'var(--primary-font, sans-serif)' }} className="text-[clamp(2.8rem,10vw,4.5rem)] font-extrabold leading-tight tracking-[-0.05em] uppercase text-white lg:text-[clamp(4rem,6vw,7rem)] lg:leading-[0.95]">
-                    <span className="block">Цифровые</span>
-                    <span className="block lg:relative">Решения</span>
-                </h1>
-                <p 
-                    style={{ fontFamily: 'var(--secondary-font, serif)' }} 
-                    className="mt-4 text-lg italic text-transparent md:text-xl select-none"
-                    aria-hidden="true"
-                >
-                    {'\u00A0'}
-                </p>
-                <p className="font-sans mt-8 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg">
-                    Мы — студия digital-дизайна и разработки. Наша задача — превратить ваши бизнес-цели в эффективные и эстетически выверенные веб-решения.
-                </p>
-                <button onClick={() => setDetailsOpen(true)} className="group mt-10 inline-flex items-center py-3 px-6 border border-white/70 rounded-full text-white bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-0.5 hover:shadow-2xl">
-                    Наши Услуги
-                    <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
-                </button>
+        <div className="relative z-20 flex flex-col h-full w-full">
+            
+            <div 
+                className={`flex h-screen w-full items-center justify-center p-8 transition-all duration-500 ease-in-out ${detailsOpen ? 'blur-md scale-95 opacity-50' : 'blur-0 scale-100 opacity-100'}`}
+            >
+                <div className="max-w-3xl text-center lg:text-left">
+                    <h1 style={{ fontFamily: 'var(--primary-font, sans-serif)' }} className="text-[clamp(2.8rem,10vw,4.5rem)] font-extrabold leading-tight tracking-[-0.05em] uppercase text-white lg:text-[clamp(4rem,6vw,7rem)] lg:leading-[0.95]">
+                        <span className="block font-unbounded">Цифровые</span>
+                        <span className="block lg:relative font-unbounded">Решения</span>
+                    </h1>
+                    <p 
+                        style={{ fontFamily: 'var(--secondary-font, serif)' }} 
+                        className="mt-4 text-lg italic text-transparent md:text-xl select-none"
+                        aria-hidden="true"
+                    >
+                        {'\u00A0'}
+                    </p>
+                    <p className="font-sans mt-8 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg">
+                        {`Мы — студия digital-дизайна и разработки. Наша задача — превратить ваши бизнес-цели в эффективные и эстетически выверенные веб-решения.`}
+                    </p>
+                    <button onClick={() => setDetailsOpen(true)} className="group mt-10 inline-flex items-center py-3 px-6 border border-white/70 rounded-full text-white bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-0.5 hover:shadow-2xl">
+                        Наши Услуги
+                        <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
+                    </button>
+                </div>
             </div>
+
+            <div className="flex h-screen w-full items-center justify-center">
+                <ResponsiveDemo />
+            </div>
+
         </div>
 
         <AnimatePresence>
             {detailsOpen && (
               <>
-                {/* --- НОВЫЙ ЭЛЕМЕНТ: Затемняющий overlay --- */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -249,15 +269,18 @@ const LineBackgroundComponent = ({ width = '100%', height = '100vh', scrollToCom
                     className="absolute inset-0 z-30 bg-black/60"
                 />
 
-                {/* Ваше модальное окно теперь имеет z-40 */}
                 <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5, ease: 'easeInOut' }}
-                    className="absolute inset-0 z-40 flex flex-col items-center justify-start sm:justify-center p-4 sm:p-8 overflow-y-auto"
+                    className="absolute inset-0 z-40 flex flex-col items-center justify-start p-4 sm:p-8 overflow-y-auto"
+                    onClick={() => setDetailsOpen(false)}
                 >
-                    <div className="w-full max-w-6xl text-center my-auto py-10">
+                    <div 
+                        className="w-full text-center py-10"
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <motion.h2 
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
@@ -282,7 +305,7 @@ const LineBackgroundComponent = ({ width = '100%', height = '100vh', scrollToCom
                             }}
                             initial="hidden"
                             animate="visible"
-                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6"
                         >
                             {cardsData.map((card) => (
                                 <motion.div 

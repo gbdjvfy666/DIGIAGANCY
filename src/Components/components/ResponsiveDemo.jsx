@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import * as THREE from 'three'; // Добавляем импорт THREE.js
+// Импорты THREE.js и изображений остаются такими же
 import houseone from '../../assets/House/houseone.jpg';
 import housetwo from '../../assets/House/housetwo.jpg';
 import housethree from '../../assets/House/housethree.jpg';
@@ -17,17 +17,13 @@ const breakpoints = {
 const images = [houseone, housetwo, housethree, housefour, housefive, housesix];
 
 export default function ResponsiveDemo() {
-  // --- ЛОГИКА ИЗ ВАШЕГО КОМПОНЕНТА (без изменений) ---
+  // --- ВСЯ ЛОГИКА УПРАВЛЕНИЯ РАЗМЕРОМ ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ ---
   const [width, setWidth] = useState(breakpoints.desktop);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
   const startWidth = useRef(0);
-  
-  // --- REF'ы ДЛЯ THREE.JS ФОНА ---
-  const backgroundContainerRef = useRef(null);
-  const sceneRef = useRef(null);
   
   useEffect(() => {
     const checkIfMobile = () => {
@@ -88,127 +84,7 @@ export default function ResponsiveDemo() {
     }
   }, [isMobile]);
 
-  // --- USE EFFECT ДЛЯ ИНИЦИАЛИЗАЦИИ ФОНА "ЖИДКАЯ ВОЛНА" ---
-  useEffect(() => {
-    const container = backgroundContainerRef.current;
-    const sceneElement = sceneRef.current;
-    if (!container || !sceneElement) return;
-
-    let animationIdRef = null;
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
-    camera.position.z = 1;
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    sceneElement.appendChild(renderer.domElement);
-
-    const shaderMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        iResolution: { value: new THREE.Vector2(container.clientWidth, container.clientHeight) },
-        iTime: { value: 0.0 },
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        precision highp float;
-        varying vec2 vUv;
-        uniform vec2 iResolution;
-        uniform float iTime;
-        #define BACKGROUND_COLOR vec3(0.05, 0.05, 0.08)
-        #define LIQUID_COLOR     vec3(0.1, 0.2, 0.5)
-        #define GLOW_COLOR       vec3(0.2, 0.8, 1.0)
-        #define WAVE_THICKNESS   0.08
-        #define WAVE_SPEED       0.2
-        #define WAVE_FREQ        3.0
-        #define NOISE_SCALE      0.5
-        vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-        vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-        vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
-        float snoise(vec2 v) {
-            const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
-            vec2 i  = floor(v + dot(v, C.yy));
-            vec2 x0 = v - i + dot(i, C.xx);
-            vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-            vec4 x12 = x0.xyxy + C.xxzz;
-            x12.xy -= i1;
-            i = mod289(i);
-            vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 )) + i.x + vec3(0.0, i1.x, 1.0 ));
-            vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
-            m = m*m;
-            m = m*m;
-            vec3 x = 2.0 * fract(p * C.www) - 1.0;
-            vec3 h = abs(x) - 0.5;
-            vec3 ox = floor(x + 0.5);
-            vec3 a0 = x - ox;
-            m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
-            vec3 g;
-            g.x  = a0.x  * x0.x  + h.x  * x0.y;
-            g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-            return 130.0 * dot(m, g);
-        }
-        void main() {
-            vec2 uv = (2.0 * gl_FragCoord.xy - iResolution.xy) / iResolution.y;
-            float noise_slow = snoise(vec2(uv.x * WAVE_FREQ, iTime * WAVE_SPEED));
-            float noise_fast = snoise(vec2(uv.x * WAVE_FREQ * 2.0, iTime * WAVE_SPEED * 3.0));
-            float wave_y = (noise_slow + noise_fast * 0.3) * NOISE_SCALE;
-            float dist_from_center = abs(uv.y - wave_y);
-            float glow_intensity = smoothstep(WAVE_THICKNESS * 2.0, 0.0, dist_from_center);
-            float line_intensity = smoothstep(WAVE_THICKNESS, 0.0, dist_from_center);
-            float h = 0.01;
-            float noise_slow_ahead = snoise(vec2((uv.x + h) * WAVE_FREQ, iTime * WAVE_SPEED));
-            float noise_fast_ahead = snoise(vec2((uv.x + h) * WAVE_FREQ * 2.0, iTime * WAVE_SPEED * 3.0));
-            float wave_y_ahead = (noise_slow_ahead + noise_fast_ahead * 0.3) * NOISE_SCALE;
-            float wave_y_deriv = (wave_y_ahead - wave_y) / h;
-            vec2 normal = normalize(vec2(-wave_y_deriv, 1.0));
-            float fresnel = 1.0 - abs(normal.y);
-            fresnel = pow(fresnel, 3.0);
-            vec3 color = BACKGROUND_COLOR;
-            color = mix(color, GLOW_COLOR, glow_intensity * 0.2);
-            vec3 liquid_final_color = mix(LIQUID_COLOR, GLOW_COLOR, fresnel);
-            color = mix(color, liquid_final_color, line_intensity);
-            float grain = (fract(sin(dot(vUv, vec2(12.9898,78.233)*2.0)) * 43758.5453) - 0.5) * 0.1;
-            color += grain;
-            gl_FragColor = vec4(color, 1.0);
-        }
-      `
-    });
-
-    const plane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), shaderMaterial);
-    scene.add(plane);
-    
-    const updateSize = () => {
-      if (!container) return;
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      shaderMaterial.uniforms.iResolution.value.set(container.clientWidth, container.clientHeight);
-    };
-    updateSize();
-    
-    function animate() {
-      animationIdRef = requestAnimationFrame(animate);
-      shaderMaterial.uniforms.iTime.value = performance.now() * 0.001;
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    const resizeObserver = new ResizeObserver(updateSize);
-    resizeObserver.observe(container);
-
-    return () => {
-      if (animationIdRef) cancelAnimationFrame(animationIdRef);
-      resizeObserver.disconnect();
-      if (sceneElement.contains(renderer.domElement)) {
-        sceneElement.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
-    };
-  }, []);
-
+  // --- ЛОГИКА РЕНДЕРА ИЗОБРАЖЕНИЙ ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ ---
   const renderImages = () => {
     switch(displayMode) {
       case 'mobile':
@@ -273,20 +149,11 @@ export default function ResponsiveDemo() {
     }
   };
 
+  // --- УПРОЩЕННАЯ JSX-РАЗМЕТКА БЕЗ ФОНА ---
   return (
-    <div 
-        ref={backgroundContainerRef}
-        className="relative isolate w-full bg-[#0a0a0b] px-4 py-8 sm:py-16 transition-colors duration-300"
-    >
-        <div ref={sceneRef} className="absolute inset-0 z-0 h-full w-full pointer-events-none" />
+    <div className="w-full px-4 py-8 sm:py-16">
+        <div className="w-full max-w-[1700px] mx-auto bg-white dark:bg-zinc-950 rounded-2xl p-4 sm:p-8 shadow-lg border border-zinc-200/50 dark:border-zinc-700/30">
 
-        <div className="relative z-10 w-full max-w-[1700px] mx-auto bg-white dark:bg-zinc-950 rounded-2xl p-4 sm:p-8 shadow-lg border border-zinc-200/50 dark:border-zinc-700/30">
-          <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-4">
-            Адаптивный дизайн
-          </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 mb-6 max-w-2xl">
-            Посмотрите, как ваш контент будет выглядеть на разных устройствах. Перетаскивайте правую границу, чтобы изменить ширину.
-          </p>
 
           <div className="w-full overflow-x-auto relative">
             {!isMobile && (
