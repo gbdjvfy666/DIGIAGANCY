@@ -1,11 +1,12 @@
 import Navbar from "../Components/other/Navbar";
 import Footer from "../Components/other/Footer";
 import FractalPyramidComponent from "../Components/animatedblock/ProfileCard/FractalPyramidComponent.jsx";
-import '../index.css'
+import '../index.css';
+import LOGO_WHITE from '../assets/LOGO_WHITE.png'; // 1. Импортируем изображение
 
 export default function Design() {
   return (
-    <div className="bg-black text-gray-200 min-h-screen font-serif relative overflow-x-hidden">
+    <div className="bg-black text-gray-200 min-h-screen font-garet relative overflow-x-hidden">
             
       {/* Слой 1: Фоновая анимация (самый нижний, z-0) */}
       <div className="absolute inset-0 z-0">
@@ -15,29 +16,38 @@ export default function Design() {
         <Navbar />
 
         {/* Hero Section */}
-        <section className="max-w-6xl mx-auto px-6 py-24 text-center space-y-6">
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight font-deutsch uppercase tracking-wider">
-            DESIGN
+        <section className="max-w-6xl mx-auto px-6 py-30 text-center space-y-6">
+          <h1 className="text-5xl md:text-8xl font-damione font-extrabold leading-tight uppercase tracking-wider">
+            ДИЗАЙН
           </h1>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Создаём аскетичный и функциональный визуал, который выделяет, продаёт и врезается в память.
+          <p className="text-lg font-garet text-gray-400 max-w-2xl mx-auto">
+            Находим форму для вашего смысла.
           </p>
-          <div className="flex justify-center gap-4 mt-8">
-              <button className="px-8 py-4 bg-gray-200 text-black rounded-none font-bold hover:bg-white transition-colors duration-300">
+          {/* 2. Оборачиваем кнопки в div для позиционирования логотипа */}
+          <div className="relative flex justify-center items-center gap-40 mt-12">
+              <button className="px-12 py-3 bg-gray-200 font-garet text-black rounded-none font-bold hover:bg-white transition-colors duration-300">
                   Обсудить проект
               </button>
-              <button className="px-8 py-4 border border-gray-600 text-gray-300 rounded-none font-bold hover:bg-zinc-900 transition-colors duration-300">
+
+              {/* 3. Вставляем логотип с нужными стилями */}
+              <img 
+                src={LOGO_WHITE} 
+                alt="Logo" 
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-26 w-20 pointer-events-none" 
+              />
+
+              <button className="px-12 py-3 border font-garet border-gray-600 text-gray-300 rounded-none font-bold hover:bg-zinc-900 transition-colors duration-300">
                   Заказать дизайн
               </button>
           </div>
         </section>
 
-        {/* Услуги */}
-        <section className="w-full px-6 py-24"> 
+
+        <section className="w-full px-6"> 
           <div className="text-center mb-16">
-            <h2 className="text-4xl text-gray-950 md:text-5xl font-extrabold font-deutsch tracking-wide mb-4">НАШИ УСЛУГИ</h2>
-            <p className="text-xl text-gray-500 max-w-3xl mx-auto">
-              Комплексные дизайн-решения для бизнеса. Без компромиссов.
+            <h2 className="text-6xl text-gray-950 md:text-8xl font-damione font-rubik tracking-wide ">УСЛУГИ</h2>
+            <p className="text-xl text-gray-900 font-garet max-w-3xl mx-auto">
+              Комплексные дизайн-решения для бизнеса.
             </p>
           </div>
         

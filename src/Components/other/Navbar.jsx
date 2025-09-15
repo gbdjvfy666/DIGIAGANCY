@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LOGO_WHITE from '../../assets/LOGO_WHITE.png';
 
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
@@ -29,7 +30,8 @@ export default function Navbar() {
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="relative w-full">
+      <div className="relative w-full font-garet">
+        {/* Возвращаем исходные отступы */}
         <div className="flex justify-between items-center py-2 px-4 md:px-16 lg:px-24">
           {/* Логотип NSBH слева */}
           <a
@@ -65,8 +67,15 @@ export default function Navbar() {
             </div>
           </div>
           
-          {/* Кнопка "О нас" справа */}
-          <div className="flex items-center">
+          {/* Контейнер для лого и кнопки "О нас" */}
+          <div className="flex items-center gap-4">
+            {/* Некликабельный логотип */}
+            <img 
+                src={LOGO_WHITE} 
+                alt="Logo" 
+                className="h-8 w-6 pointer-events-none" 
+            />
+            {/* Кнопка "О нас" */}
             <a
               className="relative text-sm sm:text-base text-white transition-colors duration-300 hoverable z-10 group"
               href="/about"
