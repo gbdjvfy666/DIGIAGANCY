@@ -29,7 +29,6 @@ const localFonts = [
       { name: 'Light Italic (300)', className: 'font-aradora font-light italic' }
     ]
   },
-  { name: 'Behance', className: 'font-behance' },
   { 
     name: 'Bounded', 
     className: 'font-bounded',

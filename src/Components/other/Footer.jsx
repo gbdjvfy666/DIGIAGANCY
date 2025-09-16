@@ -34,19 +34,19 @@ const Footer = () => {
               <div className="flex flex-col gap-0">
                 <a
                   href="/works"
-                  className="relative font-dela text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
+                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
                 >
                   <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Работы</span>
                 </a>
                 <a
                   href="/stories"
-                  className="relative font-dela text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
+                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
                 >
                   <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Истории</span>
                 </a>
                 <a
                   href="/about"
-                  className="relative font-dela text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
+                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
                 >
                   <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">О нас</span>
                 </a>
@@ -55,13 +55,13 @@ const Footer = () => {
               <div className="flex flex-col gap-0">
                 <a
                   href="/cookies"
-                  className="relative font-dela text-white group text-base md:text-lg leading-none transition-colors duration-300 "
+                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 "
                 >
                   <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Cookies</span>
                 </a>
                 <a
                   href="/privacy"
-                  className="relative font-dela text-white group text-base md:text-lg leading-none transition-colors duration-300"
+                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300"
                 >
                   <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Privacy</span>
                 </a>
@@ -77,13 +77,13 @@ const Footer = () => {
             <div className="flex flex-col gap-0 px-8">
               <a
                 href="https://www.instagram.com/nsbusinesshub/"
-                className="relative font-dela text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
+                className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
               >
                 <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Instagram</span>
               </a>
               <a
                 href="https://t.me/NSBusinessHub"
-                className="relative font-dela text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
+                className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
               >
                 <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Telegram</span>
               </a>

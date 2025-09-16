@@ -51,8 +51,6 @@ export default function Design() {
           <FractalPyramidComponent />
         </Suspense>
       </div>
-      
-      {/* Весь 2D-контент (HTML) с z-index, чтобы быть над фоном */}
       <div className="relative z-10">
         <Navbar />
 

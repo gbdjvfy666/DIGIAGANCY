@@ -31,9 +31,7 @@ export default function Navbar() {
       }`}
     >
       <div className="relative w-full font-garet">
-        {/* Возвращаем исходные отступы */}
         <div className="flex justify-between items-center py-2 px-4 md:px-16 lg:px-24">
-          {/* Логотип NSBH слева */}
           <a
             href="/"
             aria-label="Home"
@@ -43,7 +41,6 @@ export default function Navbar() {
             <span className="absolute bottom-0 left-0 w-full h-0.5 bg-current transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </a>
 
-          {/* Контейнер для кнопок, центрированный */}
           <div className="hidden sm:flex justify-center items-center absolute inset-x-0 pointer-events-none">
             <div className="flex items-center gap-2 sm:gap-4 bg-black/10 backdrop-blur-sm rounded-b-full py-1 px-2 sm:py-2 sm:px-4 border-x border-b border-black/20">
               <a 
@@ -67,15 +64,7 @@ export default function Navbar() {
             </div>
           </div>
           
-          {/* Контейнер для лого и кнопки "О нас" */}
           <div className="flex items-center gap-4">
-            {/* Некликабельный логотип */}
-            <img 
-                src={LOGO_WHITE} 
-                alt="Logo" 
-                className="h-8 w-6 pointer-events-none" 
-            />
-            {/* Кнопка "О нас" */}
             <a
               className="relative text-sm sm:text-base text-white transition-colors duration-300 hoverable z-10 group"
               href="/about"

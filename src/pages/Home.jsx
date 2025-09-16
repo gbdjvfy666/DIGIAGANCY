@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from '../Components/other/Navbar.jsx';
 import '../index.css';
-import TextEffect from '../Components/components/TextEffect.jsx';
 import VideoGrid from '../Components/animatedblock/ServicesGrid.jsx';
 import ParallaxCardSlider from '../Components/animatedblock/ParallaxCardSlider.jsx';
 import FractalOrbComponent from '../Components/animatedblock/ProfileCard/FractalOrbComponent.jsx';
