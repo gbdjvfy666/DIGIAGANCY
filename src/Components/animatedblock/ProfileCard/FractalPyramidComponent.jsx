@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { Renderer, Triangle, Program, Mesh } from 'ogl';
 
-// Этот компонент является адаптированной версией вашего оригинального 'Prism.jsx'.
+// Этот компонент является адаптированной версией вашего оригинального 'Prism.jsx'. FractalPyramidComponent
 // Все настройки "зашиты" внутри для простоты использования.
-const FractalOrbComponent = ({ width = '100%', height = '100vh' }) => {
+const FractalPyramidComponent = React.memo(function FractalOrbComponent({ width = '100%', height = '100vh' }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -165,6 +165,6 @@ const FractalOrbComponent = ({ width = '100%', height = '100vh' }) => {
   return (
     <div ref={containerRef} style={{ width, height, position: 'relative', overflow: 'hidden' }} />
   );
-};
+});
 
-export default FractalOrbComponent;
+export default FractalPyramidComponent;

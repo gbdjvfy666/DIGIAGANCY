@@ -1,19 +1,27 @@
+// Файл: src/pages/Design.jsx
+
+import React, { Suspense, lazy, useMemo } from 'react';
+
 import Navbar from "../Components/other/Navbar";
 import Footer from "../Components/other/Footer";
-import FractalPyramidComponent from "../Components/animatedblock/ProfileCard/FractalPyramidComponent.jsx";
 import '../index.css';
 import LOGO_WHITE from '../assets/LOGO_WHITE.png';
-import PrismaticBurst from '../Components/PrismaticBurst';
+
+// Оптимизация: Загружаем "тяжелые" WebGL-компоненты лениво.
+// Их код будет загружен браузером только тогда, когда React попытается их отрендерить.
+const PrismaticBurst = lazy(() => import('../Components/PrismaticBurst'));
+const FractalPyramidComponent = lazy(() => import('../Components/animatedblock/ProfileCard/FractalPyramidComponent'));
 
 export default function Design() {
-  const services = [
+  // Данные по услугам. Оборачиваем в useMemo, чтобы массив не создавался заново при каждом рендере.
+  const services = useMemo(() => [
     { 
       title: "Дизайн для маркетплейсов", 
       subtitle: "Wildberries • Ozon • Яндекс.Маркет", 
       description: "Создаем продающие карточки товаров, которые выделяют ваш продукт среди конкурентов и увеличивают конверсию. Полный цикл: от анализа до готовых файлов.", 
       icon: "✠", 
       features: [ "Глубокий анализ ниши и конкурентов", "Несколько вариантов дизайна на выбор", "Подготовка файлов по тех. требованиям" ],
-      animationColors: ['#FF007A', '#5F00D8', '#00F0FF']
+      animationColors: ['#FF007A', '#5F00D8', '#00F0FF'] // Палитра: Яркий Пурпурный / Фиолетовый / Голубой
     },
     { 
       title: "Брендинг и логотипы", 
@@ -21,7 +29,7 @@ export default function Design() {
       description: "Разрабатываем уникальные логотипы и комплексный фирменный стиль, который создает сильные ассоциации с вашим брендом. Включает гайдлайны и шаблоны.", 
       icon: "☩", 
       features: [ "3-5 концепций логотипа на выбор", "Создание полного брендбука", "Разработка анимации логотипа" ],
-      animationColors: ['#FFD700', '#FF8C00', '#FFF8E7']
+      animationColors: ['#FFD700', '#FF8C00', '#FFF8E7'] // Палитра: Золотой / Оранжевый / Кремовый
     },
     { 
       title: "Соцсети и контент", 
@@ -29,18 +37,23 @@ export default function Design() {
       description: "Комплексное оформление социальных сетей с единой стилистикой: от аватарок до шаблонов постов и сторис. Создаем узнаваемый визуальный язык.", 
       icon: "☨", 
       features: [ "Оформление VK, Telegram, Instagram", "Набор шаблонов для постов и историй", "Создание контент-плана" ],
-      animationColors: ['#00FF7F', '#4169E1', '#E0FFF0']
+      animationColors: ['#00FF7F', '#4169E1', '#E0FFF0'] // Палитра: Весенний Зеленый / Королевский Синий / Мятный
     }
-  ];
+  ], []);
 
   return (
     <div className="bg-black text-gray-200 min-h-screen font-garet relative overflow-x-hidden">
-            
+      
+      {/* Фоновая анимация */}
       <div className="absolute inset-0 z-0">
-        <FractalPyramidComponent />
+
+        <Suspense fallback={<div className="w-full h-full bg-black" />}>
+          <FractalPyramidComponent />
+        </Suspense>
       </div>
       
-      <div className="relative z-20">
+      {/* Весь 2D-контент (HTML) с z-index, чтобы быть над фоном */}
+      <div className="relative z-10">
         <Navbar />
 
         {/* Hero Section */}
@@ -79,33 +92,38 @@ export default function Design() {
             {services.map((service, index) => (
               <div key={index} className="bg-zinc-900 rounded-none overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-all duration-500 flex flex-col md:flex-row">
                 
-                <div className="md:w-2/5 h-64 md:h-auto relative bg-zinc-950 overflow-hidden">
-                  <div className="absolute inset-0 z-0 opacity-60">
-                    <PrismaticBurst
-                      colors={service.animationColors}
-                      animationType="rotate3d"
-                      intensity={1.5}
-                      speed={0.4}
-                      distort={0.8}
-                      rayCount={20}
-                      mixBlendMode="lighten"
-                    />
-                  </div>
-                  <div className="relative z-10 h-full flex items-center justify-center p-8 border-r border-zinc-800">
+                <div className="md:w-2/5 h-64 md:h-auto relative bg-zinc-950">
+                  {/* Контент (иконка, текст) находится на слое выше */}
+                  <div className="absolute inset-0 z-20 flex items-center justify-center p-8 pointer-events-none">
                     <div className="text-center text-gray-400">
                       <span className="text-8xl font-thin">{service.icon}</span>
                       <h3 className="text-3xl font-bold mt-4 font-deutsch tracking-wider">{service.title}</h3>
                       <p className="text-zinc-500 mt-2">{service.subtitle}</p>
                     </div>
                   </div>
+
+                  {/* Слой с WebGL-анимацией (ниже контента) */}
+                  <div className="absolute inset-0 z-10">
+                    <Suspense fallback={<div className="w-full h-full bg-zinc-900" />}>
+                      <PrismaticBurst
+                        colors={service.animationColors}
+                        animationType="rotate3d"
+                        intensity={1.5}
+                        speed={0.4}
+                        distort={0.8}
+                        rayCount={14} // Слегка уменьшено для дополнительной производительности
+                      />
+                    </Suspense>
+                  </div>
                 </div>
 
+                {/* Правая часть карточки */}
                 <div className="md:w-3/5 p-8 md:p-12 flex flex-col">
                   <div className="flex-1">
                     <p className="text-gray-400 mb-6 leading-relaxed">{service.description}</p>
                     <ul className="space-y-3 mb-8">
                       {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-start">
+                          <li key={i} className="flex items-start">
                           <span className="text-gray-500 mr-3 mt-1"> • </span>
                           <span>{feature}</span>
                         </li>
@@ -167,27 +185,6 @@ export default function Design() {
           <button className="bg-white text-black px-10 py-4 rounded-none font-bold hover:scale-105 transition-transform duration-300">
             Начать проект
           </button>
-        </section>
-
-        {/* === БЛОК С АНИМАЦИЕЙ В КРУГЕ И ЛОГОТИПОМ === */}
-        <section className="py-20 flex justify-center items-center">
-          <div className="w-64 h-64 rounded-full relative overflow-hidden border border-zinc-700 bg-zinc-950">
-            {/* Слой 1: Анимация */}
-            <PrismaticBurst
-                      animationType="rotate3d"
-                      intensity={1.5}
-                      speed={0.4}
-                      distort={0.8}
-                      rayCount={20}
-                      mixBlendMode="lighten"
-            />
-            {/* Слой 2: Логотип поверх анимации */}
-            <img
-              src={LOGO_WHITE}
-              alt="Logo"
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-auto z-10 pointer-events-none"
-            />
-          </div>
         </section>
         
         <Footer />

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Triangle, Texture } from 'ogl';
 
 const vertexShader = `#version 300 es
@@ -199,7 +199,7 @@ const toPx = v => {
   return isNaN(num) ? 0 : num;
 };
 
-const PrismaticBurst = ({
+const PrismaticBurst = React.memo(function PrismaticBurst({
   intensity = 2,
   speed = 0.5,
   animationType = 'rotate3d',
@@ -210,7 +210,7 @@ const PrismaticBurst = ({
   hoverDampness = 0,
   rayCount,
   mixBlendMode = 'lighten'
-}) => {
+}) {
   const containerRef = useRef(null);
   const programRef = useRef(null);
   const rendererRef = useRef(null);
@@ -453,6 +453,6 @@ const PrismaticBurst = ({
   }, [intensity, speed, animationType, colors, distort, offset, rayCount]);
 
   return <div className="w-full h-full relative overflow-hidden" ref={containerRef} />;
-};
+});
 
 export default PrismaticBurst;
