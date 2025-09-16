@@ -2,16 +2,44 @@ import Navbar from "../Components/other/Navbar";
 import Footer from "../Components/other/Footer";
 import FractalPyramidComponent from "../Components/animatedblock/ProfileCard/FractalPyramidComponent.jsx";
 import '../index.css';
-import LOGO_WHITE from '../assets/LOGO_WHITE.png'; // 1. Импортируем изображение
+import LOGO_WHITE from '../assets/LOGO_WHITE.png';
+import PrismaticBurst from '../Components/PrismaticBurst';
 
 export default function Design() {
+  const services = [
+    { 
+      title: "Дизайн для маркетплейсов", 
+      subtitle: "Wildberries • Ozon • Яндекс.Маркет", 
+      description: "Создаем продающие карточки товаров, которые выделяют ваш продукт среди конкурентов и увеличивают конверсию. Полный цикл: от анализа до готовых файлов.", 
+      icon: "✠", 
+      features: [ "Глубокий анализ ниши и конкурентов", "Несколько вариантов дизайна на выбор", "Подготовка файлов по тех. требованиям" ],
+      animationColors: ['#FF007A', '#5F00D8', '#00F0FF']
+    },
+    { 
+      title: "Брендинг и логотипы", 
+      subtitle: "Узнаваемость • Ассоциации • Стиль", 
+      description: "Разрабатываем уникальные логотипы и комплексный фирменный стиль, который создает сильные ассоциации с вашим брендом. Включает гайдлайны и шаблоны.", 
+      icon: "☩", 
+      features: [ "3-5 концепций логотипа на выбор", "Создание полного брендбука", "Разработка анимации логотипа" ],
+      animationColors: ['#FFD700', '#FF8C00', '#FFF8E7']
+    },
+    { 
+      title: "Соцсети и контент", 
+      subtitle: "Единый стиль • Вовлечение • Узнаваемость", 
+      description: "Комплексное оформление социальных сетей с единой стилистикой: от аватарок до шаблонов постов и сторис. Создаем узнаваемый визуальный язык.", 
+      icon: "☨", 
+      features: [ "Оформление VK, Telegram, Instagram", "Набор шаблонов для постов и историй", "Создание контент-плана" ],
+      animationColors: ['#00FF7F', '#4169E1', '#E0FFF0']
+    }
+  ];
+
   return (
     <div className="bg-black text-gray-200 min-h-screen font-garet relative overflow-x-hidden">
             
-      {/* Слой 1: Фоновая анимация (самый нижний, z-0) */}
       <div className="absolute inset-0 z-0">
         <FractalPyramidComponent />
       </div>
+      
       <div className="relative z-20">
         <Navbar />
 
@@ -23,27 +51,23 @@ export default function Design() {
           <p className="text-lg font-garet text-gray-400 max-w-2xl mx-auto">
             Находим форму для вашего смысла.
           </p>
-          {/* 2. Оборачиваем кнопки в div для позиционирования логотипа */}
           <div className="relative flex justify-center items-center gap-40 mt-12">
-              <button className="px-12 py-3 bg-gray-200 font-garet text-black rounded-none font-bold hover:bg-white transition-colors duration-300">
+              <button className="px-12 py-3 bg-gray-300 font-garet text-black rounded-none font-bold hover:bg-gray-200 transition-colors duration-300">
                   Обсудить проект
               </button>
-
-              {/* 3. Вставляем логотип с нужными стилями */}
               <img 
                 src={LOGO_WHITE} 
                 alt="Logo" 
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-26 w-20 pointer-events-none" 
               />
-
-              <button className="px-12 py-3 border font-garet border-gray-600 text-gray-300 rounded-none font-bold hover:bg-zinc-900 transition-colors duration-300">
+              <button className="px-10 py-3 bg-gray-300 font-garet text-black rounded-none font-bold hover:bg-gray-200 transition-colors duration-300">
                   Заказать дизайн
               </button>
           </div>
         </section>
 
-
-        <section className="w-full px-6"> 
+        {/* Секция Услуги */}
+        <section className="w-full px-6 py-20"> 
           <div className="text-center mb-16">
             <h2 className="text-6xl text-gray-950 md:text-8xl font-damione font-rubik tracking-wide ">УСЛУГИ</h2>
             <p className="text-xl text-gray-900 font-garet max-w-3xl mx-auto">
@@ -52,10 +76,22 @@ export default function Design() {
           </div>
         
           <div className="max-w-7xl mx-auto space-y-12">
-            {[ { title: "Дизайн для маркетплейсов", subtitle: "Wildberries • Ozon • Яндекс.Маркет", description: "Создаем продающие карточки товаров, которые выделяют ваш продукт среди конкурентов и увеличивают конверсию. Полный цикл: от анализа до готовых файлов.", icon: "✠", features: [ "Глубокий анализ ниши и конкурентов", "Несколько вариантов дизайна на выбор", "Подготовка файлов по тех. требованиям" ] }, { title: "Брендинг и логотипы", subtitle: "Узнаваемость • Ассоциации • Стиль", description: "Разрабатываем уникальные логотипы и комплексный фирменный стиль, который создает сильные ассоциации с вашим брендом. Включает гайдлайны и шаблоны.", icon: "☩", features: [ "3-5 концепций логотипа на выбор", "Создание полного брендбука", "Разработка анимации логотипа" ] }, { title: "Соцсети и контент", subtitle: "Единый стиль • Вовлечение • Узнаваемость", description: "Комплексное оформление социальных сетей с единой стилистикой: от аватарок до шаблонов постов и сторис. Создаем узнаваемый визуальный язык.", icon: "☨", features: [ "Оформление VK, Telegram, Instagram", "Набор шаблонов для постов и историй", "Создание контент-плана" ] } ].map((service, index) => (
+            {services.map((service, index) => (
               <div key={index} className="bg-zinc-900 rounded-none overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-all duration-500 flex flex-col md:flex-row">
-                <div className="md:w-2/5 h-64 md:h-auto relative">
-                  <div className="absolute inset-0 bg-black flex items-center justify-center p-8 border-r border-zinc-800">
+                
+                <div className="md:w-2/5 h-64 md:h-auto relative bg-zinc-950 overflow-hidden">
+                  <div className="absolute inset-0 z-0 opacity-60">
+                    <PrismaticBurst
+                      colors={service.animationColors}
+                      animationType="rotate3d"
+                      intensity={1.5}
+                      speed={0.4}
+                      distort={0.8}
+                      rayCount={20}
+                      mixBlendMode="lighten"
+                    />
+                  </div>
+                  <div className="relative z-10 h-full flex items-center justify-center p-8 border-r border-zinc-800">
                     <div className="text-center text-gray-400">
                       <span className="text-8xl font-thin">{service.icon}</span>
                       <h3 className="text-3xl font-bold mt-4 font-deutsch tracking-wider">{service.title}</h3>
@@ -63,12 +99,13 @@ export default function Design() {
                     </div>
                   </div>
                 </div>
+
                 <div className="md:w-3/5 p-8 md:p-12 flex flex-col">
                   <div className="flex-1">
                     <p className="text-gray-400 mb-6 leading-relaxed">{service.description}</p>
                     <ul className="space-y-3 mb-8">
                       {service.features.map((feature, i) => (
-                          <li key={i} className="flex items-start">
+                        <li key={i} className="flex items-start">
                           <span className="text-gray-500 mr-3 mt-1"> • </span>
                           <span>{feature}</span>
                         </li>
@@ -104,7 +141,6 @@ export default function Design() {
           </div>
         </section>
 
-
         {/* Цены */}
         <section className="max-w-6xl mx-auto px-6 py-20">
           <h2 className="text-4xl font-extrabold mb-10 text-center font-deutsch">Прайс-лист</h2>
@@ -133,6 +169,27 @@ export default function Design() {
           </button>
         </section>
 
+        {/* === БЛОК С АНИМАЦИЕЙ В КРУГЕ И ЛОГОТИПОМ === */}
+        <section className="py-20 flex justify-center items-center">
+          <div className="w-64 h-64 rounded-full relative overflow-hidden border border-zinc-700 bg-zinc-950">
+            {/* Слой 1: Анимация */}
+            <PrismaticBurst
+                      animationType="rotate3d"
+                      intensity={1.5}
+                      speed={0.4}
+                      distort={0.8}
+                      rayCount={20}
+                      mixBlendMode="lighten"
+            />
+            {/* Слой 2: Логотип поверх анимации */}
+            <img
+              src={LOGO_WHITE}
+              alt="Logo"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-auto z-10 pointer-events-none"
+            />
+          </div>
+        </section>
+        
         <Footer />
       </div>
     </div>

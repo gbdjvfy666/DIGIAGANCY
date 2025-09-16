@@ -19,7 +19,7 @@ const WorkCard = ({ title, image, description, onLearnMore }) => (
         <div className="mt-auto">
             <button onClick={onLearnMore} className="w-full inline-flex items-center justify-center py-2.5 px-4 bg-transparent text-white border border-white/40 rounded-lg transition-colors duration-200 hover:bg-white hover:text-black font-medium">
                 Подробнее
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 L 20 20" fill="currentColor" className="w-5 h-5 ml-2 transition-transform duration-200 group-hover/card:translate-x-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 ml-2 transition-transform duration-200 group-hover/card:translate-x-1">
                     <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
                 </svg>
             </button>
@@ -125,13 +125,8 @@ const LineBackgroundComponent = ({ width = '100%', height = '250vh', scrollToCom
         uniform float grainSize;
         
         #define BACKGROUND_COLOR      vec3(0.07, 0.07, 0.08)
-        #define LINE_CORE_COLOR       vec3(1.0, 1.0, 1.0)
-        #define LINE_CORE_WIDTH       0.004
         #define GLOW_SPREAD           0.15
         #define GLOW_INTENSITY        1.5
-        // Анимационные константы больше не нужны, но можно их оставить
-        // #define GLOW_ANIMATION_SPEED  2.0
-        // #define GLOW_NOISE_STRENGTH   0.3
         
         float hash(vec2 p) {
             p = fract(p * vec2(123.34, 456.21));
@@ -145,7 +140,6 @@ const LineBackgroundComponent = ({ width = '100%', height = '250vh', scrollToCom
             return vec2(length(pa - ba * h), h);
         }
         
-        // 👇 ИЗМЕНЕНИЕ ЗДЕСЬ: Функция теперь возвращает статичный белый цвет 👇
         vec3 getMonochromeGlow(float time, vec2 uv) {
             return vec3(1.0);
         }
@@ -154,13 +148,19 @@ const LineBackgroundComponent = ({ width = '100%', height = '250vh', scrollToCom
             vec2 distData = distToSegment(uv, start, end);
             float perp_dist = distData.x;
             float along_dist = distData.y;
-            float core_glow = smoothstep(LINE_CORE_WIDTH * 1.5, 0.0, perp_dist);
-            vec3 core_color = LINE_CORE_COLOR * core_glow;
+            
+            // --- Удалена часть, отвечающая за отрисовку центральной линии ---
+            // float core_glow = smoothstep(LINE_CORE_WIDTH * 1.5, 0.0, perp_dist);
+            // vec3 core_color = LINE_CORE_COLOR * core_glow;
+            
             float glow_mask = smoothstep(GLOW_SPREAD, 0.0, perp_dist);
             float end_factor = pow(abs(along_dist - 0.5) * 2.0, 2.0);
+            
             vec3 glow_color = getMonochromeGlow(time, uv);
             glow_color *= glow_mask * end_factor * GLOW_INTENSITY;
-            return max(core_color, glow_color);
+            
+            // --- Теперь возвращаем только свечение ---
+            return glow_color;
         }
 
         void main() {
@@ -189,7 +189,6 @@ const LineBackgroundComponent = ({ width = '100%', height = '250vh', scrollToCom
       };
       updateSize();
   
-      // Анимация все еще нужна для фонового шума
       function animate() {
         animationIdRef.current = requestAnimationFrame(animate);
         const time = performance.now() * 0.001;
