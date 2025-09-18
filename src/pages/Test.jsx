@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import CardSwap, { Card } from '../Components/animatedblock/CardSwap.jsx';
+import Carousel from '../Components/animatedblock/Carousel.jsx';
+import ParallaxCardSlider from '../Components/animatedblock/ParallaxCardSlider.jsx';
+import ShaderCard from '../Components/animatedblock/ShaderCard.jsx';
+import ThreeCubeAnimation from '../Components/animatedblock/ThreeCubeAnimation.jsx';
+import TiltedCard from '../Components/animatedblock/TiltedCard.jsx';
 
 // Фраза-панграмма, идеально подходит для демонстрации шрифтов.
 const sampleText = 'Съешь же ещё этих мягких французских булок, да выпей чаю. 12345';
@@ -206,8 +212,62 @@ export default function Test() {
       <header className="text-center mb-16">
         <h1 className="text-6xl font-bold">Каталог Шрифтов</h1>
         <p className="text-gray-400 mt-2">Демонстрация всех подключенных шрифтов</p>
+
       </header>
-      
+      <div style={{ height: '600px', position: 'relative' }}>
+  <CardSwap
+    cardDistance={60}
+    verticalDistance={70}
+    delay={5000}
+    pauseOnHover={false}
+  >
+    <Card>
+      <h3>Card 1</h3>
+      <p>Your content here</p>
+    </Card>
+    <Card>
+      <h3>Card 2</h3>
+      <p>Your content here</p>
+    </Card>
+    <Card>
+      <h3>Card 3</h3>
+      <p>Your content here</p>
+    </Card>
+  </CardSwap>
+</div> 
+<div style={{ height: '600px', position: 'relative' }}>
+  <Carousel
+    baseWidth={300}
+    autoplay={true}
+    autoplayDelay={3000}
+    pauseOnHover={true}
+    loop={true}
+    round={false}
+  />
+</div> 
+<ParallaxCardSlider />
+<ShaderCard/>
+<ThreeCubeAnimation/>
+<TiltedCard
+  imageSrc="https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58"
+  altText="Kendrick Lamar - GNX Album Cover"
+  captionText="Kendrick Lamar - GNX"
+  containerHeight="300px"
+  containerWidth="300px"
+  imageHeight="300px"
+  imageWidth="300px"
+  rotateAmplitude={12}
+  scaleOnHover={1.2}
+  showMobileWarning={false}
+  showTooltip={true}
+  displayOverlayContent={true}
+  overlayContent={
+    <p className="tilted-card-demo-text">
+      Kendrick Lamar - GNX
+    </p>
+  }
+/> 
+
       <main>
         <FontSection 
             title="Шрифты из Google Fonts" 
