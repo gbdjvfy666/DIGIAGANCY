@@ -109,7 +109,7 @@ export default function Design() {
                         intensity={1.5}
                         speed={0.4}
                         distort={0.8}
-                        rayCount={14} // Слегка уменьшено для дополнительной производительности
+                        rayCount={14}
                       />
                     </Suspense>
                   </div>

@@ -12,7 +12,7 @@ import RestaurantSiteMain from '../Components/section/RestaurantSiteMain';
 import NewsBlogMain from '../Components/section/NewsBlogMain';
 import DesignerSiteMain from '../Components/section/DesignerSiteMain';
 import CryptoProjectMain from '../Components/section/CryptoProjectMain';
-import FractalOrbComponentSecond from '../Components/animatedblock/ProfileCard/FractalOrbComponentSecond';
+import FractalOrbComponentSecond from '../Components/animatedblock/ProfileCard/Web';
 
 // Регистрируем плагин GSAP
 gsap.registerPlugin(ScrollToPlugin);

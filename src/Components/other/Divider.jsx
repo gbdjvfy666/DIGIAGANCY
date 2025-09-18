@@ -12,7 +12,7 @@ const Divider = ({ height = '10px' }) => {
         backgroundImage: `url(${dividerImage})`,
         backgroundRepeat: 'repeat-x',
         backgroundPosition: 'center',
-        backgroundSize: '20px', // Увеличиваем ширину изображения, сохраняя высоту
+        backgroundSize: '20px',
       }}
     />
   );
