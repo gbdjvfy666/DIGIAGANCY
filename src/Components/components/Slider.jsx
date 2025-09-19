@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Parallax } from 'swiper/modules';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -86,8 +86,38 @@ const slides = [
 
 export default function Slider() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const prevIndex = useRef(0);
   const swiperRef = useRef(null);
+  const containerRef = useRef(null); // Создаем реф для контейнера
+
+// Замените эту часть кода в вашем useEffect
+useEffect(() => {
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                console.log('Компонент стал видимым!');
+                setIsVisible(true);
+                observer.unobserve(entry.target);
+            }
+        },
+        {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1,
+        }
+    );
+
+    if (containerRef.current) {
+        observer.observe(containerRef.current);
+    }
+
+    return () => {
+        if (containerRef.current) {
+            observer.unobserve(containerRef.current);
+        }
+    };
+}, []);
 
   const handleSlideChange = (swiper) => {
     prevIndex.current = activeIndex;
@@ -116,7 +146,10 @@ export default function Slider() {
   const activeSlideLink = slides[activeIndex]?.link || '/';
 
   return (
-    <div className="rounded-3xl overflow-hidden shadow-2xl border-y-2 border-gray-200 dark:border-gray-700">
+    <div
+      ref={containerRef}
+      className="rounded-3xl overflow-hidden shadow-2xl border-y-2 border-gray-200 dark:border-gray-700"
+    >
       <Swiper
         ref={swiperRef}
         slidesPerView={1}
@@ -129,11 +162,15 @@ export default function Slider() {
         speed={900}
         onSlideChange={handleSlideChange}
         className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] bg-black"
-        autoplay={{
-          delay: 7000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
+        autoplay={
+          isVisible
+            ? {
+                delay: 7000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }
+            : false
+        }
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
@@ -192,9 +229,19 @@ export default function Slider() {
 
         {/* Элементы управления */}
         <div className="absolute bottom-6 left-6 z-50">
-          <Link to={activeSlideLink} className="group inline-flex items-center text-lg font-semibold text-white cursor-pointer hover:text-gray-200 transition-colors">
+          <Link
+            to={activeSlideLink}
+            className="group inline-flex items-center text-lg font-semibold text-white cursor-pointer hover:text-gray-200 transition-colors"
+          >
             Подробнее
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2 transition-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 ml-2 transition-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:-translate-y-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 19L19 5m0 0h-6.75M19 5v6.75" />
             </svg>
           </Link>
@@ -204,19 +251,41 @@ export default function Slider() {
             <button
               key={index}
               onClick={() => swiperRef.current.swiper.slideToLoop(index)}
-              className={`w-2 h-2 rounded-full transition-colors duration-300 ${activeIndex === index ? 'bg-white' : 'bg-white/40 hover:bg-white/70'}`}
+              className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                activeIndex === index ? 'bg-white' : 'bg-white/40 hover:bg-white/70'
+              }`}
               aria-label={`Перейти к слайду ${index + 1}`}
             />
           ))}
         </div>
         <div className="absolute bottom-6 right-6 flex gap-2 z-50">
-          <button className="custom-prev w-9 h-9 bg-neutral-200/80 rounded-full flex items-center justify-center shadow-sm hover:bg-gray-100" aria-label="Previous Slide">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <button
+            className="custom-prev w-9 h-9 bg-neutral-200/80 rounded-full flex items-center justify-center shadow-sm hover:bg-gray-100"
+            aria-label="Previous Slide"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 text-black"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 18l-6-6 6-6" />
             </svg>
           </button>
-          <button className="custom-next w-9 h-9 bg-neutral-200/80 rounded-full flex items-center justify-center shadow-sm hover:bg-gray-100" aria-label="Next Slide">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <button
+            className="custom-next w-9 h-9 bg-neutral-200/80 rounded-full flex items-center justify-center shadow-sm hover:bg-gray-100"
+            aria-label="Next Slide"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 text-black"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 18l6-6-6-6" />
             </svg>
           </button>

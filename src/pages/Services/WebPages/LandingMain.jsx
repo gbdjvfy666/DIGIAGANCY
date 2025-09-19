@@ -1,6 +1,6 @@
 import { motion, useInView, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import image2 from '../../assets/285.png'; // Убедитесь, что путь к вашему изображению верный
+import image2 from '../../../assets/285.png'; // Убедитесь, что путь к вашему изображению верный
 
 // --- ВСПОМОГАТЕЛЬНЫЕ КОМПОНЕНТЫ И ИКОНКИ ---
 

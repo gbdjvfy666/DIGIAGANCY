@@ -11,13 +11,14 @@ import SpacePage from '../Components/animatedblock/Spaceswiper/SpacePage.jsx';
 import NoiseBackgroundBig from '../Components/background/NoiseBacgroundBig/NoiseBacgroundBig.jsx'; 
 import Divider from '../Components/other/Divider.jsx';
 import Slider from '../Components/components/Slider.jsx';
-
+import ServicesSection from './Services/ServicesComponent.jsx';
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-black dark:text-white">
       <FractalOrbComponent />
       <Divider />
+      <ServicesSection />
       <NoiseBackgroundBig>
         <div className="w-full h-full flex flex-col md:flex-row items-start justify-between p-4 pt-24 lg:p-24">
           <div className="w-full md:w-1/3 text-left mb-8 md:mb-0">
