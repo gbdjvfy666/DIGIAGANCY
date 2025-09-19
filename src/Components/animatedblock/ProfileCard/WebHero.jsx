@@ -7,6 +7,7 @@ import ResponsiveDemo from '@/Components/components/ResponsiveDemo';
 const PrismaticBurst = lazy(() => import('@/Components/PrismaticBurst'));
 
 const PrismaticButton = ({ onClick, children, colors, hoverColors, className = "" }) => {
+    // ... (код этого компонента не меняется)
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -37,6 +38,7 @@ const PrismaticButton = ({ onClick, children, colors, hoverColors, className = "
 };
 
 const WorkCard = ({ title, image, description, onLearnMore }) => {
+    // ... (код этого компонента не меняется)
     const defaultColors = ['#1d4ed8', '#0ea5e9', '#6366f1'];
     const hoverColors = ['#93c5fd', '#bfdbfe', '#a5b4fc'];
     
@@ -74,6 +76,7 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
     const navigate = useNavigate();
     const containerRef = useRef(null);
     const sceneRef = useRef(null);
+    // ... (остальной код до return не меняется)
     const rendererRef = useRef(null);
     const animationIdRef = useRef(null);
     
@@ -243,8 +246,12 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                         <p className="font-sans mt-8 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg">
                             {`Мы — студия digital-дизайна и разработки. Наша задача — превратить ваши бизнес-цели в эффективные и эстетически выверенные веб-решения.`}
                         </p>
+                        
+                        {/* =================================================================================== */}
+                        {/* --- НАЧАЛО ИЗМЕНЕНИЙ --- */}
+                        {/* Меняем пустую функцию на вызов navigate */}
                         <PrismaticButton
-                            onClick={() => {}} // Пустая функция для отсутствия действий
+                            onClick={() => navigate('/Services')}
                             className="mt-10 w-full inline-flex items-center"
                             colors={['#f3f4f6', '#d1d5db', '#6b7280']}
                             hoverColors={['#e5e7eb', '#d1d5db', '#9ca3af']}
@@ -252,6 +259,9 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                             Наши Услуги
                             <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
                         </PrismaticButton>
+                        {/* --- КОНЕЦ ИЗМЕНЕНИЙ --- */}
+                        {/* =================================================================================== */}
+
                     </div>
                 </div>
 

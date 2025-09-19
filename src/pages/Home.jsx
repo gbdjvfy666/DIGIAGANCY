@@ -11,7 +11,7 @@ import SpacePage from '../Components/animatedblock/Spaceswiper/SpacePage.jsx';
 import NoiseBackgroundBig from '../Components/background/NoiseBacgroundBig/NoiseBacgroundBig.jsx'; 
 import Divider from '../Components/other/Divider.jsx';
 import Slider from '../Components/components/Slider.jsx';
-import ServicesSection from './Services/ServicesComponent.jsx';
+import ServicesSection from '../Components/components/ServicesComponent.jsx';
 
 export default function Home() {
   return (

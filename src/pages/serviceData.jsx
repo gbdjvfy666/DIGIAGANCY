@@ -1,0 +1,208 @@
+// src/serviceData.js
+
+export const servicesData = {
+  // ===================================================================================
+  // --- Категория: Презентации ---
+  // ===================================================================================
+  presentations: {
+    'prezentatsii-dlya-logisticheskikh-kompaniy': {
+      title: "Презентации для логистических компаний",
+      blocks: [{ type: 'hero', data: { title: "Презентации для логистических компаний", description: "Демонстрируем сложное простым языком: показываем маршруты, оптимизацию и эффективность вашей логистики.", price: 'от 180 000 ₽', buttonText: "Заказать презентацию" }}]
+    },
+    'interaktivnye-prezentatsii': {
+      title: "Интерактивные презентации",
+      blocks: [
+        { type: 'hero', data: { title: "Интерактивные презентации", description: "Вовлекайте аудиторию с помощью кликабельных элементов, встроенных видео и анимации. Управляйте повествованием в реальном времени.", price: 'от 250 000 ₽', buttonText: "Создать интерактив" }},
+        { type: 'faq', data: { title: "Вопросы об интерактиве", items: [{q: "На каких устройствах это работает?", a: "Мы создаем презентации, которые работают в браузерах на любых устройствах."}, {q: "Можно ли встроить 3D-модель?", a: "Да, мы можем интегрировать интерактивные 3D-модели ваших продуктов."}]}}
+      ]
+    },
+    'prezentatsiya-na-angliyskom-yazyke': {
+      title: "Презентация на английском языке",
+      blocks: [{ type: 'hero', data: { title: "Презентация на английском языке", description: "Выход на международный рынок? Мы создадим презентацию с выверенным текстом от носителей языка и культурной адаптацией дизайна.", price: 'от 220 000 ₽', buttonText: "Go Global" }}]
+    },
+    'investitsionnaya-prezentatsiya': {
+      title: "Инвестиционная презентация",
+      blocks: [
+        { type: 'hero', data: { title: "Инвестиционная презентация (Pitch Deck)", description: "Убеждаем инвесторов вложиться в ваш проект. Структурируем данные, визуализируем финансы и рассказываем историю вашего успеха.", price: 'от 350 000 ₽', buttonText: "Привлечь инвестиции" }},
+        { type: 'text', data: { title: "Структура питч-дека", content: "Мы работаем по классической структуре от проблемы и решения до анализа рынка, бизнес-модели и финансовых прогнозов, адаптируя ее под ваш проект."}}
+      ]
+    },
+    'kommercheskoe-predlozhenie': {
+      title: "Коммерческое предложение",
+      blocks: [{ type: 'hero', data: { title: "Коммерческое предложение", description: "Разрабатываем продающие КП в формате PDF-презентации, от которых невозможно отказаться.", price: 'от 100 000 ₽', buttonText: "Увеличить продажи" }}]
+    },
+    // ... и так далее для всех остальных
+    'prezentatsii-dlya-torgovykh-tsentrov': { title: "Презентации для ТЦ", blocks: [{ type: 'hero', data: { title: "Презентации для торговых центров", description: "Презентации для арендаторов и партнеров, демонстрирующие трафик, преимущества и возможности вашего ТЦ.", price: 'от 180 000 ₽', buttonText: "Заказать" }}] },
+    'prezentatsii-dlya-vystupleniya': { title: "Презентации для выступления", blocks: [{ type: 'hero', data: { title: "Презентации для выступления", description: "Эффектные и минималистичные слайды, которые помогут вам блистать на сцене, а не читать с экрана.", price: 'от 150 000 ₽', buttonText: "Подготовить выступление" }}] },
+    'prezentatsii-dlya-tenderov': { title: "Презентации для тендеров", blocks: [{ type: 'hero', data: { title: "Презентации для тендеров", description: "Структурированные и убедительные презентации, строго отвечающие требованиям тендерной документации.", price: 'от 200 000 ₽', buttonText: "Выиграть тендер" }}] },
+    'oformlenie-prezentatsiy': { title: "Оформление презентаций", blocks: [{ type: 'hero', data: { title: "Оформление презентаций", description: "У вас есть готовый текст? Мы превратим его в профессионально оформленную презентацию в вашем фирменном стиле.", price: 'от 80 000 ₽', buttonText: "Привести в порядок" }}] },
+  },
+
+  // ===================================================================================
+  // --- Категория: Сайты ---
+  // ===================================================================================
+  websites: {
+    'landing-page': {
+      title: "Landing page",
+      blocks: [
+        { type: 'hero', data: { title: "Создание Landing Page", description: "Разрабатываем одностраничные сайты с высокой конверсией, идеально заточенные под одну цель: продажу.", price: 'от 500 000 ₽', buttonText: "Заказать лендинг" }},
+        { type: 'faq', data: { title: "Вопросы о лендингах", items: [{q: "Что входит в стоимость?", a: "Дизайн, верстка, базовая SEO-оптимизация и подключение аналитики."}, {q: "Помогаете с рекламой?", a: "Да, мы можем настроить контекстную и таргетированную рекламу для вашего лендинга."}]}}
+      ]
+    },
+    'internet-magazin': {
+      title: "Интернет-магазин",
+      blocks: [
+        { type: 'hero', data: { title: "Разработка Интернет-магазина", description: "Создаем E-commerce проекты с удобным каталогом, корзиной, системами оплаты и интеграцией со складом.", price: 'от 1 200 000 ₽', buttonText: "Начать онлайн-торговлю" }},
+        { type: 'text', data: { title: "Платформы", content: "Работаем с различными CMS и фреймворками, подбирая оптимальное решение под ваш бюджет и задачи: от Tilda и Shopify до кастомных решений на Laravel."}}
+      ]
+    },
+    'dizayn-sayta': {
+      title: "Дизайн сайта",
+      blocks: [
+        { type: 'hero', data: { title: "Дизайн сайта (UI/UX)", description: "Проектируем и отрисовываем дизайн для сайтов любой сложности. Создаем не просто красивые, а удобные и понятные интерфейсы.", price: 'от 400 000 ₽', buttonText: "Заказать дизайн" }},
+        { type: 'gallery', data: { title: "Примеры интерфейсов", images: [{ src: 'https://via.placeholder.com/600x400/3B82F6/FFFFFF?text=UI+Kit', alt: 'UI Kit' }, { src: 'https://via.placeholder.com/600x400/10B981/FFFFFF?text=Dashboard', alt: 'Dashboard' }]}}
+      ]
+    },
+    // ... и так далее для всех сайтов
+    'promo-sayt': { title: "Промо-сайт", blocks: [{ type: 'hero', data: { title: "Промо-сайт", description: "Яркий сайт для продвижения конкретного продукта, услуги или мероприятия.", price: "от 450 000 ₽", buttonText: "Заказать" }}]},
+    'vizitka': { title: "Визитка", blocks: [{ type: 'hero', data: { title: "Сайт-визитка", description: "Компактный сайт с основной информацией о вашей компании, услугах и контактах.", price: "от 300 000 ₽", buttonText: "Заказать" }}]},
+    'portal': { title: "Портал", blocks: [{ type: 'hero', data: { title: "Информационный портал", description: "Разработка сложных контентных проектов, новостных сайтов и городских порталов.", price: "от 2 500 000 ₽", buttonText: "Заказать" }}]},
+    'marketpleys': { title: "Маркетплейс", blocks: [{ type: 'hero', data: { title: "Маркетплейс", description: "Создание онлайн-площадок, где множество продавцов могут размещать свои товары.", price: "от 3 000 000 ₽", buttonText: "Заказать" }}]},
+    'doska-obyavleniy': { title: "Доска объявлений", blocks: [{ type: 'hero', data: { title: "Доска объявлений", description: "Разработка сайтов типа Avito или YouDo с разделами, фильтрами и личными кабинетами.", price: "от 1 800 000 ₽", buttonText: "Заказать" }}]},
+    'sayt-portfolio': { title: "Сайт-портфолио", blocks: [{ type: 'hero', data: { title: "Сайт-портфолио", description: "Стильный сайт для демонстрации ваших работ и проектов.", price: "от 350 000 ₽", buttonText: "Заказать" }}]},
+    'blog': { title: "Блог", blocks: [{ type: 'hero', data: { title: "Блог", description: "Создание и настройка блоговой платформы с удобным редактором и управлением контентом.", price: "от 400 000 ₽", buttonText: "Заказать" }}]},
+    'forum': { title: "Форум", blocks: [{ type: 'hero', data: { title: "Форум", description: "Разработка онлайн-сообществ и форумов для общения вашей аудитории.", price: "от 700 000 ₽", buttonText: "Заказать" }}]},
+    'katalog': { title: "Каталог", blocks: [{ type: 'hero', data: { title: "Сайт-каталог", description: "Сайт с подробной демонстрацией ваших товаров или услуг, но без возможности онлайн-оплаты.", price: "от 600 000 ₽", buttonText: "Заказать" }}]},
+    'sayty-uslug': { title: "Сайты услуг", blocks: [{ type: 'hero', data: { title: "Сайты услуг", description: "Разработка сайтов для сферы услуг: салонов красоты, фитнес-центров, юристов и т.д.", price: "от 550 000 ₽", buttonText: "Заказать" }}]},
+    'prodayushchie': { title: "Продающие", blocks: [{ type: 'hero', data: { title: "Продающие сайты", description: "Комплексный подход к созданию сайтов, нацеленных на максимальную конверсию.", price: "от 600 000 ₽", buttonText: "Заказать" }}]},
+    'korporativnye': { title: "Корпоративные", blocks: [{ type: 'hero', data: { title: "Корпоративные сайты", description: "Официальное представительство вашей компании в интернете.", price: "от 700 000 ₽", buttonText: "Заказать" }}]},
+    // ... и все остальные
+    'lichnye': { title: "Личные", blocks: [{ type: 'hero', data: { title: "Личные сайты", description: "Сайт для продвижения личного бренда эксперта, коуча, консультанта.", price: "от 350 000 ₽", buttonText: "Заказать" }}]},
+    'slozhnye': { title: "Сложные", blocks: [{ type: 'hero', data: { title: "Сложные веб-сервисы", description: "Разработка нестандартных проектов, калькуляторов, систем бронирования.", price: "от 2 000 000 ₽", buttonText: "Заказать" }}]},
+    'mnogostranichnye': { title: "Многостраничные", blocks: [{ type: 'hero', data: { title: "Многостраничные сайты", description: "Классические сайты с разветвленной структурой разделов и страниц.", price: "от 700 000 ₽", buttonText: "Заказать" }}]},
+    'nestandartnye': { title: "Нестандартные", blocks: [{ type: 'hero', data: { title: "Нестандартные сайты", description: "Реализация смелых и креативных идей с помощью сложных анимаций и интерактива.", price: "от 1 500 000 ₽", buttonText: "Заказать" }}]},
+    'prostye': { title: "Простые", blocks: [{ type: 'hero', data: { title: "Простые сайты", description: "Быстрые и эффективные решения для старта бизнеса или тестирования ниши.", price: "от 250 000 ₽", buttonText: "Заказать" }}]},
+    'informatsionnye': { title: "Информационные", blocks: [{ type: 'hero', data: { title: "Информационные сайты", description: "Разработка контент-проектов, онлайн-журналов и баз знаний.", price: "от 600 000 ₽", buttonText: "Заказать" }}]},
+    'adaptivnye': { title: "Адаптивные", blocks: [{ type: 'hero', data: { title: "Адаптивная верстка", description: "Гарантируем корректное отображение вашего сайта на всех устройствах.", price: "от 150 000 ₽", buttonText: "Заказать" }}]},
+    'mobilnaya-versiya': { title: "Мобильная версия", blocks: [{ type: 'hero', data: { title: "Мобильная версия сайта", description: "Создание отдельной мобильной версии или адаптация существующего сайта.", price: "от 200 000 ₽", buttonText: "Заказать" }}]},
+    'dorabotka-sayta': { title: "Доработка сайта", blocks: [{ type: 'hero', data: { title: "Доработка сайта", description: "Улучшение, исправление ошибок и добавление нового функционала на ваш сайт.", price: "почасовая оплата", buttonText: "Оценить задачу" }}]},
+    'dizayn-dlya-marketpleysov': { title: "Дизайн для маркетплейсов", blocks: [{ type: 'hero', data: { title: "Дизайн для маркетплейсов", description: "Оформление карточек товаров, инфографика и дизайн баннеров для Ozon, Wildberries и др.", price: "от 50 000 ₽", buttonText: "Заказать" }}]},
+    'modulnaya-setka': { title: "Модульная сетка", blocks: [{ type: 'hero', data: { title: "Дизайн по модульной сетке", description: "Проектирование дизайна на основе строгой модульной сетки для идеального порядка.", price: "от 200 000 ₽", buttonText: "Заказать" }}]},
+    'cdn': { title: "CDN", blocks: [{ type: 'hero', data: { title: "Подключение CDN", description: "Ускорение загрузки вашего сайта по всему миру через сеть доставки контента.", price: "от 30 000 ₽", buttonText: "Заказать" }}]},
+    
+    // --- Вложенная категория: Тематики сайтов ---
+    themes: {
+      'avto': { title: "Авто", blocks: [{ type: 'hero', data: { title: "Сайты для автобизнеса", description: "Разработка сайтов для автосалонов, сервисов, дилеров и детейлинг-центров.", price: "от 600 000 ₽", buttonText: "Заказать" }}]},
+      'logistika': { title: "Логистика", blocks: [{ type: 'hero', data: { title: "Сайты для логистики", description: "Сайты для транспортных компаний с калькуляторами доставки и отслеживанием грузов.", price: "от 650 000 ₽", buttonText: "Заказать" }}]},
+      'stroitelstvo': { title: "Строительство", blocks: [{ type: 'hero', data: { title: "Сайты для строительства", description: "Сайты для застройщиков, строительных компаний и поставщиков материалов.", price: "от 700 000 ₽", buttonText: "Заказать" }}]},
+      'agentstva-nedvizhimosti': { title: "Агентства недвижимости", blocks: [{ type: 'hero', data: { title: "Сайты для агентств недвижимости", description: "Разработка сайтов с каталогами объектов, фильтрами и интеграцией с CRM.", price: "от 800 000 ₽", buttonText: "Заказать" }}]},
+      // ... и все остальные тематики
+      'remont': { title: "Ремонт", blocks: [{ type: 'hero', data: { title: "Сайты для сферы ремонта", description: "Сайты для ремонтных бригад и компаний с портфолио и калькуляторами.", price: "от 500 000 ₽", buttonText: "Заказать" }}]},
+      'obrazovanie': { title: "Образование", blocks: [{ type: 'hero', data: { title: "Сайты для образования", description: "Сайты для школ, курсов, репетиторов и образовательных платформ.", price: "от 700 000 ₽", buttonText: "Заказать" }}]},
+      'smi': { title: "СМИ", blocks: [{ type: 'hero', data: { title: "Сайты для СМИ", description: "Разработка новостных порталов и онлайн-журналов с высокой нагрузкой.", price: "от 1 200 000 ₽", buttonText: "Заказать" }}]},
+      'meditsina': { title: "Медицина", blocks: [{ type: 'hero', data: { title: "Сайты для медицины", description: "Сайты для клиник, врачей и медицинских центров с онлайн-записью.", price: "от 800 000 ₽", buttonText: "Заказать" }}]},
+      'turizm': { title: "Туризм", blocks: [{ type: 'hero', data: { title: "Сайты для туризма", description: "Сайты для турагентств и отелей с системами бронирования.", price: "от 900 000 ₽", buttonText: "Заказать" }}]},
+      'yuristy': { title: "Юристы", blocks: [{ type: 'hero', data: { title: "Сайты для юристов", description: "Сайты для юридических компаний и частных адвокатов.", price: "от 550 000 ₽", buttonText: "Заказать" }}]},
+      'restorany-i-kafe': { title: "Рестораны и кафе", blocks: [{ type: 'hero', data: { title: "Сайты для ресторанов и кафе", description: "Сайты с меню, онлайн-бронированием и интеграцией доставки.", price: "от 600 000 ₽", buttonText: "Заказать" }}]},
+      'dostavka-edy': { title: "Доставка еды", blocks: [{ type: 'hero', data: { title: "Сайты для доставки еды", description: "Разработка сайтов и приложений для сервисов доставки.", price: "от 900 000 ₽", buttonText: "Заказать" }}]},
+      'znakomstva': { title: "Знакомства", blocks: [{ type: 'hero', data: { title: "Сайты знакомств", description: "Разработка социальных сетей и сервисов для знакомств.", price: "от 2 000 000 ₽", buttonText: "Заказать" }}]},
+      'svadba': { title: "Свадьба", blocks: [{ type: 'hero', data: { title: "Свадебные сайты", description: "Сайты для свадебных агентств, фотографов и ведущих.", price: "от 450 000 ₽", buttonText: "Заказать" }}]},
+    }
+  },
+
+  // ===================================================================================
+  // --- Категория: Продвижение ---
+  // ===================================================================================
+  promotion: {
+    'seo-prodvizhenie': {
+      title: "SEO продвижение",
+      blocks: [
+        { type: 'hero', data: { title: "SEO продвижение", description: "Выводим ваш сайт в ТОП поисковой выдачи Яндекса и Google по ключевым запросам.", price: "от 80 000 ₽/мес", buttonText: "Получить аудит" }},
+        { type: 'faq', data: { title: "Вопросы о SEO", items: [{q: "Когда будут первые результаты?", a: "Первые заметные результаты обычно видны через 2-3 месяца работы."}, {q: "Вы даете гарантии?", a: "Мы гарантируем выполнение всех работ по договору, но не можем гарантировать конкретные позиции, так как на них влияют алгоритмы поисковых систем."}]}}
+      ]
+    },
+    'uslugi-pr': { title: "Услуги PR", blocks: [{ type: 'hero', data: { title: "Услуги PR", description: "Формируем и поддерживаем положительную репутацию вашего бренда в онлайн-пространстве.", price: "от 150 000 ₽/мес", buttonText: "Заказать" }}]},
+    'gosudarstvennyy-pr': { title: "Государственный PR", blocks: [{ type: 'hero', data: { title: "Государственный PR", description: "PR-сопровождение государственных структур и проектов.", price: "по запросу", buttonText: "Обсудить" }}]},
+  },
+
+  // ===================================================================================
+  // --- Категория: Брендинг ---
+  // ===================================================================================
+  branding: {
+    'brending': { title: "Брендинг", blocks: [{ type: 'hero', data: { title: "Комплексный брендинг", description: "Создаем бренд с нуля: от исследования и позиционирования до логотипа и брендбука.", price: "от 800 000 ₽", buttonText: "Создать бренд" }}]},
+    'logotipy': {
+        title: "Логотипы",
+        blocks: [
+            { type: 'hero', data: { title: "Разработка Логотипов", description: "Создаем уникальные и запоминающиеся логотипы, которые отражают суть вашего бренда.", price: "от 300 000 ₽", buttonText: "Заказать логотип" }},
+            { type: 'gallery', data: { title: "Примеры логотипов", images: [{ src: 'https://via.placeholder.com/600x400/8B5CF6/FFFFFF?text=Лого+1', alt: 'Лого 1' }]}}
+        ]
+    },
+    // ... и так далее для всего брендинга
+    'neyming': { title: "Нейминг", blocks: [{ type: 'hero', data: { title: "Нейминг", description: "Придумываем звучные и запоминающиеся названия для компаний и продуктов.", price: "от 150 000 ₽", buttonText: "Заказать" }}]},
+    'brendbuk': { title: "Брендбук", blocks: [{ type: 'hero', data: { title: "Брендбук", description: "Разработка полного руководства по использованию фирменного стиля.", price: "от 500 000 ₽", buttonText: "Заказать" }}]},
+    'dizayn-upakovki': { title: "Дизайн упаковки", blocks: [{ type: 'hero', data: { title: "Дизайн упаковки", description: "Создаем дизайн упаковки, которая продает ваш товар.", price: "от 200 000 ₽", buttonText: "Заказать" }}]},
+    'aydentika': { title: "Айдентика", blocks: [{ type: 'hero', data: { title: "Айдентика", description: "Разработка системы визуальной идентификации бренда.", price: "от 400 000 ₽", buttonText: "Заказать" }}]},
+    'firmennyy-stil': { title: "Фирменный стиль", blocks: [{ type: 'hero', data: { title: "Фирменный стиль", description: "Создание набора визуальных элементов для вашего бренда.", price: "от 350 000 ₽", buttonText: "Заказать" }}]},
+    'gaydbuk': { title: "Гайдбук", blocks: [{ type: 'hero', data: { title: "Гайдбук", description: "Упрощенная версия брендбука, описывающая основные правила использования логотипа и стиля.", price: "от 250 000 ₽", buttonText: "Заказать" }}]},
+    'razrabotka-slogana': { title: "Разработка слогана", blocks: [{ type: 'hero', data: { title: "Разработка слогана", description: "Создаем короткие и емкие слоганы, которые передают суть бренда.", price: "от 80 000 ₽", buttonText: "Заказать" }}]},
+    'logobuk': { title: "Логобук", blocks: [{ type: 'hero', data: { title: "Логобук", description: "Руководство по использованию вашего логотипа.", price: "от 150 000 ₽", buttonText: "Заказать" }}]},
+    'rebrending': { title: "Ребрендинг", blocks: [{ type: 'hero', data: { title: "Ребрендинг", description: "Комплексное обновление вашего бренда и визуального стиля.", price: "от 900 000 ₽", buttonText: "Заказать" }}]},
+    'gaydlayn': { title: "Гайдлайн", blocks: [{ type: 'hero', data: { title: "Гайдлайн", description: "Набор правил и стандартов для дизайна и верстки.", price: "от 200 000 ₽", buttonText: "Заказать" }}]},
+    'monogramma': { title: "Монограмма", blocks: [{ type: 'hero', data: { title: "Монограмма", description: "Разработка уникального знака из инициалов.", price: "от 100 000 ₽", buttonText: "Заказать" }}]},
+    'dizayn-paketov': { title: "Дизайн пакетов", blocks: [{ type: 'hero', data: { title: "Дизайн пакетов", description: "Создание дизайна для фирменных пакетов и сумок.", price: "от 80 000 ₽", buttonText: "Заказать" }}]},
+    'razrabotka-lichnogo-brenda': { title: "Разработка личного бренда", blocks: [{ type: 'hero', data: { title: "Разработка личного бренда", description: "Создание и продвижение бренда для экспертов и публичных личностей.", price: "от 500 000 ₽", buttonText: "Заказать" }}]},
+    'sozdanie-brend-portfelya': { title: "Создание бренд-портфеля", blocks: [{ type: 'hero', data: { title: "Создание бренд-портфеля", description: "Структурирование и управление портфелем брендов компании.", price: "по запросу", buttonText: "Обсудить" }}]},
+    'sozdanie-brenda-produkta': { title: "Создание бренда продукта", blocks: [{ type: 'hero', data: { title: "Создание бренда продукта", description: "Разработка бренда для конкретного товара или линейки.", price: "от 400 000 ₽", buttonText: "Заказать" }}]},
+    'dizayn-vystavochnykh-stendov': { title: "Дизайн выставочных стендов", blocks: [{ type: 'hero', data: { title: "Дизайн выставочных стендов", description: "Проектирование дизайна для выставочных стендов.", price: "от 250 000 ₽", buttonText: "Заказать" }}]},
+    'razrabotka-dizayna-menyu': { title: "Разработка дизайна меню", blocks: [{ type: 'hero', data: { title: "Разработка дизайна меню", description: "Создание стильного и удобного меню для ресторанов и кафе.", price: "от 100 000 ₽", buttonText: "Заказать" }}]},
+    'dizayn-animatsii-video-reklamy': { title: "Дизайн анимации, видео-рекламы", blocks: [{ type: 'hero', data: { title: "Дизайн анимации, видео-рекламы", description: "Создание анимированных роликов и рекламных видео.", price: "от 100 000 ₽", buttonText: "Заказать" }}]},
+    'infografika': { title: "Инфографика", blocks: [{ type: 'hero', data: { title: "Инфографика", description: "Визуализация сложных данных в понятную и красивую графику.", price: "от 70 000 ₽", buttonText: "Заказать" }}]},
+    'kopirayting': { title: "Копирайтинг", blocks: [{ type: 'hero', data: { title: "Копирайтинг", description: "Написание продающих и информационных текстов для сайтов и рекламы.", price: "от 50 000 ₽", buttonText: "Заказать" }}]},
+  },
+
+  // ===================================================================================
+  // --- Категория: Полиграфия ---
+  // ===================================================================================
+  polygraphy: {
+    'poligraficheskiy-dizayn': { title: "Полиграфический дизайн", blocks: [{ type: 'hero', data: { title: "Полиграфический дизайн", description: "Дизайн любых печатных материалов: от визиток до каталогов.", price: "от 40 000 ₽", buttonText: "Заказать" }}]},
+    'verstka-poligrafii': { title: "Верстка полиграфии", blocks: [{ type: 'hero', data: { title: "Верстка полиграфии", description: "Профессиональная верстка многостраничных изданий.", price: "от 80 000 ₽", buttonText: "Заказать" }}]},
+    'godovye-otchety': { title: "Годовые отчеты", blocks: [{ type: 'hero', data: { title: "Годовые отчеты", description: "Дизайн и верстка годовых отчетов для акционеров и партнеров.", price: "от 200 000 ₽", buttonText: "Заказать" }}]},
+    // ... и так далее
+    'broshyury': { title: "Брошюры", blocks: [{ type: 'hero', data: { title: "Брошюры", description: "Дизайн и верстка рекламных и информационных брошюр.", price: "от 60 000 ₽", buttonText: "Заказать" }}]},
+    'buklety': { title: "Буклеты", blocks: [{ type: 'hero', data: { title: "Буклеты", description: "Создание дизайна для буклетов различных форматов.", price: "от 40 000 ₽", buttonText: "Заказать" }}]},
+    'flaery': { title: "Флаеры", blocks: [{ type: 'hero', data: { title: "Флаеры", description: "Дизайн рекламных флаеров и листовок.", price: "от 20 000 ₽", buttonText: "Заказать" }}]},
+    'plakaty-i-postery': { title: "Плакаты и постеры", blocks: [{ type: 'hero', data: { title: "Плакаты и постеры", description: "Разработка дизайна для плакатов и афиш.", price: "от 30 000 ₽", buttonText: "Заказать" }}]},
+    'bloknoty': { title: "Блокноты", blocks: [{ type: 'hero', data: { title: "Блокноты", description: "Дизайн фирменных блокнотов.", price: "от 25 000 ₽", buttonText: "Заказать" }}]},
+    'vizitki': { title: "Визитки", blocks: [{ type: 'hero', data: { title: "Визитки", description: "Создание дизайна визиток: от классики до эксклюзива.", price: "от 15 000 ₽", buttonText: "Заказать" }}]},
+    'bannery': { title: "Баннеры", blocks: [{ type: 'hero', data: { title: "Баннеры", description: "Дизайн баннеров для наружной рекламы и интернета.", price: "от 20 000 ₽", buttonText: "Заказать" }}]},
+    'katalogi': { title: "Каталоги", blocks: [{ type: 'hero', data: { title: "Каталоги", description: "Дизайн и верстка каталогов продукции.", price: "от 150 000 ₽", buttonText: "Заказать" }}]},
+    'plastikovye-karty': { title: "Пластиковые карты", blocks: [{ type: 'hero', data: { title: "Пластиковые карты", description: "Дизайн дисконтных, клубных и подарочных карт.", price: "от 20 000 ₽", buttonText: "Заказать" }}]},
+    'papki': { title: "Папки", blocks: [{ type: 'hero', data: { title: "Папки", description: "Дизайн фирменных папок для документов.", price: "от 25 000 ₽", buttonText: "Заказать" }}]},
+    'listovki': { title: "Листовки", blocks: [{ type: 'hero', data: { title: "Листовки", description: "Дизайн рекламных листовок.", price: "от 20 000 ₽", buttonText: "Заказать" }}]},
+    'roll-up': { title: "Roll Up", blocks: [{ type: 'hero', data: { title: "Roll Up", description: "Дизайн мобильных выставочных стендов Roll Up.", price: "от 30 000 ₽", buttonText: "Заказать" }}]},
+    'liflety': { title: "Лифлеты", blocks: [{ type: 'hero', data: { title: "Лифлеты", description: "Дизайн евробуклетов (лифлетов).", price: "от 25 000 ₽", buttonText: "Заказать" }}]},
+    'press-voll': { title: "Пресс-волл", blocks: [{ type: 'hero', data: { title: "Пресс-волл", description: "Дизайн пресс-воллов и фотозон для мероприятий.", price: "от 40 000 ₽", buttonText: "Заказать" }}]},
+    'illyustratsii': { title: "Иллюстрации", blocks: [{ type: 'hero', data: { title: "Иллюстрации", description: "Создание уникальных иллюстраций в различных стилях.", price: "от 50 000 ₽", buttonText: "Заказать" }}]},
+    'konverty': { title: "Конверты", blocks: [{ type: 'hero', data: { title: "Конверты", description: "Дизайн фирменных конвертов.", price: "от 20 000 ₽", buttonText: "Заказать" }}]},
+    'blanki': { title: "Бланки", blocks: [{ type: 'hero', data: { title: "Бланки", description: "Дизайн фирменных бланков.", price: "от 20 000 ₽", buttonText: "Заказать" }}]},
+    'otkrytki': { title: "Открытки", blocks: [{ type: 'hero', data: { title: "Открытки", description: "Дизайн поздравительных и корпоративных открыток.", price: "от 25 000 ₽", buttonText: "Заказать" }}]},
+    'ikonki': { title: "Иконки", blocks: [{ type: 'hero', data: { title: "Иконки", description: "Разработка наборов уникальных иконок для сайтов и приложений.", price: "от 60 000 ₽", buttonText: "Заказать" }}]},
+    'firmennye-personazhi': { title: "Фирменные персонажи", blocks: [{ type: 'hero', data: { title: "Фирменные персонажи", description: "Создание уникального персонажа-маскота для вашего бренда.", price: "от 150 000 ₽", buttonText: "Заказать" }}]},
+    'kalendari': { title: "Календари", blocks: [{ type: 'hero', data: { title: "Календари", description: "Дизайн настенных, настольных и карманных календарей.", price: "от 80 000 ₽", buttonText: "Заказать" }}]},
+    'knigi': { title: "Книги", blocks: [{ type: 'hero', data: { title: "Книги", description: "Дизайн обложки и верстка книг.", price: "от 120 000 ₽", buttonText: "Заказать" }}]},
+  },
+  
+  // ===================================================================================
+  // --- Категория: Интеграции ---
+  // ===================================================================================
+  integrations: {
+    'nastroyka-amocrm': {
+      title: "Настройка amoCRM",
+      blocks: [
+        { type: 'hero', data: { title: "Настройка и внедрение amoCRM", description: "Автоматизируем ваш отдел продаж, настраиваем воронки и интегрируем amoCRM с вашими сервисами.", price: "от 120 000 ₽", buttonText: "Внедрить amoCRM" }},
+        { type: 'faq', data: { title: "Вопросы о CRM", items: [{q: "Вы обучаете сотрудников?", a: "Да, обучение вашей команды входит в стоимость внедрения."}]}}
+      ]
+    },
+    'avtomatizatsiya-biznesa': { title: "Автоматизация бизнеса", blocks: [{ type: 'hero', data: { title: "Автоматизация бизнеса", description: "Анализируем ваши бизнес-процессы и внедряем IT-решения для их автоматизации.", price: "от 200 000 ₽", buttonText: "Обсудить автоматизацию" }}]},
+  },
+};
