@@ -11,34 +11,56 @@ import About from './pages/About';
 import CustomCursor from './Components/other/CustomCursor';
 import SmoothScrollContainer from './Components/other/SmoothScrollContainer';
 
+// Импорт новых компонентов для страниц
+import CorporateMain from './pages/WebPages/CorporateMain'; // Убедитесь, что пути верные
+import CryptoProjectMain from './pages/WebPages/CryptoProjectMain';
+import DesignerSiteMain from './pages/WebPages/DesignerSiteMain';
+import LandingMain from './pages/WebPages/LandingMain';
+import MultipageSiteMain from './pages/WebPages/MultipageSiteMain';
+import NewsBlogMain from './pages/WebPages/NewsBlogMain';
+import OnlineShopMain from './pages/WebPages/OnlineShopMain';
+import RestaurantSiteMain from './pages/WebPages/RestaurantSiteMain';
+
 function AppContent() {
-  const location = useLocation();
+  const location = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
-  return (
-    <SmoothScrollContainer>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/target" element={<Target />} />
-        <Route path="/Design" element={<Design />} />
-        <Route path="/Test" element={<Test />} />
-        <Route path="/Reviews" element={<Reviews />} />
-        <Route path="/web-development" element={<WebDevelopment />} />
-        <Route path="/works" element={<Works />} />
-        <Route path="/About" element={<About />} />
-      </Routes>
-    </SmoothScrollContainer>
-  );
+  return (
+    <SmoothScrollContainer>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/target" element={<Target />} />
+        <Route path="/Design" element={<Design />} />
+        <Route path="/Test" element={<Test />} />
+        <Route path="/Reviews" element={<Reviews />} />
+        <Route path="/web-development" element={<WebDevelopment />} />
+        <Route path="/works" element={<Works />} />
+        <Route path="/About" element={<About />} />
+
+        {/* Добавление вложенных маршрутов для каждой страницы */}
+        {/* Обратите внимание: путь начинается с /web-development/ */}
+        <Route path="/web-development/corporate-site" element={<CorporateMain />} />
+        <Route path="/web-development/crypto-project" element={<CryptoProjectMain />} />
+        <Route path="/web-development/designer-site" element={<DesignerSiteMain />} />
+        <Route path="/web-development/landing" element={<LandingMain />} />
+        <Route path="/web-development/multipage-site" element={<MultipageSiteMain />} />
+        <Route path="/web-development/news-blog" element={<NewsBlogMain />} />
+        <Route path="/web-development/online-shop" element={<OnlineShopMain />} />
+        <Route path="/web-development/restaurant-site" element={<RestaurantSiteMain />} />
+
+      </Routes>
+    </SmoothScrollContainer>
+  );
 }
 
 export default function App() {
-  return (
-    <Router>
-      <CustomCursor />
-      <AppContent />
-    </Router>
-  );
+  return (
+    <Router>
+      <CustomCursor />
+      <AppContent />
+    </Router>
+  );
 }

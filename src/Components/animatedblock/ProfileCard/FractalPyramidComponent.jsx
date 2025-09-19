@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Renderer, Triangle, Program, Mesh } from 'ogl';
 
-// Этот компонент является адаптированной версией вашего оригинального 'Prism.jsx'. FractalPyramidComponent
-// Все настройки "зашиты" внутри для простоты использования.
+
 const FractalPyramidComponent = React.memo(function FractalOrbComponent({ width = '100%', height = '100vh' }) {
   const containerRef = useRef(null);
 
@@ -10,17 +9,16 @@ const FractalPyramidComponent = React.memo(function FractalOrbComponent({ width 
     const container = containerRef.current;
     if (!container) return;
 
-    // --- Настройки, взятые из оригинального компонента Prism ---
     const H = 3.5;
     const BW = 5.5;
-    const animationType = '3drotate'; // Тип анимации не влияет на логику, т.к. мы ее упростили
-    const GLOW = 1.0;                 // Правильное значение свечения
-    const NOISE = 0.5;                // Правильное значение шума
+    const animationType = '3drotate';
+    const GLOW = 1.0;                
+    const NOISE = 0.5;                
     const transparent = true;
     const SCALE = 2.6;
     const HUE = 0;
-    const CFREQ = 1.0;                // Правильная частота цвета
-    const BLOOM = 1.0;                // Стандартное значение
+    const CFREQ = 1.0;          
+    const BLOOM = 1.0;               
     const TS = 0.5;
 
     const BASE_HALF = BW * 0.5;
@@ -46,15 +44,15 @@ const FractalPyramidComponent = React.memo(function FractalOrbComponent({ width 
     });
     container.appendChild(gl.canvas);
 
-    const vertex = /* glsl */ `
+    const vertex = `
       attribute vec2 position;
       void main() {
         gl_Position = vec4(position, 0.0, 1.0);
       }
     `;
 
-    // Шейдер взят из вашего оригинального компонента Prism без изменений
-    const fragment = /* glsl */ `
+
+    const fragment = `
       precision highp float;
       uniform vec2  iResolution;
       uniform float iTime;
@@ -139,9 +137,9 @@ const FractalPyramidComponent = React.memo(function FractalOrbComponent({ width 
       
       if (animationType === '3drotate') {
         const tScaled = time * TS;
-        const yaw = tScaled * wY; // Вращение вокруг своей оси Y (оставляем)
-        const pitch = 0.0;        // Убираем вращение вверх/вниз
-        const roll = 0.0;         // Убираем боковое вращение
+        const yaw = tScaled * wY; 
+        const pitch = 0.0;        
+        const roll = 0.0;         
         program.uniforms.uRot.value = setMat3FromEuler(yaw, pitch, roll, rotBuf);
       }
       
@@ -160,7 +158,7 @@ const FractalPyramidComponent = React.memo(function FractalOrbComponent({ width 
       observer.disconnect(); ro.disconnect();
       if (gl.canvas.parentElement === container) container.removeChild(gl.canvas);
     };
-  }, []); // Пустой массив зависимостей, чтобы useEffect не перезапускался при изменении props
+  }, []); 
 
   return (
     <div ref={containerRef} style={{ width, height, position: 'relative', overflow: 'hidden' }} />

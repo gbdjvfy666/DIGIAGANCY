@@ -1,19 +1,21 @@
+/* === Общие настройки и переменные === */
+/* Импорт шрифтов с Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Boldonse&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&display=swap");
 
-/* Переменные для легкой настройки */
+/* Переменные для легкой настройки цветовой схемы и шрифтов */
 :root {
   --primary-font: "Boldonse", sans-serif;
   --secondary-font: "Bodoni Moda", serif;
-  --primary-color: #e0e0e0;
-  --secondary-color: rgba(255, 244, 244, 0.5);
-  --accent-red: #e53e3e;
+  --primary-color: #e0e0e0; /* Основной цвет текста */
+  --secondary-color: rgba(255, 244, 244, 0.5); /* Вторичный цвет текста/элементов */
+  --accent-red: #e53e3e; /* Акцентный красный цвет */
 }
 
-/* Анимация шума на фоне */
-/* Анимация шума на фоне, ограниченная контейнером */
+/* === Анимации === */
+/* Создает псевдоэлемент, который накладывает эффект шума на всю страницу */
 .fractal-orb-container::before {
   content: "";
-  position: absolute; /* Changed from 'fixed' to 'absolute' */
+  position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
@@ -23,10 +25,11 @@
   animation: noise-animation 0.3s steps(5) infinite;
   opacity: 1;
   will-change: transform;
-  z-index: 10; /* Lowered z-index to be behind content but above the canvas */
+  z-index: 10;
   pointer-events: none;
 }
 
+/* Анимация для эффекта шума */
 @keyframes noise-animation {
   0% { transform: translate(0, 0); }
   10% { transform: translate(-2%, -3%); }
@@ -41,12 +44,13 @@
   100% { transform: translate(1%, 0); }
 }
 
-/* Контейнер компонента */
+/* === Основные контейнеры и базовые стили (Mobile-first, для экранов <= 424px) === */
+/* Главный контейнер компонента, который управляет курсором и фоном */
 .fractal-orb-container {
   position: relative;
-  cursor: none;
+  cursor: none; /* Скрывает стандартный курсор */
   width: 100%;
-  min-height: 100vh; 
+  min-height: 100vh;
   overflow: hidden;
   border-radius: 8px;
   isolation: isolate;
@@ -54,7 +58,7 @@
   background-color: #111;
 }
 
-/* Основное содержимое (Mobile-first) */
+/* Контейнер для всего текстового контента */
 .content {
   position: relative;
   width: 100%;
@@ -68,17 +72,18 @@
   padding: 1.5rem;
   text-align: center;
   color: var(--primary-color);
-  pointer-events: none;
+  pointer-events: none; /* Игнорирует события мыши на пустом пространстве, чтобы они передавались на нижележащий canvas */
 }
 
+/* Разрешает события мыши для всех дочерних элементов .content */
 .content > * {
   pointer-events: auto;
 }
 
-/* Canvas для Three.js */
+/* Контейнер для Three.js Canvas */
 .three-container canvas {
   display: block;
-  position: absolute; 
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -89,14 +94,14 @@
   pointer-events: none;
 }
 
+/* Контейнер для цитаты */
 .quote-container {
   max-width: 90%;
 }
 
-/* Стили для мобильных и планшетов */
+/* Стили для мобильных и планшетов - основной текст цитаты ("NSBH") */
 .quote {
   font-family: var(--primary-font);
-  /* 🟢 Увеличен размер для планшетов и мобильных */
   font-size: clamp(6rem, 25vw, 12rem);
   line-height: 1;
   font-weight: 400;
@@ -106,14 +111,15 @@
   text-transform: uppercase;
 }
 
+/* Стили для подписи автора цитаты */
 .author {
   font-family: var(--secondary-font);
-  /* 🟢 Увеличен размер для планшетов и мобильных */
   font-size: clamp(1.5rem, 6vw, 2rem);
   font-style: italic;
   opacity: 0.7;
 }
 
+/* Контейнер для карточки профиля (иконка + текст) */
 .profile-card {
   display: flex;
   align-items: center;
@@ -128,6 +134,7 @@
   pointer-events: none;
 }
 
+/* Разрешает события мыши на ссылках внутри карточки профиля */
 .profile-card a {
   pointer-events: auto;
 }
@@ -157,6 +164,7 @@
   text-decoration: underline;
 }
 
+/* Контейнеры для заголовка и описания агентства */
 .main-heading,
 .agency-description {
   position: relative;
@@ -170,6 +178,7 @@
   z-index: 20;
 }
 
+/* Стили для основного заголовка */
 .main-heading h1 {
   font-size: clamp(2.5rem, 12vw, 5rem);
   font-weight: 800;
@@ -188,6 +197,7 @@
   left: auto;
 }
 
+/* Стили для описания агентства */
 .agency-description {
   color: var(--primary-color);
   font-family: sans-serif;
@@ -195,8 +205,54 @@
   line-height: 1.6;
 }
 
-/* Медиа-запрос для ноутбуков и десктопов (>= 1024px) */
-@media (min-width: 1024px) {
+/* Контейнер для кнопки, позиционированный абсолютно внизу */
+.brief-button-absolute-container {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  width: 80%;
+  max-width: 300px;
+  pointer-events: auto;
+}
+
+/* Класс для элементов, которые должны реагировать на кастомный курсор */
+.hoverable {
+  pointer-events: auto;
+  cursor: none;
+}
+
+
+/* === Медиа-запросы для адаптивного дизайна === */
+
+/* Стили для экранов от 425px до 767px (Смартфоны в горизонтальной ориентации) */
+@media (min-width: 425px) and (max-width: 768px) {
+  /* Здесь вы можете добавить или переопределить стили для этого диапазона */
+    .main-heading h1 {
+    font-size: clamp(3rem, 6vw, 8rem);
+    line-height: 0.55;
+  }
+    .brief-button-absolute-container {
+    bottom: 80px;
+    max-width: 400px;
+    width: 50%;
+  }
+    .fractal-orb-container .author {
+    font-size: 2.2vw;
+    color: var(--accent-red);
+    opacity: 1;
+  }
+    .fractal-orb-container .quote {
+    font-size: 9vw;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Стили для экранов от 768px до 1023px (Планшеты) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Расположение контента для планшетов */
   .content {
     display: block;
     position: absolute;
@@ -205,6 +261,7 @@
     height: 100%;
   }
 
+  /* Позиционирование основного заголовка */
   .main-heading {
     position: absolute;
     top: 50%;
@@ -212,44 +269,46 @@
     transform: translateY(-50%);
     width: auto;
     text-align: left;
-    padding-left: 2rem;
+    padding-left: 1rem;
   }
-    /* 🟢 Обновляем псевдоэлемент для создания красной линии */
+  
+  /* Красная вертикальная линия рядом с заголовком */
   .main-heading::before {
     content: '';
     position: absolute;
-    left: -20px; /* Сдвинуто левее */
+    left: -20px;
     top: 50%;
     transform: translateY(-50%);
-    width: 5px; /* Увеличена толщина */
-    height: 470px; /* Вы можете настроить длину */
+    width: 5px;
+    height: 260px;
     background-color: var(--accent-red);
   }
 
-
+  /* Размер шрифта заголовка */
   .main-heading h1 {
     font-size: clamp(4rem, 6vw, 8rem);
     line-height: 0.95;
   }
 
+  /* Позиционирование части текста в заголовке */
   .main-heading .text-gray-500 {
     position: relative;
     left: 0.4vw;
   }
 
+  /* Позиционирование описания агентства */
   .agency-description {
     position: absolute;
     top: 50%;
-    /* 🟢 Сдвинут блок правее */
-    right: 5%; 
+    right: 5%;
     transform: translateY(-50%);
     width: 30%;
     max-width: 450px;
     text-align: left;
-    /* 🟢 Уменьшен размер шрифта на больших экранах */
-    font-size: 1rem;
+    font-size: 15px;
   }
 
+  /* Позиционирование и стили для контейнера цитаты */
   .quote-container {
     position: absolute;
     top: 50%;
@@ -259,25 +318,221 @@
     max-width: none;
   }
 
+  /* Размер шрифта цитаты */
   .fractal-orb-container .quote {
-    font-size: 8vw; 
+    font-size: 8vw;
     line-height: 1.1;
-    margin-bottom: 2rem; 
+    margin-bottom: 2rem;
   }
 
+  /* Стили для подписи автора цитаты */
   .fractal-orb-container .author {
     font-size: 1.2vw;
     color: var(--accent-red);
     opacity: 1;
   }
 
+  /* Позиционирование карточки профиля */
   .profile-card {
     left: 1.5rem;
     transform: none;
   }
+  
+  /* Стили для кнопки на планшетах */
+  .brief-button-absolute-container {
+    bottom: 80px;
+    max-width: 400px;
+    width: 50%;
+  }
 }
 
-.hoverable {
-  pointer-events: auto;
-  cursor: none;
+/* Стили для экранов от 1024px до 1439px (Ноутбуки) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .content {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  /* Позиционирование основного заголовка */
+  .main-heading {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    width: auto;
+    text-align: left;
+    padding-left: 2rem;
+  }
+  
+  /* Красная вертикальная линия рядом с заголовком */
+  .main-heading::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 470px;
+    background-color: var(--accent-red);
+  }
+
+  /* Размер шрифта заголовка */
+  .main-heading h1 {
+    font-size: clamp(4rem, 6vw, 8rem);
+    line-height: 0.95;
+  }
+
+  /* Позиционирование части текста в заголовке */
+  .main-heading .text-gray-500 {
+    position: relative;
+    left: 0.4vw;
+  }
+
+  /* Позиционирование описания агентства */
+  .agency-description {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 30%;
+    max-width: 450px;
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  /* Позиционирование и стили для контейнера цитаты */
+  .quote-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Размер шрифта цитаты */
+  .fractal-orb-container .quote {
+    font-size: 8vw;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  /* Стили для подписи автора цитаты */
+  .fractal-orb-container .author {
+    font-size: 1.2vw;
+    color: var(--accent-red);
+    opacity: 1;
+  }
+
+  /* Позиционирование карточки профиля */
+  .profile-card {
+    left: 1.5rem;
+    transform: none;
+  }
+  
+  /* Стили для кнопки на планшетах */
+  .brief-button-absolute-container {
+    bottom: 100px;
+    max-width: 600px;
+    width: 80%;
+  }
+}
+
+/* Стили для экранов от 1440px и больше (Широкие десктопы) */
+@media (min-width: 1441px) {
+  /* Расположение контента для планшетов */
+  .content {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  /* Позиционирование основного заголовка */
+  .main-heading {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    width: auto;
+    text-align: left;
+    padding-left: 2rem;
+  }
+  
+  /* Красная вертикальная линия рядом с заголовком */
+  .main-heading::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 470px;
+    background-color: var(--accent-red);
+  }
+
+  /* Размер шрифта заголовка */
+  .main-heading h1 {
+    font-size: clamp(4rem, 6vw, 8rem);
+    line-height: 0.95;
+  }
+
+  /* Позиционирование части текста в заголовке */
+  .main-heading .text-gray-500 {
+    position: relative;
+    left: 0.4vw;
+  }
+
+  /* Позиционирование описания агентства */
+  .agency-description {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 30%;
+    max-width: 450px;
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  /* Позиционирование и стили для контейнера цитаты */
+  .quote-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Размер шрифта цитаты */
+  .fractal-orb-container .quote {
+    font-size: 8vw;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  /* Стили для подписи автора цитаты */
+  .fractal-orb-container .author {
+    font-size: 1.2vw;
+    color: var(--accent-red);
+    opacity: 1;
+  }
+
+  /* Позиционирование карточки профиля */
+  .profile-card {
+    left: 1.5rem;
+    transform: none;
+  }
+  
+  /* Стили для кнопки на планшетах */
+  .brief-button-absolute-container {
+    bottom: 100px;
+    max-width: 1500px;
+    width: 80%;
+  }
 }

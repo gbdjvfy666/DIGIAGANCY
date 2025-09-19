@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import shopImage from '../../assets/chrome51.png';
-import BlurText from '../animatedtext/BlurText';
-import ShinyText from '../animatedtext/ShinyText';
-import GlassIcons from '../animatedblock/GlassIcons';
-import TiltedCard from '../animatedblock/TiltedCard';
+import multipageImage from '../../assets/chrome51.png';
+import BlurText from '@/Components/animatedtext/BlurText';
+import ShinyText from '@/Components/animatedtext/ShinyText';
+import TiltedCard from '@/Components/animatedblock/TiltedCard';
 
-export default function OnlineShopMain() {
+export default function MultipageSiteMain() {
   const SectionAnimation = ({ children }) => {
     const controls = useAnimation();
     const [ref, inView] = useInView({ threshold: 0.1 });
@@ -47,12 +46,12 @@ export default function OnlineShopMain() {
       <section className="w-full mx-auto flex flex-col md:flex-row items-center gap-10 max-w-7xl">
         <div className="md:w-1/2">
           <h1 className="text-5xl sm:text-6xl leading-tight tracking-tight">
-            <ShinyText text="ИНТЕРНЕТ" disabled={false} speed={4} />
-            <span className="text-white font-bold">МАГАЗИН </span><br />
-            <ShinyText text="ПОД КЛЮЧ" disabled={false} speed={4} />
+            <ShinyText text="КОРПОРАТИВНЫЙ" disabled={false} speed={4} />
+            <span className="text-white font-bold">МНОГОСТРАНИЧНЫЙ</span> <br />
+            <ShinyText text="САЙТ ПОД КЛЮЧ" disabled={false} speed={4} />
           </h1>
           <p className="mt-6 text-lg text-gray-300 max-w-xl">
-            Полнофункциональное eCommerce решение с каталогом, корзиной, оплатой и админкой. Максимальная конверсия и удобство.
+            Полноценное цифровое представительство вашего бизнеса с продуманной структурой, аналитикой и системой управления контентом.
           </p>
           <div className="mt-8 flex gap-4">
             <motion.button 
@@ -60,7 +59,7 @@ export default function OnlineShopMain() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Заказать магазин
+              Обсудить проект
             </motion.button>
             <button className="px-8 py-3 border border-white/30 text-white rounded-full hover:bg-white/10 transition">
               Примеры работ
@@ -69,8 +68,8 @@ export default function OnlineShopMain() {
         </div>
         <div className="md:w-1/2">
           <TiltedCard
-            imageSrc={shopImage}
-            altText="Интернет-магазин"
+            imageSrc={multipageImage}
+            altText="Корпоративный многостраничный сайт"
             containerHeight="500px"
             containerWidth="600px"
             rotateAmplitude={8}
@@ -81,38 +80,38 @@ export default function OnlineShopMain() {
 
       {/* Features */}
       <div className="relative w-full">
-        <SectionTitle text="ФУНКЦИОНАЛ" />
+        <SectionTitle text="ВОЗМОЖНОСТИ" />
         <section className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
           {[
             {
-              title: "Каталог товаров",
-              desc: "Удобная система категорий, фильтров и поиска",
-              icon: "📦"
+              title: "5+ страниц",
+              desc: "Главная, О компании, Услуги, Контакты, Блог и другие",
+              icon: "📑"
             },
             {
-              title: "Корзина и оплата",
-              desc: "Разные способы оплаты и доставки с сохранением состояния",
-              icon: "🛒"
-            },
-            {
-              title: "Админ-панель",
-              desc: "Полный контроль над товарами, заказами и клиентами",
-              icon: "⚙️"
-            },
-            {
-              title: "Аналитика",
-              desc: "Интеграция с Яндекс.Метрикой и Google Analytics",
-              icon: "📊"
+              title: "Уникальный дизайн",
+              desc: "Индивидуальный стиль для каждой страницы",
+              icon: "🎨"
             },
             {
               title: "SEO-оптимизация",
-              desc: "Готовая база для продвижения в поисковых системах",
+              desc: "Готовая структура для продвижения",
               icon: "🔍"
             },
             {
-              title: "Мобильная версия",
-              desc: "Идеальное отображение на всех устройствах",
-              icon: "📱"
+              title: "CRM-интеграция",
+              desc: "Подключение к вашей системе управления",
+              icon: "📊"
+            },
+            {
+              title: "Аналитика",
+              desc: "Яндекс.Метрика и Google Analytics",
+              icon: "📈"
+            },
+            {
+              title: "Мультиязычность",
+              desc: "Поддержка нескольких языков",
+              icon: "🌐"
             }
           ].map((item, i) => (
             <motion.div 
@@ -129,38 +128,46 @@ export default function OnlineShopMain() {
         </section>
       </div>
 
-      {/* Product Showcase */}
+      {/* Pages Showcase */}
       <div className="relative w-full">
-        <SectionTitle text="ТОВАРЫ" />
+        <SectionTitle text="СТРАНИЦЫ" />
         <section className="max-w-7xl mx-auto relative z-10">
-          <h2 className="text-3xl font-bold mb-6">Как мы презентуем товары</h2>
+          <h2 className="text-3xl font-bold mb-6">Типовые разделы сайта</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-white/80">Карточки товаров</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white/80">Основные страницы</h3>
               <p className="text-gray-300 mb-6">
-                Каждый товар получает детальную карточку с фото, описанием, характеристиками и отзывами.
+                Каждая страница разрабатывается с учетом ее цели и места в структуре сайта.
               </p>
               <ul className="space-y-3 text-gray-400">
                 <li className="flex items-start">
                   <span className="text-white mr-2">•</span>
-                  <span>Вариации товаров (цвет, размер)</span>
+                  <span>Главная - визитка компании</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-white mr-2">•</span>
-                  <span>Галерея изображений (до 10 фото)</span>
+                  <span>О компании - история и преимущества</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-white mr-2">•</span>
-                  <span>Рекомендации и сопутствующие товары</span>
+                  <span>Услуги/продукты - полное описание</span>
                 </li>
               </ul>
             </div>
             <div className="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-sm h-full">
-              <div className="grid grid-cols-2 gap-4">
-                {[1, 2, 3, 4].map((item) => (
-                  <div key={item} className="bg-white/10 rounded-lg p-4 h-40 flex items-center justify-center">
-                    <span className="text-white/50">Товар {item}</span>
+              <div className="space-y-4">
+                {[
+                  { title: "Главная", desc: "Первое впечатление о компании" },
+                  { title: "О нас", desc: "Наша миссия и ценности" },
+                  { title: "Услуги", desc: "Полный спектр предлагаемых услуг" }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-4 p-4 bg-white/5 rounded-lg border border-white/10">
+                    <div className="w-24 h-24 bg-white/10 rounded flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-medium">{item.title}</h4>
+                      <p className="text-sm text-gray-400 mt-1">{item.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -170,32 +177,30 @@ export default function OnlineShopMain() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="order-2 md:order-1">
               <div className="bg-gradient-to-r from-white/5 to-white/20 rounded-xl p-8 h-full border border-white/10 backdrop-blur-sm">
-                <h3 className="text-2xl font-bold mb-4">Акции и скидки</h3>
+                <h3 className="text-2xl font-bold mb-4">Дополнительные разделы</h3>
                 <p className="text-gray-300 mb-6">
-                  Специальные блоки для промо-товаров с таймерами и выделенным оформлением.
+                  Специализированные страницы для решения конкретных бизнес-задач.
                 </p>
                 <div className="bg-black/30 p-4 rounded-lg border border-white/10">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-bold">Скидка 30%</span>
-                    <span className="text-sm text-gray-400">Осталось: 12:34:56</span>
+                  <div className="h-40 bg-white/10 rounded flex items-center justify-center">
+                    <span className="text-white/50">Блог/Новости компании</span>
                   </div>
-                  <div className="h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
                 </div>
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <h3 className="text-2xl font-bold mb-4 text-white/80">Популярные товары</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white/80">Функциональные элементы</h3>
               <p className="text-gray-300 mb-6">
-                Умные блоки с автоматическим подбором товаров по популярности, новинкам или акциям.
+                Интерактивные компоненты для вовлечения посетителей.
               </p>
               <div className="space-y-4">
-                {[1, 2, 3].map((item) => (
-                  <div key={item} className="flex items-center gap-4 p-3 bg-white/5 rounded-lg border border-white/10">
-                    <div className="w-16 h-16 bg-white/10 rounded"></div>
-                    <div>
-                      <h4 className="font-medium">Топовый товар {item}</h4>
-                      <p className="text-sm text-gray-400">1 299₽ <span className="line-through text-gray-500 ml-2">1 999₽</span></p>
-                    </div>
+                {[
+                  { title: "Формы обратной связи", desc: "Сбор заявок и контактов" },
+                  { title: "Онлайн-калькулятор", desc: "Расчет стоимости услуг" }
+                ].map((item, i) => (
+                  <div key={i} className="p-4 bg-white/5 rounded-lg border border-white/10">
+                    <h4 className="font-medium">{item.title}</h4>
+                    <p className="text-sm text-gray-400 mt-1">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -212,23 +217,23 @@ export default function OnlineShopMain() {
             {[
               {
                 step: "1. Анализ",
-                desc: "Изучаем ваш ассортимент и целевую аудиторию"
+                desc: "Изучаем бизнес, конкурентов и целевую аудиторию"
               },
               {
-                step: "2. Дизайн",
-                desc: "Создаём интерфейс магазина и карточек товаров"
+                step: "2. Прототип",
+                desc: "Разрабатываем структуру и пользовательские сценарии"
               },
               {
-                step: "3. Разработка",
-                desc: "Реализуем весь функционал магазина"
+                step: "3. Дизайн",
+                desc: "Создаем визуальную концепцию для всех страниц"
               },
               {
-                step: "4. Наполнение",
-                desc: "Добавляем товары и настраиваем процессы"
+                step: "4. Разработка",
+                desc: "Программируем функционал и интеграции"
               },
               {
                 step: "5. Запуск",
-                desc: "Публикуем и тестируем перед открытием"
+                desc: "Тестируем и публикуем проект"
               }
             ].map((item, i) => (
               <motion.div 
@@ -250,9 +255,9 @@ export default function OnlineShopMain() {
         <SectionTitle text="ЗАКАЗАТЬ" />
         <section className="max-w-4xl mx-auto relative z-10">
           <div className="bg-gradient-to-r from-white/5 to-white/20 rounded-2xl p-10 border border-white/10 backdrop-blur-lg text-center">
-            <h2 className="text-3xl font-bold mb-4">Готовы запустить свой магазин?</h2>
+            <h2 className="text-3xl font-bold mb-4">Готовы создать корпоративный сайт?</h2>
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Оставьте заявку и получите бесплатную консультацию по созданию интернет-магазина
+              Оставьте заявку и получите бесплатную консультацию по разработке многостраничного сайта
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button 
@@ -278,20 +283,20 @@ export default function OnlineShopMain() {
             {[
               {
                 title: "Базовый",
-                price: "49 000₽",
-                features: ["До 50 товаров", "Каталог + корзина", "1 способ оплаты", "Базовая админка"],
+                price: "85 000₽",
+                features: ["5 страниц", "Базовый дизайн", "Адаптивная верстка", "Формы обратной связи"],
                 popular: false
               },
               {
                 title: "Стандарт",
-                price: "89 000₽",
-                features: ["До 200 товаров", "Фильтры + поиск", "3 способа оплаты", "Полная админка", "SEO-база"],
+                price: "149 000₽",
+                features: ["7+ страниц", "Индивидуальный дизайн", "SEO-оптимизация", "Базовые интеграции", "CMS"],
                 popular: true
               },
               {
                 title: "Премиум",
-                price: "от 149 000₽",
-                features: ["Неограниченно товаров", "Все функции", "Интеграции с 1С", "CRM система", "Персональный дизайн"],
+                price: "от 249 000₽",
+                features: ["Неограниченные страницы", "Эксклюзивный дизайн", "Сложные интеграции", "Мультиязычность", "Личный кабинет"],
                 popular: false
               }
             ].map((item, i) => (

@@ -1,5 +1,5 @@
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import corporateImage from '../../assets/chrome51.png'; // Убедитесь, что путь верный
 
 // --- ВСПОМОГАТЕЛЬНЫЕ КОМПОНЕНТЫ И ИКОНКИ ---
@@ -28,28 +28,8 @@ const UXIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
 // --- ГЛАВНЫЕ СЕКЦИИ СТРАНИЦЫ ---
 
 const HeroSection = () => {
-    const ref = useRef(null);
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-    const springConfig = { damping: 25, stiffness: 100, mass: 0.5 };
-    const springX = useSpring(mouseX, springConfig);
-    const springY = useSpring(mouseY, springConfig);
-
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            const rect = ref.current?.getBoundingClientRect();
-            if (rect) {
-                mouseX.set(e.clientX - rect.left - rect.width / 2);
-                mouseY.set(e.clientY - rect.top - rect.height / 2);
-            }
-        };
-        const currentRef = ref.current;
-        if (currentRef) currentRef.addEventListener('mousemove', handleMouseMove);
-        return () => { if (currentRef) currentRef.removeEventListener('mousemove', handleMouseMove); };
-    }, [mouseX, mouseY]);
-
     return (
-        <section ref={ref} className="relative w-full min-h-screen flex flex-col-reverse md:flex-row justify-center items-center gap-16 px-6 text-left overflow-hidden">
+        <section className="relative w-full min-h-screen flex flex-col-reverse md:flex-row justify-center items-center gap-16 px-6 text-left overflow-hidden">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }} className="relative z-10 md:w-1/2">
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl leading-tight tracking-tighter font-unbounded font-bold text-white">
                     Корпоративный сайт — Ваш <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400">цифровой актив.</span>
@@ -63,15 +43,10 @@ const HeroSection = () => {
                     </motion.button>
                 </div>
             </motion.div>
-            <div className="relative md:w-1/2 flex justify-center items-center" style={{ perspective: 1200 }}>
-                <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1]}} style={{ transformStyle: 'preserve-3d', x: springX, y: springY }}>
-                    <motion.div className="absolute -inset-8 bg-zinc-800/20 rounded-3xl" style={{ transform: 'translateZ(-50px)' }} />
-                    <motion.img src={corporateImage} alt="Премиальный корпоративный сайт" className="relative rounded-2xl shadow-2xl border-2 border-zinc-800"
-                        style={{
-                           rotateX: useTransform(springY, [-300, 300], [10, -10]),
-                           rotateY: useTransform(springX, [-300, 300], [-10, 10]),
-                        }}
-                    />
+            <div className="relative md:w-1/2 flex justify-center items-center">
+                <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1]}}>
+                    <motion.div className="absolute -inset-8 bg-zinc-800/20 rounded-3xl" />
+                    <motion.img src={corporateImage} alt="Премиальный корпоративный сайт" className="relative rounded-2xl shadow-2xl border-2 border-zinc-800" />
                 </motion.div>
             </div>
         </section>

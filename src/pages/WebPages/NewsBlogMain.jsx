@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import multipageImage from '../../assets/chrome51.png';
-import BlurText from '../animatedtext/BlurText';
-import ShinyText from '../animatedtext/ShinyText';
-import TiltedCard from '../animatedblock/TiltedCard';
+import newsImage from '../../assets/1.png';
+import BlurText from '@/Components/animatedtext/BlurText';
+import ShinyText from '@/Components/animatedtext/ShinyText';
+import TiltedCard from '@/Components/animatedblock/TiltedCard';
 
-export default function MultipageSiteMain() {
+export default function NewsBlogMain() {
   const SectionAnimation = ({ children }) => {
     const controls = useAnimation();
     const [ref, inView] = useInView({ threshold: 0.1 });
@@ -46,12 +46,12 @@ export default function MultipageSiteMain() {
       <section className="w-full mx-auto flex flex-col md:flex-row items-center gap-10 max-w-7xl">
         <div className="md:w-1/2">
           <h1 className="text-5xl sm:text-6xl leading-tight tracking-tight">
-            <ShinyText text="КОРПОРАТИВНЫЙ" disabled={false} speed={4} />
-            <span className="text-white font-bold">МНОГОСТРАНИЧНЫЙ</span> <br />
-            <ShinyText text="САЙТ ПОД КЛЮЧ" disabled={false} speed={4} />
+            <ShinyText text="НОВОСТНОЙ" disabled={false} speed={4} />
+            <span className="text-white font-bold">ПОРТАЛ </span><br />
+            <ShinyText text="ПОД КЛЮЧ" disabled={false} speed={4} />
           </h1>
           <p className="mt-6 text-lg text-gray-300 max-w-xl">
-            Полноценное цифровое представительство вашего бизнеса с продуманной структурой, аналитикой и системой управления контентом.
+            Профессиональная платформа для СМИ, блогов и онлайн-журналов с современным дизайном и мощным функционалом.
           </p>
           <div className="mt-8 flex gap-4">
             <motion.button 
@@ -59,7 +59,7 @@ export default function MultipageSiteMain() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Обсудить проект
+              Заказать проект
             </motion.button>
             <button className="px-8 py-3 border border-white/30 text-white rounded-full hover:bg-white/10 transition">
               Примеры работ
@@ -68,8 +68,8 @@ export default function MultipageSiteMain() {
         </div>
         <div className="md:w-1/2">
           <TiltedCard
-            imageSrc={multipageImage}
-            altText="Корпоративный многостраничный сайт"
+            imageSrc={newsImage}
+            altText="Новостной портал"
             containerHeight="500px"
             containerWidth="600px"
             rotateAmplitude={8}
@@ -80,38 +80,38 @@ export default function MultipageSiteMain() {
 
       {/* Features */}
       <div className="relative w-full">
-        <SectionTitle text="ВОЗМОЖНОСТИ" />
+        <SectionTitle text="ФУНКЦИОНАЛ" />
         <section className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
           {[
             {
-              title: "5+ страниц",
-              desc: "Главная, О компании, Услуги, Контакты, Блог и другие",
-              icon: "📑"
+              title: "Гибкая CMS",
+              desc: "Удобное управление контентом, категориями и авторами",
+              icon: "📝"
             },
             {
-              title: "Уникальный дизайн",
-              desc: "Индивидуальный стиль для каждой страницы",
-              icon: "🎨"
+              title: "Мультимедиа",
+              desc: "Поддержка статей, видео, подкастов и галерей",
+              icon: "🎥"
+            },
+            {
+              title: "Соц. интеграции",
+              desc: "Комментарии, лайки, репосты в соцсети",
+              icon: "🔗"
             },
             {
               title: "SEO-оптимизация",
-              desc: "Готовая структура для продвижения",
+              desc: "Автоматические мета-теги, карта сайта, микроразметка",
               icon: "🔍"
             },
             {
-              title: "CRM-интеграция",
-              desc: "Подключение к вашей системе управления",
+              title: "Аналитика",
+              desc: "Интеграция с Яндекс.Метрикой и Google Analytics",
               icon: "📊"
             },
             {
-              title: "Аналитика",
-              desc: "Яндекс.Метрика и Google Analytics",
-              icon: "📈"
-            },
-            {
-              title: "Мультиязычность",
-              desc: "Поддержка нескольких языков",
-              icon: "🌐"
+              title: "Монетизация",
+              desc: "Готовые решения для рекламы и платного контента",
+              icon: "💰"
             }
           ].map((item, i) => (
             <motion.div 
@@ -128,45 +128,46 @@ export default function MultipageSiteMain() {
         </section>
       </div>
 
-      {/* Pages Showcase */}
+      {/* Content Showcase */}
       <div className="relative w-full">
-        <SectionTitle text="СТРАНИЦЫ" />
+        <SectionTitle text="КОНТЕНТ" />
         <section className="max-w-7xl mx-auto relative z-10">
-          <h2 className="text-3xl font-bold mb-6">Типовые разделы сайта</h2>
+          <h2 className="text-3xl font-bold mb-6">Как мы представляем контент</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-white/80">Основные страницы</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white/80">Карточки новостей</h3>
               <p className="text-gray-300 mb-6">
-                Каждая страница разрабатывается с учетом ее цели и места в структуре сайта.
+                Каждая новость получает привлекательную карточку с изображением, заголовком и кратким описанием.
               </p>
               <ul className="space-y-3 text-gray-400">
                 <li className="flex items-start">
                   <span className="text-white mr-2">•</span>
-                  <span>Главная - визитка компании</span>
+                  <span>Разные форматы карточек (горизонтальные, вертикальные)</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-white mr-2">•</span>
-                  <span>О компании - история и преимущества</span>
+                  <span>Категории и теги для фильтрации</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-white mr-2">•</span>
-                  <span>Услуги/продукты - полное описание</span>
+                  <span>Лента новостей с бесконечной подгрузкой</span>
                 </li>
               </ul>
             </div>
             <div className="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-sm h-full">
               <div className="space-y-4">
-                {[
-                  { title: "Главная", desc: "Первое впечатление о компании" },
-                  { title: "О нас", desc: "Наша миссия и ценности" },
-                  { title: "Услуги", desc: "Полный спектр предлагаемых услуг" }
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 p-4 bg-white/5 rounded-lg border border-white/10">
+                {[1, 2, 3].map((item) => (
+                  <div key={item} className="flex items-start gap-4 p-4 bg-white/5 rounded-lg border border-white/10">
                     <div className="w-24 h-24 bg-white/10 rounded flex-shrink-0"></div>
                     <div>
-                      <h4 className="font-medium">{item.title}</h4>
-                      <p className="text-sm text-gray-400 mt-1">{item.desc}</p>
+                      <h4 className="font-medium">Важная новость {item}</h4>
+                      <p className="text-sm text-gray-400 mt-1">Краткое описание новости в несколько строк...</p>
+                      <div className="flex items-center mt-2 text-xs text-gray-500">
+                        <span>Сегодня</span>
+                        <span className="mx-2">•</span>
+                        <span>Политика</span>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -177,30 +178,31 @@ export default function MultipageSiteMain() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="order-2 md:order-1">
               <div className="bg-gradient-to-r from-white/5 to-white/20 rounded-xl p-8 h-full border border-white/10 backdrop-blur-sm">
-                <h3 className="text-2xl font-bold mb-4">Дополнительные разделы</h3>
+                <h3 className="text-2xl font-bold mb-4">Главная страница</h3>
                 <p className="text-gray-300 mb-6">
-                  Специализированные страницы для решения конкретных бизнес-задач.
+                  Умное размещение контента с приоритетом важных новостей, рубриками и баннерами.
                 </p>
                 <div className="bg-black/30 p-4 rounded-lg border border-white/10">
                   <div className="h-40 bg-white/10 rounded flex items-center justify-center">
-                    <span className="text-white/50">Блог/Новости компании</span>
+                    <span className="text-white/50">Главные новости дня</span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <h3 className="text-2xl font-bold mb-4 text-white/80">Функциональные элементы</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white/80">Статьи и материалы</h3>
               <p className="text-gray-300 mb-6">
-                Интерактивные компоненты для вовлечения посетителей.
+                Полноценные статьи с медиа-вложениями, цитатами и дополнительными материалами.
               </p>
               <div className="space-y-4">
-                {[
-                  { title: "Формы обратной связи", desc: "Сбор заявок и контактов" },
-                  { title: "Онлайн-калькулятор", desc: "Расчет стоимости услуг" }
-                ].map((item, i) => (
-                  <div key={i} className="p-4 bg-white/5 rounded-lg border border-white/10">
-                    <h4 className="font-medium">{item.title}</h4>
-                    <p className="text-sm text-gray-400 mt-1">{item.desc}</p>
+                {[1, 2].map((item) => (
+                  <div key={item} className="p-4 bg-white/5 rounded-lg border border-white/10">
+                    <h4 className="font-medium">Длинный заголовок аналитической статьи {item}</h4>
+                    <div className="flex items-center mt-2 text-xs text-gray-500">
+                      <span>Автор: Иван Иванов</span>
+                      <span className="mx-2">•</span>
+                      <span>15 мин чтения</span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -217,23 +219,23 @@ export default function MultipageSiteMain() {
             {[
               {
                 step: "1. Анализ",
-                desc: "Изучаем бизнес, конкурентов и целевую аудиторию"
+                desc: "Изучаем вашу аудиторию и контент-стратегию"
               },
               {
-                step: "2. Прототип",
-                desc: "Разрабатываем структуру и пользовательские сценарии"
+                step: "2. Дизайн",
+                desc: "Создаём интерфейс и систему представления контента"
               },
               {
-                step: "3. Дизайн",
-                desc: "Создаем визуальную концепцию для всех страниц"
+                step: "3. Разработка",
+                desc: "Реализуем функционал платформы"
               },
               {
-                step: "4. Разработка",
-                desc: "Программируем функционал и интеграции"
+                step: "4. Наполнение",
+                desc: "Переносим контент и настраиваем процессы"
               },
               {
                 step: "5. Запуск",
-                desc: "Тестируем и публикуем проект"
+                desc: "Публикуем и обучаем команду"
               }
             ].map((item, i) => (
               <motion.div 
@@ -255,9 +257,9 @@ export default function MultipageSiteMain() {
         <SectionTitle text="ЗАКАЗАТЬ" />
         <section className="max-w-4xl mx-auto relative z-10">
           <div className="bg-gradient-to-r from-white/5 to-white/20 rounded-2xl p-10 border border-white/10 backdrop-blur-lg text-center">
-            <h2 className="text-3xl font-bold mb-4">Готовы создать корпоративный сайт?</h2>
+            <h2 className="text-3xl font-bold mb-4">Готовы запустить свой медиа-проект?</h2>
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Оставьте заявку и получите бесплатную консультацию по разработке многостраничного сайта
+              Оставьте заявку и получите бесплатную консультацию по созданию новостного портала
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button 
@@ -283,20 +285,20 @@ export default function MultipageSiteMain() {
             {[
               {
                 title: "Базовый",
-                price: "85 000₽",
-                features: ["5 страниц", "Базовый дизайн", "Адаптивная верстка", "Формы обратной связи"],
+                price: "59 000₽",
+                features: ["До 5 рубрик", "Базовый редактор", "Комментарии", "RSS-лента"],
                 popular: false
               },
               {
                 title: "Стандарт",
-                price: "149 000₽",
-                features: ["7+ страниц", "Индивидуальный дизайн", "SEO-оптимизация", "Базовые интеграции", "CMS"],
+                price: "99 000₽",
+                features: ["Неограниченные рубрики", "Расширенный редактор", "Авторские профили", "SEO-оптимизация", "Аналитика"],
                 popular: true
               },
               {
                 title: "Премиум",
-                price: "от 249 000₽",
-                features: ["Неограниченные страницы", "Эксклюзивный дизайн", "Сложные интеграции", "Мультиязычность", "Личный кабинет"],
+                price: "от 179 000₽",
+                features: ["Все функции", "Подкасты и видео", "Платный контент", "Персональный дизайн", "Интеграция с соцсетями"],
                 popular: false
               }
             ].map((item, i) => (

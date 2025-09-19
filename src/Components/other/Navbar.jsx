@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import LOGO_WHITE from '../../assets/LOGO_WHITE.png';
 
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
