@@ -1,6 +1,6 @@
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import restaurantImage from '../../../assets/1.png'; // Убедитесь, что путь к вашему изображению верный
+import restaurantImage from '../../assets/1.png'; // Убедитесь, что путь к вашему изображению верный
 
 // --- ВСПОМОГАТЕЛЬНЫЕ КОМПОНЕНТЫ И ИКОНКИ ---
 

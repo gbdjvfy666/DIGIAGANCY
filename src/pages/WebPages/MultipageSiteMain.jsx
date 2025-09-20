@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import multipageImage from '../../../assets/chrome51.png';
+import multipageImage from '../../assets/chrome51.png';
 import BlurText from '@/Components/animatedtext/BlurText';
 import ShinyText from '@/Components/animatedtext/ShinyText';
 import TiltedCard from '@/Components/animatedblock/TiltedCard';

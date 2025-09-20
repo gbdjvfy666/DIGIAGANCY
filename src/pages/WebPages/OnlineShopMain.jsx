@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import shopImage from '../../../assets/chrome51.png';
-import BlurText from '../../../Components/animatedtext/BlurText';
-import ShinyText from '../../../Components/animatedtext/ShinyText';
-import TiltedCard from '../../../Components/animatedblock/TiltedCard';
+import shopImage from '../../assets/chrome51.png';
+import BlurText from '../../Components/animatedtext/BlurText';
+import ShinyText from '../../Components/animatedtext/ShinyText';
+import TiltedCard from '../../Components/animatedblock/TiltedCard';
 
 export default function OnlineShopMain() {
   const SectionAnimation = ({ children }) => {

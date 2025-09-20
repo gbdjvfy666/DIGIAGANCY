@@ -76,7 +76,6 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
     const navigate = useNavigate();
     const containerRef = useRef(null);
     const sceneRef = useRef(null);
-    // ... (остальной код до return не меняется)
     const rendererRef = useRef(null);
     const animationIdRef = useRef(null);
     
@@ -247,11 +246,9 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                             {`Мы — студия digital-дизайна и разработки. Наша задача — превратить ваши бизнес-цели в эффективные и эстетически выверенные веб-решения.`}
                         </p>
                         
-                        {/* =================================================================================== */}
-                        {/* --- НАЧАЛО ИЗМЕНЕНИЙ --- */}
-                        {/* Меняем пустую функцию на вызов navigate */}
+
                         <PrismaticButton
-                            onClick={() => navigate('/Services')}
+                            onClick={() => navigate('/services')}
                             className="mt-10 w-full inline-flex items-center"
                             colors={['#f3f4f6', '#d1d5db', '#6b7280']}
                             hoverColors={['#e5e7eb', '#d1d5db', '#9ca3af']}
@@ -259,8 +256,7 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                             Наши Услуги
                             <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
                         </PrismaticButton>
-                        {/* --- КОНЕЦ ИЗМЕНЕНИЙ --- */}
-                        {/* =================================================================================== */}
+
 
                     </div>
                 </div>

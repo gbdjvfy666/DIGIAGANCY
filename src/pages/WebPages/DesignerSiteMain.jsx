@@ -1,10 +1,10 @@
-import designerImage from '../../../assets/VeloLand.png';
-import BlurText from '../../../Components/animatedtext/BlurText';
-import ShinyText from '../../../Components/animatedtext/ShinyText';
+import designerImage from '../../assets/VeloLand.png';
+import BlurText from '../../Components/animatedtext/BlurText';
+import ShinyText from '../../Components/animatedtext/ShinyText';
 
-import Stepper, { Step } from '../../../Components/animatedblock/Stepper';
-import ThemeToggleCard from '../../../Components/components/ThemeToggleCard';
-import '../../../index.css';
+import Stepper, { Step } from '../../Components/animatedblock/Stepper';
+import ThemeToggleCard from '../../Components/components/ThemeToggleCard';
+import '../../index.css';
 
 export default function DesignerSiteMain() {
   const SectionTitle = ({ text }) => (

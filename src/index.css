@@ -908,3 +908,7 @@ html[data-theme='dark'] .scrollbar-custom::-webkit-scrollbar-thumb {
     @apply bg-background text-foreground;
   }
 }
+
+.max-w-9xl-custom {
+  max-width: 100rem; 
+}

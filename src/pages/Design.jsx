@@ -5,9 +5,6 @@ import Footer from "../Components/other/Footer";
 import '../index.css';
 import LOGO_WHITE from '../assets/LOGO_WHITE.png';
 
-// Оптимизация: Загружаем "тяжелые" WebGL-компоненты лениво.
-// Их код будет загружен браузером только тогда, когда React попытается их отрендерить.
-// Компонент FractalPyramidComponent был удален
 const PrismaticBurst = lazy(() => import('../Components/PrismaticBurst'));
 
 export default function Design() {
@@ -42,7 +39,6 @@ export default function Design() {
   return (
     <div className="bg-black text-gray-200 min-h-screen font-garet relative overflow-x-hidden">
       
-      {/* Фоновая анимация была полностью удалена */}
       <div className="relative z-10">
         <Navbar />
 
@@ -92,7 +88,6 @@ export default function Design() {
                     </div>
                   </div>
 
-                  {/* Слой с WebGL-анимацией (ниже контента) */}
                   <div className="absolute inset-0 z-10">
                     <Suspense fallback={<div className="w-full h-full bg-zinc-900" />}>
                       <PrismaticBurst

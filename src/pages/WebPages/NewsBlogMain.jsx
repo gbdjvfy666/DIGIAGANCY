@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import newsImage from '../../../assets/1.png';
+import newsImage from '../../assets/1.png';
 import BlurText from '@/Components/animatedtext/BlurText';
 import ShinyText from '@/Components/animatedtext/ShinyText';
 import TiltedCard from '@/Components/animatedblock/TiltedCard';

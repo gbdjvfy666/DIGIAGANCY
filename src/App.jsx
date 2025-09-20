@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+// src/App.jsx
 
-// Ваши основные компоненты страниц (остаются без изменений)
+import { useSmoothScroll } from './hooks/useSmoothScroll';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect, useLayoutEffect } from 'react';
+// ===================================================================================
 import Home from './pages/Home';
 import Design from './pages/Design';
 import Target from './pages/Target';
@@ -11,45 +15,48 @@ import Reviews from './pages/Reviews';
 import WebDevelopment from './pages/WebDevelopment';
 import About from './pages/About';
 import Brief from './pages/Brief';
-import Services from './pages/Services/Services';
+import Services from './pages/Services';
+import ServicePage from './pages/ServicePage';
 
-// Вспомогательные компоненты (остаются без изменений)
 import CustomCursor from './Components/other/CustomCursor';
-import SmoothScrollContainer from './Components/other/SmoothScrollContainer';
-
-// Ваши статичные страницы услуг (веб-разработка, остаются без изменений)
-import CorporateMain from './pages/Services/WebPages/CorporateMain';
-import CryptoProjectMain from './pages/Services/WebPages/CryptoProjectMain';
-import DesignerSiteMain from './pages/Services/WebPages/DesignerSiteMain';
-import LandingMain from './pages/Services/WebPages/LandingMain';
-import MultipageSiteMain from './pages/Services/WebPages/MultipageSiteMain';
-import NewsBlogMain from './pages/Services/WebPages/NewsBlogMain';
-import OnlineShopMain from './pages/Services/WebPages/OnlineShopMain';
-import RestaurantSiteMain from './pages/Services/WebPages/RestaurantSiteMain';
-
-// ===================================================================================
-// НАЧАЛО ИЗМЕНЕНИЙ
 // ===================================================================================
 
-// 1. УДАЛЯЕМ ВСЕ 100+ ИМПОРТОВ для каждой услуги.
-// Вместо них добавляем ОДИН импорт для нашего будущего универсального шаблона.
-import ServicePage from './pages/ServicePage'; // Убедитесь, что такой файл будет создан
-
-// ===================================================================================
-// КОНЕЦ ИЗМЕНЕНИЙ
-// ===================================================================================
+gsap.registerPlugin(ScrollTrigger);
 
 function AppContent() {
   const location = useLocation();
+  // Вызываем хук здесь и получаем ref и функцию
+  const { containerRef, refreshScroll } = useSmoothScroll();
+
+  useLayoutEffect(() => {
+    ScrollTrigger.scrollerProxy(document.body, {
+      scrollTop(value) {
+        return arguments.length ? window.scrollTo(0, value) : window.scrollY;
+      },
+      getBoundingClientRect() {
+        return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+      },
+    });
+    
+    ScrollTrigger.defaults({ scroller: document.body });
+    refreshScroll();
+
+    return () => {
+      ScrollTrigger.killAll();
+    }
+  }, [refreshScroll]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+    setTimeout(() => {
+      refreshScroll();
+    }, 100);
+  }, [location.pathname, refreshScroll]);
 
+  // ===================================================================================
   return (
-    <SmoothScrollContainer>
+    <div className="fixed top-0 left-0 w-full will-change-transform" ref={containerRef}>
       <Routes>
-        {/* Ваши основные маршруты (остаются без изменений) */}
         <Route path="/" element={<Home />} />
         <Route path="/target" element={<Target />} />
         <Route path="/Design" element={<Design />} />
@@ -59,36 +66,12 @@ function AppContent() {
         <Route path="/works" element={<Works />} />
         <Route path="/About" element={<About />} />
         <Route path="/Brief" element={<Brief />} />
-        <Route path="/Services" element={<Services />} />
-
-        {/* Ваши статичные маршруты (остаются без изменений) */}
-        <Route path="/web-development/corporate-site" element={<CorporateMain />} />
-        <Route path="/web-development/crypto-project" element={<CryptoProjectMain />} />
-        <Route path="/web-development/designer-site" element={<DesignerSiteMain />} />
-        <Route path="/web-development/landing" element={<LandingMain />} />
-        <Route path="/web-development/multipage-site" element={<MultipageSiteMain />} />
-        <Route path="/web-development/news-blog" element={<NewsBlogMain />} />
-        <Route path="/web-development/online-shop" element={<OnlineShopMain />} />
-        <Route path="/web-development/restaurant-site" element={<RestaurantSiteMain />} />
-
-        {/* =================================================================================== */}
-        {/* НАЧАЛО ИЗМЕНЕНИЙ                                                                   */}
-        {/* =================================================================================== */}
-
-        {/* 2. УДАЛЯЕМ ВСЕ 100+ СТАТИЧНЫХ РОУТОВ. */}
-        {/* Вместо них добавляем ДВА динамических роута, которые "ловят" все возможные услуги. */}
-
-        {/* Этот роут будет работать для URL вида /branding/logotipy */}
-        <Route path="/:category/:slug" element={<ServicePage />} />
-
-        {/* Этот роут для вложенных категорий, как /websites/themes/avto */}
-        <Route path="/:category/themes/:slug" element={<ServicePage />} />
-
-        {/* =================================================================================== */}
-        {/* КОНЕЦ ИЗМЕНЕНИЙ                                                                     */}
-        {/* =================================================================================== */}
+        <Route path="/services" element={<Services />} />
+        <Route path="/services/:category" element={<ServicePage />} />
+        <Route path="/services/:category/:slug" element={<ServicePage />} />
+        <Route path="/services/websites/themes/:slug" element={<ServicePage />} />
       </Routes>
-    </SmoothScrollContainer>
+    </div>
   );
 }
 

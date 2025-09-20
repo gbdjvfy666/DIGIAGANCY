@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import corporateImage from '../../../assets/chrome51.png'; // Убедитесь, что путь верный
+import corporateImage from '../../assets/chrome51.png'; // Убедитесь, что путь верный
 
 // --- ВСПОМОГАТЕЛЬНЫЕ КОМПОНЕНТЫ И ИКОНКИ ---
 
