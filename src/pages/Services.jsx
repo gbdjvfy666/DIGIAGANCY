@@ -95,10 +95,9 @@ export default function Services() {
         <div className="min-h-screen bg-black text-white overflow-x-hidden">
             <Navbar />
             <main className="container mx-auto px-4 py-12 lg:py-24 max-w-8xl">
-                <div className="mb-8 text-sm md:text-base text-zinc-500">
-                    <Link to="/" className="hover:underline hover:text-blue-500 transition-colors">Главная</Link>
-                    <span className="mx-2">/</span>
-                    <span className="text-white font-semibold">Услуги</span>
+                <div className="mb-8 text-zinc-400">
+                    <Link to="/" className="hover:text-white">Главная</Link> /
+                    <span className="text-white"> Услуги</span>
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-12 lg:mb-20 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
                     Услуги
