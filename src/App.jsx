@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,8 +14,9 @@ import WebDevelopment from './pages/WebDevelopment';
 import About from './pages/About';
 import Brief from './pages/Brief';
 import Services from './pages/Services';
-import ServicePage from './pages/ServicePage';
-
+import ServicePage from './pages/ServiecesConstructor/ServicePage';
+// ===================================================================================
+import BlogPage from './pages/BlogConstructor/BlogPage'; 
 import CustomCursor from './Components/other/CustomCursor';
 // ===================================================================================
 
@@ -45,18 +44,18 @@ function AppContent() {
       ScrollTrigger.killAll();
     }
   }, [refreshScroll]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     setTimeout(() => {
       refreshScroll();
     }, 100);
-  }, [location.pathname, refreshScroll]);
+  }, [location.pathname, location.search, refreshScroll]);
 
   // ===================================================================================
   return (
     <div className="fixed top-0 left-0 w-full will-change-transform" ref={containerRef}>
       <Routes>
+        {/* --- Основные страницы --- */}
         <Route path="/" element={<Home />} />
         <Route path="/target" element={<Target />} />
         <Route path="/Design" element={<Design />} />
@@ -66,10 +65,17 @@ function AppContent() {
         <Route path="/works" element={<Works />} />
         <Route path="/About" element={<About />} />
         <Route path="/Brief" element={<Brief />} />
+
+        {/* --- Маршруты для Услуг --- */}
         <Route path="/services" element={<Services />} />
         <Route path="/services/:category" element={<ServicePage />} />
         <Route path="/services/:category/:slug" element={<ServicePage />} />
         <Route path="/services/websites/themes/:slug" element={<ServicePage />} />
+        
+        {/* --- Маршруты для Блога --- */}
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPage />} />
+
       </Routes>
     </div>
   );

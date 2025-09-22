@@ -28,7 +28,7 @@ const ProjectCard = ({ project, isExpanded, onClick }) => (
         className={`relative rounded-2xl overflow-hidden cursor-pointer ${isExpanded ? 'col-span-12' : 'bg-zinc-900 border-zinc-800'}`}
         transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
     >
-        {!isExpanded && ( // --- СЛОЖЕННЫЙ ВИД (ПРЕВЬЮ) ---
+        {!isExpanded && (
              <div className="relative w-full h-full group">
                 <motion.img
                     layoutId={`image-${project.id}`}

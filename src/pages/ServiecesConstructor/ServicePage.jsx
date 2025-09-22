@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { servicesData, categoryData } from './serviceData'; // Убедитесь, что пути к вашим данным верны
+import { servicesData, categoryData } from './serviceData'; 
 
 // Импорты ваших компонентов-блоков
 import HeroBlock from './ServiceBlocks/HeroBlock';
@@ -13,11 +13,9 @@ import WebsiteTypesGrid from './ServiceBlocks/WebsiteTypesGrid';
 import PricingBlock from './ServiceBlocks/PricingBlock';
 import ContactFormBlock from './ServiceBlocks/ContactFormBlock';
 
-// Импорты общих компонентов
 import Navbar from '@/Components/other/Navbar';
 import Footer from '@/Components/other/Footer';
 
-// Карта, сопоставляющая тип блока с React-компонентом
 const blockComponents = {
   hero: HeroBlock,
   gallery: ImageGalleryBlock,
@@ -31,7 +29,6 @@ const blockComponents = {
 export default function ServicePage() {
   let { category, slug } = useParams();
 
-  // Логика для определения текущей услуги
   if (!slug) {
     slug = category;
   }
@@ -43,7 +40,6 @@ export default function ServicePage() {
     service = servicesData[category]?.[slug];
   }
 
-  // Рендеринг страницы 404, если услуга или категория не найдены
   if (!service || !currentCategoryInfo) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center text-center px-4">
@@ -57,21 +53,11 @@ export default function ServicePage() {
   }
   
   return (
-    // Общий фон страницы остается здесь
+
     <div className="min-h-screen bg-black text-white">
       <Navbar />
-      
-      {/* 
-        Тег <main> теперь не имеет отступов. 
-        Каждый дочерний компонент-блок будет сам управлять своими отступами.
-      */}
       <main>
         
-        {/* =================================================================================== */}
-        {/* "Хлебные крошки" теперь размещаются в своем собственном, отдельном контейнере, */}
-        {/* чтобы они всегда были отцентрованы, независимо от других блоков. */}
-        {/* pt-24 (padding-top) компенсирует отсутствие py-24 у <main> */}
-        {/* =================================================================================== */}
         <div className="container max-w-8xl mx-auto px-4 pt-24">
           <div className="mb-8 text-zinc-400">
             <Link to="/" className="hover:text-white">Главная</Link> /
@@ -87,12 +73,6 @@ export default function ServicePage() {
           </div>
         </div>
           
-        {/* =================================================================================== */}
-        {/* Рендеринг блоков */}
-        {/* ОБРАТИТЕ ВНИМАНИЕ: здесь больше нет общего <div className="container...">. */}
-        {/* Каждый компонент рендерится напрямую и сам решает, как ему выглядеть: */}
-        {/* быть на всю ширину с собственным фоном или быть в стандартном контейнере. */}
-        {/* =================================================================================== */}
         {service.blocks.map((block, index) => {
           const Component = blockComponents[block.type];
           if (!Component) return null; 

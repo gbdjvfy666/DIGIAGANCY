@@ -71,14 +71,12 @@ const ContactFormBlock = ({ data }) => {
             </div>
           </div>
           
-          {/* БЛОК 2: Поля для ввода данных */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <input type="text" name="name" placeholder="Имя" required className="w-full bg-transparent border-b border-gray-600 text-white placeholder-gray-500 py-3 focus:outline-none focus:border-purple-500 transition-colors" />
             <input type="tel" name="phone" placeholder="Телефон" required className="w-full bg-transparent border-b border-gray-600 text-white placeholder-gray-500 py-3 focus:outline-none focus:border-purple-500 transition-colors" />
             <input type="email" name="email" placeholder="Почта" className="w-full bg-transparent border-b border-gray-600 text-white placeholder-gray-500 py-3 focus:outline-none focus:border-purple-500 transition-colors" />
           </div>
 
-          {/* БЛОК 3: Кнопка отправки */}
           <div className="mt-12">
             <button type="submit" className="relative inline-flex items-center justify-center px-12 py-4 text-lg font-medium tracking-wider">
               <ButtonBorder />

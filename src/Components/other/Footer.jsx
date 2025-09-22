@@ -5,23 +5,8 @@ import '../../index.css';
 const Footer = () => {
   return (
     <div className="bg-black w-full overflow-hidden">
-      <a
-        // 2. Устанавливаем статичный адрес
-        href="/works"
-        className="w-full block py-10 px-1 border-t border-b border-zinc-800 group relative transition-colors duration-300 hover:bg-gray-100"
-      >
-        <div className="w-full flex justify-between items-center relative z-10">
-          <span className="font-dela text-white group-hover:text-black text-2xl transition-colors duration-300 ml-7">
-            ДАЛЬШЕ
-          </span>
-          <span className="font-dela text-red-500 group-hover:text-black text-2xl transition-colors duration-300 mr-7">
-            ПРОЕКТЫ →
-          </span>
-        </div>
-      </a>
-
-      <footer className="w-full py-7 bg-black relative overflow-hidden">
-        {/* Верхняя строка: Меню, Соцсети, Рассылка */}
+      <footer className="w-full py-7 bg-black relative overflow-hidden mt-10 border-t border-zinc-800">
+        {/* Верхняя строка: Меню, Соцсети */}
         <div className="w-full flex flex-col md:flex-row justify-between items-start gap-8">
           
           {/* Меню + Политики */}
@@ -50,6 +35,32 @@ const Footer = () => {
                 >
                   <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">О нас</span>
                 </a>
+                {/* --- НОВЫЕ ССЫЛКИ НАЧАЛО --- */}
+                <a
+                  href="/blog" // Укажите правильный адрес для блога
+                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
+                >
+                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Блог</span>
+                </a>
+                <a
+                  href="/services/websites" // Укажите правильный адрес
+                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
+                >
+                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Сайты</span>
+                </a>
+                <a
+                  href="/services/design" // Укажите правильный адрес
+                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
+                >
+                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Дизайн</span>
+                </a>
+                <a
+                  href="/services/targeting" // Укажите правильный адрес
+                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
+                >
+                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Таргет</span>
+                </a>
+                {/* --- НОВЫЕ ССЫЛКИ КОНЕЦ --- */}
               </div>
               {/* Правая колонка (политики) */}
               <div className="flex flex-col gap-0">
@@ -94,17 +105,15 @@ const Footer = () => {
 
         {/* Средняя строка: NSBH */}
         <div className="w-full mt-8 flex justify-center items-center relative">
-
-
-          {/* Текст на переднем плане (relative z-10) */}
           <span className="relative z-10 font-extrabold text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-neutral-800 select-none font-deutsch">
             NSBH
           </span>
         </div>
 
-
-        <div className="w-full mt-12 pt-6 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-gray-400 mb-4 md:mb-0 text-sm"></div>
+        <div className="w-full mt-12 pt-6 border-t border-zinc-800 flex justify-center items-center">
+          <p className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} NSBH. Все права защищены.
+          </p>
         </div>
       </footer>
     </div>

@@ -3,137 +3,207 @@ import Navbar from '../Components/other/Navbar.jsx';
 import Footer from '../Components/other/Footer.jsx';
 import '../index.css';
 
-// --- ДАННЫЕ ПРОЕКТОВ (с замененным последним проектом) ---
-const allProjects = [
-    // Проекты 1-3 остаются без изменений
-    { id: 'dev-1', client: 'Quantum Leap Logistics', title: 'Портал с AI-оптимизацией маршрутов', category: 'Веб-разработка', heroImage: 'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=1920&auto=format&fit=crop', task: 'Разработать B2B-платформу, способную в реальном времени анализировать тысячи точек доставки и строить оптимальные маршруты для 500+ грузовиков.', process: [ { step: '01. Аналитика и архитектура', description: 'Спроектировали микросервисную архитектуру на Node.js.' }, { step: '02. UX/UI и Frontend', description: 'Создали сложный, но интуитивный интерфейс на React с картой на Mapbox.' }, { step: '03. Backend и AI', description: 'Разработали ядро системы: генетический алгоритм и нейросеть для предсказания пробок.' }], results: [ { value: '-18%', label: 'Сокращение расходов на ГСМ' }, { value: '+22%', label: 'Увеличено доставок в день' }, { value: '-40%', label: 'Время на планирование' } ] },
-    { id: 'des-1', client: 'Metropolis Bank', title: 'Ребрендинг и дизайн-система для необанка', category: 'Брендинг и Дизайн', heroImage: 'https://images.unsplash.com/photo-1554224155-8d04421cd673?q=80&w=1920&auto=format&fit=crop', task: 'Полностью переосмыслить визуальный язык банка для привлечения аудитории 22-35 лет. Создать гибкую дизайн-систему для веба и мобильных приложений.', process: [ { step: '01. Исследование и позиционирование', description: 'Выработали платформу бренда: "Финансы без сложностей".' }, { step: '02. Визуальная концепция', description: 'Разработали новый логотип, смелую палитру и типографику.' }, { step: '03. Разработка дизайн-системы', description: 'Создали в Figma библиотеку из 200+ компонентов, ускорив разработку на 40%.' }], results: [ { value: '+75%', label: 'Рост узнаваемости' }, { value: '-30%', label: 'Time-to-market для фич' }, { value: 'Top 5', label: 'Рейтинг приложений' } ] },
-    { id: 'tar-1', client: 'AURA Cosmetics', title: 'Запуск Vegan-косметики в ВК', category: 'VK Таргетинг', heroImage: 'https://images.unsplash.com/photo-1590439471364-192aa70c0b23?q=80&w=1920&auto=format&fit=crop', task: 'Обеспечить взрывной старт продаж новой линейки косметики с нуля. KPI: ROMI > 350%, CAC < 450 руб.', process: [ { step: '01. Стратегия и сегментация', description: 'Выделили 5 ключевых сегментов. Разработали уникальные офферы для каждого.' }, { step: '02. Креативная концепция', description: 'Создали 30+ видео и статичных креативов. Провели A/B тесты.' }], results: [ { value: '412%', label: 'ROMI за 3 месяца' }, { value: '415 руб', label: 'Средний CAC' }, { value: '1.2 млн ₽', label: 'Продаж из ВК' } ] },
-    
-    // --- ЗАМЕНЕННЫЙ ПРОЕКТ ---
+// Импортируем наши иконки для тегов. Убедитесь, что путь верный.
+import * as Icons from '../Components/icons/Icons.jsx';
+
+// --- ИКОНКИ ДЛЯ СЕКЦИЙ ---
+const TaskIcon = () => <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+const ProcessIcon = () => <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25a8.967 8.967 0 011.332 6.645A8.967 8.967 0 0112 2.25z" /></svg>;
+const ResultIcon = () => <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>;
+
+// --- ПОЛНЫЙ СПИСОК ПРОЕКТОВ ---
+const projectsData = [
     { 
-        id: 'des-2', 
-        client: 'NEON GHOST', 
-        title: 'Айдентика и SMM-дизайн для стритвир-бренда', 
-        category: 'Брендинг и Графический Дизайн', 
-        heroImage: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1920&auto=format&fit=crop', 
-        task: 'Разработать с нуля дерзкую айдентику для нового стритвир-бренда, ориентированного на молодежную аудиторию. Создать полный пакет для SMM, включая шаблоны постов, оформление группы VK и карточки товаров для Wildberries.',
+        id: 'case-1', 
+        layout: 'standard', 
+        client: 'AeroFlow Dynamics', 
+        title: 'B2B-портал для авиационной промышленности', 
+        heroImage: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=1920&auto=format&fit=crop', 
+        tags: [{ name: "Веб-разработка", icon: <Icons.SozdaniyeSaytovIcon /> }, { name: "UX/UI", icon: <Icons.DizaynIcon /> }],
+        task: 'Разработать защищенный B2B-портал для инженеров, позволяющий заказывать кастомные аэродинамические компоненты и отслеживать производство.',
         process: [
-            { step: '01. Мудборд и Концепция', description: 'Сформулировали визуальную метафору бунтарства и киберпанка. Определили ключевые элементы стиля.' },
-            { step: '02. Дизайн Логотипа и Фирстиля', description: 'Создали динамичный логотип, подобрали шрифтовую пару (Gerhaus + Inter) и разработали паттерны.'},
-            { step: '03. SMM & Web Kit', description: 'Разработали сетку постов для VK, анимированные сторис и продающий дизайн карточек товаров.'},
+            { title: 'Глубинные интервью с инженерами', description: 'Провели 20+ интервью с целевой аудиторией для выявления ключевых сценариев.' },
+            { title: 'Прототипирование в Figma', description: 'Создали интерактивный прототип для тестирования пользовательских путей.' },
+            { title: 'Backend на NestJS и Frontend на React', description: 'Выбрали надежный и масштабируемый стек для обеспечения безопасности.' },
         ],
         results: [
-            { value: "+250%", label: "Рост вовлеченности" }, 
-            { value: "1.5x", label: "Конверсия карточек" },
-            { value: "New Look", label: "Оценка 'The Dieline'" },
+            { value: '-60%', label: 'Время на оформление заказа' }, 
+            { value: '+35%', label: 'Повторные заказы' },
+            { value: '98%', label: 'Удовлетворенность клиентов' },
+        ] 
+    },
+    { 
+        id: 'case-2', 
+        layout: 'inverted', 
+        client: 'Ritual Coffee Roasters', 
+        title: 'Ребрендинг и запуск E-commerce платформы', 
+        heroImage: 'https://images.unsplash.com/photo-1511920183359-5b1b5dd0a1e5?q=80&w=1920&auto=format&fit=crop', 
+        tags: [{ name: "Брендинг", icon: <Icons.BrendyngIcon /> }, { name: "E-commerce", icon: <Icons.SozdaniyeSaytovIcon /> }],
+        task: 'Провести полный ребрендинг кофейной компании, чтобы отразить ее премиальное качество и крафтовый подход, и запустить интернет-магазин.',
+        process: [
+            { title: 'Разработка платформы бренда', description: 'Сформулировали ключевое сообщение: "Ваш личный кофейный ритуал".' },
+            { title: 'Создание айдентики', description: 'Разработали новый логотип, фирменные иллюстрации и дизайн упаковки.' },
+            { title: 'Разработка на Shopify Plus', description: 'Создали кастомную тему, интегрировали систему подписок и лояльности.' },
+        ],
+        results: [
+            { value: '2.5x', label: 'Рост онлайн-продаж за 6 мес.' }, 
+            { value: '+40%', label: 'Средний чек' },
+            { value: 'Top Brand', label: 'Награда Awwwards' },
+        ] 
+    },
+    { 
+        id: 'case-5',
+        layout: 'centered', 
+        client: 'Starlight Studios', 
+        title: 'Промо-сайт для анимационного фильма "Хроники Ориона"', 
+        heroImage: 'https://images.unsplash.com/photo-1534447677768-64483a0a4a89?q=80&w=1920&auto=format&fit=crop', 
+        tags: [{ name: "Промо-сайт", icon: <Icons.ReklamaIcon /> }, { name: "Видео", icon: <Icons.VideorolikiIcon /> }],
+        task: 'Создать захватывающий и интерактивный промо-сайт для нового анимационного фильма, который бы передавал атмосферу вселенной и вовлекал аудиторию до премьеры.',
+        process: [
+            { title: 'Интерактивная карта мира', description: 'Разработали карту с кликабельными зонами, раскрывающими лор и персонажей.' },
+            { title: 'WebGL и анимации', description: 'Использовали GSAP и WebGL для создания плавных анимаций и эффекта погружения.' },
+            { title: 'Система предзаказа билетов', description: 'Интегрировали API киносетей для удобного предзаказа билетов прямо с сайта.' },
+        ],
+        results: [
+            { value: '500k+', label: 'Уникальных посетителей' }, 
+            { value: '5 мин', label: 'Среднее время на сайте' },
+            { value: '25k', label: 'Предзаказов билетов' },
+        ] 
+    },
+    { 
+        id: 'case-3', 
+        layout: 'standard',
+        client: 'Terra Futura', 
+        title: 'PR-кампания для запуска эко-стартапа', 
+        heroImage: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1920&auto=format&fit=crop', 
+        tags: [{ name: "PR", icon: <Icons.PRIcon /> }, { name: "Копирайтинг", icon: <Icons.KopiraytingIcon /> }],
+        task: 'Обеспечить максимальный медийный охват для нового стартапа по переработке пластика. Цель — привлечь внимание инвесторов и первых B2B-клиентов.',
+        process: [
+            { title: 'Формирование PR-стратегии', description: 'Определили 3 ключевых инфоповода: технология, экология и команда.' },
+            { title: 'Написание и дистрибуция материалов', description: 'Подготовили серию экспертных статей, пресс-релизов и колонок для основателей.' },
+            { title: 'Организация пресс-завтрака', description: 'Провели мероприятие для 20+ журналистов и блогеров для волны публикаций.' },
+        ],
+        results: [
+            { value: '50+', label: 'Публикаций в СМИ' }, 
+            { value: '3 млн+', label: 'Медийный охват' },
+            { value: '4', label: 'Приглашения на конференции' },
+        ] 
+    },
+    { 
+        id: 'case-4', // НОВЫЙ ЗАМЕНЕННЫЙ КЕЙС
+        layout: 'inverted',
+        client: 'Renova Clinic', 
+        title: 'Редизайн и SEO для клиники эстетической медицины', 
+        heroImage: 'https://images.unsplash.com/photo-1576091160550-2173dba9996a?q=80&w=1920&auto=format&fit=crop', 
+        tags: [{ name: "Веб-дизайн", icon: <Icons.VebDizaynIcon /> }, { name: "SEO", icon: <Icons.SEOIcon /> }, { name: "Копирайтинг", icon: <Icons.KopiraytingIcon /> }],
+        task: 'Увеличить количество онлайн-заявок на дорогостоящие процедуры. Старый сайт не вызывал доверия, имел низкие позиции в поисковой выдаче и плохую конверсию.',
+        process: [
+            { title: 'Анализ конкурентов и ЦА', description: 'Изучили сайты ведущих клиник, выявили сильные и слабые стороны. Определили ключевые факторы принятия решений для пациентов.' },
+            { title: 'Новый дизайн и контент', description: 'Создали светлый, премиальный дизайн. Написали экспертные тексты об услугах, добавили фото "до/после" и видео-отзывы врачей.' },
+            { title: 'Техническое SEO и семантика', description: 'Собрали семантическое ядро по коммерческим запросам. Провели полную техническую оптимизацию сайта для быстрой загрузки.' },
+        ],
+        results: [
+            { value: '+400%', label: 'Рост трафика из Google/Яндекс' }, 
+            { value: '3x', label: 'Увеличение онлайн-записей' },
+            { value: 'Топ-5', label: 'По ключевым услугам' },
         ] 
     },
 ];
 
-// --- Вспомогательный компонент для РЕЗУЛЬТАТОВ ---
-const ResultsSection = ({ results, titleClassName = "text-zinc-300", valueColor = "text-white" }) => (
-    <div className="mt-12 md:mt-16 text-center">
-        <h3 className={`font-dela text-4xl ${titleClassName} tracking-wider`}>Ключевые результаты</h3>
-        <div className="mt-8 flex flex-wrap justify-center gap-6">
-            {results.map(item => (
-                <div key={item.label} className="flex-1 min-w-[180px] max-w-[250px] bg-black/30 p-6 rounded-lg border border-zinc-800 shadow-lg shadow-black/20">
-                    <p className={`font-receipt text-5xl ${valueColor} mb-2`}>{item.value}</p>
-                    <p className="font-jost text-zinc-500 uppercase tracking-widest text-sm">{item.label}</p>
+// --- КОМПОНЕНТ КАРТОЧКИ КЕЙСА ---
+const CaseCard = ({ project }) => (
+    <section className="bg-white rounded-2xl shadow-lg p-8 md:p-12 border border-zinc-200/80">
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-8 items-start ${project.layout === 'centered' ? 'lg:grid-cols-1' : ''}`}>
+            <div className={`lg:col-span-1 flex flex-col h-full ${project.layout === 'inverted' ? 'lg:order-last' : ''} ${project.layout === 'centered' ? 'lg:order-none lg:text-center lg:items-center' : ''}`}>
+                <div>
+                    <p className="font-semibold text-zinc-500">{project.client}</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black mt-1">{project.title}</h2>
+                    <div className={`flex flex-wrap gap-2 mt-4 ${project.layout === 'centered' ? 'justify-center' : ''}`}>
+                        {project.tags.map(tag => (
+                            <div key={tag.name} className="flex items-center bg-zinc-100 text-zinc-700 text-xs font-medium px-3 py-1.5 rounded-full">
+                                <span className="w-4 h-4 mr-1.5">{React.cloneElement(tag.icon, { className: 'w-full h-full' })}</span>
+                                {tag.name}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            ))}
+                <div className={`mt-auto pt-8 ${project.layout === 'centered' ? 'mt-8' : ''}`}>
+                     <a href="#" className="inline-block bg-zinc-900 text-white font-bold py-3 px-6 rounded-full transition-transform hover:scale-105">
+                        Смотреть кейс
+                    </a>
+                </div>
+            </div>
+            
+            <div className={`lg:col-span-2 ${project.layout === 'centered' ? 'lg:col-span-1 w-full' : ''}`}>
+                <div className="aspect-video bg-zinc-100 rounded-lg overflow-hidden">
+                    <img src={project.heroImage} alt={project.title} className="w-full h-full object-cover"/>
+                </div>
+            </div>
         </div>
-    </div>
+        
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-black">
+            <div>
+                <div className="flex items-center gap-3 text-purple-600 font-bold">
+                    <TaskIcon />
+                    <h3 className="text-xl">Задача</h3>
+                </div>
+                <p className="mt-2 text-zinc-600 border-l-2 border-zinc-200 pl-4">{project.task}</p>
+            </div>
+            <div>
+                <div className="flex items-center gap-3 text-purple-600 font-bold">
+                    <ProcessIcon />
+                    <h3 className="text-xl">Процесс</h3>
+                </div>
+                <ul className="mt-2 space-y-2">
+                    {project.process.map(item => (
+                        <li key={item.title}>
+                            <p className="font-semibold text-zinc-800">{item.title}</p>
+                            <p className="text-zinc-500 text-sm">{item.description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div>
+                 <div className="flex items-center gap-3 text-purple-600 font-bold">
+                    <ResultIcon />
+                    <h3 className="text-xl">Результаты</h3>
+                </div>
+                <div className="mt-2 space-y-2">
+                    {project.results.map(item => (
+                        <div key={item.label} className="flex items-baseline gap-3">
+                            <p className="text-3xl font-bold text-black">{item.value}</p>
+                            <p className="text-zinc-500">{item.label}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
 );
 
 
 // --- ГЛАВНЫЙ КОМПОНЕНТ СТРАНИЦЫ ---
 export default function Works() {
-
-    const [projectDev, projectDesign, projectTarget, projectNeonGhost] = allProjects;
-
     return (
-        <div className="min-h-screen bg-zinc-950 text-white font-muller noisy-bg">
+        <div className="min-h-screen bg-zinc-50 text-black">
             <Navbar />
             
-            <header className="py-24 md:py-32 px-8 text-center border-b-2 border-zinc-800/50">
-                <h1 className="font-dela text-6xl md:text-9xl uppercase tracking-tighter text-zinc-100">Наши <br/> работы</h1>
-                <p className="font-inter text-xl text-zinc-400 mt-6 max-w-4xl mx-auto">
-                    Мы проектируем системы для решения бизнес-задач. Это не просто проекты — это <span className="font-ppneue text-zinc-200">архитектура результата.</span>
+            <header className="py-24 md:py-32 px-4 text-center">
+                <h1 className="text-5xl md:text-7xl font-black text-zinc-900">Наши кейсы</h1>
+                <p className="text-lg text-zinc-600 mt-4 max-w-3xl mx-auto">
+                    Мы не просто создаем сайты и запускаем рекламу. Мы решаем конкретные бизнес-задачи, погружаясь в каждый проект.
                 </p>
             </header>
             
-            <main className="p-8 md:p-16 space-y-24 md:space-y-32">
-
-                {/* --- ПРОЕКТЫ 1, 2, 3 (без изменений) --- */}
-                <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div className="w-full h-full min-h-[400px]">
-                         <img src={projectDev.heroImage} alt={projectDev.title} className="w-full h-full object-cover rounded-2xl shadow-2xl shadow-black/30 grayscale"/>
-                    </div>
-                    <div>
-                        <p className="font-jost text-zinc-500 uppercase tracking-widest text-sm">{projectDev.category}</p>
-                        <h2 className="font-ppneue text-5xl md:text-7xl text-white leading-tight mt-2">{projectDev.title}</h2>
-                        <h3 className="font-aradora text-2xl text-zinc-300 font-light italic mt-1">{projectDev.client}</h3>
-                        <p className="font-muller text-lg text-zinc-400 mt-6 leading-relaxed border-l-2 border-zinc-700 pl-6">{projectDev.task}</p>
-                        <ResultsSection results={projectDev.results} />
-                    </div>
-                </section>
-                <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div className="lg:order-last w-full h-full min-h-[400px]">
-                         <img src={projectDesign.heroImage} alt={projectDesign.title} className="w-full h-full object-cover rounded-2xl shadow-2xl shadow-black/30 grayscale"/>
-                    </div>
-                    <div className="lg:order-first">
-                        <p className="font-jost text-zinc-500 uppercase tracking-widest text-sm">{projectDesign.category}</p>
-                        <h2 className="font-playfair text-5xl md:text-7xl italic text-white leading-tight mt-2">{projectDesign.title}</h2>
-                        <h3 className="font-aradora text-2xl text-zinc-300 font-light italic mt-1">{projectDesign.client}</h3>
-                        <p className="font-muller text-lg text-zinc-400 mt-6 leading-relaxed">{projectDesign.task}</p>
-                        <ResultsSection results={projectDesign.results} />
-                    </div>
-                </section>
-                <section className="flex flex-col items-center text-center">
-                     <p className="font-jost text-zinc-500 uppercase tracking-widest text-sm">{projectTarget.category}</p>
-                     <h2 className="font-dela text-5xl md:text-7xl text-white leading-tight mt-2">{projectTarget.title}</h2>
-                     <h3 className="font-aradora text-2xl text-zinc-300 font-light italic mt-1">{projectTarget.client}</h3>
-                     <div className="w-full h-[50vh] mt-8 overflow-hidden rounded-2xl shadow-2xl shadow-black/30 border border-zinc-800">
-                         <img src={projectTarget.heroImage} alt={projectTarget.title} className="w-full h-full object-cover grayscale"/>
-                     </div>
-                     <p className="font-muller text-lg text-zinc-400 mt-8 max-w-3xl mx-auto leading-relaxed">{projectTarget.task}</p>
-                     <ResultsSection results={projectTarget.results} />
-                </section>
-
-                {/* --- НОВЫЙ ПРОЕКТ 4: Макет "Текст слева, изображение справа" --- */}
-                <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <p className="font-jost text-zinc-500 uppercase tracking-widest text-sm">{projectNeonGhost.category}</p>
-                        <h2 className="font-gerhaus text-5xl md:text-7xl text-white leading-tight mt-2">{projectNeonGhost.title}</h2>
-                        <h3 className="font-aradora text-2xl text-zinc-300 font-light italic mt-1">{projectNeonGhost.client}</h3>
-                        <p className="font-muller text-lg text-zinc-400 mt-6 leading-relaxed border-l-2 border-zinc-700 pl-6">{projectNeonGhost.task}</p>
-                         
-                         <div className="mt-8 space-y-4">
-                            {projectNeonGhost.process.map(item => (
-                                <div key={item.step} className="p-4 border border-zinc-800 rounded-lg bg-black/20 shadow-inner shadow-black/10">
-                                    <h4 className="font-jost text-xl text-zinc-200">{item.step}</h4>
-                                    <p className="font-muller text-base text-zinc-500 mt-1">{item.description}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                     <div className="w-full h-full min-h-[500px] lg:order-last">
-                         <img src={projectNeonGhost.heroImage} alt={projectNeonGhost.title} className="w-full h-full object-cover rounded-2xl shadow-2xl shadow-black/30 grayscale"/>
-                     </div>
-                     {/* Результаты вынесены за сетку для акцента */}
-                     <div className="lg:col-span-2">
-                        <ResultsSection results={projectNeonGhost.results} />
-                     </div>
-                </section>
-                
-
+            <main className="px-4 pb-16 md:pb-24 space-y-16">
+                <div className="container max-w-7xl mx-auto space-y-16">
+                    {projectsData.map(project => (
+                        <CaseCard key={project.id} project={project} />
+                    ))}
+                </div>
             </main>
 
-            <Footer 
-                topButtonText="О нашем агентстве" 
-                topButtonLink="/about"
-            />
+            <Footer />
         </div>
     );
 }
