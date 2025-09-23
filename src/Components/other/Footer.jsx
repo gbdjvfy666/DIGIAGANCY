@@ -1,122 +1,71 @@
-// Footer.jsx
 import React from "react";
 import '../../index.css';
 
 const Footer = () => {
+  // Общий стиль для всех кнопок-ссылок в футере
+  const buttonClasses = "px-4 py-2 bg-zinc-800 text-sm text-zinc-300 rounded-full hover:bg-zinc-700 hover:text-white transition-colors duration-200 hoverable";
+
   return (
-    <div className="bg-black w-full overflow-hidden">
-      <footer className="w-full py-7 bg-black relative overflow-hidden mt-10 border-t border-zinc-800">
-        {/* Верхняя строка: Меню, Соцсети */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-start gap-8">
+    <footer className="bg-black text-white w-full overflow-hidden mt-20 border-t border-zinc-800 font-garet">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col items-center gap-12">
+        
+        {/* --- БЛОК С КНОПКАМИ --- */}
+        <div className="w-full flex flex-col sm:flex-row flex-wrap justify-center items-start text-center sm:text-left gap-10 sm:gap-16">
           
-          {/* Меню + Политики */}
-          <div>
-            <h3 className="font-dela mb-3 bg-white text-black py-1 px-42 shadow-md">
-              МЕНЮ
-            </h3>
-            <div className="grid grid-cols-2 gap-x-8 px-8 ">
-              {/* Левая колонка */}
-              <div className="flex flex-col gap-0">
-                <a
-                  href="/works"
-                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
-                >
-                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Работы</span>
-                </a>
-                <a
-                  href="/stories"
-                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
-                >
-                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Истории</span>
-                </a>
-                <a
-                  href="/about"
-                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
-                >
-                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">О нас</span>
-                </a>
-                {/* --- НОВЫЕ ССЫЛКИ НАЧАЛО --- */}
-                <a
-                  href="/blog" // Укажите правильный адрес для блога
-                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
-                >
-                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Блог</span>
-                </a>
-                <a
-                  href="/services/websites" // Укажите правильный адрес
-                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
-                >
-                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Сайты</span>
-                </a>
-                <a
-                  href="/services/design" // Укажите правильный адрес
-                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
-                >
-                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Дизайн</span>
-                </a>
-                <a
-                  href="/services/targeting" // Укажите правильный адрес
-                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
-                >
-                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Таргет</span>
-                </a>
-                {/* --- НОВЫЕ ССЫЛКИ КОНЕЦ --- */}
-              </div>
-              {/* Правая колонка (политики) */}
-              <div className="flex flex-col gap-0">
-                <a
-                  href="/cookies"
-                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 "
-                >
-                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Cookies</span>
-                </a>
-                <a
-                  href="/privacy"
-                  className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300"
-                >
-                  <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Privacy</span>
-                </a>
-              </div>
+          {/* Категория 1: МЕНЮ */}
+          <div className="flex flex-col items-center sm:items-start gap-3">
+            <h3 className="text-zinc-500 text-xs uppercase tracking-widest">Меню</h3>
+            <div className="w-full h-px bg-zinc-800"></div>
+            <div className="flex flex-wrap justify-center items-center gap-3">
+              <a href="/works" className={buttonClasses}>Работы</a>
+              <a href="/stories" className={buttonClasses}>Истории</a>
+              <a href="/about" className={buttonClasses}>О нас</a>
+              <a href="/blog" className={buttonClasses}>Блог</a>
+              <a href="/brief" className={buttonClasses}>Бриф</a>
+            </div>
+          </div>
+          
+          {/* Категория 2: УСЛУГИ */}
+          <div className="flex flex-col items-center sm:items-start gap-3">
+            <h3 className="text-zinc-500 text-xs uppercase tracking-widest">Услуги</h3>
+            <div className="w-full h-px bg-zinc-800"></div>
+            <div className="flex flex-wrap justify-center items-center gap-3">
+              <a href="/services/websites" className={buttonClasses}>Сайты</a>
+              <a href="/services/design" className={buttonClasses}>Дизайн</a>
+              <a href="/services/targeting" className={buttonClasses}>Таргет</a>
             </div>
           </div>
 
-          {/* Соцсети */}
-          <div className="md:ml-auto">
-            <h3 className="font-dela bg-white text-black py-1 px-30 shadow-md">
-              СОЦСЕТИ
-            </h3>
-            <div className="flex flex-col gap-0 px-8">
-              <a
-                href="https://www.instagram.com/nsbusinesshub/"
-                className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
-              >
-                <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Instagram</span>
-              </a>
-              <a
-                href="https://t.me/NSBusinessHub"
-                className="relative font-garet text-white group text-base md:text-lg leading-none transition-colors duration-300 hover:text-gray-300"
-              >
-                <span className="relative group-hover:after:scale-x-100 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300">Telegram</span>
-              </a>
+          {/* Категория 3: СОЦСЕТИ И ПОЛИТИКИ */}
+          <div className="flex flex-col items-center sm:items-start gap-3">
+            <h3 className="text-zinc-500 text-xs uppercase tracking-widest">Соцсети и Политики</h3>
+            <div className="w-full h-px bg-zinc-800"></div>
+            <div className="flex flex-wrap justify-center items-center gap-3">
+              <a href="https://www.instagram.com/nsbusinesshub/" className={buttonClasses} target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://t.me/NSBusinessHub" className={buttonClasses} target="_blank" rel="noopener noreferrer">Telegram</a>
+              <a href="/cookies" className={buttonClasses}>Cookies</a>
+              <a href="/privacy" className={buttonClasses}>Privacy</a>
             </div>
           </div>
 
         </div>
 
-        {/* Средняя строка: NSBH */}
-        <div className="w-full mt-8 flex justify-center items-center relative">
-          <span className="relative z-10 font-extrabold text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-neutral-800 select-none font-deutsch">
+        {/* --- НИЖНИЙ БЛОК: ЛОГО И КОПИРАЙТ --- */}
+        <div className="w-full max-w-2xl pt-12 mt-8 border-t border-zinc-800 flex flex-col items-center gap-6">
+          <h1 className="font-extrabold text-5xl sm:text-7xl md:text-8xl text-white select-none font-deutsch pb-3">
             NSBH
-          </span>
-        </div>
-
-        <div className="w-full mt-12 pt-6 border-t border-zinc-800 flex justify-center items-center">
-          <p className="text-gray-400 text-sm">
+          </h1>
+          
+          {/* --- ВОТ НОВАЯ ЛИНИЯ --- */}
+          <div className="w-full h-px bg-zinc-800"></div>
+          
+          <p className="text-zinc-500 text-sm">
             © {new Date().getFullYear()} NSBH. Все права защищены.
           </p>
         </div>
-      </footer>
-    </div>
+
+      </div>
+    </footer>
   );
 };
 

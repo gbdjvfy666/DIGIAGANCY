@@ -82,11 +82,12 @@ export default function SpacePage() {
       startAnimation();
     };
 
-    const handleWheel = (e) => {
-      e.preventDefault();
-      targetX = clamp(targetX + e.deltaY * WHEEL_SENSITIVITY, 0, maxScroll);
-      startAnimation();
-    };
+    // --- ИЗМЕНЕНИЕ 1: Функция для скролла колесиком закомментирована ---
+    // const handleWheel = (e) => {
+    //   e.preventDefault();
+    //   targetX = clamp(targetX + e.deltaY * WHEEL_SENSITIVITY, 0, maxScroll);
+    //   startAnimation();
+    // };
 
     const handleMouseDown = (e) => {
         if (e.target.closest(".left-menu") || e.target.closest(".copy-email")) return;
@@ -249,7 +250,8 @@ export default function SpacePage() {
 
     copyEmailBtnRef.current?.addEventListener("click", handleCopyEmail);
     sectionNavItems.forEach(item => item.addEventListener("click", handleNavItemClick));
-    horizontalContainerRef.current?.addEventListener("wheel", handleWheel, { passive: false });
+    // --- ИЗМЕНЕНИЕ 2: Слушатель события 'wheel' закомментирован ---
+    // horizontalContainerRef.current?.addEventListener("wheel", handleWheel, { passive: false });
     horizontalContainerRef.current?.addEventListener("mousedown", handleMouseDown);
     horizontalContainerRef.current?.addEventListener("touchstart", handleTouchStart, { passive: true });
     horizontalContainerRef.current?.addEventListener("touchmove", handleTouchMove, { passive: false });
@@ -270,7 +272,8 @@ export default function SpacePage() {
         
         copyEmailBtnRef.current?.removeEventListener("click", handleCopyEmail);
         sectionNavItems.forEach(item => item.removeEventListener("click", handleNavItemClick));
-        horizontalContainerRef.current?.removeEventListener("wheel", handleWheel);
+        // --- ИЗМЕНЕНИЕ 3: Удаление слушателя 'wheel' закомментировано ---
+        // horizontalContainerRef.current?.removeEventListener("wheel", handleWheel);
         horizontalContainerRef.current?.removeEventListener("mousedown", handleMouseDown);
         horizontalContainerRef.current?.removeEventListener("touchstart", handleTouchStart);
         horizontalContainerRef.current?.removeEventListener("touchmove", handleTouchMove);
@@ -283,7 +286,7 @@ export default function SpacePage() {
 
   }, []); // Пустой массив зависимостей означает, что этот useEffect выполнится только один раз.
 
-  // Этот useEffect остаётся для управления классом на wrapper'е при клике на меню
+  // ... остальная часть вашего компонента остается без изменений ...
   useEffect(() => {
     if (mainWrapperRef.current) {
       if (menuExpanded) {
@@ -299,6 +302,7 @@ export default function SpacePage() {
   };
 
   return (
+    // ... ваш JSX остается без изменений ...
     <>
       <div ref={mainWrapperRef} className="main-wrapper">
         <div className="left-menu"> {/* leftMenuRef больше не нужен, т.к. поиск идет от mainWrapperRef */}
