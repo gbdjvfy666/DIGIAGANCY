@@ -126,7 +126,7 @@ const NoiseBacgroundBig = ({ children }) => {
     <div 
       ref={containerRef}
       className="noise-background-container relative"
-      style={{ width: '100%', height: '250vh' }}
+      style={{ width: '100%', height: '220vh' }}
     >
       <div className="absolute inset-0 z-0">
         <div ref={sceneRef} className="three-container"></div>
