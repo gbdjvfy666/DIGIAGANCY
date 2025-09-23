@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Navbar from '../Components/other/Navbar';
 import Footer from '../Components/other/Footer';
 
 // Компонент для анимированного контейнера
@@ -38,9 +37,7 @@ const FancyDivider = () => (
 export default function Brief() {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 dark:text-white overflow-x-hidden">
-      <Navbar />
-
-      {/* Контейнер для хлебных крошек, прижатый к левому краю */}
+      {/* {хлебные крошки} */}
       <div className="w-full relative">
         <div className="absolute top-20 left-20 pl-5 z-50 text-sm md:text-base text-zinc-500 dark:text-zinc-400">
           <Link to="/" className="hover:underline hover:text-blue-500 transition-colors">Главная</Link>

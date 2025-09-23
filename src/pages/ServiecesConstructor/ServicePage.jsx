@@ -13,7 +13,6 @@ import WebsiteTypesGrid from './ServiceBlocks/WebsiteTypesGrid';
 import PricingBlock from './ServiceBlocks/PricingBlock';
 import ContactFormBlock from './ServiceBlocks/ContactFormBlock';
 
-import Navbar from '@/Components/other/Navbar';
 import Footer from '@/Components/other/Footer';
 
 const blockComponents = {
@@ -55,7 +54,6 @@ export default function ServicePage() {
   return (
 
     <div className="min-h-screen bg-black text-white">
-      <Navbar />
       <main>
         
         <div className="container max-w-8xl mx-auto px-4 pt-24">

@@ -1,6 +1,5 @@
 import React, { Suspense, lazy, useMemo } from 'react';
 
-import Navbar from "../Components/other/Navbar";
 import Footer from "../Components/other/Footer";
 import '../index.css';
 import LOGO_WHITE from '../assets/LOGO_WHITE.png';
@@ -40,7 +39,6 @@ export default function Design() {
     <div className="bg-black text-gray-200 min-h-screen font-garet relative overflow-x-hidden">
       
       <div className="relative z-10">
-        <Navbar />
 
         {/* Hero Section */}
         <section className="max-w-6xl mx-auto px-6 py-30 text-center space-y-6">

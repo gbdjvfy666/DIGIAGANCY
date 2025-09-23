@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../Components/other/Navbar.jsx';
 import '../index.css';
 import VideoGrid from '../Components/animatedblock/ServicesGrid.jsx';
 import ParallaxCardSlider from '../Components/animatedblock/ParallaxCardSlider.jsx';
@@ -34,7 +33,6 @@ export default function Home() {
       <Divider />
       {/* Остальные компоненты */}
       <div className="flex-grow bg-white dark:bg-zinc-900 px-0">
-        <Navbar />
         <VideoGrid />
       </div>
       <StarBackground />

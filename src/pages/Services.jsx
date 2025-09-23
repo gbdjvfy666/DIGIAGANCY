@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from '../Components/other/Navbar';
 import Footer from '../Components/other/Footer';
 
 // ===================================================================================
@@ -93,7 +92,7 @@ export default function Services() {
 
     return (
         <div className="min-h-screen bg-black text-white overflow-x-hidden">
-            <Navbar />
+
             <main className="container mx-auto px-4 py-12 lg:py-24 max-w-8xl">
                 <div className="mb-8 text-zinc-400">
                     <Link to="/" className="hover:text-white">Главная</Link> /

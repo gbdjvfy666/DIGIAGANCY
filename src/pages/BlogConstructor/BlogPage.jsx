@@ -7,8 +7,6 @@ import BlogCommentsBlock from './BlogBlocks/BlogCommentsBlock';
 import BlogRecommendedBlock from './BlogBlocks/BlogRecommendedBlock';
 import TagsNavBlock from './BlogBlocks/TagsNavBlock'; 
 import PostsGridBlock from './BlogBlocks/PostsGridBlock'; 
-// import BreadcrumbsBlock from './BlogBlocks/BreadcrumbsBlock'; // <--- 1. УДАЛИТЕ ЭТУ СТРОКУ
-import Navbar from '@/Components/other/Navbar';
 import Footer from '@/Components/other/Footer';
 
 const blockComponents = {
@@ -43,7 +41,7 @@ export default function BlogPage() {
 
     return (
         <div className={`min-h-screen ${isIndexPage ? 'bg-white text-black' : 'bg-black text-white'}`}>
-            <Navbar />
+
             <main className="pt-24">
                 
                 <div className={`container max-w-8xl mx-auto px-4 mb-8 ${isIndexPage ? 'text-black' : 'text-zinc-400'}`}>

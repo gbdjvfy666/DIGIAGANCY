@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../Components/other/Navbar.jsx';
 import Footer from '../Components/other/Footer.jsx';
 import '../index.css';
 
@@ -201,8 +200,6 @@ export default function About() {
             </div>
 
             <div className="relative z-10">
-                <Navbar />
-
                 <header className="relative w-full">
 
                     <div className="min-h-screen flex flex-col justify-between p-8 md:p-12">

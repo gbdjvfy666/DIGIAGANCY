@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../Components/other/Navbar.jsx';
 import Footer from '../Components/other/Footer.jsx';
 import '../index.css';
 
@@ -186,7 +185,7 @@ const CaseCard = ({ project }) => (
 export default function Works() {
     return (
         <div className="min-h-screen bg-zinc-50 text-black">
-            <Navbar />
+
             
             <header className="py-24 md:py-32 px-4 text-center">
                 <h1 className="text-5xl md:text-7xl font-black text-zinc-900">Наши кейсы</h1>

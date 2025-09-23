@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useState } from "react";
 import { motion } from "framer-motion";
-import Navbar from "../Components/other/Navbar";
 import Footer from "../Components/other/Footer";
 import Silk from "../Components/background/Silk";
 import '../index.css';
@@ -68,101 +67,100 @@ export default function PremiumVkTarget() {
             <div className="fixed inset-0 z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,_rgba(20,22,38,0)_0%,_rgba(12,12,20,1)_90%)]"></div>
 
             <div className="relative z-20">
-                <Navbar />
-{/* Hero Section */}
-<section className="relative min-h-screen flex flex-col md:flex-row items-center px-6 py-20">
-    <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-        
-        {/* Левая часть - Заголовок и текст */}
-        <div className="w-full md:w-1/2 text-center md:text-left">
-            <h1 
-                className="font-unbounded font-bold text-5xl md:text-7xl leading-tight text-white mb-8 md:mb-12 whitespace-nowrap" 
-                style={{ textShadow: '0 0 25px rgba(255, 255, 255, 0.1)' }}
-            >
-                ТАРГЕТ РЕКЛАМА
-            </h1>
+            {/* Hero Section */}
+            <section className="relative min-h-screen flex flex-col md:flex-row items-center px-6 py-20">
+                <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+                    
+                    {/* Левая часть - Заголовок и текст */}
+                    <div className="w-full md:w-1/2 text-center md:text-left">
+                        <h1 
+                            className="font-unbounded font-bold text-5xl md:text-7xl leading-tight text-white mb-8 md:mb-12 whitespace-nowrap" 
+                            style={{ textShadow: '0 0 25px rgba(255, 255, 255, 0.1)' }}
+                        >
+                            ТАРГЕТ РЕКЛАМА
+                        </h1>
 
-            <p className="text-xl md:text-2xl font-garet text-gray-300 mb-8 leading-relaxed">
-                Профессиональная настройка рекламы с гарантией результата. <br className="hidden md:inline"/> Приводим клиентов, а не просто клики.
-            </p>
+                        <p className="text-xl md:text-2xl font-garet text-gray-300 mb-8 leading-relaxed">
+                            Профессиональная настройка рекламы с гарантией результата. <br className="hidden md:inline"/> Приводим клиентов, а не просто клики.
+                        </p>
 
-            {/* КАРТОЧКА */}
-            <div
-                className="bg-white/10 backdrop-blur-md border border-blue-200/20 rounded-xl p-4 flex items-center gap-4 mb-8"
-            >
-                <div>
-                    {React.createElement(strategyIcons[2], { className: "w-8 h-8 text-blue-300 shrink-0" })}
+                        {/* КАРТОЧКА */}
+                        <div
+                            className="bg-white/10 backdrop-blur-md border border-blue-200/20 rounded-xl p-4 flex items-center gap-4 mb-8"
+                        >
+                            <div>
+                                {React.createElement(strategyIcons[2], { className: "w-8 h-8 text-blue-300 shrink-0" })}
+                            </div>
+                            <p className="text-sm text-blue-100/80">
+                                Используем **AI-алгоритмы** для гиперсегментации аудитории и достижения максимального ROI.
+                            </p>
+                        </div>
+                        
+                        {/* Кнопки */}
+                        <div className="flex flex-col sm:flex-row gap-6">
+                            <a 
+                                href="#contact" 
+                                className="relative group w-full sm:w-90 overflow-hidden rounded-lg"
+                                onMouseEnter={() => setIsHovered(true)} 
+                                onMouseLeave={() => setIsHovered(false)}
+                            >
+                                <div className="absolute inset-0 z-10">
+                                    <Suspense fallback={<div className="w-full h-full bg-blue-900/50 rounded-lg" />}>
+                                        <PrismaticBurst 
+                                            colors={isHovered ? hoverColors : defaultColors} 
+                                            animationType="rotate3d" 
+                                            intensity={1.5} 
+                                            speed={0.4} 
+                                            distort={0.8} 
+                                            rayCount={14} 
+                                        />
+                                    </Suspense>
+                                </div>
+                                <span className="absolute inset-0 z-10 rounded-lg border-2 border-white/50 group-hover:border-white transition-colors duration-300"></span>
+                                <div className="relative z-20 flex items-center justify-center px-8 py-4 font-bold text-lg text-white">
+                                    Получить консультацию
+                                </div>
+                            </a>
+
+                            {/* КНОПКА С ФОНОМ */}
+                            <a 
+                                href="#cases" 
+                                className="relative group w-full sm:w-90 overflow-hidden rounded-lg"
+                                onMouseEnter={() => setIsHovered2(true)}
+                                onMouseLeave={() => setIsHovered2(false)}
+                            >
+                                <div className="absolute inset-0 z-10">
+                                    <Suspense fallback={<div className="w-full h-full bg-blue-900/50 rounded-lg" />}>
+                                        <PrismaticBurst 
+                                            colors={isHovered2 ? hoverColors2 : defaultColors2} 
+                                            animationType="rotate3d" 
+                                            intensity={1.5} 
+                                            speed={0.4} 
+                                            distort={0.8} 
+                                            rayCount={14} 
+                                        />
+                                    </Suspense>
+                                </div>
+                                <span className="absolute inset-0 z-10 rounded-lg border-2 border-white/50 group-hover:border-white transition-colors duration-300"></span>
+                                <div className="relative z-20 flex items-center justify-center px-8 py-4 font-bold text-lg text-white">
+                                    кейсы
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div
+                        className="hidden md:block w-full md:w-1/2 flex items-center justify-center relative aspect-square max-w-2xl shrink-0"
+                    >
+                        <span 
+                            className="font-black font-monoton text-[29rem] text-white opacity-80 select-none" 
+                            style={{ textShadow: '0 0 25px rgba(0,0,0,0.5)' }}
+                        >
+                            VK
+                        </span>
+                    </div>
                 </div>
-                <p className="text-sm text-blue-100/80">
-                    Используем **AI-алгоритмы** для гиперсегментации аудитории и достижения максимального ROI.
-                </p>
-            </div>
-            
-            {/* Кнопки */}
-            <div className="flex flex-col sm:flex-row gap-6">
-                <a 
-                    href="#contact" 
-                    className="relative group w-full sm:w-90 overflow-hidden rounded-lg"
-                    onMouseEnter={() => setIsHovered(true)} 
-                    onMouseLeave={() => setIsHovered(false)}
-                >
-                    <div className="absolute inset-0 z-10">
-                        <Suspense fallback={<div className="w-full h-full bg-blue-900/50 rounded-lg" />}>
-                            <PrismaticBurst 
-                                colors={isHovered ? hoverColors : defaultColors} 
-                                animationType="rotate3d" 
-                                intensity={1.5} 
-                                speed={0.4} 
-                                distort={0.8} 
-                                rayCount={14} 
-                            />
-                        </Suspense>
-                    </div>
-                    <span className="absolute inset-0 z-10 rounded-lg border-2 border-white/50 group-hover:border-white transition-colors duration-300"></span>
-                    <div className="relative z-20 flex items-center justify-center px-8 py-4 font-bold text-lg text-white">
-                        Получить консультацию
-                    </div>
-                </a>
-
-                {/* КНОПКА С ФОНОМ */}
-                <a 
-                    href="#cases" 
-                    className="relative group w-full sm:w-90 overflow-hidden rounded-lg"
-                    onMouseEnter={() => setIsHovered2(true)}
-                    onMouseLeave={() => setIsHovered2(false)}
-                >
-                    <div className="absolute inset-0 z-10">
-                        <Suspense fallback={<div className="w-full h-full bg-blue-900/50 rounded-lg" />}>
-                            <PrismaticBurst 
-                                colors={isHovered2 ? hoverColors2 : defaultColors2} 
-                                animationType="rotate3d" 
-                                intensity={1.5} 
-                                speed={0.4} 
-                                distort={0.8} 
-                                rayCount={14} 
-                            />
-                        </Suspense>
-                    </div>
-                    <span className="absolute inset-0 z-10 rounded-lg border-2 border-white/50 group-hover:border-white transition-colors duration-300"></span>
-                    <div className="relative z-20 flex items-center justify-center px-8 py-4 font-bold text-lg text-white">
-                        кейсы
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <div
-            className="hidden md:block w-full md:w-1/2 flex items-center justify-center relative aspect-square max-w-2xl shrink-0"
-        >
-            <span 
-                className="font-black font-monoton text-[29rem] text-white opacity-80 select-none" 
-                style={{ textShadow: '0 0 25px rgba(0,0,0,0.5)' }}
-            >
-                VK
-            </span>
-        </div>
-    </div>
-</section>
+            </section>
 
                 {/* --- Trust Badges --- */}
                 <motion.section className="py-20" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}>

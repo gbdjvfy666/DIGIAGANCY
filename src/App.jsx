@@ -19,12 +19,13 @@ import ServicePage from './pages/ServiecesConstructor/ServicePage';
 import BlogPage from './pages/BlogConstructor/BlogPage'; 
 import CustomCursor from './Components/other/CustomCursor';
 // ===================================================================================
+import Navbar from './Components/other/Navbar';
+// ===================================================================================
 
 gsap.registerPlugin(ScrollTrigger);
 
 function AppContent() {
   const location = useLocation();
-  // Вызываем хук здесь и получаем ref и функцию
   const { containerRef, refreshScroll } = useSmoothScroll();
 
   useLayoutEffect(() => {
@@ -44,6 +45,7 @@ function AppContent() {
       ScrollTrigger.killAll();
     }
   }, [refreshScroll]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     setTimeout(() => {
@@ -51,33 +53,35 @@ function AppContent() {
     }, 100);
   }, [location.pathname, location.search, refreshScroll]);
 
-  // ===================================================================================
   return (
-    <div className="fixed top-0 left-0 w-full will-change-transform" ref={containerRef}>
-      <Routes>
-        {/* --- Основные страницы --- */}
-        <Route path="/" element={<Home />} />
-        <Route path="/target" element={<Target />} />
-        <Route path="/Design" element={<Design />} />
-        <Route path="/Test" element={<Test />} />
-        <Route path="/Reviews" element={<Reviews />} />
-        <Route path="/web-development" element={<WebDevelopment />} />
-        <Route path="/works" element={<Works />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Brief" element={<Brief />} />
-
-        {/* --- Маршруты для Услуг --- */}
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/:category" element={<ServicePage />} />
-        <Route path="/services/:category/:slug" element={<ServicePage />} />
-        <Route path="/services/websites/themes/:slug" element={<ServicePage />} />
-        
-        {/* --- Маршруты для Блога --- */}
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/blog/:slug" element={<BlogPage />} />
-
-      </Routes>
-    </div>
+    <>
+      <Navbar />
+      
+      <div className="fixed top-0 left-0 w-full will-change-transform" ref={containerRef}>
+        {/* 
+          ИЗМЕНЕНИЕ: Внутренний div с отступом убран. 
+          Теперь Routes является прямым потомком, и контент будет под навбаром.
+        */}
+        <Routes>
+          {/* --- Все ваши маршруты --- */}
+          <Route path="/" element={<Home />} />
+          <Route path="/target" element={<Target />} />
+          <Route path="/Design" element={<Design />} />
+          <Route path="/Test" element={<Test />} />
+          <Route path="/Reviews" element={<Reviews />} />
+          <Route path="/web-development" element={<WebDevelopment />} />
+          <Route path="/works" element={<Works />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/Brief" element={<Brief />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:category" element={<ServicePage />} />
+          <Route path="/services/:category/:slug" element={<ServicePage />} />
+          <Route path="/services/websites/themes/:slug" element={<ServicePage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPage />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 

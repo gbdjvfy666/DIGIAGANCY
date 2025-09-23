@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from '../Components/other/Navbar.jsx';
 import Footer from '../Components/other/Footer.jsx';
 import '../index.css';
 
@@ -129,7 +128,6 @@ export default function Reviews() {
                 )}
             </AnimatePresence>
             
-            <Navbar />
             
             <header className="py-24 md:py-32 px-8 text-center border-b-2 border-zinc-800">
                 <h1 className="font-bebas text-6xl md:text-9xl uppercase tracking-wider">Кейсы</h1>
