@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useState } from "react";
 import { motion } from "framer-motion";
-import Footer from "../Components/other/Footer";
 import Silk from "../Components/background/Silk";
 import '../index.css';
 
@@ -228,7 +227,6 @@ export default function PremiumVkTarget() {
                     </div>
                 </motion.section>
                 
-                <Footer />
             </div>
         </div>
     );

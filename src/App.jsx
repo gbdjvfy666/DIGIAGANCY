@@ -20,6 +20,7 @@ import BlogPage from './pages/BlogConstructor/BlogPage';
 import CustomCursor from './Components/other/CustomCursor';
 // ===================================================================================
 import Navbar from './Components/other/Navbar';
+import Footer from './Components/other/Footer';
 // ===================================================================================
 
 gsap.registerPlugin(ScrollTrigger);
@@ -57,11 +58,7 @@ function AppContent() {
     <>
       <Navbar />
       
-      <div className="fixed top-0 left-0 w-full will-change-transform" ref={containerRef}>
-        {/* 
-          ИЗМЕНЕНИЕ: Внутренний div с отступом убран. 
-          Теперь Routes является прямым потомком, и контент будет под навбаром.
-        */}
+      <div className="fixed top-0 left-0 w-full will-change-transform bg-black" ref={containerRef}>
         <Routes>
           {/* --- Все ваши маршруты --- */}
           <Route path="/" element={<Home />} />
@@ -80,6 +77,8 @@ function AppContent() {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPage />} />
         </Routes>
+        <Footer />
+        
       </div>
     </>
   );

@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import Footer from '../Components/other/Footer';
 
 // ===================================================================================
 // --- КОМПОНЕНТЫ ДЛЯ СТРАНИЦЫ ---
@@ -166,7 +165,6 @@ export default function Services() {
                     <DirectServiceLink title="Видеоролик" category="branding" />
                 </div>
             </main>
-            <Footer/>
         </div>
     );
 }

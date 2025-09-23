@@ -7,13 +7,9 @@ export default function Navbar() {
   return (
     <div className="fixed inset-x-0 top-0 z-50">
       <div className="relative w-full font-garet">
-        {/* --- ИЗМЕНЕНИЕ 1: Теперь главный контейнер просто центрирует содержимое --- */}
         <div className="flex justify-center items-center py-2 px-4 md:px-16 lg:px-24">
-          
-          {/* --- ИЗМЕНЕНИЕ 2: Создан ЕДИНЫЙ блок для ВСЕХ ссылок --- */}
           <div className="flex items-center gap-2 sm:gap-4 bg-white rounded-full py-1 px-2 sm:py-2 sm:px-4 border border-black/20 shadow-sm">
             
-            {/* NSBH теперь стилизован как кнопка */}
             <a
               href="/"
               aria-label="Home"
@@ -22,7 +18,6 @@ export default function Navbar() {
               NSBH
             </a>
             
-            {/* Центральные ссылки остались без изменений */}
             <a 
               className={`${buttonClasses} text-black hover:bg-black/20 hoverable pointer-events-auto`}
               href="/works"
@@ -31,14 +26,16 @@ export default function Navbar() {
             </a>
             
             <div className="relative group pointer-events-auto">
-              <button 
+              {/* --- ИЗМЕНЕНИЕ ЗДЕСЬ: <button> заменен на <a> --- */}
+              <a 
+                href="/services" // Укажите здесь путь к вашей общей странице услуг
                 className={`${buttonClasses} text-black hover:bg-black/20 flex items-center gap-1 hoverable`}
               >
                 Услуги
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
-              </button>
+              </a>
               
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-white rounded-lg shadow-lg border border-black/10
                               opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto
@@ -56,7 +53,6 @@ export default function Navbar() {
               Отзывы
             </a>
 
-            {/* --- ИЗМЕНЕНИЕ 3: Ссылки "Блог" и "О нас" перенесены сюда и стилизованы как кнопки --- */}
             <a
               className={`${buttonClasses} text-sm sm:text-base text-black hover:bg-black/20 hoverable pointer-events-auto`}
               href="/blog"

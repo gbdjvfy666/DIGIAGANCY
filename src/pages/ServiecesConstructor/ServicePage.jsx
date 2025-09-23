@@ -13,7 +13,6 @@ import WebsiteTypesGrid from './ServiceBlocks/WebsiteTypesGrid';
 import PricingBlock from './ServiceBlocks/PricingBlock';
 import ContactFormBlock from './ServiceBlocks/ContactFormBlock';
 
-import Footer from '@/Components/other/Footer';
 
 const blockComponents = {
   hero: HeroBlock,
@@ -83,8 +82,7 @@ export default function ServicePage() {
           return <Component key={index} {...props} />;
         })}
       </main>
-      
-      <Footer />
+
     </div>
   );
 }

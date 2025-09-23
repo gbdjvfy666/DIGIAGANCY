@@ -1,13 +1,12 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { blogPostsData } from './BlogData'; // Убрали blogCategoryData, так как он больше не нужен здесь
+import { blogPostsData } from './BlogData'; 
 import BlogHeroBlock from './BlogBlocks/BlogHeroBlock';
 import BlogContentBlock from './BlogBlocks/BlogContentBlock';
 import BlogCommentsBlock from './BlogBlocks/BlogCommentsBlock';
 import BlogRecommendedBlock from './BlogBlocks/BlogRecommendedBlock';
 import TagsNavBlock from './BlogBlocks/TagsNavBlock'; 
 import PostsGridBlock from './BlogBlocks/PostsGridBlock'; 
-import Footer from '@/Components/other/Footer';
 
 const blockComponents = {
   hero: BlogHeroBlock,
@@ -16,7 +15,6 @@ const blockComponents = {
   recommended: BlogRecommendedBlock,
   'tags-nav': TagsNavBlock,
   'posts-grid': PostsGridBlock,
-  // 'breadcrumbs': BreadcrumbsBlock, // <--- 2. УДАЛИТЕ ЭТУ СТРОКУ
 };
 
 export default function BlogPage() {
@@ -75,7 +73,6 @@ export default function BlogPage() {
                 })}
             </main>
             
-            <Footer />
         </div>
     );
 }

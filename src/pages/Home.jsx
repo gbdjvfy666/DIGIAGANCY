@@ -1,9 +1,7 @@
 import React from 'react';
 import '../index.css';
 import VideoGrid from '../Components/animatedblock/ServicesGrid.jsx';
-import ParallaxCardSlider from '../Components/animatedblock/ParallaxCardSlider.jsx';
 import FractalOrbComponent from '../Components/animatedblock/ProfileCard/FractalOrbComponent.jsx';
-import Footer from '../Components/other/Footer.jsx';
 import StarBackground from '../Components/background/StarBackground.jsx';
 import SpacePage from '../Components/animatedblock/Spaceswiper/SpacePage.jsx';
 // Импортируем NoiseBackgroundBig напрямую
@@ -37,13 +35,6 @@ export default function Home() {
       </div>
       <StarBackground />
       <SpacePage />
-      <ParallaxCardSlider />
-      <ParallaxCardSlider />
-      <ParallaxCardSlider />
-      <Footer
-        topButtonText="Дальше проекты"
-        topButtonLink="/projects"
-      />
     </div>
   );
 }

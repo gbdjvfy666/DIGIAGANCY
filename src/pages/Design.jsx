@@ -1,6 +1,5 @@
 import React, { Suspense, lazy, useMemo } from 'react';
 
-import Footer from "../Components/other/Footer";
 import '../index.css';
 import LOGO_WHITE from '../assets/LOGO_WHITE.png';
 
@@ -170,7 +169,6 @@ export default function Design() {
           </button>
         </section>
         
-        <Footer />
       </div>
     </div>
   );

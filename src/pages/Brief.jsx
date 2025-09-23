@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Footer from '../Components/other/Footer';
+
 
 // Компонент для анимированного контейнера
 const AnimatedSection = ({ children, delay = 0.1 }) => {
@@ -214,7 +214,6 @@ export default function Brief() {
           </motion.button>
         </form>
       </main>
-      <Footer/>
     </div>
   );
 }

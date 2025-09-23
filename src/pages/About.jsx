@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Footer from '../Components/other/Footer.jsx';
 import '../index.css';
 
 // --- ИМПОРТЫ ДЛЯ ФОНА ---
@@ -321,10 +320,6 @@ export default function About() {
                         </div>
                     </section>
                     
-                    <Footer 
-                        topButtonText="Наши Услуги" 
-                        topButtonLink="/services"
-                    />
 
                 </header>
             </div>

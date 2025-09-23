@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../Components/other/Footer.jsx';
+
 import '../index.css';
 
 // Импортируем наши иконки для тегов. Убедитесь, что путь верный.
@@ -202,7 +202,6 @@ export default function Works() {
                 </div>
             </main>
 
-            <Footer />
         </div>
     );
 }

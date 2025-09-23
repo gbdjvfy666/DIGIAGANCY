@@ -3,12 +3,13 @@
 }
 
 body {
-
   cursor: none; 
 }
+
 a, button, .hoverable {
   cursor: none;
 }
+
 .cursor__ball {
   position: fixed;
   top: 0;
@@ -28,6 +29,7 @@ a, button, .hoverable {
 .cursor__ball circle {
   fill: #f0f0f0;
 }
+
 .cursor-container {
   position: fixed;
   top: 0;
@@ -37,18 +39,38 @@ a, button, .hoverable {
   pointer-events: none;
   z-index: 9999;
   transform: translateY(var(--scroll-y, 0px));
-  mix-blend-mode: difference; /* 👈 ПЕРЕНЕСИТЕ ЭТУ СТРОКУ СЮДА */
+  mix-blend-mode: difference;
 }
 
-/* Старые стили теперь применяются к дочерним элементам */
 .cursor-container .cursor__ball {
   position: absolute;
   top: 0;
   left: 0;
-  /* mix-blend-mode: difference; ❌ УДАЛИТЕ ЭТУ СТРОКУ ОТСЮДА */
   will-change: transform;
 }
 
 .cursor-container .cursor__ball circle {
   fill: #f0f0f0;
+}
+
+/* --- ИЗМЕНЕНИЯ ЗДЕСЬ --- */
+.cursor-arrows-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;  /* <-- ИЗМЕНЕНИЕ ЗДЕСЬ (было 36px) */
+  height: 100px; /* <-- ИЗМЕНЕНИЕ ЗДЕСЬ (было 36px) */
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cursor-arrow-icon {
+  width: 100%;
+  height: 100%;
+  stroke: #f0f0f0;
+  fill: none;
 }

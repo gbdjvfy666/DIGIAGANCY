@@ -330,7 +330,7 @@ export default function SpacePage() {
         </div>
 
         <div className="page-container">
-          <div className="horizontal-container" ref={horizontalContainerRef}>
+          <div className="horizontal-container cursor-slider-area" ref={horizontalContainerRef}>
             <div className="navigation">
               <div className="nav-text">СКРОЛЛ</div>
               <div className="nav-progress">
