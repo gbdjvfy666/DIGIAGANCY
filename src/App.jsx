@@ -1,9 +1,10 @@
+// App.jsx 
+
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import React, { useEffect, useLayoutEffect } from 'react';
-// ===================================================================================
 import Home from './pages/Home';
 import Design from './pages/Design';
 import Target from './pages/Target';
@@ -15,13 +16,10 @@ import About from './pages/About';
 import Brief from './pages/Brief';
 import Services from './pages/Services';
 import ServicePage from './pages/ServiecesConstructor/ServicePage';
-// ===================================================================================
 import BlogPage from './pages/BlogConstructor/BlogPage'; 
 import CustomCursor from './Components/other/CustomCursor';
-// ===================================================================================
 import Navbar from './Components/other/Navbar';
 import Footer from './Components/other/Footer';
-// ===================================================================================
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -57,10 +55,8 @@ function AppContent() {
   return (
     <>
       <Navbar />
-      
       <div className="fixed top-0 left-0 w-full will-change-transform bg-black" ref={containerRef}>
         <Routes>
-          {/* --- Все ваши маршруты --- */}
           <Route path="/" element={<Home />} />
           <Route path="/target" element={<Target />} />
           <Route path="/Design" element={<Design />} />
@@ -71,14 +67,13 @@ function AppContent() {
           <Route path="/About" element={<About />} />
           <Route path="/Brief" element={<Brief />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/services/:category" element={<ServicePage />} />
-          <Route path="/services/:category/:slug" element={<ServicePage />} />
           <Route path="/services/websites/themes/:slug" element={<ServicePage />} />
+          <Route path="/services/:category/:slug" element={<ServicePage />} />
+          <Route path="/services/:category" element={<ServicePage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPage />} />
         </Routes>
         <Footer />
-        
       </div>
     </>
   );

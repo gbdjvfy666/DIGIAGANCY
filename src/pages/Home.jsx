@@ -19,7 +19,6 @@ export default function Home() {
       <FractalOrbComponent />
       <Divider />
       <ServicesSection />
-
       <NoiseBackgroundBig>
         <div>
           <div className="min-h-screen w-full flex items-center justify-center px-8 lg:px-24">
@@ -28,21 +27,17 @@ export default function Home() {
               <div className="w-full lg:w-5/12">
                 <DigitalInfo /> 
               </div>
-
-              {/* Правая часть: Слайдер занимает чуть больше половины */}
               <div className="w-full lg:w-6/12">
                 <Slider />
               </div>
 
             </div>
           </div>
-
           <div className="min-h-screen w-full flex items-center justify-center p-4 md:p-8 lg:p-12">
             <DashboardCard />
           </div>
         </div>
       </NoiseBackgroundBig>
-
       <Divider />
       {/* Остальные компоненты */}
       <div className="flex-grow bg-white dark:bg-zinc-900 px-0">

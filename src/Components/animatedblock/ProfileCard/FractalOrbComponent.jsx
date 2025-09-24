@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, Suspense, lazy } from 'react';
 import * as THREE from 'three';
-import { Link } from 'react-router-dom'; // Импортируем Link
+import { Link } from 'react-router-dom';
 import './FractalOrbComponent.css';
 
 // Import the PrismaticBurst component lazily
@@ -351,20 +351,19 @@ const FractalOrbComponent = ({ width = '100%', height = '100vh' }) => {
                         создать продукт, а сформировать будущее вашего
                         бренда.
                     </p>
+                    <div style={{ marginTop: '2rem' }}>
+                        <Link to="/Brief">
+                            <PrismaticButton
+                                onClick={() => {}} 
+                                className="w-full flex items-center justify-center px-10 py-2"
+                                colors={['#6b7280', '#4b5563', '#374151']}
+                                hoverColors={['#9ca3af', '#6b7280', '#4b5563']}
+                            >
+                                Заполнить бриф
+                            </PrismaticButton>
+                        </Link>
+                    </div>
                 </div>
-            </div>
-            
-            <div className="brief-button-absolute-container">
-                <Link to="/Brief">
-                    <PrismaticButton
-                        onClick={() => {}} 
-                        className="w-full inline-flex items-center justify-center px-10 py-2"
-                        colors={['#f3f4f6', '#d1d5db', '#6b7280']}
-                        hoverColors={['#e5e7eb', '#d1d5db', '#9ca3af']}
-                    >
-                        Заполнить бриф
-                    </PrismaticButton>
-                </Link>
             </div>
         </div>
     );

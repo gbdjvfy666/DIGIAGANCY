@@ -1,4 +1,4 @@
-// src/pages/ServicePage.jsx
+// src/pages/ServiecesConstructor/ServicePage.jsx (Исправленная версия)
 
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
@@ -13,7 +13,6 @@ import WebsiteTypesGrid from './ServiceBlocks/WebsiteTypesGrid';
 import PricingBlock from './ServiceBlocks/PricingBlock';
 import ContactFormBlock from './ServiceBlocks/ContactFormBlock';
 
-
 const blockComponents = {
   hero: HeroBlock,
   gallery: ImageGalleryBlock,
@@ -27,16 +26,29 @@ const blockComponents = {
 export default function ServicePage() {
   let { category, slug } = useParams();
 
+  // Если slug отсутствует (например, для /services/websites), используем category как slug
   if (!slug) {
     slug = category;
   }
-  const currentCategoryInfo = categoryData[category];
+
+  // ==================================================================
+  // ИСПРАВЛЕННАЯ ЛОГИКА ПОИСКА ДАННЫХ
+  // ==================================================================
   let service;
-  if (category === 'websites' && servicesData.websites.themes[slug]) {
+  
+  // 1. Сначала проверяем, не является ли slug одной из "тематик".
+  //    Это самый специфичный случай.
+  if (servicesData.websites?.themes?.[slug]) {
     service = servicesData.websites.themes[slug];
+    // Если нашли, принудительно устанавливаем category, чтобы "хлебные крошки" работали
+    category = 'websites'; 
   } else {
+    // 2. Если это не "тематика", ищем как обычно.
     service = servicesData[category]?.[slug];
   }
+
+  const currentCategoryInfo = categoryData[category];
+  // ==================================================================
 
   if (!service || !currentCategoryInfo) {
     return (
@@ -51,21 +63,17 @@ export default function ServicePage() {
   }
   
   return (
-
     <div className="min-h-screen bg-black text-white">
       <main>
-        
         <div className="container max-w-8xl mx-auto px-4 pt-24">
           <div className="mb-8 text-zinc-400">
             <Link to="/" className="hover:text-white">Главная</Link> /
             <Link to="/services" className="hover:text-white"> Услуги</Link> /
-
             {slug !== category && (
               <>
                 <Link to={currentCategoryInfo.path} className="hover:text-white"> {currentCategoryInfo.title}</Link> /
               </>
             )}
-
             <span className="text-white"> {service.title}</span>
           </div>
         </div>
@@ -82,7 +90,6 @@ export default function ServicePage() {
           return <Component key={index} {...props} />;
         })}
       </main>
-
     </div>
   );
 }

@@ -3,11 +3,12 @@ import * as THREE from 'three';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import ResponsiveDemo from '@/Components/components/ResponsiveDemo';
+import { FaLaptopCode, FaShoppingCart, FaBuilding, FaSitemap, FaUtensils, FaGraduationCap } from 'react-icons/fa';
 
 const PrismaticBurst = lazy(() => import('@/Components/PrismaticBurst'));
 
+// Компонент PrismaticButton теперь используется только для главной кнопки
 const PrismaticButton = ({ onClick, children, colors, hoverColors, className = "" }) => {
-    // ... (код этого компонента не меняется)
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -18,6 +19,7 @@ const PrismaticButton = ({ onClick, children, colors, hoverColors, className = "
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className="absolute inset-0 z-10">
+                {/* Анимация рендерится всегда для этой кнопки */}
                 <Suspense fallback={<div className="w-full h-full bg-blue-900/50 rounded-lg" />}>
                     <PrismaticBurst
                         colors={isHovered ? hoverColors : colors}
@@ -37,37 +39,17 @@ const PrismaticButton = ({ onClick, children, colors, hoverColors, className = "
     );
 };
 
-const WorkCard = ({ title, image, description, onLearnMore }) => {
-    // ... (код этого компонента не меняется)
-    const defaultColors = ['#1d4ed8', '#0ea5e9', '#6366f1'];
-    const hoverColors = ['#93c5fd', '#bfdbfe', '#a5b4fc'];
-    
+// === НОВЫЙ КОМПОНЕНТ: Простая кнопка без анимации для карточек ===
+const SimpleButton = ({ onClick, children, className = "" }) => {
     return (
-        <div className="group/card relative flex flex-col text-left bg-white/5 border border-white/10 rounded-xl p-6 transition-all duration-300 hover:border-white/40 hover:bg-white/[0.08] hover:-translate-y-1.5 h-full">
-            <div className="aspect-video mb-5 rounded-lg overflow-hidden">
-                <img 
-                    src={image} 
-                    alt={title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" 
-                    loading="lazy" 
-                />
+        <button
+            onClick={onClick}
+            className={`group relative overflow-hidden rounded-lg border-2 border-white/50 bg-transparent hover:border-white hover:bg-white/10 transition-colors duration-300 ${className}`}
+        >
+            <div className="relative z-20 flex items-center justify-center py-2.5 px-4 font-medium text-white">
+                {children}
             </div>
-            <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-            <p className="text-gray-400 text-sm leading-relaxed flex-grow mb-6 font-sans">{description}</p>
-            <div className="mt-auto">
-                <PrismaticButton 
-                    onClick={onLearnMore} 
-                    colors={defaultColors} 
-                    hoverColors={hoverColors} 
-                    className="w-full"
-                >
-                    Подробнее
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 ml-2 transition-transform duration-200 group-hover/card:translate-x-1">
-                        <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
-                    </svg>
-                </PrismaticButton>
-            </div>
-        </div>
+        </button>
     );
 };
 
@@ -78,16 +60,18 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
     const sceneRef = useRef(null);
     const rendererRef = useRef(null);
     const animationIdRef = useRef(null);
+
+    // Состояние hoveredCardId больше не нужно, удаляем его
     
     const cardsData = [
-      { id: 'landing', title: 'Лендинг "под ключ"', image: 'https://images.unsplash.com/photo-1559028006-448665bd7c22?q=80&w=1920', description: 'Одностраничный сайт с выверенной структурой и дизайном для достижения максимальной конверсии. Идеален для запуска продукта или услуги.', path: '/web-development/landing' },
-      { id: 'shop', title: 'Интернет-магазин', image: 'https://images.unsplash.com/photo-1522204523234-8729aa6e-3d54?q=80&w=1920', description: 'Надежное e-commerce решение с каталогом, корзиной, оплатой и системой управления. Готово к масштабированию и высоким нагрузкам.', path: '/web-development/online-shop' },
-      { id: 'corporate', title: 'Корпоративный сайт', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1920', description: 'Профессиональное онлайн-представительство вашей компании. Повышает доверие, привлекает клиентов и партнеров.', path: '/web-development/corporate-site' },
-      { id: 'multi', title: 'Многостраничный сайт', image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1920', description: 'Сайт с полноценной информационной архитектурой: услуги, блог, о компании. Оптимальное решение для малого и среднего бизнеса.', path: '/web-development/multipage-site' },
-      { id: 'restaurant', title: 'Сайт для ресторана', image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1920', description: 'Элегантный сайт с меню, системой бронирования и фотогалереей. Создает правильную атмосферу и привлекает новых гостей.', path: '/web-development/restaurant-site' },
-      { id: 'courses', title: 'Платформа онлайн-курсов', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1920', description: 'Система для продажи образовательных продуктов: личные кабинеты, уроки, тесты и сертификаты. Монетизируйте свою экспертизу.', path: '/web-development/designer-site' },
+      { id: 'landing', title: 'Лендинг "под ключ"', icon: <FaLaptopCode />, description: 'Одностраничный сайт с выверенной структурой и дизайном для достижения максимальной конверсии. Идеален для запуска продукта или услуги.', path: '/web-development/landing' },
+      { id: 'shop', title: 'Интернет-магазин', icon: <FaShoppingCart />, description: 'Надежное e-commerce решение с каталогом, корзиной, оплатой и системой управления. Готово к масштабированию и высоким нагрузкам.', path: '/web-development/online-shop' },
+      { id: 'corporate', title: 'Корпоративный сайт', icon: <FaBuilding />, description: 'Профессиональное онлайн-представительство вашей компании. Повышает доверие, привлекает клиентов и партнеров.', path: '/web-development/corporate-site' },
+      { id: 'multi', title: 'Многостраничный сайт', icon: <FaSitemap />, description: 'Сайт с полноценной информационной архитектурой: услуги, блог, о компании. Оптимальное решение для малого и среднего бизнеса.', path: '/web-development/multipage-site' },
+      { id: 'restaurant', title: 'Сайт для ресторана', icon: <FaUtensils />, description: 'Элегантный сайт с меню, системой бронирования и фотогалереей. Создает правильную атмосферу и привлекает новых гостей.', path: '/web-development/restaurant-site' },
+      { id: 'courses', title: 'Платформа онлайн-курсов', icon: <FaGraduationCap />, description: 'Система для продажи образовательных продуктов: личные кабинеты, уроки, тесты и сертификаты. Монетизируйте свою экспертизу.', path: '/web-development/designer-site' },
     ];
-    
+
     const handleLearnMore = (path) => {
         navigate(path);
     };
@@ -230,7 +214,7 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
             <div className="relative z-20 flex flex-col h-full w-full">
                 
                 <div className="flex h-screen w-full items-center justify-center p-8 transition-all duration-500 ease-in-out">
-                    <div className="max-w-3xl text-center lg:text-left">
+                    <div className="max-w-5xl text-center lg:text-left">
                         <h1 style={{ fontFamily: 'var(--primary-font, sans-serif)' }} className="text-[clamp(2.8rem,10vw,4.5rem)] font-extrabold leading-tight tracking-[-0.05em] uppercase text-white lg:text-[clamp(4rem,6vw,7rem)] lg:leading-[0.95]">
                             <span className="block font-unbounded">Цифровые</span>
                             <span className="block lg:relative font-unbounded">Решения</span>
@@ -242,11 +226,10 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                         >
                             {'\u00A0'}
                         </p>
-                        <p className="font-sans mt-8 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg">
+                        <p className="font-sans mt-8 max-w-3xl text-base leading-relaxed text-gray-300 md:text-lg">
                             {`Мы — студия digital-дизайна и разработки. Наша задача — превратить ваши бизнес-цели в эффективные и эстетически выверенные веб-решения.`}
                         </p>
                         
-
                         <PrismaticButton
                             onClick={() => navigate('/services')}
                             className="mt-10 w-full inline-flex items-center"
@@ -256,8 +239,6 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                             Наши Услуги
                             <span className="ml-3 transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
                         </PrismaticButton>
-
-
                     </div>
                 </div>
 
@@ -291,13 +272,35 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                         {cardsData.map((card) => (
                             <motion.div 
                                 key={card.id}
+                                // onMouseEnter и onMouseLeave удалены
                                 variants={{
                                     hidden: { y: 20, opacity: 0 },
                                     visible: { y: 0, opacity: 1 },
                                 }}
                                 transition={{ duration: 0.5, ease: 'easeOut' }}
                             >
-                                <WorkCard {...card} onLearnMore={() => handleLearnMore(card.path)} />
+                                <div className="group/card relative flex flex-col text-left bg-white/5 border border-white/10 rounded-xl p-6 transition-all duration-300 hover:border-white/40 hover:bg-white/[0.08] hover:-translate-y-1.5 h-full">
+                                    <div className="w-full h-32 mb-5 flex items-center justify-center rounded-lg bg-white/10 text-sky-400">
+                                        <div className="text-5xl transition-transform duration-500 group-hover/card:scale-110">
+                                            {card.icon}
+                                        </div>
+                                    </div>
+                                    
+                                    <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
+                                    <p className="text-gray-400 text-sm leading-relaxed flex-grow mb-6 font-sans">{card.description}</p>
+                                    <div className="mt-auto">
+                                        {/* === ИСПОЛЬЗУЕМ НОВУЮ ПРОСТУЮ КНОПКУ === */}
+                                        <SimpleButton 
+                                            onClick={() => handleLearnMore(card.path)} 
+                                            className="w-full"
+                                        >
+                                            Подробнее
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 ml-2 transition-transform duration-200 group-hover:translate-x-1">
+                                                <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                                            </svg>
+                                        </SimpleButton>
+                                    </div>
+                                </div>
                             </motion.div>
                         ))}
                     </motion.div>
