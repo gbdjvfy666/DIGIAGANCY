@@ -1,4 +1,4 @@
-// главная страница услуг с анимацией и интерактивными карточками
+// ServicesSection.jsx (Финальная версия со смещением вправо)
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -16,7 +16,7 @@ const services = [
   { title: 'Брендбуки', price: '500 000 ₽', url: '/branding/brendbuk', img: LOGO_EXAMPLE_IMG },
   { title: 'Коммерческие предложения', price: '100 000 ₽', url: '/presentations/kommercheskoe-predlozhenie', img: LOGO_EXAMPLE_IMG },
   { title: 'Видеоролики', price: '100 000 ₽', url: '/branding/dizayn-animatsii-video-reklamy', img: LOGO_EXAMPLE_IMG },
-  { title: 'Маркетинг-киты', price: '200 000 ₽', url: '/presentations/marketing-kity', img: LOGO_EXAMPLE_IMG }, // Предполагаем, что это тип презентации
+  { title: 'Маркетинг-киты', price: '200 000 ₽', url: '/presentations/marketing-kity', img: LOGO_EXAMPLE_IMG },
 ];
 
 export default function ServicesSection() {
@@ -48,13 +48,17 @@ export default function ServicesSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <motion.div
-                  className="absolute w-[350px] h-[350px] bg-purple-600 rounded-full z-0"
-                  initial={{ x: '100%', y: '100%' }}
+                  className="absolute w-[350px] h-[350px] bg-gradient-to-br from-blue-500 to-purple-600 rounded-full z-0"
+                  
+                  // ==================================================================
+                  // ИЗМЕНЕНИЕ ЗДЕСЬ: Смещаем по 'x' с '40%' на '55%'
+                  // ==================================================================
+                  initial={{ y: '110%', x: '55%' }}
                   animate={{
-                    x: hoveredCard === index ? '55%' : '100%',
-                    y: hoveredCard === index ? '50%' : '100%',
+                    y: hoveredCard === index ? '15%' : '110%',
+                    x: hoveredCard === index ? '55%' : '55%',
                   }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
                 />
                 <div className="relative z-10 flex flex-col justify-between h-full">
                   <h3 className="text-3xl font-bold text-white">{service.title}</h3>

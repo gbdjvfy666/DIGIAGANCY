@@ -67,7 +67,12 @@ const NoiseBacgroundBig = ({ children }) => {
             centeredUV.x *= iResolution.x / iResolution.y;
             float light = calculateLight(centeredUV);
             vec3 baseColor = vec3(0.0);
-            baseColor = mix(baseColor, vec3(1.0), light * 2.0);
+
+            // ==========================================================
+            // ИЗМЕНЕНИЕ ЗДЕСЬ: Множитель яркости уменьшен с 2.0 до 1.0
+            // ==========================================================
+            baseColor = mix(baseColor, vec3(1.0), light * 1.0);
+
             float noise = hash(vUv * 3.5 + iTime * 0.1) * 0.15;
             baseColor += noise - 0.15 * 0.5;
             gl_FragColor = vec4(baseColor, 1.0);
@@ -132,9 +137,6 @@ const NoiseBacgroundBig = ({ children }) => {
         <div ref={sceneRef} className="three-container"></div>
         <div className="noise-effect"></div>
       </div>
-      {/* Здесь будет отображаться все содержимое, которое передается
-        внутрь компонента <NoiseBackgroundBig>.
-      */}
       <div className="z-10 relative">
         {children}
       </div>

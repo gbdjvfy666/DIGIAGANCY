@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+// DashboardCard.jsx (Полный и готовый код)
 
-// --- Вспомогательные компоненты для контента ---
+import React, { useState } from 'react';
+import GooeyNav from './GooeyNav'; // Убедитесь, что GooeyNav.jsx находится в той же папке или укажите правильный путь
+
+// --- Вспомогательные компоненты для контента (без изменений) ---
 
 // Иконка
 const Icon = ({ path }) => (
@@ -9,7 +12,7 @@ const Icon = ({ path }) => (
   </svg>
 );
 
-// Контент для вкладки "Гарантии" (без изменений)
+// Контент для вкладки "Гарантии"
 const GuaranteesContent = () => (
   <>
     <div className="mb-12">
@@ -61,7 +64,7 @@ const GuaranteesContent = () => (
   </>
 );
 
-// КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Полностью переработанный контент "О нас"
+// Контент для вкладки "О нас"
 const AboutContent = () => (
     <>
       <div className="mb-12">
@@ -72,7 +75,6 @@ const AboutContent = () => (
       <div className="w-full h-px bg-zinc-700 mb-12"></div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
-        {/* Колонка 1: Легкий старт */}
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-4">
             <Icon path="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.72.241c-.56.035-1.12.308-1.53.742L12 21.75l-2.02-2.721c-.41-.434-.97-.707-1.53-.742l-3.72-.241A2.062 2.062 0 013 14.894V10.608c0-.97.616-1.813 1.5-2.097L8.25 6.75l3.75-1.5 3.75 1.5 2.25 1.761zM10.5 10.5h3M10.5 13.5h3" />
@@ -83,7 +85,6 @@ const AboutContent = () => (
           </p>
         </div>
 
-        {/* Колонка 2: Уникальный дизайн */}
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-4">
             <Icon path="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.47 2.118v-.092c0-.537.436-.97.97-.97h.515c.245 0 .443-.198.443-.442V13.5a1.125 1.125 0 011.125-1.125h2.252c.577 0 1.042.465 1.042 1.042v3.282c0 .097-.059.185-.148.22l-2.443 1.162a.25.25 0 00-.076.365l3.513 4.925a.25.25 0 00.41-.161l.175-1.05a.25.25 0 00-.076-.288l-1.52-1.298a.25.25 0 01-.076-.288l.545-1.21a.25.25 0 01.385-.121l1.472 1.01a.25.25 0 00.364-.231l.243-1.458a.25.25 0 00-.364-.231l-1.472 1.01a.25.25 0 01-.385-.121l-.545-1.21a.25.25 0 01.076-.288l1.52-1.298a.25.25 0 00.076-.288l-.175-1.05a.25.25 0 00-.41-.161l-3.513 4.925a.25.25 0 00.076.365l2.443 1.162a.25.25 0 00.148.22z" />
@@ -97,7 +98,7 @@ const AboutContent = () => (
     </>
 );
 
-// Контент для вкладки "Старт" (без изменений)
+// Контент для вкладки "Старт"
 const StartContent = () => (
     <>
       <div className="text-center mb-12">
@@ -122,33 +123,60 @@ const StartContent = () => (
 // --- Основной компонент карточки ---
 const DashboardCard = () => {
   const [activeTab, setActiveTab] = useState('guarantees');
-  const activeButtonClasses = "px-6 py-3 bg-white text-zinc-900 font-medium rounded-full transition-colors duration-200";
-  const inactiveButtonClasses = "px-6 py-3 bg-white/10 text-zinc-200 rounded-full hover:bg-white/20 transition-colors duration-200";
+
+  const navItems = [
+    { id: 'guarantees', label: 'Гарантии' },
+    { id: 'about', label: 'О нас' },
+    { id: 'start', label: 'Старт' },
+  ];
+
+  const activeNavIndex = navItems.findIndex(item => item.id === activeTab);
+
+  const handleNavClick = (item) => {
+    setActiveTab(item.id);
+  };
 
   return (
-    <div className="w-full h-auto min-h-[700px] bg-zinc-900/50 border border-zinc-800 rounded-3xl backdrop-blur-sm overflow-hidden">
-      <div className="w-full flex flex-col p-4 md:p-8">
-        <div className="w-full">
-          <div className="w-full flex justify-between items-center">
-            <div className="w-24"><span className="font-deutsch text-2xl text-white">NSBH</span></div>
-            <div className="flex-grow flex justify-center">
-              <div className="flex items-center gap-4">
-                <button className={activeTab === 'guarantees' ? activeButtonClasses : inactiveButtonClasses} onClick={() => setActiveTab('guarantees')}>Гарантии</button>
-                <button className={activeTab === 'about' ? activeButtonClasses : inactiveButtonClasses} onClick={() => setActiveTab('about')}>О нас</button>
-                <button className={activeTab === 'start' ? activeButtonClasses : inactiveButtonClasses} onClick={() => setActiveTab('start')}>Старт</button>
+    <>
+      {/* ================================================================== */}
+      {/* 1. ДОБАВЛЯЕМ ОПРЕДЕЛЕНИЕ SVG ФИЛЬТРА. ОН БУДЕТ НЕВИДИМЫМ */}
+      <svg style={{ display: 'none' }} xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+          <filter id="gooey-filter">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feBlend in="SourceGraphic" in2="goo" />
+          </filter>
+        </defs>
+      </svg>
+      {/* ================================================================== */}
+
+      <div className="w-full h-auto min-h-[700px] bg-zinc-900/50 border border-zinc-800 rounded-3xl backdrop-blur-sm overflow-hidden">
+        <div className="w-full flex flex-col p-4 md:p-8">
+          <div className="w-full">
+            <div className="w-full flex justify-between items-center">
+              <div className="w-24"><span className="font-deutsch text-2xl text-white">NSBH</span></div>
+              
+              <div className="flex-grow flex justify-center">
+                <GooeyNav
+                  items={navItems}
+                  activeIndex={activeNavIndex}
+                  onItemClick={handleNavClick}
+                />
               </div>
+
+              <div className="w-24"></div>
             </div>
-            <div className="w-24"></div>
+            <div className="w-full h-px bg-zinc-700 mt-6"></div>
           </div>
-          <div className="w-full h-px bg-zinc-700 mt-6"></div>
-        </div>
-        <div className="w-full mt-12 text-left">
-          {activeTab === 'guarantees' && <GuaranteesContent />}
-          {activeTab === 'about' && <AboutContent />}
-          {activeTab === 'start' && <StartContent />}
+          <div className="w-full mt-12 text-left">
+            {activeTab === 'guarantees' && <GuaranteesContent />}
+            {activeTab === 'about' && <AboutContent />}
+            {activeTab === 'start' && <StartContent />}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
