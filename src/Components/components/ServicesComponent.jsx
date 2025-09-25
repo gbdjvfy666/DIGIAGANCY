@@ -49,10 +49,6 @@ export default function ServicesSection() {
               >
                 <motion.div
                   className="absolute w-[350px] h-[350px] bg-gradient-to-br from-blue-500 to-purple-600 rounded-full z-0"
-                  
-                  // ==================================================================
-                  // ИЗМЕНЕНИЕ ЗДЕСЬ: Смещаем по 'x' с '40%' на '55%'
-                  // ==================================================================
                   initial={{ y: '110%', x: '55%' }}
                   animate={{
                     y: hoveredCard === index ? '15%' : '110%',

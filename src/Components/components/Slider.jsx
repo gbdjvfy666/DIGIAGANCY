@@ -89,9 +89,8 @@ export default function Slider() {
   const [isVisible, setIsVisible] = useState(false);
   const prevIndex = useRef(0);
   const swiperRef = useRef(null);
-  const containerRef = useRef(null); // Создаем реф для контейнера
+  const containerRef = useRef(null);
 
-// Замените эту часть кода в вашем useEffect
 useEffect(() => {
     const observer = new IntersectionObserver(
         ([entry]) => {

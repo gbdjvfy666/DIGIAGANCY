@@ -1,16 +1,93 @@
-import React from 'react';
-import { gsap } from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import Divider from '@/Components/other/Divider';
-import FractalOrbComponentSecond from '../Components/animatedblock/ProfileCard/WebHero';
+import React, { Suspense, lazy, useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaShoppingCart, FaBuilding, FaRocket, FaCogs, FaSitemap, FaBullhorn } from 'react-icons/fa';
+import '../index.css';
 
-gsap.registerPlugin(ScrollToPlugin);
+// --- Компоненты ---
+import TubesBackground from '../Components/TubesBackground'; // Импортируем наш новый компонент
+
+
+const InfiniteScroller = ({ items, direction = 'left', type = 'outline' }) => {
+  const allItems = [...items, ...items];
+  const typeClasses = type === 'filled'
+    ? 'bg-zinc-800 border-zinc-700 text-zinc-200'
+    : 'border border-zinc-800 text-zinc-500 hover:bg-zinc-800 hover:text-white hover:border-zinc-700';
+  return (
+    <div className="infinite-scroller w-full overflow-hidden" data-direction={direction}>
+      <div className="scroller-inner">
+        {allItems.map((item, index) => (<div key={index} className={`tag font-medium ${typeClasses}`}>{item}</div>))}
+      </div>
+    </div>
+  );
+};
 
 export default function WebDevelopment() {
-  return (
-    <div className="min-h-screen bg-white dark:bg-zinc-900 dark:text-white overflow-x-hidden">
-      <FractalOrbComponentSecond />
-      <Divider/>
-    </div>
-  );
+  const allWebServices = useMemo(() => ({
+    byType: { title: "По типу", icon: <FaSitemap/>, items: ["Landing page", "Промо-сайт", "Сайт-визитка", "Портал", "Интернет-магазин", "Маркетплейс", "Доска объявлений", "Сайт-портфолио", "Блог", "Форум", "Каталог", "Сайт услуг", "Корпоративный сайт"] },
+    byTheme: { title: "По тематике", icon: <FaBuilding/>, items: ["Авто", "Логистика", "Строительство", "Недвижимость", "Ремонт", "Образование", "СМИ", "Медицина", "Туризм", "Юристы", "Рестораны", "Доставка еды", "Свадьба"] },
+    features: { title: "Услуги и технологии", icon: <FaCogs/>, items: ["Адаптивный дизайн", "Мобильная версия", "Доработка сайта", "Редизайн", "Интеграция с CRM", "Подключение платежей", "Настройка CDN", "Верстка макетов", "UI/UX аудит"] },
+    promotion: { title: "Продвижение", icon: <FaBullhorn/>, items: ["SEO-оптимизация", "Контекстная реклама", "PR-сопровождение", "Технический аудит сайта"] }
+  }), []);
+
+  const [activeTab, setActiveTab] = useState(Object.keys(allWebServices)[0]);
+
+  const mainWebServices = useMemo(() => [
+    { title: "Интернет-магазины и E-commerce", subtitle: "Продажи • Автоматизация • Масштабирование", description: "Создаем мощные E-commerce платформы, которые не просто продают, а становятся полноценным бизнес-инструментом. Интеграция с 1С, CRM, платежными системами и службами доставки.", icon: <FaShoppingCart />, features: ["Каталог с фильтрами и поиском", "Корзина и онлайн-оплата", "Личные кабинеты пользователей", "Интеграция со складскими системами"], animation: { colors: ["#4F46E5", "#14B8A6", "#DBEAFE"], lightsColors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"] }},
+    { title: "Корпоративные сайты и порталы", subtitle: "Имидж • Доверие • Коммуникация", description: "Разрабатываем серьезные веб-решения для B2B и крупных компаний. Сайт становится вашим цифровым офисом, который формирует имидж, привлекает партнеров и оптимизирует внутренние процессы.", icon: <FaBuilding />, features: ["Современный и строгий дизайн", "Сложная структура и навигация", "Раздел для инвесторов и партнеров", "Интеграция с внутренними сервисами"], animation: { colors: ["#4B5563", "#9CA3AF", "#F3F4F6"], lightsColors: ["#ffffff", "#e5e7eb", "#d1d5db", "#9ca3af"] }},
+    { title: "Landing Pages и Промо-сайты", subtitle: "Конверсия • Скорость • Эффект", description: "Проектируем и запускаем посадочные страницы, заточенные на одну цель — максимальную конверсию. Идеально для запуска новых продуктов, акций или сбора лидов.", icon: <FaRocket />, features: ["Продающая структура AIDA", "Анализ целевой аудитории", "Яркий, запоминающийся дизайн", "А/Б тестирование для повышения эффективности"], animation: { colors: ["#D946EF", "#F59E0B", "#FEFCE8"], lightsColors: ["#f967fb", "#53bc28", "#6958d5", "#ff008a"] }}
+  ], []);
+
+  const allServiceItemsForScroller = useMemo(() => Object.values(allWebServices).flatMap(cat => cat.items), [allWebServices]);
+  const scrollerPart1 = allServiceItemsForScroller.slice(0, Math.ceil(allServiceItemsForScroller.length / 2));
+  const scrollerPart2 = allServiceItemsForScroller.slice(Math.ceil(allServiceItemsForScroller.length / 2));
+
+  return (
+    <div className="bg-black text-gray-200 min-h-screen font-garet overflow-x-hidden">
+      
+      <section className="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+        <motion.div initial={{ opacity: 0, scale: 1.2 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut" }} className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"><span className="text-[30rem] md:text-[40rem] font-damione text-zinc-900 leading-none" aria-hidden="true">&lt;/&gt;</span></motion.div>
+        <div className="relative z-10 flex flex-col items-center">
+          <motion.h1 className="text-5xl md:text-8xl font-damione font-extrabold leading-tight uppercase tracking-wider text-white" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.2 } }, hidden: {} }}>
+            <motion.span variants={{ hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } }} className="inline-block">КОД,</motion.span>{' '}
+            <motion.span variants={{ hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } }} className="inline-block">КОТОРЫЙ</motion.span>{' '}
+            <motion.span variants={{ hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } }} className="inline-block text-zinc-400">ПРИНОСИТ</motion.span>{' '}
+            <motion.span variants={{ hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } }} className="inline-block text-zinc-400">РЕЗУЛЬТАТ</motion.span>
+          </motion.h1>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }} className="text-lg font-garet text-gray-400 max-w-2xl mx-auto mt-6">Мы превращаем дизайн-макеты в быстрые, функциональные и масштабируемые веб-сайты. Чистый код и современные технологии для решения ваших бизнес-задач.</motion.p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }} className="flex flex-col sm:flex-row items-center gap-6 mt-12">
+            <button className="flex items-center gap-3 px-8 py-4 bg-white text-black rounded-none font-bold text-lg hover:bg-gray-200 transition-colors duration-300 w-full sm:w-auto transform hover:scale-105"><span>Рассчитать проект</span><svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></button>
+            <button className="px-8 py-4 border border-zinc-700 font-garet text-white rounded-none font-bold hover:bg-zinc-900 transition-colors duration-300 w-full sm:w-auto">Наши кейсы</button>
+          </motion.div>
+        </div>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.5 }} className="absolute bottom-10 left-1/2 -translate-x-1/2"><div className="w-px h-16 bg-gradient-to-b from-transparent via-zinc-700 to-zinc-900"></div></motion.div>
+      </section>
+      
+      <section className="py-24 bg-black border-y border-zinc-800 overflow-hidden">
+        <div className="text-center mb-16 px-6"><h2 className="text-4xl md:text-6xl font-damione font-rubik tracking-wide">Технологии и Решения</h2><p className="text-lg text-gray-400 font-garet max-w-3xl mx-auto mt-4">От простых лендингов до сложных маркетплейсов — мы владеем всем стеком технологий для реализации ваших идей.</p></div>
+        <div className="space-y-6 transform -rotate-2 scale-110"><InfiniteScroller items={scrollerPart1} direction="left" /><InfiniteScroller items={scrollerPart2} direction="right" type="filled" /></div>
+      </section>
+
+      <section className="w-full px-6 py-24 bg-black border-t border-zinc-800">
+        <div className="text-center mb-20"><h2 className="text-4xl md:text-6xl font-damione font-rubik tracking-wide">Наши флагманские решения</h2><p className="text-lg text-gray-400 font-garet max-w-3xl mx-auto mt-4">Три ключевых направления, в которых мы сочетаем глубокую экспертизу, технологии и креативный подход.</p></div>
+        <div className="max-w-7xl mx-auto space-y-24">{mainWebServices.map((service, index) => (<motion.div key={index} className={`flex flex-col md:gap-16 lg:gap-24 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'}`} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+          <div className="w-full md:w-1/2"><div className="relative aspect-square rounded-none overflow-hidden border border-zinc-800"><Suspense fallback={<div className="w-full h-full bg-zinc-950" />}><TubesBackground colors={service.animation.colors} lightsColors={service.animation.lightsColors} /></Suspense><div className="relative z-20 flex items-center justify-center h-full text-center text-gray-300 pointer-events-none"><div className="text-8xl">{service.icon}</div></div></div></div>
+          <div className="w-full md:w-1/2 relative mt-8 md:mt-0"><span className="absolute -top-12 -left-4 text-[10rem] font-damione text-zinc-900 leading-none z-0" aria-hidden="true">0{index + 1}</span><div className="relative z-10"><p className="text-lg font-semibold text-indigo-400">{service.subtitle}</p><h3 className="text-4xl md:text-5xl font-bold font-deutsch tracking-wider text-white mt-4">{service.title}</h3><p className="text-gray-400 mt-6 text-lg leading-relaxed">{service.description}</p><ul className="space-y-4 mt-8">{service.features.map((feature, i) => (<li key={i} className="flex items-start text-gray-300"><svg className="w-6 h-6 mr-3 text-green-500 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span>{feature}</span></li>))}</ul><div className="flex flex-col sm:flex-row gap-4 mt-10"><button className="px-6 py-3 bg-white text-black rounded-none font-bold hover:bg-gray-200 transition flex-1">Рассчитать стоимость</button><button className="px-6 py-3 border border-zinc-700 rounded-none font-bold hover:bg-zinc-800 transition flex-1">Смотреть кейсы</button></div></div></div>
+        </motion.div>))}</div>
+      </section>
+
+      <section className="px-6 py-24 bg-zinc-950 border-y border-zinc-900">
+        <div className="text-center mb-16"><h2 className="text-4xl md:text-6xl font-damione font-rubik tracking-wide">Все наши компетенции</h2><p className="text-lg text-gray-400 font-garet max-w-3xl mx-auto mt-4">Мы предлагаем полный цикл услуг по созданию и поддержке веб-проектов.</p></div>
+        <div className="max-w-7xl mx-auto"><div className="flex flex-wrap justify-center gap-x-2 gap-y-3 mb-12">{Object.keys(allWebServices).map(key => (<button key={key} onClick={() => setActiveTab(key)} className={`relative flex items-center px-5 py-2 text-base font-medium rounded-full transition-colors duration-300 ${activeTab === key ? 'text-white' : 'text-gray-500 hover:text-white'}`}>{allWebServices[key].icon}<span className="ml-2">{allWebServices[key].title}</span>{activeTab === key && (<motion.div className="absolute bottom-[-2px] left-0 right-0 h-0.5 bg-white" layoutId="underline-web" />)}</button>))}</div><AnimatePresence mode="wait"><motion.div key={activeTab} initial="hidden" animate="visible" exit="hidden" variants={{ visible: { transition: { staggerChildren: 0.05 } }, hidden: {} }} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">{allWebServices[activeTab].items.map((item) => {const descriptions = { "Landing page": "Конверсионные страницы для запуска продуктов.", "Интернет-магазин": "Надежные E-commerce решения для онлайн-продаж.", "Корпоративный сайт": "Цифровое представительство вашего бизнеса.", "Маркетплейс": "Платформы для объединения продавцов и покупателей.", "Адаптивный дизайн": "Идеальное отображение на всех устройствах.", "Доработка сайта": "Улучшаем и расширяем функционал существующих проектов.", "SEO-оптимизация": "Фундамент для высоких позиций в поиске." }; return (<motion.div key={item} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 },}} transition={{ duration: 0.4 }} className="relative bg-zinc-900 border border-zinc-800 p-6 rounded-none group h-full flex flex-col hover:border-white hover:-translate-y-1.5 transition-all duration-300"><h3 className="text-lg font-bold text-white transition-colors duration-300">{item}</h3><p className="text-sm text-gray-500 mt-2 flex-grow">{descriptions[item] || "Современные решения для вашего проекта."}</p><svg className="absolute top-4 right-4 w-6 h-6 text-zinc-700 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></motion.div>);})}</motion.div></AnimatePresence></div>
+      </section>
+      
+      <section className="py-24 bg-black">
+        <div className="max-w-5xl mx-auto px-6"><div className="text-center mb-20"><h2 className="text-4xl md:text-6xl font-damione font-rubik tracking-wide">От идеи до запуска за 5 шагов</h2><p className="text-lg text-gray-400 font-garet max-w-3xl mx-auto mt-6">Наш отлаженный процесс гарантирует предсказуемый результат в установленные сроки.</p></div><div className="relative"><div className="absolute left-6 md:left-8 top-8 h-[calc(100%-2rem)] w-px bg-zinc-800" aria-hidden="true"></div><div className="space-y-16">{[{ step: "01", title: "Анализ и Прототип", description: "Глубоко погружаемся в ваши бизнес-процессы и создаем интерактивный прототип будущего сайта. На этом этапе мы утверждаем структуру и логику.", details: ["Брифинг и анализ", "Создание User Flow", "Разработка прототипа в Figma"] }, { step: "02", title: "Дизайн (UI/UX)", description: "На основе прототипа создаем уникальный дизайн, который отражает ваш бренд и удобен для пользователя. Прорабатываем все состояния и адаптивные версии.", details: ["Разработка дизайн-концепции", "Дизайн всех страниц", "Создание UI-кита"] }, { step: "03", title: "Разработка (Code)", description: "Наши разработчики превращают дизайн-макеты в быстрый и функциональный сайт. Чистый код, современные технологии и внимание к деталям.", details: ["Frontend (React/Vue/HTML)", "Backend (Node.js/PHP)", "Интеграция с CMS"] }, { step: "04", title: "Тестирование и Правки", description: "Проводим комплексное тестирование на разных устройствах и в разных браузерах, устраняем все ошибки и вносим финальные корректировки.", details: ["Функциональное тестирование", "Проверка адаптивности", "Нагрузочное тестирование"] }, { step: "05", title: "Запуск и Поддержка", description: "Переносим сайт на ваш хостинг, подключаем домен и проводим финальные проверки. Мы не бросаем вас после запуска и предлагаем услуги поддержки.", details: ["Развертывание на сервере", "Подключение аналитики", "Обучение и техподдержка"] }].map((item, i) => (<motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: i * 0.1 }} className="relative flex items-start"><div className="flex-shrink-0 flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-zinc-700 bg-black z-10"><span className="text-xl md:text-2xl font-semibold text-white">{item.step}</span></div><div className="ml-6 md:ml-10"><h3 className="text-2xl md:text-3xl font-bold text-white font-deutsch tracking-wider">{item.title}</h3><p className="mt-2 text-gray-400 leading-relaxed">{item.description}</p><ul className="mt-4 space-y-2">{item.details.map((detail, j) => (<li key={j} className="flex items-center text-gray-500"><svg className="w-4 h-4 mr-2 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>{detail}</li>))}</ul></div></motion.div>))}</div></div></div>
+      </section>
+      
+      <section className="relative bg-black border-y border-zinc-800 py-24 sm:py-32 overflow-hidden" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.2) 0%, rgba(10, 10, 10, 0.1) 40%, transparent 70%)' }}>
+        <div className="relative z-20 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center"><div><h2 className="text-4xl md:text-6xl font-damione font-extrabold tracking-wide text-white">Готовы создать ваш следующий проект?</h2><p className="text-gray-400 mt-6 text-lg leading-relaxed">Расскажите нам о вашей задаче, и мы предложим оптимальное решение и рассчитаем предварительную стоимость в течение одного рабочего дня.</p><ul className="space-y-4 mt-8"><li className="flex items-center text-gray-300"><svg className="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Бесплатная оценка проекта</li><li className="flex items-center text-gray-300"><svg className="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Гарантия соблюдения сроков</li><li className="flex items-center text-gray-300"><svg className="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Поэтапная оплата работы</li></ul></div><div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 p-8 rounded-none"><form action="#" method="POST" className="space-y-6"><div><label htmlFor="name-web" className="sr-only">Имя</label><input type="text" name="name-web" id="name-web" placeholder="Ваше имя" className="w-full bg-zinc-800 border border-zinc-700 px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-white transition rounded-none" /></div><div><label htmlFor="contact-web" className="sr-only">Телефон или Email</label><input type="text" name="contact-web" id="contact-web" placeholder="Телефон или Email" className="w-full bg-zinc-800 border border-zinc-700 px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-white transition rounded-none" /></div><div><label htmlFor="message-web" className="sr-only">Кратко о задаче</label><textarea name="message-web" id="message-web" rows={4} placeholder="Кратко о задаче (необязательно)" className="w-full bg-zinc-800 border border-zinc-700 px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-white transition rounded-none"></textarea></div><div><button type="submit" className="w-full bg-white text-black px-10 py-4 rounded-none font-bold text-lg hover:scale-105 transition-transform duration-300">Отправить заявку</button></div></form></div></div>
+      </section>
+
+    </div>
+  );
 }

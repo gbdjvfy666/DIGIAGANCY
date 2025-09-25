@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import CardSwap, { Card } from '../Components/animatedblock/CardSwap.jsx';
 import Carousel from '../Components/animatedblock/Carousel.jsx';
 import ParallaxCardSlider from '../Components/animatedblock/ParallaxCardSlider.jsx';
-import ShaderCard from '../Components/animatedblock/ShaderCard.jsx';
-import ThreeCubeAnimation from '../Components/animatedblock/ThreeCubeAnimation.jsx';
 import TiltedCard from '../Components/animatedblock/TiltedCard.jsx';
 
 // Фраза-панграмма, идеально подходит для демонстрации шрифтов.
@@ -246,8 +244,7 @@ export default function Test() {
   />
 </div> 
 <ParallaxCardSlider />
-<ShaderCard/>
-<ThreeCubeAnimation/>
+
 <TiltedCard
   imageSrc="https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58"
   altText="Kendrick Lamar - GNX Album Cover"

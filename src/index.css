@@ -912,3 +912,157 @@ html[data-theme='dark'] .scrollbar-custom::-webkit-scrollbar-thumb {
 .max-w-9xl-custom {
   max-width: 100rem; 
 }
+
+/* --- Стили для бегущей строки услуг --- */
+/* --- Обновленные стили для бегущей строки услуг --- */
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@keyframes scroll-right {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.infinite-scroller .scroller-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  /* Регулируйте время для скорости */
+  animation: scroll-left 80s linear infinite; 
+}
+
+/* Применяем анимацию для движения вправо */
+.infinite-scroller[data-direction="right"] .scroller-inner {
+  animation-name: scroll-right;
+}
+
+.infinite-scroller:hover .scroller-inner {
+  animation-play-state: paused;
+}
+
+.infinite-scroller .tag {
+  margin: 0 1rem;
+  padding: 0.75rem 2rem; /* Увеличили отступы */
+  border-radius: 9999px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  font-size: 1.125rem; /* 18px */
+}
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating-icon {
+  animation: float 6s ease-in-out infinite;
+}
+/* --- Анимация для парящих иконок --- */
+@keyframes float-light {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating-icon {
+  animation: float-light 6s ease-in-out infinite;
+}
+
+/* --- Стили для аккордеона FAQ --- */
+.faq-item summary {
+  cursor: pointer;
+  outline: none;
+  list-style: none; /* Убираем стандартный маркер */
+}
+.faq-item summary::-webkit-details-marker {
+  display: none; /* Убираем маркер для Chrome/Safari */
+}
+
+/* Анимация иконки плюса/минуса */
+.faq-item .plus-icon {
+  transition: transform 0.3s ease-in-out;
+}
+.faq-item[open] .plus-icon {
+  transform: rotate(45deg);
+}
+
+/* Анимация появления ответа */
+.faq-item .answer {
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1.0),
+              padding 0.5s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.faq-item[open] .answer {
+  max-height: 500px; /* Достаточно большое значение */
+  padding-top: 1.5rem; /* 24px */
+}
+
+.noise-bg {
+  position: relative;
+}
+
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAARlJREFUaIHt2LENwjAUAFA7oQRqoZ0LoVwH92EE4h7cKxI2x0B3kBCXg5gUUSI6SR/i90t618j/J22TfQZAozQJ4L24534IgE0kCca997M/uN/3N8d+2QcAYtNIAnGv/fR/0W/7/V/1H/9a/wGgNI0kEPfaj24A0L//9X8A0JpGEoj77Uc3ANC///V/ANDaRBLIe+9HNwDQv//1fwDQ2kQSyHvvRzcAsGSROA8A0BptEjwFANBaRhLIe+9HNwDQv//1fwDQ2kQSyHvvRzcAsM0kCca997MbgH1A61/gHwAE0kpSjHvtRzcA0L//9X8A0JpGEoj77Uc3ANC///V/ANDaRBLIe+9HNwBYYJME41772au/AVg3lHwEaNoAAAAASUVORK5CYII=');
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.form-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 1.25rem; /* 20px */
+  height: 1.25rem; /* 20px */
+  border: 2px solid #4A5568; /* border-zinc-600 */
+  border-radius: 0.375rem; /* rounded-md */
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-checkbox:checked {
+  background-color: #3B82F6; /* bg-blue-500 */
+  border-color: #3B82F6;
+}
+
+.form-checkbox:checked::after {
+  content: '✔';
+  font-size: 0.875rem; /* 14px */
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}

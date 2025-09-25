@@ -84,7 +84,6 @@ export default function ResponsiveDemo() {
     }
   }, [isMobile]);
 
-  // --- ЛОГИКА РЕНДЕРА ИЗОБРАЖЕНИЙ ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ ---
   const renderImages = () => {
     switch(displayMode) {
       case 'mobile':
@@ -149,7 +148,6 @@ export default function ResponsiveDemo() {
     }
   };
 
-  // --- УПРОЩЕННАЯ JSX-РАЗМЕТКА БЕЗ ФОНА ---
   return (
     <div className="w-full px-4 py-8 sm:py-16">
         <div className="w-full max-w-[1700px] mx-auto bg-white dark:bg-zinc-950 rounded-2xl p-4 sm:p-8 shadow-lg border border-zinc-200/50 dark:border-zinc-700/30">

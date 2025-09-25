@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import ResponsiveDemo from '@/Components/components/ResponsiveDemo';
 import { FaLaptopCode, FaShoppingCart, FaBuilding, FaSitemap, FaUtensils, FaGraduationCap } from 'react-icons/fa';
-
+import ThemeToggleCard from '@/Components/components/ThemeToggleCard';
 const PrismaticBurst = lazy(() => import('@/Components/PrismaticBurst'));
 
 // Компонент PrismaticButton теперь используется только для главной кнопки
@@ -54,15 +54,13 @@ const SimpleButton = ({ onClick, children, className = "" }) => {
 };
 
 
-const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
+const WebHero = ({ width = '100%', height = 'auto' }) => {
     const navigate = useNavigate();
     const containerRef = useRef(null);
     const sceneRef = useRef(null);
     const rendererRef = useRef(null);
     const animationIdRef = useRef(null);
 
-    // Состояние hoveredCardId больше не нужно, удаляем его
-    
     const cardsData = [
       { id: 'landing', title: 'Лендинг "под ключ"', icon: <FaLaptopCode />, description: 'Одностраничный сайт с выверенной структурой и дизайном для достижения максимальной конверсии. Идеален для запуска продукта или услуги.', path: '/web-development/landing' },
       { id: 'shop', title: 'Интернет-магазин', icon: <FaShoppingCart />, description: 'Надежное e-commerce решение с каталогом, корзиной, оплатой и системой управления. Готово к масштабированию и высоким нагрузкам.', path: '/web-development/online-shop' },
@@ -206,7 +204,7 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
     return (
         <div
             ref={containerRef}
-            style={{ width, height }}
+            style={{ width }}
             className="relative isolate overflow-hidden bg-[#0a0a0b]"
         >
             <div ref={sceneRef} className="absolute inset-0 z-[1] h-full w-full pointer-events-none" />
@@ -232,7 +230,7 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                         
                         <PrismaticButton
                             onClick={() => navigate('/services')}
-                            className="mt-10 w-full inline-flex items-center"
+                            className="mt-10 w-full sm:w-auto"
                             colors={['#f3f4f6', '#d1d5db', '#6b7280']}
                             hoverColors={['#e5e7eb', '#d1d5db', '#9ca3af']}
                         >
@@ -242,19 +240,21 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                     </div>
                 </div>
 
-                <div className="w-full text-center py-10 px-4 sm:p-8">
+                <div className="w-full text-center py-16 sm:py-24 px-4 sm:p-8">
                     <motion.h2 
                         initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
                         className="text-4xl sm:text-5xl font-bold text-white mb-4"
                     >
                         Ключевые направления разработки
                     </motion.h2>
                     <motion.p 
                         initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
                         className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto"
                     >
                         Выберите интересующее решение, чтобы ознакомиться подробнее.
@@ -262,17 +262,17 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                     
                     <motion.div 
                         variants={{
-                            visible: { transition: { staggerChildren: 0.1, delayChildren: 0.4 } },
+                            visible: { transition: { staggerChildren: 0.1 } },
                             hidden: {},
                         }}
                         initial="hidden"
-                        animate="visible"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.1 }}
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
                     >
                         {cardsData.map((card) => (
                             <motion.div 
                                 key={card.id}
-                                // onMouseEnter и onMouseLeave удалены
                                 variants={{
                                     hidden: { y: 20, opacity: 0 },
                                     visible: { y: 0, opacity: 1 },
@@ -289,7 +289,6 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                                     <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
                                     <p className="text-gray-400 text-sm leading-relaxed flex-grow mb-6 font-sans">{card.description}</p>
                                     <div className="mt-auto">
-                                        {/* === ИСПОЛЬЗУЕМ НОВУЮ ПРОСТУЮ КНОПКУ === */}
                                         <SimpleButton 
                                             onClick={() => handleLearnMore(card.path)} 
                                             className="w-full"
@@ -306,12 +305,55 @@ const LineBackgroundComponent = ({ width = '100%', height = '300vh' }) => {
                     </motion.div>
                 </div>
                 
-                <div className="flex h-screen w-full items-center justify-center">
+                <div className="w-full text-center pt-16 sm:pt-24 px-4 sm:p-8">
+                     <motion.h2 
+                        initial={{ y: 20, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                        className="text-4xl sm:text-5xl font-bold text-white"
+                    >
+                        Адаптивность
+                    </motion.h2>
+                </div>
+
+                <div className="flex h-screen w-full items-center justify-center p-4">
                     <ResponsiveDemo />
                 </div>
+
+                <div className="w-full py-16 sm:py-24 px-4 sm:px-8 flex flex-col items-center">
+                    <motion.h2 
+                        initial={{ y: 20, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                        className="text-4xl sm:text-5xl font-bold text-white mb-4 text-center"
+                    >
+                        Интерактивный Компонент
+                    </motion.h2>
+                    <motion.p 
+                        initial={{ y: 20, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+                        className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto text-center"
+                    >
+                        Пример изолированного компонента с собственной логикой. Переключите тему, чтобы увидеть, как меняется только правая часть карточки.
+                    </motion.p>
+                    <motion.div
+                        initial={{ y: 20, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+                        className="w-full"
+                    >
+                        <ThemeToggleCard />
+                    </motion.div>
+                </div>
             </div>
+
         </div>
     );
 };
   
-export default LineBackgroundComponent;
+export default WebHero;

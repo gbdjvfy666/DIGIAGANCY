@@ -1,0 +1,84 @@
+/* --- Контейнер для правой части карточки --- */
+.weather-panel {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: background 1.5s ease;
+    /* Темный фон по умолчанию (Облачно) */
+    background: linear-gradient(to top, #232526, #414345);
+}
+.weather-panel.is-sunny {
+    /* Светлый фон для Солнца */
+    background: linear-gradient(to top, #a1c4fd, #c2e9fb);
+}
+
+/* --- Контейнер для SVG-анимации --- */
+.weather-svg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* --- Группы элементов внутри SVG --- */
+.sun-group, .cloud-group {
+    transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), opacity 1.2s ease;
+    will-change: transform, opacity;
+}
+
+/* --- Стили для ОБЛАКОВ --- */
+.cloud-group {
+    opacity: 1;
+    transform: translateY(0);
+}
+.weather-panel.is-sunny .cloud-group {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+#cloud1 { fill: #efefef; }
+#cloud2 { fill: #E6E6E6; }
+#cloud3 { fill: #D5D5D5; }
+
+/* --- Стили для СОЛНЦА --- */
+.sun-group {
+    opacity: 0;
+    transform: translateY(150px);
+}
+.weather-panel.is-sunny .sun-group {
+    opacity: 1;
+    transform: translateY(0);
+}
+#sun { fill: #F7ED47; }
+
+/* --- Детали карточки (только надпись "Солнечно/Облачно") --- */
+.weather-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    transition: color 1.5s ease;
+}
+.weather-panel.is-sunny .weather-details {
+    color: #333;
+}
+.weather-details .right {
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* --- Контейнер для переключателя --- */
+.switcher-container {
+    position: relative;
+    z-index: 10;
+}
