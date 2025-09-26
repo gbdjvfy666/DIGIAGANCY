@@ -1,9 +1,8 @@
 // DashboardCard.jsx (Полный и готовый код)
 
 import React, { useState } from 'react';
-import GooeyNav from './GooeyNav'; // Убедитесь, что GooeyNav.jsx находится в той же папке или укажите правильный путь
+import GooeyNav from './GooeyNav';
 
-// --- Вспомогательные компоненты для контента (без изменений) ---
 
 // Иконка
 const Icon = ({ path }) => (

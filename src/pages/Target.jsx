@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useState } from "react";
 import { motion } from "framer-motion";
-import Silk from "../Components/background/Silk";
+import Silk from "../Components/other/background/Silk";
 import '../index.css';
 
 // --- Иконки (без изменений) ---
@@ -14,7 +14,7 @@ const strategyIcons = [
 ];
 
 // Ленивая загрузка WebGL-компонента
-const PrismaticBurst = lazy(() => import('../Components/PrismaticBurst'));
+const PrismaticBurst = lazy(() => import('../Components/Block/PrismaticBurst'));
 
 export default function PremiumVkTarget() {
 

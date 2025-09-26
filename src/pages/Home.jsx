@@ -2,23 +2,23 @@
 
 import React from 'react';
 import '../index.css';
-import VideoGrid from '../Components/animatedblock/ServicesGrid.jsx';
-import FractalOrbComponent from '../Components/animatedblock/ProfileCard/FractalOrbComponent.jsx';
-import StarBackground from '../Components/background/StarBackground.jsx';
-import SpacePage from '../Components/animatedblock/Spaceswiper/SpacePage.jsx';
-import NoiseBackgroundBig from '../Components/background/NoiseBacgroundBig/NoiseBacgroundBig.jsx'; 
+import VideoGrid from '../Components/Block/ServicesGrid.jsx';
+import FractalOrbComponent from '../Components/Block/ProfileCard/FractalOrbComponent.jsx';
+import StarBackground from '../Components/other/background/StarBackground.jsx';
+
+import NoiseBackgroundBig from '../Components/other/background/NoiseBacgroundBig/NoiseBacgroundBig.jsx'; 
 import Divider from '../Components/other/Divider.jsx';
-import Slider from '../Components/components/Slider.jsx';
-import ServicesSection from '../Components/components/ServicesComponent.jsx';
-import DashboardCard from '../Components/DashboardCard.jsx'; 
-import DigitalInfo from '@/Components/DigitalInfo';
+import Slider from '../Components/Block/Slider.jsx';
+import ServicesSection from '../Components/Block/ServicesComponent.jsx';
+import DashboardCard from '../Components/Block/DashboardCard.jsx'; 
+import DigitalInfo from '@/Components/Block/DigitalInfo';
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-black dark:text-white">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-black dark:text-white ">
       <FractalOrbComponent />
       <Divider />
-      <ServicesSection />
+
       <NoiseBackgroundBig>
         <div>
           <div className="min-h-screen w-full flex items-center justify-center px-8 lg:px-24">
@@ -43,8 +43,7 @@ export default function Home() {
       <div className="flex-grow bg-white dark:bg-zinc-900 px-0">
         <VideoGrid />
       </div>
-      <StarBackground />
-      <SpacePage />
+            <ServicesSection />
     </div>
   );
 }

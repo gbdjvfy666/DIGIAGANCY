@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSmoothScroll } from '../../hooks/useSmoothScroll';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
 
 const SmoothScrollContainer = ({ children }) => {
   const containerRef = useSmoothScroll();

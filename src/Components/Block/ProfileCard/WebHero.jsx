@@ -2,10 +2,10 @@ import React, { lazy, Suspense, useRef, useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import ResponsiveDemo from '@/Components/components/ResponsiveDemo';
+import ResponsiveDemo from '@/Components/Block/ResponsiveDemoHouse';
 import { FaLaptopCode, FaShoppingCart, FaBuilding, FaSitemap, FaUtensils, FaGraduationCap } from 'react-icons/fa';
-import ThemeToggleCard from '@/Components/components/ThemeToggleCard';
-const PrismaticBurst = lazy(() => import('@/Components/PrismaticBurst'));
+import ThemeToggleCard from '@/Components/Block/Theme/ThemeToggleCard';
+const PrismaticBurst = lazy(() => import('@/Components/Block/PrismaticBurst'));
 
 // Компонент PrismaticButton теперь используется только для главной кнопки
 const PrismaticButton = ({ onClick, children, colors, hoverColors, className = "" }) => {

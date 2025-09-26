@@ -4,7 +4,7 @@ import { FaShoppingCart, FaBuilding, FaRocket, FaCogs, FaSitemap, FaBullhorn } f
 import '../index.css';
 
 // --- Компоненты ---
-import TubesBackground from '../Components/TubesBackground'; // Импортируем наш новый компонент
+import TubesBackground from '../Components/other/TubesBackground'; // Импортируем наш новый компонент
 
 
 const InfiniteScroller = ({ items, direction = 'left', type = 'outline' }) => {

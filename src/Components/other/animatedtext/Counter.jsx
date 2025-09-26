@@ -110,11 +110,11 @@ export default function CountUp({
 
 
 // как использовать
-// <CountUp
-//   from={0}
-//   to={100}
-//   separator=","
-//   direction="up"
-//   duration={1}
-//   className="count-up-text"
-// />
+{/* <CountUp
+  from={0}
+  to={100}
+  separator=","
+  direction="up"
+  duration={1}
+  className="count-up-text"
+/> */}

@@ -4,7 +4,7 @@ import '../index.css';
 import LOGO_WHITE from '../assets/LOGO_WHITE.png';
 import { FaPaintBrush, FaGlobe, FaPrint, FaChalkboardTeacher, FaBullhorn, FaCogs } from 'react-icons/fa';
 
-const PrismaticBurst = lazy(() => import('../Components/PrismaticBurst'));
+const PrismaticBurst = lazy(() => import('../Components/Block/PrismaticBurst'));
 
 // --- НОВЫЙ УЛУЧШЕННЫЙ КОМПОНЕНТ: Бегущая строка ---
 const InfiniteScroller = ({ items, direction = 'left', type = 'outline' }) => {

@@ -1,44 +1,28 @@
 /*
 |-------------------------------------------------------------------------------
-|
-| 🌐 ГЛОБАЛЬНЫЕ ИМПОРТЫ И ПЕРЕМЕННЫЕ
-|
+| 🌐 ГЛОБАЛЬНЫЕ ИМПОРТЫ (САМЫЙ ПЕРВЫЙ БЛОК)
 |-------------------------------------------------------------------------------
 */
-/*
----break---
-*/
 @plugin "tailwindcss-animate";
-
-/* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Dela+Gothic+One&family=Fredoka+One&family=Inter:wght@400;500;700&family=Karantina:wght@300;400;700&family=Noto+Sans+SC:wght@100..900&family=Oswald:wght@200..700&family=Poppins:wght@400;600;700&family=Rubik+Mono+One&family=Tektur:wght@400..900&family=Unbounded:wght@200..900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
-/*
----break---
-*/
+
+
+/* --- Другие декларации, которые могут быть в начале: --- */
 @custom-variant dark (&:is(.dark *));
 
-/* --- Локальные шрифты --- */
+/*
+|-------------------------------------------------------------------------------
+| 🖋️ ЛОКАЛЬНЫЕ ШРИФТЫ (@font-face)
+|-------------------------------------------------------------------------------
+| Объединены все определения font-face для каждого семейства шрифтов.
+*/
+
+/* Aradora Pro */
 @font-face {
   font-family: 'Aradora Pro';
   src: url('/fonts/AradoraPro-Light.otf') format('opentype');
   font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Monoton';
-  src: url('/fonts/Monoton-Regular.ttf') format('truetype');
-  font-weight: 400; 
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Bangers';
-  src: url('/fonts/Bangers-Regular.ttf') format('truetype');
-  font-weight: normal; 
   font-style: normal;
   font-display: swap;
 }
@@ -49,6 +33,26 @@
   font-style: italic;
   font-display: swap;
 }
+
+/* Monoton */
+@font-face {
+  font-family: 'Monoton';
+  src: url('/fonts/Monoton-Regular.ttf') format('truetype');
+  font-weight: 400; 
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bangers */
+@font-face {
+  font-family: 'Bangers';
+  src: url('/fonts/Bangers-Regular.ttf') format('truetype');
+  font-weight: normal; 
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ArchivoBlack-Regular */
 @font-face {
   font-family: 'ArchivoBlack-Regular';
   src: url('/fonts/ArchivoBlack-Regular.ttf') format('truetype');
@@ -56,6 +60,8 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* Behance */
 @font-face {
   font-family: 'Behance';
   src: url('/fonts/behance-67842caacaac4.ttf') format('truetype');
@@ -64,6 +70,7 @@
   font-display: swap;
 }
 
+/* Bounded (Объединены все начертания) */
 @font-face {
   font-family: 'Bounded';
   src: url('/fonts/Bounded-ExtraLight.ttf') format('truetype');
@@ -71,7 +78,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Bounded';
   src: url('/fonts/Bounded-Regular.ttf') format('truetype');
@@ -79,7 +85,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Bounded';
   src: url('/fonts/Bounded-Black.ttf') format('truetype');
@@ -88,6 +93,7 @@
   font-display: swap;
 }
 
+/* Bubbler Graffiti (Объединены все начертания) */
 @font-face {
   font-family: 'Bubbler Graffiti';
   src: url('/fonts/BubblerGraffiti.ttf') format('truetype');
@@ -95,7 +101,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Bubbler Graffiti';
   src: url('/fonts/bubblergraffititalic.ttf') format('truetype');
@@ -104,6 +109,7 @@
   font-display: swap;
 }
 
+/* Coves (Объединены все начертания) */
 @font-face {
   font-family: 'Coves';
   src: url('/fonts/coves_light.otf') format('opentype');
@@ -111,7 +117,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Coves';
   src: url('/fonts/coves_bold.otf') format('opentype');
@@ -120,6 +125,7 @@
   font-display: swap;
 }
 
+/* Damn */
 @font-face {
   font-family: 'Damn';
   src: url('/fonts/DAMN.ttf') format('truetype');
@@ -128,6 +134,7 @@
   font-display: swap;
 }
 
+/* Deutsch Gothic */
 @font-face {
   font-family: 'Deutsch Gothic';
   src: url('/fonts/DeutschGothic.ttf') format('truetype');
@@ -136,6 +143,7 @@
   font-display: swap;
 }
 
+/* Doloman Pavklenko */
 @font-face {
   font-family: 'Doloman Pavklenko';
   src: url('/fonts/DolomanPavklenko.otf') format('opentype');
@@ -144,6 +152,7 @@
   font-display: swap;
 }
 
+/* Frankinity */
 @font-face {
   font-family: 'Frankinity';
   src: url('/fonts/FRANKINITY.otf') format('opentype');
@@ -152,6 +161,7 @@
   font-display: swap;
 }
 
+/* Garet (Объединены все начертания) */
 @font-face {
   font-family: 'Garet';
   src: url('/fonts/Garet-Book.otf') format('opentype');
@@ -159,7 +169,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Garet';
   src: url('/fonts/Garet-Heavy.otf') format('opentype');
@@ -168,6 +177,7 @@
   font-display: swap;
 }
 
+/* Gerhaus */
 @font-face {
   font-family: 'Gerhaus';
   src: url('/fonts/Gerhaus.ttf') format('truetype');
@@ -176,6 +186,7 @@
   font-display: swap;
 }
 
+/* Helvetica Now Text (Объединены все начертания) */
 @font-face {
   font-family: 'Helvetica Now Text';
   src: url('/fonts/helveticanowtext-bold-demo.ttf') format('truetype');
@@ -183,7 +194,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Helvetica Now Text';
   src: url('/fonts/helveticanowtext-bolditalic-demo.ttf') format('truetype');
@@ -191,7 +201,6 @@
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Helvetica Now Text';
   src: url('/fonts/helveticanowtext-black-demo.ttf') format('truetype');
@@ -199,7 +208,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Helvetica Now Text';
   src: url('/fonts/helveticanowtext-blackitalic-demo.ttf') format('truetype');
@@ -208,6 +216,7 @@
   font-display: swap;
 }
 
+/* IndiKazka */
 @font-face {
   font-family: 'IndiKazka';
   src: url('/fonts/IndiKazka4F.ttf') format('truetype');
@@ -216,6 +225,7 @@
   font-display: swap;
 }
 
+/* Jost */
 @font-face {
   font-family: 'Jost';
   src: url('/fonts/Jost-Regular.ttf') format('truetype');
@@ -224,6 +234,7 @@
   font-display: swap;
 }
 
+/* Kankin */
 @font-face {
   font-family: 'Kankin';
   src: url('/fonts/kankin.ttf') format('truetype');
@@ -232,6 +243,7 @@
   font-display: swap;
 }
 
+/* Lena */
 @font-face {
   font-family: 'Lena';
   src: url('/fonts/lena.ttf') format('truetype');
@@ -240,6 +252,7 @@
   font-display: swap;
 }
 
+/* Maler */
 @font-face {
   font-family: 'Maler';
   src: url('/fonts/Maler.ttf') format('truetype');
@@ -248,6 +261,7 @@
   font-display: swap;
 }
 
+/* MullerNextWide (Объединены все начертания) */
 @font-face {
   font-family: 'MullerNextWide';
   src: url('/fonts/MullerNextWideTrial-Thin.otf') format('opentype');
@@ -255,7 +269,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'MullerNextWide';
   src: url('/fonts/MullerNextWideTrial-ThinItalic.otf') format('opentype');
@@ -263,58 +276,50 @@
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'MullerNextWide';
   src: url('/fonts/MullerNextWideTrial-Regular.otf') format('opentype');
-  font-weight: 400; /* Соответствует Tailwind .font-normal */
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'MullerNextWide';
   src: url('/fonts/MullerNextWideTrial-RegularItalic.otf') format('opentype');
-  font-weight: 400; /* Соответствует Tailwind .font-normal */
+  font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'MullerNextWide';
   src: url('/fonts/MullerNextWideTrial-Heavy.otf') format('opentype');
-  font-weight: 800; /* Соответствует Tailwind .font-extrabold */
+  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'MullerNextWide';
   src: url('/fonts/MullerNextWideTrial-HeavyItalic.otf') format('opentype');
-  font-weight: 800; /* Соответствует Tailwind .font-extrabold */
+  font-weight: 800;
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'MullerNextWide';
   src: url('/fonts/MullerNextWideTrial-ExtraBold.otf') format('opentype');
-  font-weight: 900; /* Соответствует Tailwind .font-black */
+  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'MullerNextWide';
   src: url('/fonts/MullerNextWideTrial-ExtraBoldItalic.otf') format('opentype');
-  font-weight: 900; /* Соответствует Tailwind .font-black */
+  font-weight: 900;
   font-style: italic;
   font-display: swap;
 }
 
-/* --- КОНЕЦ ИЗМЕНЕНИЙ --- */
-
-
+/* Nauryzredkeds */
 @font-face {
   font-family: 'Nauryzredkeds';
   src: url('/fonts/NAURYZREDKEDS.ttf') format('truetype');
@@ -323,6 +328,7 @@
   font-display: swap;
 }
 
+/* Neopixel */
 @font-face {
   font-family: 'Neopixel';
   src: url('/fonts/NEOPIXEL-Regular.otf') format('opentype');
@@ -331,6 +337,7 @@
   font-display: swap;
 }
 
+/* Orpheus */
 @font-face {
   font-family: 'Orpheus';
   src: url('/fonts/Orpheus.ttf') format('truetype');
@@ -339,6 +346,7 @@
   font-display: swap;
 }
 
+/* Petrogradski */
 @font-face {
   font-family: 'Petrogradski';
   src: url('/fonts/Petrogradski.otf') format('opentype');
@@ -347,6 +355,7 @@
   font-display: swap;
 }
 
+/* Playfair Display (Объединены все начертания) */
 @font-face {
   font-family: 'Playfair Display';
   src: url('/fonts/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
@@ -354,7 +363,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Playfair Display';
   src: url('/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
@@ -363,6 +371,7 @@
   font-display: swap;
 }
 
+/* PPNeueMachina */
 @font-face {
   font-family: 'PPNeueMachina';
   src: url('/fonts/PPNeueMachina-Regular.otf') format('opentype');
@@ -371,6 +380,7 @@
   font-display: swap;
 }
 
+/* Receipt */
 @font-face {
   font-family: 'Receipt';
   src: url('/fonts/Receipt-Regular.otf') format('opentype');
@@ -379,6 +389,7 @@
   font-display: swap;
 }
 
+/* Saytag */
 @font-face {
   font-family: 'Saytag';
   src: url('/fonts/Saytag-Regular 3.ttf') format('truetype');
@@ -387,6 +398,7 @@
   font-display: swap;
 }
 
+/* SK Coisa */
 @font-face {
   font-family: 'SK Coisa';
   src: url('/fonts/SKCoisa-Regular.ttf') format('truetype');
@@ -395,6 +407,7 @@
   font-display: swap;
 }
 
+/* Soledago */
 @font-face {
   font-family: 'Soledago';
   src: url('/fonts/Soledago.ttf') format('truetype');
@@ -403,6 +416,7 @@
   font-display: swap;
 }
 
+/* Sorcerer */
 @font-face {
   font-family: 'Sorcerer';
   src: url('/fonts/Sorcerer.otf') format('opentype');
@@ -411,6 +425,7 @@
   font-display: swap;
 }
 
+/* DaMiOne */
 @font-face {
   font-family: 'DaMiOne';
   src: url('/fonts/Шрифт DaMiOne.ttf') format('truetype');
@@ -419,6 +434,7 @@
   font-display: swap;
 }
 
+/* Zvezda NHZDN */
 @font-face {
   font-family: 'Zvezda NHZDN';
   src: url('/fonts/Zvezda NHZDN Bold Italic v.1.1.otf') format('opentype');
@@ -430,14 +446,12 @@
 
 /*
 |-------------------------------------------------------------------------------
-|
-| 🎨 CSS-ПЕРЕМЕННЫЕ
-|
+| 🎨 CSS-ПЕРЕМЕННЫЕ (ROOT)
 |-------------------------------------------------------------------------------
+| Все переменные цвета, типографики, интервалов и анимаций объединены.
 */
-
 :root {
-  /* --- Шрифты --- */
+  /* --- 1. Шрифты (Основные и Google) --- */
   --font-primary: 'Inter', sans-serif;
   --font-bebas: 'Bebas Neue', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
@@ -451,8 +465,9 @@
   --font-muller: 'MullerNextWide', sans-serif;
   --font-anton: 'Anton', sans-serif;
   --font-bangers: 'Bangers', cursive;
-
-  /* --- Локальные шрифты --- */
+  --font-serif: "EB Garamond", serif; /* Из space.css */
+  
+  /* --- 2. Шрифты (Локальные) --- */
   --font-ppneue: 'PPNeueMachina', sans-serif;
   --font-petrogradski: 'Petrogradski', sans-serif;
   --font-behance: 'Behance', sans-serif;
@@ -469,7 +484,6 @@
   --font-jost: 'Jost', sans-serif;
   --font-archivo-black: 'ArchivoBlack-Regular', sans-serif;
   --font-monoton: 'Monoton', cursive;
-  /* --- НОВЫЕ ПЕРЕМЕННЫЕ --- */
   --font-aradora: 'Aradora Pro', sans-serif;
   --font-bounded: 'Bounded', sans-serif;
   --font-bubbler: 'Bubbler Graffiti', sans-serif;
@@ -487,32 +501,32 @@
   --font-soledago: 'Soledago', sans-serif;
   --font-damione: 'DaMiOne', sans-serif;
 
+  /* --- 3. Типографика и Размеры (Из space.css) --- */
+  --font-display: var(--font-dela), sans-serif;
+  --text-xs: 0.7rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 3rem;
+  --text-mega: clamp(7rem, 15vw, 12rem);
+  
+  /* --- 4. Интервалы (Из space.css) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --space-12: 6rem;
 
-  /* --- Палитра Ivory --- */
-  --color-ivory-50: #fffefc;
-  --color-ivory-100: #fcfaf5;
-  --color-ivory-200: #f8f5ec;
-  --color-ivory-300: #f0ebdd;
-  --color-ivory-400: #e5dfcc;
-  --color-ivory-500: #d6cfb8;
-  --color-ivory-600: #b8b09a;
-  --color-ivory-700: #8a8374;
-  --color-ivory-800: #5a5448;
-  --color-ivory-900: #2d2921;
-  --color-follower: #b3b3b3;
-  /* --- Палитра Amber (акцентная) --- */
-  --color-amber-100: #ffecb3;
-  --color-amber-200: #ffe082;
-  --color-amber-300: #ffd54f;
-  --color-amber-400: #ffca28;
-  --color-amber-500: #ffc107;
-  --color-amber-600: #ffb300;
-
-  /* --- Luxury metallic --- */
-  --color-gold-100: #fff9e6;
-  --color-gold-200: #ffedb3;
-  --color-gold-300: #e6c87d;
+  /* --- 5. Цвета (OKLCH, Tailwind, Ivory) --- */
   --radius: 0.625rem;
+  
+  /* Цвета Tailwind/OKLCH (Светлая тема по умолчанию) */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -531,11 +545,13 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+  /* Цвета Chart */
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+  /* Цвета Sidebar */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -544,48 +560,116 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Палитра Ivory */
+  --color-ivory-50: #fffefc;
+  --color-ivory-100: #fcfaf5;
+  --color-ivory-200: #f8f5ec;
+  --color-ivory-300: #f0ebdd;
+  --color-ivory-400: #e5dfcc;
+  --color-ivory-500: #d6cfb8;
+  --color-ivory-600: #b8b09a;
+  --color-ivory-700: #8a8374;
+  --color-ivory-800: #5a5448;
+  --color-ivory-900: #2d2921;
+  --color-follower: #b3b3b3;
+  
+  /* Палитра Amber (акцентная) */
+  --color-amber-100: #ffecb3;
+  --color-amber-200: #ffe082;
+  --color-amber-300: #ffd54f;
+  --color-amber-400: #ffca28;
+  --color-amber-500: #ffc107;
+  --color-amber-600: #ffb300;
+
+  /* Luxury metallic */
+  --color-gold-100: #fff9e6;
+  --color-gold-200: #ffedb3;
+  --color-gold-300: #e6c87d;
+
+  /* Цвета из space.css (Акцентная тема) */
+  --color-primary: #0a0a0a;
+  --color-secondary: #161616;
+  --color-accent: #ff2c2c;
+  --color-text: #f5f5f5;
+  --color-text-muted: rgba(245, 245, 245, 0.7);
+  --color-border: rgba(255, 255, 255, 0.05);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+
+  /* --- 6. Анимации (Из space.css) --- */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --word-stagger-delay: 0.02s;
 }
 
 /*
 |-------------------------------------------------------------------------------
-|
-| 📝 БАЗОВЫЕ СТИЛИ
-|
+| 🌙 ТЕМНАЯ ТЕМА (.dark)
 |-------------------------------------------------------------------------------
+| Переопределение цветов для темного режима.
 */
-
-html,
-body {
-  scroll-behavior: auto !important;
-  overflow-x: hidden;
-  font-family: var(--font-primary);
-  line-height: 1.5;
-  font-weight: 400;
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
 }
 
-body {
-  font-family: var(--font-muller); 
-    cursor: none;
-  overflow-x: hidden;
-}
-
-.hoverable {
-  pointer-events: auto;
-}
 
 /*
 |-------------------------------------------------------------------------------
-|
-| ⚙️ TAILWIND CSS СЛОИ
-|
+| ⚙️ TAILWIND CSS СЛОЙ BASE
 |-------------------------------------------------------------------------------
+| Стили, применяемые к HTML-элементам по умолчанию.
 */
-
 @layer base {
+  /* Базовые цвета Tailwind */
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Стили body из space.css (применены ниже, чтобы не конфликтовать с Tailwind) */
+  /* body {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    cursor: none;
+    overflow-x: hidden;
+  } */
+  
+  /* --- Классы шрифтов (Google Fonts) --- */
   .font-poppins { font-family: var(--font-poppins); }
   .font-anton { font-family: var(--font-anton); }
   .font-fredoka { font-family: var(--font-fredoka); }
@@ -599,7 +683,41 @@ body {
   .font-dela { font-family: var(--font-dela); }
 }
 
+
+/*
+|-------------------------------------------------------------------------------
+| 📝 БАЗОВЫЕ СТИЛИ (НЕ-TAILWIND)
+|-------------------------------------------------------------------------------
+| Стили, которые должны применяться вне слоев Tailwind.
+*/
+/* Общий body */
+body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  cursor: none;
+  overflow-x: hidden;
+  /* Дополнительные стили, перенесенные из space.css для body: */
+  background-color: var(--color-primary); /* #0a0a0a */
+  color: var(--color-text); /* #f5f5f5 */
+}
+
+.hoverable {
+  pointer-events: auto;
+}
+
+.max-w-9xl-custom {
+  max-width: 100rem; 
+}
+
+
+/*
+|-------------------------------------------------------------------------------
+| ⚙️ TAILWIND CSS СЛОЙ UTILITIES
+|-------------------------------------------------------------------------------
+| Кастомные утилиты и компоненты.
+*/
 @layer utilities {
+  /* --- Классы шрифтов (Локальные) --- */
   .font-ppneue { font-family: var(--font-ppneue); }
   .font-petrogradski { font-family: var(--font-petrogradski); }
   .font-behance { font-family: var(--font-behance); }
@@ -615,8 +733,6 @@ body {
   .font-kankin { font-family: var(--font-kankin); }
   .font-bangers { font-family: var(--font-bangers); }
   .font-monoton { font-family: var(--font-monoton); }
-
-  /* --- НОВЫЕ КЛАССЫ --- */
   .font-aradora { font-family: var(--font-aradora); }
   .font-bounded { font-family: var(--font-bounded); }
   .font-bubbler { font-family: var(--font-bubbler); }
@@ -636,18 +752,26 @@ body {
   .font-muller { font-family: var(--font-muller); }
   .font-archivo-black { font-family: var(--font-archivo-black); }
 
-
-  /* --- Анимации --- */
+  /* --- Анимации и 3D эффекты --- */
   @keyframes shine {
     0% { background-position: 100%; }
     100% { background-position: -100%; }
   }
   .animate-shine { animation: shine 5s linear infinite; }
 
-  /* --- Кастомные эффекты --- */
   .transform-style-preserve-3d { transform-style: preserve-3d; }
   .perspective-800 { perspective: 800px; }
   .perspective-600 { perspective: 600px; }
+  
+  /* --- Анимация для парящих иконок (Объединены) --- */
+  @keyframes float-light {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+  .floating-icon {
+    animation: float-light 6s ease-in-out infinite;
+  }
 
   /* --- Стили Swiper --- */
   .swiper-button-next,
@@ -674,7 +798,36 @@ body {
     @apply bg-white opacity-100;
   }
 
-  /* --- Стили для продукта --- */
+  /* --- Стили для бегущей строки (Объединены) --- */
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+  @keyframes scroll-right {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+  .infinite-scroller .scroller-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    animation: scroll-left 80s linear infinite; 
+  }
+  .infinite-scroller[data-direction="right"] .scroller-inner {
+    animation-name: scroll-right;
+  }
+  .infinite-scroller:hover .scroller-inner {
+    animation-play-state: paused;
+  }
+  .infinite-scroller .tag {
+    margin: 0 1rem;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    font-size: 1.125rem;
+  }
+
+  /* --- Стили для продукта (Product/Soda) --- */
   .bg-grid {
     background-image:
       repeating-linear-gradient(to right, transparent 0 150px, #0001 150px 151px),
@@ -736,10 +889,9 @@ body {
     transform: translateX(100px) translateY(100px);
   }
 
-  /* --- Разные стили --- */
+  /* --- Разные стили и Luxury --- */
   .heading { font-family: var(--font-heading); font-weight: 700; }
-  .subheading { font-family: var(--font-bebas); } /* Используем общую переменную */
-
+  .subheading { font-family: var(--font-bebas); }
   .decorative-circle {
     position: absolute;
     border-radius: 50%;
@@ -747,56 +899,163 @@ body {
     opacity: 0.4;
     z-index: 0;
   }
-
   .rounded-luxury { border-radius: 1.25rem; }
   .rounded-luxury-lg { border-radius: 1.75rem; }
   .shadow-luxury { box-shadow: 0 10px 30px -10px rgba(31, 29, 24, 0.1); }
   .hover\:shadow-luxury:hover { box-shadow: 0 15px 40px -10px rgba(31, 29, 24, 0.15); }
   .border-luxury { border: 1px solid rgba(218, 210, 193, 0.5); }
-
-  /* --- Luxury элементы --- */
   .font-serif { font-family: 'Cormorant Garamond', 'Times New Roman', serif; }
   .font-display { font-family: 'Playfair Display', 'Times New Roman', serif; }
+
+  /* --- Стили для текста из space.css (Объединены) --- */
+  .chapter {
+    text-transform: uppercase;
+    margin-bottom: var(--space-6);
+    font-size: var(--text-sm);
+    letter-spacing: -0.03em;
+    color: var(--color-accent);
+  }
+  .title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: var(--space-6);
+    letter-spacing: -0.03em;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--color-text);
+    width: 100%;
+  }
+  .subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: var(--space-8);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-weight: 400;
+    color: var(--color-text);
+  }
+  .text {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    line-height: 1.4;
+    letter-spacing: normal;
+    color: var(--color-text);
+    width: 100%;
+  }
+  .text p {
+    margin-bottom: var(--space-5);
+  }
+  .quote {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-5);
+    line-height: 1.4;
+    position: relative;
+    font-style: italic;
+    color: var(--color-text);
+    letter-spacing: -0.03em;
+    max-width: 100%;
+  }
+  .author {
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-6);
+    color: var(--color-accent);
+  }
+  /* Объединенные классы крупного текста */
+  .space-text,
+  .beyond-text,
+  .mega-text,
+  .contact-name {
+    font-family: var(--font-display);
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-6);
+    letter-spacing: -0.03em;
+  }
+  .space-text {
+    font-size: clamp(6rem, 15vw, 10rem);
+  }
+  .beyond-text {
+    font-size: clamp(6rem, 15vw, 10rem);
+  }
+  .mega-text {
+    font-size: var(--text-mega);
+    letter-spacing: -0.05em;
+    text-shadow: 0 0 20px rgba(255, 44, 44, 0.3);
+  }
+  .contact-name {
+    font-size: clamp(6rem, 15vw, 10rem);
+    color: var(--color-text) !important;
+    margin-bottom: var(--space-12);
+    letter-spacing: -0.03em;
+  }
+  .direction-label {
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    letter-spacing: 1px;
+    margin-bottom: var(--space-2);
+    color: var(--color-accent);
+  }
+  .full-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: var(--text-base);
+    line-height: 1.5;
+    margin-bottom: var(--space-5);
+    width: 100%;
+  }
+  .conclusion-text {
+    margin-top: var(--space-5);
+    padding: var(--space-5);
+    background-color: rgba(255, 44, 44, 0.08);
+    border-left: 3px solid var(--color-accent);
+    width: 100%;
+    border-radius: 0 4px 4px 0;
+  }
+  .email-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: var(--space-4) var(--space-6);
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform var(--transition-medium), background-color var(--transition-medium);
+  }
+  .email-wrapper:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+  .email {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .email:hover {
+    color: var(--color-accent);
+  }
+  
+  /* --- Стили для аккордеона FAQ --- */
+  .faq-item summary {
+    cursor: pointer;
+    outline: none;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
 }
+
 
 /*
 |-------------------------------------------------------------------------------
-|
-| ⚙️ МЕДИА-ЗАПРОСЫ
-|
-|-------------------------------------------------------------------------------
-*/
-
-@media (max-width: 1023px) {
-  .soda {
-    width: 400px;
-  }
-}
-
-@media (max-width: 768px) {
-  .luxury-responsive {
-    padding: 2.5rem 1.5rem;
-  }
-
-  .luxury-responsive-text {
-    font-size: 1.75rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .soda {
-    width: 250px;
-  }
-}
-
-/*
-|-------------------------------------------------------------------------------
-|
 | 🖱️ КУРСОР И СКРОЛЛБАР
-|
 |-------------------------------------------------------------------------------
+| Общие стили для прокрутки и кастомного курсора.
 */
-
 .scrollbar-custom::-webkit-scrollbar {
   height: 6px;
   width: 6px;
@@ -813,16 +1072,68 @@ body {
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
   background-color: rgba(100, 100, 100, 0.6);
 }
-
 html[data-theme='dark'] .scrollbar-custom::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.2);
 }
 .flower-layer {
-  /* Говорит браузеру оптимизировать рендеринг трансформаций и прозрачности */
   will-change: transform, opacity;
 }
+
+
 /*
----break---
+|-------------------------------------------------------------------------------
+| ⚙️ МЕДИА-ЗАПРОСЫ
+|-------------------------------------------------------------------------------
+| Все медиа-запросы объединены и расположены в конце.
+*/
+@media (max-width: 1023px) {
+  .soda {
+    width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .luxury-responsive {
+    padding: 2.5rem 1.5rem;
+  }
+  .luxury-responsive-text {
+    font-size: 1.75rem;
+  }
+  /* Стили для текста из space.css */
+  .title {
+    font-size: var(--text-2xl);
+  }
+  .subtitle {
+    font-size: var(--text-xl);
+  }
+  .mega-text {
+    font-size: clamp(4rem, 15vw, 8rem);
+  }
+  .contact-name {
+    font-size: clamp(4rem, 12vw, 8rem);
+    margin-bottom: var(--space-8);
+  }
+  .email-wrapper {
+    flex-direction: column;
+    padding: var(--space-3);
+  }
+  .email {
+    font-size: var(--text-xl);
+  }
+}
+
+@media (max-width: 767px) {
+  .soda {
+    width: 250px;
+  }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| ⚙️ ТЕМА INLINE (@theme inline)
+|-------------------------------------------------------------------------------
+| Оставлен в конце, так как, вероятно, это директива, которая генерирует
+| inline-стили для компонента или фреймворка.
 */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -860,209 +1171,4 @@ html[data-theme='dark'] .scrollbar-custom::-webkit-scrollbar-thumb {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-}
-/*
----break---
-*/
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-/*
----break---
-*/
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-.max-w-9xl-custom {
-  max-width: 100rem; 
-}
-
-/* --- Стили для бегущей строки услуг --- */
-/* --- Обновленные стили для бегущей строки услуг --- */
-@keyframes scroll-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
-}
-
-@keyframes scroll-right {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
-}
-
-.infinite-scroller .scroller-inner {
-  display: flex;
-  flex-wrap: nowrap;
-  /* Регулируйте время для скорости */
-  animation: scroll-left 80s linear infinite; 
-}
-
-/* Применяем анимацию для движения вправо */
-.infinite-scroller[data-direction="right"] .scroller-inner {
-  animation-name: scroll-right;
-}
-
-.infinite-scroller:hover .scroller-inner {
-  animation-play-state: paused;
-}
-
-.infinite-scroller .tag {
-  margin: 0 1rem;
-  padding: 0.75rem 2rem; /* Увеличили отступы */
-  border-radius: 9999px;
-  white-space: nowrap;
-  transition: all 0.3s ease;
-  font-size: 1.125rem; /* 18px */
-}
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-.floating-icon {
-  animation: float 6s ease-in-out infinite;
-}
-/* --- Анимация для парящих иконок --- */
-@keyframes float-light {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-}
-
-.floating-icon {
-  animation: float-light 6s ease-in-out infinite;
-}
-
-/* --- Стили для аккордеона FAQ --- */
-.faq-item summary {
-  cursor: pointer;
-  outline: none;
-  list-style: none; /* Убираем стандартный маркер */
-}
-.faq-item summary::-webkit-details-marker {
-  display: none; /* Убираем маркер для Chrome/Safari */
-}
-
-/* Анимация иконки плюса/минуса */
-.faq-item .plus-icon {
-  transition: transform 0.3s ease-in-out;
-}
-.faq-item[open] .plus-icon {
-  transform: rotate(45deg);
-}
-
-/* Анимация появления ответа */
-.faq-item .answer {
-  overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1.0),
-              padding 0.5s cubic-bezier(0.25, 0.1, 0.25, 1.0);
-  max-height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.faq-item[open] .answer {
-  max-height: 500px; /* Достаточно большое значение */
-  padding-top: 1.5rem; /* 24px */
-}
-
-.noise-bg {
-  position: relative;
-}
-
-.noise-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAARlJREFUaIHt2LENwjAUAFA7oQRqoZ0LoVwH92EE4h7cKxI2x0B3kBCXg5gUUSI6SR/i90t618j/J22TfQZAozQJ4L24534IgE0kCca997M/uN/3N8d+2QcAYtNIAnGv/fR/0W/7/V/1H/9a/wGgNI0kEPfaj24A0L//9X8A0JpGEoj77Uc3ANC///V/ANDaRBLIe+9HNwDQv//1fwDQ2kQSyHvvRzcAsGSROA8A0BptEjwFANBaRhLIe+9HNwDQv//1fwDQ2kQSyHvvRzcAsM0kCca997MbgH1A61/gHwAE0kpSjHvtRzcA0L//9X8A0JpGEoj77Uc3ANC///V/ANDaRBLIe+9HNwBYYJME41772au/AVg3lHwEaNoAAAAASUVORK5CYII=');
-  opacity: 0.03;
-  pointer-events: none;
-}
-
-.form-checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 1.25rem; /* 20px */
-  height: 1.25rem; /* 20px */
-  border: 2px solid #4A5568; /* border-zinc-600 */
-  border-radius: 0.375rem; /* rounded-md */
-  background-color: transparent;
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.form-checkbox:checked {
-  background-color: #3B82F6; /* bg-blue-500 */
-  border-color: #3B82F6;
-}
-
-.form-checkbox:checked::after {
-  content: '✔';
-  font-size: 0.875rem; /* 14px */
-  color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea {
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.375rem;
-  padding: 0.75rem 1rem;
-  width: 100%;
-  color: white;
-  transition: all 0.2s ease;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-textarea:focus {
-  outline: none;
-  border-color: #3B82F6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
 }

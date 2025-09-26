@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './FractalOrbComponent.css';
 
 // Import the PrismaticBurst component lazily
-const PrismaticBurst = lazy(() => import('@/Components/PrismaticBurst'));
+const PrismaticBurst = lazy(() => import('@/Components/Block/PrismaticBurst'));
 
 // The PrismaticButton component from your example
 const PrismaticButton = ({ onClick, children, colors, hoverColors, className = "" }) => {

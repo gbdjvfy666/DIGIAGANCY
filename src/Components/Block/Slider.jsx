@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 
 // Компоненты для других слайдов и фона
 import MacbookWrapper from '../other/MacbookWrapper';
-import GradientBlinds from '../background/GradientBlinds';
-import Prism from '../Prism';
+import GradientBlinds from '../other/background/GradientBlinds';
+import Prism from './Prism';
 import logPng from '../../assets/LOG.png';
 
 const ease = [0.4, 0, 0.2, 0.8];

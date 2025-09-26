@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import video1 from '../../assets/6973-197914400_small.mp4';
 import video2 from '../../assets/1992-153555258_small.mp4';
 import video3 from '../../assets/885-141277483_small.mp4';
-import logoWhite from '../../assets/LOGO_WHITE.png'; // <-- Убедитесь, что путь верный
+import logoWhite from '../../assets/LOGO_WHITE.png'; 
 
 const ServicesGrid = () => {
   const [hoveredItem, setHoveredItem] = useState(null);

@@ -8,7 +8,7 @@ import {
   useVelocity,
   useAnimationFrame,
 } from "framer-motion";
-
+export const velocity = 100;
 function useElementWidth(ref) {
   const [width, setWidth] = useState(0);
 
@@ -155,8 +155,8 @@ export default ScrollVelocity;
 
 
 // использование 
-// <ScrollVelocity
-//   texts={['React Bits', 'Scroll Down']} 
-//   velocity={velocity} 
-//   className="custom-scroll-text"
-// />
+{/* <ScrollVelocity
+  texts={['React Bits', 'Scroll Down']} 
+  velocity={velocity} 
+  className="custom-scroll-text"
+/> */}

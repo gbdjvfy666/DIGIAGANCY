@@ -1,6 +1,6 @@
 // App.jsx 
 
-import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { useSmoothScroll } from './Components/other/hooks/useSmoothScroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
