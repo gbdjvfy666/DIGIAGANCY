@@ -1,99 +1,123 @@
+// Файл: src/pages/Blog/BlogBlocks/BlogHeroBlock.jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Для простоты, иконки вставлены как компоненты. 
-// Их можно вынести в отдельную библиотеку иконок.
+// --- Вспомогательные компоненты (Иконки) ---
 
-const CodeIcon = () => (
-    <svg className="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-);
-const RocketIcon = () => (
-    <svg className="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-);
+const ClockIcon = () => (<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.6"><path d="M12 3C7.03125 3 3 7.03125 3 12C3 16.9688 7.03125 21 12 21C16.9688 21 21 16.9688 21 12C21 7.03125 16.9688 3 12 3Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"></path><path d="M12 6V12.75H16.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></g></svg>);
+const HeartIcon = () => (<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0001 21.35L10.5501 20.03C5.40009 15.36 2.00009 12.28 2.00009 8.5C2.00009 5.42 4.42009 3 7.50009 3C9.24009 3 10.9101 3.81 12.0001 5.09C13.0901 3.81 14.7601 3 16.5001 3C19.5801 3 22.0001 5.42 22.0001 8.5C22.0001 12.28 18.6001 15.36 13.4501 20.04L12.0001 21.35Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"></path></svg>);
+const CommentIcon = () => (<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5C21 16.7467 16.7467 21 11.5 21C10.5366 21 9.60134 20.849 8.72051 20.5631L3 22L4.43695 16.2795C4.151 15.3987 4 14.4634 4 13.5C4 8.25329 8.25329 4 13.5 4C15.8354 4 17.9354 4.88998 19.4853 6.43981C21.0351 7.98964 22 10.0896 22 12.425C21.9992 12.1182 21.8741 11.8213 21.6489 11.6033C21.4237 11.3852 21.1189 11.2656 21 11.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"></path></svg>);
+const EyeIcon = () => (<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"></path><path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"></path></svg>);
 
-// Иконки из вашего HTML
-const ClockIcon = () => (<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.5"><path d="M12 3C7.03125 3 3 7.03125 3 12C3 16.9688 7.03125 21 12 21C16.9688 21 21 16.9688 21 12C21 7.03125 16.9688 3 12 3Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"></path><path d="M12 6V12.75H16.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></g></svg>);
-const HeartIcon = () => (<svg className="w-6 h-6" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.823 4.13688L14.6667 5.46263L15.5103 4.13688C16.7258 2.2268 18.8735 1 21.3333 1C25.181 1 28.3333 4.15229 28.3333 8C28.3333 9.69912 27.5492 11.4919 26.2353 13.2836C24.9289 15.065 23.1653 16.7545 21.3668 18.226C19.5731 19.6936 17.7744 20.9203 16.4215 21.7813C15.7459 22.2112 15.1839 22.5484 14.7923 22.7773C14.7489 22.8026 14.7077 22.8266 14.6686 22.8493C14.6291 22.8263 14.5875 22.8019 14.5437 22.7761C14.152 22.5455 13.5898 22.2059 12.9141 21.7734C11.5608 20.9071 9.76175 19.6739 7.96762 18.2019C6.16855 16.7258 4.40438 15.0339 3.0976 13.2549C1.78263 11.4647 1 9.68082 1 8C1 4.15229 4.15229 1 8 1C10.4599 1 12.6075 2.2268 13.823 4.13688Z" stroke="currentColor" strokeOpacity="0.5" strokeWidth="2"></path></svg>);
-const CommentIcon = () => (<svg className="w-6 h-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.5"><path d="M16.5439 5H16.9971C22.4937 5 26.9998 9.59918 27 15.3369C27 16.6808 26.7749 18.0129 26.3369 19.2744L26.1367 19.8105C25.6382 21.0504 24.9371 22.1897 24.0664 23.1797L23.6826 23.5947C22.7641 24.5411 21.6961 25.3151 20.5273 25.8848L20.0205 26.1172C18.8237 26.6279 17.5523 26.9211 16.2627 26.9863L15.71 27H5.48145L7.67676 25.1846C7.92635 24.9782 8.11022 24.7071 8.21191 24.4053L8.25098 24.2734C8.3287 23.9639 8.32009 23.6389 8.22656 23.335L8.18066 23.2061L6.86816 19.8887C4.04268 12.7398 9.16029 5.00006 16.5439 5Z" stroke="currentColor" strokeWidth="2"></path></g></svg>);
-const EyeIcon = () => (<svg className="w-6 h-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.5"><path d="M16 5C23.2 5 29 10.8 31 16C29 21.2 23.2 27 16 27C8.8 27 3 21.2 1 16C3 10.8 8.8 5 16 5ZM16 12C13.8 12 12 13.8 12 16C12 18.2 13.8 20 16 20C18.2 20 20 18.2 20 16C20 13.8 18.2 12 16 12Z" fill="currentColor"></path></g></svg>);
 
-// Сопоставление названий тегов с иконками
-const ICONS = {
-    'Создание сайтов': <CodeIcon />,
-    'Продвижение сайтов': <RocketIcon />,
-};
+// --- Основной компонент ---
 
-export default function BlogHeroBlock({ data }) {
-    if (!data) return null;
+export default function BlogHeroBlock({ data, pageContext }) {
+    if (!data || !pageContext) return null;
 
-    const { title, description, author, readingTime, stats, tags } = data;
+    const { title, description, author, readingTime, stats } = data;
+
+    const breadcrumbs = [
+        { name: 'Главная', link: '/' },
+        { name: 'Блог', link: '/blog' }
+    ];
+    breadcrumbs.push({ name: pageContext.title, link: '#' });
+
+    const bgStyles = {
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px), radial-gradient(circle at 50% 50%, rgba(0, 112, 115, 0.25) 0%, rgba(0, 31, 84, 0.15) 35%, transparent 70%)`,
+        backgroundSize: '40px 40px, 40px 40px, 100% 100%',
+    };
 
     return (
-        // Блок использует светлую тему, как на скриншоте
-        <section className="text-black bg-white pt-10 pb-16">
-            <div className="container max-w-7xl mx-auto px-4">
-                {/* Верхняя панель */}
-                <div className="flex flex-wrap justify-between items-center border-b border-zinc-200 pb-4 mb-10 gap-4">
-                    {/* Теги и время чтения */}
-                    <div className="flex items-center flex-wrap gap-x-2 gap-y-2 text-zinc-800">
-                        {tags?.map((tag, index) => (
-                            <Link to={tag.link} key={index} className="flex items-center bg-zinc-100 hover:bg-zinc-200 rounded-full px-4 py-2 text-sm font-medium transition-colors">
-                                {ICONS[tag.name] || <CodeIcon />}
-                                <span>{tag.name}</span>
-                            </Link>
-                        ))}
-                         <div className="flex items-center text-zinc-500 ml-4">
+        <section className="relative bg-black text-white border-y border-zinc-800 pt-32 pb-24 sm:pt-40 sm:pb-28 overflow-hidden" style={bgStyles}>
+            <div className="absolute inset-0 bg-black/60"></div>
+            
+            {/* ИЗМЕНЕНИЕ: Единый хедер с хлебными крошками */}
+            <div className="absolute top-0 left-0 w-full z-20 bg-black/20 backdrop-blur-sm">
+                <div className="max-w-8xl mx-auto px-6 lg:px-8">
+                    <div className="flex items-center gap-4 text-sm text-zinc-400 h-16">
+                        <nav aria-label="Breadcrumb">
+                            <ol className="flex items-center">
+                                {breadcrumbs.map((item, index) => (
+                                    <li key={index} className="flex items-center">
+                                        {index < breadcrumbs.length - 1 ? (
+                                            <Link to={item.link} className="hover:text-white transition-colors">
+                                                {item.name}
+                                            </Link>
+                                        ) : (
+                                            <span className="text-white font-medium" aria-current="page">
+                                                {item.name}
+                                            </span>
+                                        )}
+                                        {index < breadcrumbs.length - 1 && (
+                                            <span className="mx-3 text-zinc-700" aria-hidden="true">/</span>
+                                        )}
+                                    </li>
+                                ))}
+                            </ol>
+                        </nav>
+                        <div className="flex-grow h-px bg-gradient-to-r from-zinc-800 via-zinc-700 to-transparent ml-4"></div>
+                        <div className="flex items-center gap-2" title="Время чтения">
                             <ClockIcon />
-                            <span className="ml-2 text-sm">{readingTime}</span>
-                        </div>
-                    </div>
-                    {/* Статистика */}
-                    <div className="flex items-center gap-x-6 text-zinc-500">
-                        <div className="flex items-center" title="Лайки">
-                            <HeartIcon />
-                            <span className="ml-2 font-medium text-sm">{stats?.likes ?? 0}</span>
-                        </div>
-                        <div className="flex items-center" title="Комментарии">
-                            <CommentIcon />
-                            <span className="ml-2 font-medium text-sm">{stats?.comments ?? 0}</span>
-                        </div>
-                        <div className="flex items-center" title="Просмотры">
-                            <EyeIcon />
-                            <span className="ml-2 font-medium text-sm">{stats?.views ?? 0}</span>
+                            <span>{readingTime}</span>
                         </div>
                     </div>
                 </div>
-
-                {/* Основной контент */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Левая часть: Заголовок и описание */}
-                    <div className="lg:col-span-2">
-                        <h1 className="text-5xl md:text-6xl font-black text-zinc-900 leading-tight mb-6">
+            </div>
+            
+            {/* Основной контент */}
+            <div className="relative z-10 w-full max-w-8xl mx-auto px-6 lg:px-8">
+                <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    {/* Левая колонка */}
+                    <div className="lg:col-span-8">
+                        <h1 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-zinc-500 leading-none tracking-tighter mb-8">
                             {title}
                         </h1>
-                        <p className="text-lg text-zinc-600 max-w-3xl">
+                        <p className="text-xl text-zinc-400 max-w-4xl leading-relaxed">
                             {description}
                         </p>
                     </div>
 
-                    {/* Правая часть: Информация об авторе */}
-                    <div className="flex lg:justify-center">
-                        <div>
-                            <p className="font-semibold mb-3">Автор:</p>
-                            <div className="flex items-center">
-                                <Link to={author?.link || '#'} target="_blank" className="flex-shrink-0">
+                    {/* Правая колонка */}
+                    <div className="lg:col-span-4">
+                        <div className="bg-zinc-900/50 border border-zinc-800 backdrop-blur-md rounded-none">
+                            <div className="p-6">
+                                <div className="flex items-center space-x-4">
                                     <img 
                                         src={author?.imageUrl} 
                                         alt={author?.name || 'Автор'} 
-                                        className="w-16 h-16 rounded-full object-cover mr-4 hover:opacity-90 transition-opacity" 
+                                        className="w-16 h-16 rounded-none object-cover border-2 border-zinc-700" 
                                     />
-                                </Link>
-                                <div>
-                                    <Link to={author?.link || '#'} target="_blank" className="font-bold text-lg text-zinc-900 hover:underline">
-                                        {author?.name}
-                                    </Link>
-                                    <p className="text-zinc-500">{author?.position}</p>
+                                    <div>
+                                        <p className="text-sm text-zinc-400">Автор</p>
+                                        <h3 className="font-bold text-lg text-white">
+                                            {author?.name}
+                                        </h3>
+                                        <p className="text-zinc-500 text-sm">{author?.position}</p>
+                                    </div>
                                 </div>
+                            </div>
+                            
+                            <div className="border-t border-zinc-800 grid grid-cols-3 text-center">
+                                {[
+                                    {icon: <HeartIcon />, value: stats?.likes, label: 'Лайки'}, 
+                                    {icon: <CommentIcon />, value: stats?.comments, label: 'Отзывы'}, 
+                                    {icon: <EyeIcon />, value: stats?.views, label: 'Просмотры'}
+                                ].map((stat, i) => (
+                                    <div className="p-4 border-r border-zinc-800 last:border-r-0" key={i}>
+                                        <div className="w-fit mx-auto text-zinc-500">{stat.icon}</div>
+                                        <p className="font-bold text-lg text-white mt-1">{stat.value ?? 0}</p>
+                                        <p className="text-xs text-zinc-500">{stat.label}</p>
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="p-3 border-t border-zinc-800">
+                                <Link to={author?.link || '#'} target="_blank" className="block w-full text-center bg-zinc-800 border border-zinc-700 text-white px-6 py-2.5 rounded-none font-semibold hover:bg-white hover:text-black transition-colors duration-300">
+                                    Профиль автора
+                                </Link>
                             </div>
                         </div>
                     </div>

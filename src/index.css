@@ -1172,3 +1172,31 @@ html[data-theme='dark'] .scrollbar-custom::-webkit-scrollbar-thumb {
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
+
+/* Кастомные стили для корректного отображения заголовков и параграфов внутри .custom-prose-fix */
+.custom-prose-fix h1, .custom-prose-fix h2, .custom-prose-fix h3, .custom-prose-fix h4, .custom-prose-fix h5, .custom-prose-fix h6 {
+  color: #fff !important;
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+}
+.custom-prose-fix p {
+  color: #e5e7eb !important;
+  margin-bottom: 1.2rem;
+  font-size: 1.15rem;
+}
+.custom-prose-fix a {
+  color: #a78bfa !important;
+  text-decoration: underline;
+}
+.custom-prose-fix img {
+  border-radius: 0.75rem;
+  margin: 2rem 0;
+  max-width: 100%;
+  height: auto;
+}
+.custom-prose-fix h2 {
+  font-size: 2.5rem !important;
+  line-height: 1.15;
+}
+

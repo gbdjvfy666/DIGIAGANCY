@@ -1,4 +1,6 @@
-import React from 'react';
+// Ваш файл: BlogPage.jsx
+
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { blogPostsData } from './BlogData'; 
 import BlogHeroBlock from './BlogBlocks/BlogHeroBlock';
@@ -7,6 +9,9 @@ import BlogCommentsBlock from './BlogBlocks/BlogCommentsBlock';
 import BlogRecommendedBlock from './BlogBlocks/BlogRecommendedBlock';
 import TagsNavBlock from './BlogBlocks/TagsNavBlock'; 
 import PostsGridBlock from './BlogBlocks/PostsGridBlock'; 
+
+// ✅ ВАЖНО: Убедитесь, что этот хук импортирован правильно
+import { useSmoothScroll } from '../../Components/other/hooks/useSmoothScroll';
 
 const blockComponents = {
   hero: BlogHeroBlock,
@@ -23,6 +28,21 @@ export default function BlogPage() {
     const pageData = blogPostsData[pageSlug];
     const allPosts = Object.values(blogPostsData).filter(p => !p.isIndexPage);
 
+    // ✅ ВАЖНО: Получаем функцию refreshScroll из вашего хука
+    const { refreshScroll } = useSmoothScroll();
+
+    // ✅ ВАЖНО: Этот useEffect отвечает за обновление скролла при смене страницы
+    useEffect(() => {
+        // Небольшая задержка, чтобы React успел отрендерить новый контент
+        const timer = setTimeout(() => {
+            if (refreshScroll) {
+                refreshScroll();
+            }
+        }, 100);
+
+        return () => clearTimeout(timer); // Очистка таймера при размонтировании
+    }, [pageData, refreshScroll]); // Зависимость от pageData - ключ к работе!
+
     if (!pageData) {
         return (
             <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center text-center px-4">
@@ -35,44 +55,32 @@ export default function BlogPage() {
         );
     }
 
-    const isIndexPage = pageData.isIndexPage;
-
     return (
-        <div className={`min-h-screen ${isIndexPage ? 'bg-white text-black' : 'bg-black text-white'}`}>
-
-            <main className="pt-24">
-                
-                <div className={`container max-w-8xl mx-auto px-4 mb-8 ${isIndexPage ? 'text-black' : 'text-zinc-400'}`}>
-                    <Link to="/" className={`${isIndexPage ? 'text-zinc-500 hover:text-black' : 'hover:text-white'}`}>Главная</Link>
-                    <span className="mx-2">/</span>
-                    
-                    {isIndexPage ? (
-                        <span className="font-medium">Блог</span>
-                    ) : (
-                        <>
-                            <Link to="/blog" className="hover:text-white">Блог</Link>
-                            <span className="mx-2">/</span>
-                            <span className="text-white">{pageData.title}</span>
-                        </>
-                    )}
-                </div>
+        // Убраны статические "хлебные крошки"
+        <div className={`min-h-screen ${pageData.isIndexPage ? 'bg-white text-black' : 'bg-black text-white'}`}>
+            <main className="">
                   
                 {pageData.blocks.map((block, index) => {
                     const Component = blockComponents[block.type];
                     if (!Component) return null; 
 
-                    const props = {
-                        ...(block.data && { data: block.data }),
-                    };
+                    const props = {};
                     
-                    if (block.type === 'posts-grid') {
+                    if (block.type === 'hero') {
+                        // Для hero-блока передаем и его личные данные, и данные всей страницы
+                        props.data = block.data;
+                        props.pageContext = pageData; // pageContext содержит title, tags и т.д.
+                    } else if (block.type === 'posts-grid') {
+                        // Для других блоков логика остается прежней
+                        props.data = block.data;
                         props.allPosts = allPosts;
+                    } else {
+                        props.data = block.data;
                     }
 
                     return <Component key={index} {...props} />;
                 })}
             </main>
-            
         </div>
     );
 }

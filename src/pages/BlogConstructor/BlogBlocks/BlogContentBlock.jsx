@@ -1,128 +1,145 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
-import CtaCard from './CtaCard';
-import QuoteCard from './QuoteCard';
+// Файл: src/pages/Blog/BlogBlocks/BlogContentBlock.jsx
 
-// Компонент для рендеринга содержания (без изменений)
-const TableOfContentsList = ({ items, level = 0, parentIndex = '' }) => {
-    const olClasses = level === 0 ? "space-y-3" : "space-y-2 mt-2";
-    const linkClasses = level === 0 ? "text-lg font-medium" : "text-base font-normal";
-    
+import React from 'react';
+// import CtaCard from './CtaCard';
+// import QuoteCard from './QuoteCard';
+
+// ===================================================================================
+// КОМПОНЕНТЫ ДЛЯ ДИЗАЙНА (без изменений)
+// ===================================================================================
+
+// Компонент градиентной звезды
+const GradientStarIcon = ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="url(#star-gradient)" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#c084fc" /> {/* purple-400 */}
+                <stop offset="100%" stopColor="#22d3ee" /> {/* cyan-400 */}
+            </linearGradient>
+        </defs>
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/>
+    </svg>
+);
+
+// Компонент Содержания
+const TableOfContentsList = ({ items, level = 0 }) => {
     return (
-        <ol className={`list-none pl-0 ${olClasses}`}>
-            {items.map((item, index) => {
-                const itemIndex = level === 0 ? `${index + 1}` : `${parentIndex}.${index + 1}`;
-                return (
-                    <li key={index}>
-                        <a href={item.link} className={`flex items-start gap-x-3 text-zinc-300 hover:text-white transition-colors ${linkClasses}`}>
-                            <span className={`flex-shrink-0 w-8 text-right font-semibold ${level === 0 ? 'bg-gradient-to-br from-purple-400 to-cyan-400 bg-clip-text text-transparent' : 'text-zinc-500'}`}>
-                                {itemIndex}
-                            </span>
-                            <span className="flex-grow">{item.title}</span>
-                        </a>
-                        {item.children && item.children.length > 0 && (
-                            <div className="pl-11 mt-1">
-                                <TableOfContentsList items={item.children} level={level + 1} parentIndex={itemIndex} />
-                            </div>
-                        )}
-                    </li>
-                );
-            })}
+        <ol className="list-none pl-0 space-y-4">
+            {items.map((item, index) => (
+                <li key={index}>
+                    <a href={item.link} className="flex items-start gap-x-4 text-zinc-400 hover:text-white transition-colors group">
+                        <div className="flex-shrink-0 mt-1">
+                            {level === 0 ? (
+                                <GradientStarIcon className="w-5 h-5" />
+                            ) : (
+                                <div className="w-5 h-5 flex items-center justify-center">
+                                    <div className="w-1.5 h-1.5 bg-zinc-600 rounded-full"></div>
+                                </div>
+                            )}
+                        </div>
+                        <span className={`flex-grow ${level === 0 ? 'text-lg font-medium text-zinc-200 group-hover:text-white' : 'text-base'}`}>
+                            {item.title}
+                        </span>
+                    </a>
+                    {item.children && item.children.length > 0 && (
+                        <div className="pl-9 mt-3">
+                            <TableOfContentsList items={item.children} level={level + 1} />
+                        </div>
+                    )}
+                </li>
+            ))}
         </ol>
     );
 };
 
 // ===================================================================================
-// ОСНОВНОЙ КОМПОНЕНТ БЛОКА С АДАПТИВНОЙ ЛОГИКОЙ
+// ОСНОВНОЙ КОМПОНЕНТ БЛОКА (упрощенный, без логики скролла)
 // ===================================================================================
 export default function BlogContentBlock({ data }) {
     if (!data || !data.htmlContent) return null;
 
-    const containerRef = useRef(null);
-    const navRef = useRef(null);
-    const [navTransformY, setNavTransformY] = useState(0);
-
-    // --- ИЗМЕНЕНИЕ №1: Отслеживаем, является ли экран большим ---
-    // (lg в Tailwind по умолчанию 1024px)
-    const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
-
-    useEffect(() => {
-        const checkScreenSize = () => {
-            setIsLargeScreen(window.innerWidth >= 1024);
-        };
-        window.addEventListener('resize', checkScreenSize);
-        // Очистка при размонтировании
-        return () => window.removeEventListener('resize', checkScreenSize);
-    }, []);
-
-
-    useLayoutEffect(() => {
-        // --- ИЗМЕНЕНИЕ №2: Вся логика скролла работает ТОЛЬКО на больших экранах ---
-        if (isLargeScreen) {
-            const handleScroll = () => {
-                if (!containerRef.current || !navRef.current) return;
-
-                const TOP_OFFSET = 96;
-                const containerRect = containerRef.current.getBoundingClientRect();
-                const navHeight = navRef.current.offsetHeight;
-                const containerHeight = containerRef.current.offsetHeight;
-
-                if (containerRect.top > TOP_OFFSET) {
-                    setNavTransformY(0); return;
-                }
-                if (containerRect.bottom < navHeight + TOP_OFFSET) {
-                    setNavTransformY(containerHeight - navHeight); return;
-                }
-                setNavTransformY(TOP_OFFSET - containerRect.top);
-            };
-
-            let animationFrameId;
-            const animationLoop = () => {
-                handleScroll();
-                animationFrameId = requestAnimationFrame(animationLoop);
-            };
-
-            animationLoop();
-            return () => cancelAnimationFrame(animationFrameId);
-        } else {
-            // На маленьких экранах просто сбрасываем сдвиг
-            setNavTransformY(0);
-        }
-    }, [data, isLargeScreen]); // Добавляем isLargeScreen в зависимости
-
     return (
-        <section className="bg-black text-white py-16">
-            <div className="container max-w-8xl mx-auto px-4">
-                <div ref={containerRef} className="relative grid grid-cols-1 lg:grid-cols-4 lg:gap-16">
-                    
-                    <aside className="lg:col-span-1 mb-12 lg:mb-0">
-                        {/* 
-                          --- ИЗМЕНЕНИЕ №3: Позиционирование становится абсолютным ТОЛЬКО на больших экранах ---
-                          На маленьких экранах оно будет 'static' по умолчанию.
-                        */}
-                        <div 
-                            ref={navRef} 
-                            className="w-full lg:max-w-xs lg:absolute"
-                            style={{ transform: `translateY(${navTransformY}px)` }}
-                        > 
-                            <div className="relative pr-6 before:content-[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:w-0.5 before:bg-gradient-to-b before:from-purple-500 before:to-cyan-400">
-                                <h3 className="text-2xl font-bold mb-6">Содержание:</h3>
+        <>
+            <style jsx global>{`
+                .custom-prose-styles {
+                    counter-reset: h2-counter;
+                }
+                .custom-prose-styles h2 {
+                    position: relative;
+                    padding-left: 5.5rem; /* 88px */
+                    margin-top: 4rem; /* 64px */
+                    margin-bottom: 2rem; /* 32px */
+                    padding-bottom: 1rem; /* 16px */
+                    border-bottom: 1px solid #27272a; /* zinc-800 */
+                }
+                .custom-prose-styles h2::before {
+                    counter-increment: h2-counter;
+                    content: "0" counter(h2-counter);
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    font-size: 4.5rem; /* 72px */
+                    font-weight: 900;
+                    line-height: 1;
+                    color: rgba(255, 255, 255, 0.05);
+                }
+                 .custom-prose-styles h3 {
+                    font-size: 1.875rem; /* 30px */
+                    margin-top: 3rem;
+                 }
+                .custom-prose-styles a {
+                    color: #c084fc; /* purple-400 */
+                    text-decoration: none;
+                    transition: color 0.2s ease;
+                }
+                .custom-prose-styles a:hover {
+                    color: #ffffff;
+                    text-decoration: underline;
+                }
+                .custom-prose-styles img {
+                    border-radius: 0; /* rounded-none */
+                    border: 1px solid #27272a; /* zinc-800 */
+                }
+            `}</style>
+
+            <section className="bg-black py-16 sm:py-24">
+                <div className="container max-w-8xl mx-auto px-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8">
+                        
+                        {/* Левая колонка: Содержание (теперь статичное) */}
+                        <aside className="lg:col-span-4 mb-16 lg:mb-0">
+                            <div className="w-full lg:max-w-sm p-4">
+                                <h3 className="text-3xl font-bold mb-8 text-white">
+                                    Содержание статьи
+                                </h3>
                                 <nav>
                                     <TableOfContentsList items={data.tableOfContents || []} />
                                 </nav>
                             </div>
+                        </aside>
+                        
+                        {/* Разделитель */}
+                        <div className="hidden lg:block lg:col-span-1">
+                             <div className="h-full w-px bg-gradient-to-b from-zinc-800 via-purple-500/30 to-zinc-800 mx-auto"></div>
                         </div>
-                    </aside>
 
-                    <article className="lg:col-span-3">
-                        <div
-                            className="prose prose-lg prose-invert max-w-none prose-h2:text-3xl prose-h3:text-2xl prose-a:text-purple-400 hover:prose-a:text-purple-300 prose-img:rounded-lg"
-                            dangerouslySetInnerHTML={{ __html: data.htmlContent }}
-                        />
-                        <CtaCard />
-                        <QuoteCard />
-                    </article>
+                        {/* Правая колонка: Контент статьи */}
+                        <article className="lg:col-span-7">
+                            <div
+                                className="prose prose-xl prose-invert max-w-none custom-prose-styles"
+                                dangerouslySetInnerHTML={{ __html: data.htmlContent }}
+                            />
+                            {/* 
+                            <div className="mt-16 space-y-8">
+                                <CtaCard />
+                                <QuoteCard />
+                            </div> 
+                            */}
+                        </article>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 }
