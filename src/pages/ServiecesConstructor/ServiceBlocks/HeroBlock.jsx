@@ -1,4 +1,4 @@
-// src/pages/ServiceBlocks/HeroBlock.jsx
+// src/pages/ServiceBlocks/HeroBlock.jsx (Исправленная версия с отступами)
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -38,19 +38,29 @@ const Breadcrumbs = ({ items }) => (
 export default function HeroBlock({ data }) {
     if (!data) return null;
 
-    const { title, description, breadcrumbs, price, timeline, result, buttonText } = data;
+    const { title, description, price, timeline, result, buttonText } = data;
+    
+    const breadcrumbs = [
+        { name: 'Главная', link: '/' },
+        { name: 'Услуги', link: '/services' } 
+    ];
+    breadcrumbs.push({ name: title, link: '#' });
 
     const bgStyles = {
         backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px), radial-gradient(circle at top left, rgba(168, 85, 247, 0.15) 0%, rgba(59, 130, 246, 0.1) 25%, transparent 50%)`,
         backgroundSize: '40px 40px, 40px 40px, 100% 100%',
     };
 
+    // --- ИЗМЕНЕНИЕ 1: Увеличены верхние отступы (pt) ---
+    // pt-32 -> pt-48 (для мобильных)
+    // sm:pt-40 -> sm:pt-64 (для больших экранов)
     return (
-        <section className="relative bg-black text-white pt-32 pb-24 sm:pt-40 sm:pb-28 border-b border-zinc-800 overflow-hidden" style={bgStyles}>
+        <section className="relative bg-black text-white pt-48 pb-24 sm:pt-64 sm:pb-28 border-b border-zinc-800 overflow-hidden" style={bgStyles}>
             <div className="absolute inset-0 bg-black/60"></div>
             
-            {/* Верхний "парящий" бар с хлебными крошками */}
-            <div className="absolute top-0 left-0 w-full z-20 bg-black/20 backdrop-blur-sm border-b border-zinc-800/50">
+            {/* --- ИЗМЕНЕНИЕ 2: Смещена позиция бара с крошками (top) --- */}
+            {/* top-0 -> top-24 (96px отступ сверху) */}
+            <div className="absolute top-15 left-0 w-full z-20 bg-black/20 backdrop-blur-sm border-b border-zinc-800/50">
                 <div className="max-w-8xl mx-auto px-6 lg:px-8 h-16 flex items-center">
                     {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
                 </div>
@@ -62,7 +72,7 @@ export default function HeroBlock({ data }) {
                     
                     {/* Левая колонка: Заголовок и описание */}
                     <div className="lg:col-span-8">
-                        <h1 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-zinc-500 leading-none tracking-tighter mb-8">
+                        <h1 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-zinc-500 leading-tight tracking-tighter mb-8">
                             {title}
                         </h1>
                         <p className="text-xl text-zinc-400 max-w-4xl leading-relaxed">

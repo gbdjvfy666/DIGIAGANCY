@@ -4,8 +4,7 @@ import React from 'react';
 import '../index.css';
 import VideoGrid from '../Components/Block/ServicesGrid.jsx';
 import FractalOrbComponent from '../Components/Block/ProfileCard/FractalOrbComponent.jsx';
-import StarBackground from '../Components/other/background/StarBackground.jsx';
-
+import CtaBanner from '../Components/Block/CtaBanner.jsx';  
 import NoiseBackgroundBig from '../Components/other/background/NoiseBacgroundBig/NoiseBacgroundBig.jsx'; 
 import Divider from '../Components/other/Divider.jsx';
 import Slider from '../Components/Block/Slider.jsx';
@@ -44,6 +43,7 @@ export default function Home() {
         <VideoGrid />
       </div>
             <ServicesSection />
+            <CtaBanner />
     </div>
   );
 }

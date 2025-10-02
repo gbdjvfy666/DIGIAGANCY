@@ -6,7 +6,6 @@ import { servicesData, categoryData } from './serviceData';
 
 // Импорты ваших компонентов-блоков
 import HeroBlock from './ServiceBlocks/HeroBlock';
-import ImageGalleryBlock from './ServiceBlocks/ImageGalleryBlock';
 import FaqBlock from './ServiceBlocks/FaqBlock';
 import TextBlock from './ServiceBlocks/TextBlock';
 import WebsiteTypesGrid from './ServiceBlocks/WebsiteTypesGrid';
@@ -15,7 +14,6 @@ import ContactFormBlock from './ServiceBlocks/ContactFormBlock';
 
 const blockComponents = {
   hero: HeroBlock,
-  gallery: ImageGalleryBlock,
   faq: FaqBlock,
   text: TextBlock,
   link: WebsiteTypesGrid,
@@ -65,18 +63,6 @@ export default function ServicePage() {
   return (
     <div className="min-h-screen bg-black text-white">
       <main>
-        <div className="container max-w-8xl mx-auto px-4 pt-24">
-          <div className="mb-8 text-zinc-400">
-            <Link to="/" className="hover:text-white">Главная</Link> /
-            <Link to="/services" className="hover:text-white"> Услуги</Link> /
-            {slug !== category && (
-              <>
-                <Link to={currentCategoryInfo.path} className="hover:text-white"> {currentCategoryInfo.title}</Link> /
-              </>
-            )}
-            <span className="text-white"> {service.title}</span>
-          </div>
-        </div>
           
         {service.blocks.map((block, index) => {
           const Component = blockComponents[block.type];
