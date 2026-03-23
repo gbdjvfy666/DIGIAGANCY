@@ -3,27 +3,90 @@
 export const categoryData = {
   presentations: {
     title: 'Презентации',
-    path: '/services/presentations'
+    path: '/services/presentations',
+    services: [
+      { title: 'Разработка презентаций', path: '/services/presentations' },
+      { title: 'Презентации для логистики', path: '/services/prezentatsii-dlya-logisticheskikh-kompaniy' },
+      { title: 'Интерактивные презентации', path: '/services/interaktivnye-prezentatsii' },
+      { title: 'Презентация на английском', path: '/services/prezentatsiya-na-angliyskom-yazyke' },
+      { title: 'Инвестиционная презентация', path: '/services/investitsionnaya-prezentatsiya' },
+      { title: 'Коммерческое предложение', path: '/services/kommercheskoe-predlozhenie' },
+      { title: 'Презентации для ТЦ', path: '/services/prezentatsii-dlya-torgovykh-tsentrov' },
+      { title: 'Презентации для выступления', path: '/services/prezentatsii-dlya-vystupleniya' },
+      { title: 'Презентации для тендеров', path: '/services/prezentatsii-dlya-tenderov' },
+      { title: 'Оформление презентаций', path: '/services/oformlenie-prezentatsiy' },
+    ]
   },
   websites: {
     title: 'Создание сайтов',
-    path: '/services/websites'
+    path: '/services/websites',
+    services: [
+      { title: 'Сайт + дизайн', path: '/services/websites' },
+      { title: 'Дизайн сайта', path: '/services/dizayn-sayta' },
+      { title: 'Промо сайт', path: '/services/promo-sayt' },
+      { title: 'Визитка', path: '/services/vizitka' },
+      { title: 'Маркетплейс', path: '/services/marketpleys' },
+      { title: 'Доска объявлений', path: '/services/doska-obyavleniy' },
+      { title: 'Сайт портфолио', path: '/services/sayt-portfolio' },
+      { title: 'Блог', path: '/services/blog' },
+      { title: 'Каталог', path: '/services/katalog' },
+      { title: 'Сайты услуг', path: '/services/sayty-uslug' },
+      { title: 'Продающие сайты', path: '/services/prodayushchie' },
+      { title: 'Корпоративные', path: '/services/korporativnye' },
+      { title: 'Личные сайты', path: '/services/lichnye' },
+      { title: 'Сложные сайты', path: '/services/slozhnye' },
+      { title: 'Многостраничные', path: '/services/mnogostranichnye' },
+      { title: 'Простые сайты', path: '/services/prostye' },
+    ]
   },
   promotion: {
     title: 'Продвижение',
-    path: '/services/promotion'
+    path: '/services/promotion',
+    services: [
+      { title: 'Продвижение / SEO', path: '/services/promotion' },
+    ]
   },
   branding: {
     title: 'Брендинг',
-    path: '/services/branding'
+    path: '/services/branding',
+    services: [
+      { title: 'Брендинг', path: '/services/branding' },
+    ]
   },
   polygraphy: {
     title: 'Полиграфический дизайн',
-    path: '/services/polygraphy'
+    path: '/services/polygraphy',
+    services: [
+      { title: 'Полиграфический дизайн', path: '/services/polygraphy' },
+    ]
   },
   integrations: {
     title: 'Интеграции',
-    path: '/services/integrations'
+    path: '/services/integrations',
+    services: [
+      { title: 'Интеграции', path: '/services/integrations' },
+    ]
+  },
+  infographics: {
+    title: 'Инфографика',
+    path: '/services/infographics',
+    services: [
+      { title: 'Инфографика', path: '/services/infographics' },
+    ]
+  },
+  copywriting: {
+    title: 'Копирайтинг',
+    path: '/services/copywriting',
+    services: [
+      { title: 'Копирайтинг', path: '/services/copywriting' },
+    ]
+  },
+  video: {
+    title: 'Видеоролик',
+    path: '/services/video',
+    services: [
+      { title: 'Видеоролик', path: '/services/video' },
+    ]
   },
 };
 

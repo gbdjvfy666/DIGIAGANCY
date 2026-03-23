@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { categoryData } from "../../pages/ServiecesConstructor/serviceData";
 
 export default function Navbar() {
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [expandedCategory, setExpandedCategory] = useState(null);
+  const servicesRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (servicesRef.current && !servicesRef.current.contains(event.target)) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
+
   const buttonClasses = "relative px-2 py-1 flex items-center justify-center rounded-full transition-all duration-300 sm:px-4 sm:py-2";
-  const dropdownLinkClasses = "block w-full text-left px-4 py-2 text-sm text-black transition-colors duration-200 hover:bg-black/10";
 
   return (
     <div className="fixed inset-x-0 top-0 z-50">
@@ -25,24 +39,53 @@ export default function Navbar() {
               Работы
             </a>
             
-            <div className="relative group pointer-events-auto">
-              {/* --- ИЗМЕНЕНИЕ ЗДЕСЬ: <button> заменен на <a> --- */}
-              <a 
-                href="/services" // Укажите здесь путь к вашей общей странице услуг
+            <div className="relative pointer-events-auto" ref={servicesRef}>
+              <button
+                type="button"
+                onClick={() => setServicesOpen((prev) => !prev)}
                 className={`${buttonClasses} text-black hover:bg-black/20 flex items-center gap-1 hoverable`}
               >
                 Услуги
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
-              </a>
-              
-              <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-white rounded-lg shadow-lg border border-black/10
-                              opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto
-                              transition-all duration-300 origin-top">
-                <a href="/web-development" className={`${dropdownLinkClasses} rounded-t-lg`}>Сайты</a>
-                <a href="/design" className={dropdownLinkClasses}>Дизайн</a>
-                <a href="/target" className={`${dropdownLinkClasses} rounded-b-lg`}>Таргет</a>
+              </button>
+
+              <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[1500px] max-w-[calc(100vw-2rem)] bg-white rounded-xl shadow-lg border border-gray-200 transition-all duration-300 origin-top ${servicesOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}`}>
+                <div className="p-4 border-b border-gray-100">
+                  <a href="/services" className="inline-block text-sm font-semibold text-blue-600 hover:text-blue-800 px-3 py-1 rounded hover:bg-blue-50 transition-colors">Все услуги →</a>
+                </div>
+                <div className="p-6 text-black">
+                  <div className="grid grid-cols-6 gap-8">
+                    {Object.entries(categoryData).map(([key, category]) => (
+                      <div key={key} className="space-y-2.5">
+                        <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider leading-tight">
+                          {category.title}
+                        </h4>
+                        <div className="space-y-1.5">
+                          {category.services.slice(0, 8).map((service, idx) => (
+                            <a
+                              key={idx}
+                              href={service.path}
+                              className="block px-2.5 py-0.5 text-xs text-gray-700 hover:text-blue-700 hover:bg-blue-50 rounded transition-all duration-200"
+                              title={service.title}
+                            >
+                              {service.title}
+                            </a>
+                          ))}
+                          {category.services.length > 8 && (
+                            <a
+                              href={category.path}
+                              className="block px-2.5 py-0.5 text-xs text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                            >
+                              +{category.services.length - 8} ещё
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
             
