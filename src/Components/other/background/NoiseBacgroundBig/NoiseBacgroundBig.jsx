@@ -1,14 +1,18 @@
+// src/Components/other/background/NoiseBacgroundBig/NoiseBacgroundBig.jsx
+
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import './NoiseBacgroundBig.css';
 
-const NoiseBacgroundBig = ({ children }) => {
+// 1. Принимаем 'height' как пропс
+const NoiseBacgroundBig = ({ children, height }) => {
   const containerRef = useRef(null);
   const sceneRef = useRef(null);
   const rendererRef = useRef(null);
   const animationIdRef = useRef(null);
 
   useEffect(() => {
+    // ... (весь твой код внутри useEffect остается без изменений) ...
     if (!containerRef.current || !sceneRef.current) return;
 
     const container = containerRef.current;
@@ -67,12 +71,7 @@ const NoiseBacgroundBig = ({ children }) => {
             centeredUV.x *= iResolution.x / iResolution.y;
             float light = calculateLight(centeredUV);
             vec3 baseColor = vec3(0.0);
-
-            // ==========================================================
-            // ИЗМЕНЕНИЕ ЗДЕСЬ: Множитель яркости уменьшен с 2.0 до 1.0
-            // ==========================================================
             baseColor = mix(baseColor, vec3(1.0), light * 1.0);
-
             float noise = hash(vUv * 3.5 + iTime * 0.1) * 0.15;
             baseColor += noise - 0.15 * 0.5;
             gl_FragColor = vec4(baseColor, 1.0);
@@ -128,16 +127,17 @@ const NoiseBacgroundBig = ({ children }) => {
   }, []);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="noise-background-container relative"
-      style={{ width: '100%', height: '220vh' }}
+      // 2. Устанавливаем высоту из пропсов, с запасным вариантом '220vh'
+      style={{ width: '100%', height: height || '220vh' }}
     >
       <div className="absolute inset-0 z-0">
         <div ref={sceneRef} className="three-container"></div>
         <div className="noise-effect"></div>
       </div>
-      <div className="z-10 relative">
+      <div className="z-10 relative h-full"> {/* Добавил h-full сюда для корректного позиционирования children */}
         {children}
       </div>
     </div>

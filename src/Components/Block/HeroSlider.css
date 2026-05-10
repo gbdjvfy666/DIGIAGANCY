@@ -1,0 +1,72 @@
+/* src/Components/Block/HeroSlider.css */
+
+/* === ДОБАВЬ ЭТОТ БЛОК В САМОЕ НАЧАЛО === */
+.hero-container {
+  width: 100%;
+  height: 100vh; /* Самое важное: высота равна высоте экрана */
+  overflow: hidden; /* Обрезаем всё, что может вылезти за пределы */
+  position: relative; /* Нужно для позиционирования навигации */
+}
+
+/* Swiper внутри контейнера должен занимать всю доступную высоту */
+.hero-swiper {
+  width: 100%;
+  height: 100%;
+}
+/* === КОНЕЦ НОВОГО БЛОКА === */
+
+
+/* Контейнер для навигационных полос (остается без изменений) */
+.progress-nav {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 50;
+}
+
+/* ... остальные стили из ProgressNavigation.css оставляем как есть ... */
+.progress-bar-container {
+  width: 120px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.progress-bar-container:hover {
+  transform: scaleX(1.05);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #ffffff;
+  border-radius: 2px;
+}
+
+.progress-bar-container.active .progress-bar-fill {
+  width: 100%;
+  animation-name: fill-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.hero-container:hover .progress-bar-container.active .progress-bar-fill,
+.hero-swiper:hover .progress-bar-container.active .progress-bar-fill {
+  animation-play-state: paused;
+}
+
+@keyframes fill-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}

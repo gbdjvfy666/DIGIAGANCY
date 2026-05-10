@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
+import { db } from '../../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-/**
- * Блок с формой для заполнения краткого брифа (заявки).
- * Этот блок предназначен для размещения в конце страницы.
- */
 const BriefForm = () => {
-    // Состояние для полей формы
     const [formData, setFormData] = useState({
         name: '',
         contact: '',
         message: ''
     });
+    const [loading, setLoading] = useState(false);
+    const [sent, setSent] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -19,18 +18,22 @@ const BriefForm = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Здесь должна быть логика отправки данных на сервер (API, email и т.д.)
-        console.log('Данные формы отправлены:', formData);
-        alert('Спасибо за вашу заявку! Мы скоро свяжемся с вами.');
-        
-        // Сброс формы (опционально)
-        setFormData({
-            name: '',
-            contact: '',
-            message: ''
-        });
+        setLoading(true);
+        try {
+            await addDoc(collection(db, 'leads'), {
+                ...formData,
+                createdAt: serverTimestamp()
+            });
+            setSent(true);
+            setFormData({ name: '', contact: '', message: '' });
+        } catch (err) {
+            console.error('Ошибка отправки заявки:', err);
+            alert('Ошибка при отправке. Попробуйте ещё раз.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -101,15 +104,21 @@ const BriefForm = () => {
                         />
                     </div>
 
-                    {/* Кнопка отправки */}
-                    <button
-                        type="submit"
-                        className="w-full px-8 py-4 text-lg font-bold rounded-lg shadow-xl 
-                                   bg-amber-500 hover:bg-amber-600 text-gray-900 
-                                   transition duration-300 ease-in-out transform hover:scale-[1.01]"
-                    >
-                        ОТПРАВИТЬ ЗАЯВКУ
-                    </button>
+                    {sent ? (
+                        <div className="w-full px-8 py-4 text-lg font-bold rounded-lg text-center bg-green-500/10 border border-green-500/30 text-green-400">
+                            Заявка отправлена! Скоро свяжемся с вами.
+                        </div>
+                    ) : (
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full px-8 py-4 text-lg font-bold rounded-lg shadow-xl
+                                       bg-amber-500 hover:bg-amber-600 text-gray-900
+                                       transition duration-300 ease-in-out transform hover:scale-[1.01] disabled:opacity-50"
+                        >
+                            {loading ? 'Отправка...' : 'ОТПРАВИТЬ ЗАЯВКУ'}
+                        </button>
+                    )}
                 </form>
 
             </div>

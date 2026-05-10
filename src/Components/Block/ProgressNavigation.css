@@ -1,0 +1,75 @@
+/* src/Components/Block/ProgressNavigation.css (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ) */
+
+/* Главный контейнер для всех полосок навигации */
+.progress-nav {
+  /* Это позволяет нам точно позиционировать блок относительно родителя (.hero-container) */
+  position: absolute;
+
+  /* === КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ === */
+  /* Вместо 'top: 50%' мы используем 'bottom' чтобы прижать блок к низу */
+  bottom: 40px;          /* Отступ 40px от НИЖНЕГО края экрана */
+  left: 50%;             /* Располагаем по центру по горизонтали */
+  transform: translateX(-50%); /* Точно центрируем, сдвигая обратно на половину своей ширины */
+  
+  /* Располагаем полоски в один горизонтальный ряд */
+  display: flex;
+  flex-direction: row;
+  
+  /* Пространство между полосками */
+  gap: 12px;
+  
+  /* Убедимся, что навигация всегда поверх контента слайдера */
+  z-index: 50;
+}
+
+/* --- Остальные стили остаются без изменений, они уже работают правильно --- */
+
+/* Внешний контейнер для каждой отдельной полосы */
+.progress-bar-container {
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  cursor: pointer;
+  overflow: hidden;
+  width: 40px; 
+  transition: width 0.5s ease;
+}
+
+.progress-bar-container:hover {
+  transform: scaleY(1.5);
+}
+
+.progress-bar-container.active {
+  width: 120px; 
+}
+
+/* Внутренняя, заполняющаяся полоса */
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #ffffff;
+  border-radius: 2px;
+}
+
+/* Активация анимации */
+.progress-bar-container.active .progress-bar-fill {
+  width: 100%;
+  animation-name: fill-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* Пауза анимации при наведении */
+.hero-container:hover .progress-bar-container.active .progress-bar-fill {
+  animation-play-state: paused;
+}
+
+/* Сама анимация */
+@keyframes fill-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
